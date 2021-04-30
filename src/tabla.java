@@ -2,6 +2,7 @@
 
 
 import models.Alumno;
+import models.Asignatura;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
@@ -55,13 +56,15 @@ public class tabla extends JFrame{
         opciones.add(datePicker);
 
         JPanel combo = new JPanel();
-        combo.setLayout(new GridLayout(3,1));
+        combo.setLayout(new GridLayout(3, 1));
         combo.setBackground(new Color(227, 247, 193));
         asignatura = new JComboBox();
         asignatura.setBackground(new Color(227, 247, 193));
-        //ArrayList<Asignatura> asignaturas = controlador.getAsignaturaProfesor(idProfesor);
-        asignatura.addItem("Programacion");
-        asignatura.addItem("Bases de datos");
+
+        ArrayList<Asignatura> asignaturas = controlador.getAsignaturaProfesor(3);
+        for (int i = 0; i < asignaturas.size(); i++) {
+            asignatura.addItem(asignaturas.get(i).getNombre());
+        }
         combo.add(asignatura);
         opciones.add(combo);
         fecha.setEditable(false);
