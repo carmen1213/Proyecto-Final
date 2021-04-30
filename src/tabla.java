@@ -61,7 +61,7 @@ public class tabla extends JFrame{
         asignatura = new JComboBox();
         asignatura.setBackground(new Color(227, 247, 193));
 
-        ArrayList<Asignatura> asignaturas = controlador.getAsignaturaProfesor(3);
+        ArrayList<Asignatura> asignaturas = controlador.getAsignaturaProfesor(2);
         for (int i = 0; i < asignaturas.size(); i++) {
             asignatura.addItem(asignaturas.get(i).getNombre());
         }
@@ -72,7 +72,7 @@ public class tabla extends JFrame{
         //ArrayList<String> nombresAlumnos = controlador.getNombreAlumnoxAsignatura(3);
         //DefaultTableModel model = generarModeloTabla(nombresAlumnos);
 
-        ArrayList<Alumno> alumnosAsignatura = controlador.getAlumnosxAsignaturaA(3);
+        ArrayList<Alumno> alumnosAsignatura = controlador.getAlumnosxAsignaturaA(asignaturas.get(1).getId());
         DefaultTableModel model = generarModeloTablaAlumno(alumnosAsignatura);
 
         jTableAlumnos = new JTable(model){
