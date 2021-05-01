@@ -17,7 +17,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library">
+    <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
           <root url="jar://$USER_HOME$/Downloads/mysql-connector-java-8.0.24.jar!/" />
@@ -30,6 +30,33 @@
       <library>
         <CLASSES>
           <root url="jar://$USER_HOME$/Downloads/mysql-connector-java-8.0.24/mysql-connector-java-8.0.24/mysql-connector-java-8.0.24.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES />
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$USER_HOME$/Downloads/mysql-connector-java-8.0.24.zip!/mysql-connector-java-8.0.24/src/build/java" />
+          <root url="jar://$USER_HOME$/Downloads/mysql-connector-java-8.0.24.zip!/mysql-connector-java-8.0.24/src/demo/java" />
+          <root url="jar://$USER_HOME$/Downloads/mysql-connector-java-8.0.24.zip!/mysql-connector-java-8.0.24/src/generated/java" />
+          <root url="jar://$USER_HOME$/Downloads/mysql-connector-java-8.0.24.zip!/mysql-connector-java-8.0.24/src/legacy/java" />
+          <root url="jar://$USER_HOME$/Downloads/mysql-connector-java-8.0.24.zip!/mysql-connector-java-8.0.24/src/main/core-api/java" />
+          <root url="jar://$USER_HOME$/Downloads/mysql-connector-java-8.0.24.zip!/mysql-connector-java-8.0.24/src/main/core-impl/java" />
+          <root url="jar://$USER_HOME$/Downloads/mysql-connector-java-8.0.24.zip!/mysql-connector-java-8.0.24/src/main/protocol-impl/java" />
+          <root url="jar://$USER_HOME$/Downloads/mysql-connector-java-8.0.24.zip!/mysql-connector-java-8.0.24/src/main/user-api/java" />
+          <root url="jar://$USER_HOME$/Downloads/mysql-connector-java-8.0.24.zip!/mysql-connector-java-8.0.24/src/main/user-impl/java" />
+          <root url="jar://$USER_HOME$/Downloads/mysql-connector-java-8.0.24.zip!/mysql-connector-java-8.0.24/src/test/java" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/Desktop/mysql-connector-java-8.0.24/mysql-connector-java-8.0.24.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

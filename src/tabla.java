@@ -3,19 +3,24 @@
 
 import models.Alumno;
 import models.Asignatura;
+import models.Asistencia;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.sql.SQLException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.sql.Date;
 
 public class tabla extends JFrame{
+
     private JTable jTableAlumnos;
     private ControladorTabla controlador = new ControladorTabla();
     static ArrayList<String> resultadosdam = new ArrayList<>();
@@ -23,8 +28,10 @@ public class tabla extends JFrame{
     private JLabel titulop;
     private JButton guardar;
     private JButton modificar;
-
-    public tabla(){
+    private static Connection conn;
+     private ArrayList<Asignatura> asignaturas = controlador.getAsignaturaProfesor(2);
+    private UtilDateModel date = new UtilDateModel();
+    public tabla() throws SQLException {
         super("Listas");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.getContentPane().setBackground(new Color(227, 247, 193));
@@ -47,7 +54,7 @@ public class tabla extends JFrame{
         opciones.add(new JLabel(" "));
 
         listas.DatePicker fecha = new listas.DatePicker(LocalDate.now());
-        UtilDateModel date = new UtilDateModel();
+
         date.setDate(2021, 3, 23);
         date.setSelected(true);
         JDatePanelImpl datePanel = new JDatePanelImpl(date);
@@ -61,7 +68,7 @@ public class tabla extends JFrame{
         asignatura = new JComboBox();
         asignatura.setBackground(new Color(227, 247, 193));
 
-        ArrayList<Asignatura> asignaturas = controlador.getAsignaturaProfesor(2);
+
         for (int i = 0; i < asignaturas.size(); i++) {
             asignatura.addItem(asignaturas.get(i).getNombre());
         }
@@ -72,7 +79,8 @@ public class tabla extends JFrame{
         //ArrayList<String> nombresAlumnos = controlador.getNombreAlumnoxAsignatura(3);
         //DefaultTableModel model = generarModeloTabla(nombresAlumnos);
 
-        ArrayList<Alumno> alumnosAsignatura = controlador.getAlumnosxAsignaturaA(asignaturas.get(1).getId());
+        ArrayList<Alumno> alumnosAsignatura = controlador.getAlumnosxAsignaturaA(asignaturas.get(asignatura.getSelectedIndex()).getId());
+        System.out.println(controlador.getAlumnosxAsignaturaA(asignaturas.get(asignatura.getSelectedIndex()).getId()));
         DefaultTableModel model = generarModeloTablaAlumno(alumnosAsignatura);
 
         jTableAlumnos = new JTable(model){
@@ -114,6 +122,12 @@ public class tabla extends JFrame{
         guardar = new JButton("Guardar");
         modificar = new JButton("Modificar");
 
+        System.out.println(asignaturas.get(asignatura.getSelectedIndex()).getId());
+        System.out.println(asignaturas.get(1).getId());
+
+        // ArrayList<Asistencia> asistencia = controlador.getAsignaturaProfesor(2);
+
+        guardar.addActionListener(new guardarinformacion());
 
         guardarm.add(guardar);
         guardarm.add(modificar);
@@ -136,18 +150,32 @@ public class tabla extends JFrame{
 
     }
 
-    private DefaultTableModel generarModeloTabla(ArrayList<String> nombresAlumnos){
-        String[] cols = { "Nombre","Asistencia"};
-        DefaultTableModel model = new DefaultTableModel(cols,0);
-        for (int i = 0; i < nombresAlumnos.size(); i++) {
-            Object[] data = {nombresAlumnos.get(i), false};
-            model.addRow(data);
-        }
-        return model;
+
+
+
+    public JTable getjTableAlumnos() {
+        return jTableAlumnos;
     }
 
+
+
+//    private AncestorListener guardarAsistencia() {
+//
+//
+//    }
+
+//    private DefaultTableModel generarModeloTabla(ArrayList<String> nombresAlumnos){
+//        String[] cols = { "Nombre","Asistencia"};
+//        DefaultTableModel model = new DefaultTableModel(cols,0);
+//        for (int i = 0; i < nombresAlumnos.size(); i++) {
+//            Object[] data = {nombresAlumnos.get(i), false};
+//            model.addRow(data);
+//        }
+//        return model;
+//    }
+
     private DefaultTableModel generarModeloTablaAlumno(ArrayList<Alumno> nombresAlumnos){
-        String[] cols = { "Nombre","Asistencia"};
+        String[] cols = {"Nombre","Asistencia"};
         DefaultTableModel model = new DefaultTableModel(cols,0);
         for (int i = 0; i < nombresAlumnos.size(); i++) {
             Object[] data = {nombresAlumnos.get(i).getNombre(), false};
@@ -159,5 +187,36 @@ public class tabla extends JFrame{
     public static void main()throws SQLException
     {
         tabla tabla = new tabla();
+    }
+
+    private class guardarinformacion implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            conexionbasedatos conexion;
+            conexion = new conexionbasedatos();
+            conn = conexion.conectarMySQL();
+            Statement stmt = null;
+            try {
+                stmt = conn.createStatement();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            Object asistencia = null;
+            for (int i = 0; i < jTableAlumnos.getRowCount(); i++) {
+                asistencia = jTableAlumnos.getValueAt(0,1);
+                System.out.println(asistencia);
+                if (asistencia.equals(false)){
+                    asistencia = 1;
+                }else{
+                    asistencia = 0;
+                }
+
+            }
+            try {
+                Object resultados =  stmt.executeUpdate("INSERT INTO asistencia (id_alumno,asiste,id_asignatura,dia_semana,fecha) " + "VALUES('"+asignaturas.get(1).getId()+"','"+asistencia+"','"+asignaturas.get(asignatura.getSelectedIndex()).getId()+"','"+null+"','"+date.getValue()+"')");
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
     }
 }

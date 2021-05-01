@@ -94,4 +94,25 @@ public class ControladorTabla {
 
         return resultado;
     }
+//    public ArrayList<Asignatura> setAsistencia(boolean asiste) {
+//        ArrayList<Asignatura> resultado = new ArrayList<Asignatura>();
+//
+//        String SQL = "INSERT INTO asistencia " +" VALUES ();
+//        try {
+//            PreparedStatement st = conn.prepareStatement(SQL);
+//            st.setBoolean(1, asiste);
+//            ResultSet alumnosAsignatura = st.executeQuery();
+//            System.out.println(alumnosAsignatura);
+//            while (alumnosAsignatura.next()) {
+//                String nombre = alumnosAsignatura.getString(2);
+//                int id = alumnosAsignatura.getInt(1);
+//                resultado.add(new Asignatura(nombre, id));
+//            }
+//
+//        } catch (SQLException throwables) {
+//            throwables.printStackTrace();
+//        }
+//
+//        return resultado;
+//    }
 }
