@@ -11,7 +11,7 @@ public class inicio extends JFrame {
     private  JButton login,olvido;
     private JLabel confirmacion,denegacion;
     public static JTextField usuario;
-    private JTextField contraseÃ±a;
+    private JTextField contraseña;
     Font f = new Font("Monospaced", BOLD, 24);
 
    public inicio(){
@@ -42,11 +42,11 @@ public class inicio extends JFrame {
            general.add(usuario);
 
 
-           general.add(new JLabel(" ContraseÃ±a:"));
-           contraseÃ±a=new JPasswordField("");
-           general.add(contraseÃ±a);
+           general.add(new JLabel(" Contraseña:"));
+           contraseña=new JPasswordField("");
+           general.add(contraseña);
 
-       olvido=new JButton("ContraseÃ±a olvidada");
+       olvido=new JButton("Contraseña olvidada");
        general.add(olvido);
        olvido.setBackground(new Color(232, 91, 74));
        olvido.addActionListener(new recuperar());
@@ -83,35 +83,35 @@ public class inicio extends JFrame {
 
            @Override
            public void actionPerformed(ActionEvent e) {
-               if (usuario.getText().equals("Cristina") && contraseÃ±a.getText().equals("1")) {
+               if (usuario.getText().equals("Cristina") && contraseña.getText().equals("1")) {
                    confirmacion.setText("inicio correcto");
                    confirmacion.setForeground(Color.GREEN);
                    director.main();
                    return;
                }
 
-               else if (usuario.getText().equals("Ivan") && contraseÃ±a.getText().equals("2")) {
+               else if (usuario.getText().equals("Ivan") && contraseña.getText().equals("2")) {
                    confirmacion.setText("inicio correcto");
                    confirmacion.setForeground(Color.GREEN);
                    profesor.main();
 
                }
 
-              else if (usuario.getText().equals("Neus") && contraseÃ±a.getText().equals("3")) {
+              else if (usuario.getText().equals("Neus") && contraseña.getText().equals("3")) {
                    confirmacion.setText("inicio correcto");
                    confirmacion.setForeground(Color.GREEN);
                    Jefedeestudios.main();
 
                }
 
-               else if (usuario.getText().equals("padre") && contraseÃ±a.getText().equals("4")) {
+               else if (usuario.getText().equals("padre") && contraseña.getText().equals("4")) {
                    confirmacion.setText("inicio correcto");
                    confirmacion.setForeground(Color.GREEN);
                    padre.main();
 
                }
 
-               else if (usuario.getText().equals("alumno") && contraseÃ±a.getText().equals("5")) {
+               else if (usuario.getText().equals("alumno") && contraseña.getText().equals("5")) {
                    confirmacion.setText("inicio correcto");
                    confirmacion.setForeground(Color.GREEN);
                    alumnoGUI.main();
@@ -120,7 +120,7 @@ public class inicio extends JFrame {
 
                else{
                    confirmacion.setForeground(Color.red);
-                   confirmacion.setText("<html> <div style = 'text-align: center;'> contraseÃ±a incorrecta <br> o <br>usuario incorrecto </div></html>");
+                   confirmacion.setText("<html> <div style = 'text-align: center;'> contraseña incorrecta <br> o <br>usuario incorrecto </div></html>");
                }
            }
     }
