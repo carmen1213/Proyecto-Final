@@ -25,13 +25,6 @@ public class pruebanotas extends JFrame {
         table.setPreferredScrollableViewportSize(new Dimension(500, 80));
         DefaultTableModel dtm;
         for (int i = 0; i < table.getRowCount(); i++) {
-            //LLAMAMOS EL MODELO DE LA TABLA.
-
-            //HACEMOS LA CONVERSION CON UN PARSE PARA QUE NO DE ERROR.
-            // EN ESTA PARTE HAY QUE TENER CUIDADO DE QUE LA CELDA
-            // NO CONTENGA LITERALES PUES NOS MANDARA ERROR.
-
-            //ESTA ES LA NUEVA LINEA.
             String a = table.getValueAt(i, 3) + "";
             float importe = Float.parseFloat(a);
             //SUMAMOS LA FILA ACTUAL AL TOTAL GLOBAL.
