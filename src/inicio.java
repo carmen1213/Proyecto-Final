@@ -11,8 +11,9 @@ public class inicio extends JFrame {
     private  JButton login,olvido;
     private JLabel confirmacion,denegacion;
     public static JTextField usuario;
-    private JTextField contraseña;
+    private JTextField contraseÃ±a;
     Font f = new Font("Monospaced", BOLD, 24);
+    private obtencion_datos_login control = new obtencion_datos_login();
 
    public inicio(){
        super("Inicio");
@@ -42,11 +43,11 @@ public class inicio extends JFrame {
            general.add(usuario);
 
 
-           general.add(new JLabel(" Contraseña:"));
-           contraseña=new JPasswordField("");
-           general.add(contraseña);
+           general.add(new JLabel(" ContraseÃ±a:"));
+           contraseÃ±a=new JPasswordField("");
+           general.add(contraseÃ±a);
 
-       olvido=new JButton("Contraseña olvidada");
+       olvido=new JButton("ContraseÃ±a olvidada");
        general.add(olvido);
        olvido.setBackground(new Color(232, 91, 74));
        olvido.addActionListener(new recuperar());
@@ -83,46 +84,31 @@ public class inicio extends JFrame {
 
            @Override
            public void actionPerformed(ActionEvent e) {
-               if (usuario.getText().equals("Cristina") && contraseña.getText().equals("1")) {
-                   confirmacion.setText("inicio correcto");
-                   confirmacion.setForeground(Color.GREEN);
-                   director.main();
-                   return;
-               }
+               System.out.println(control.getdatosdellogin().get(0));
+               System.out.println(control.getdatosdellogin().get(1));
+               for (int i = 0; i < control.getdatosdellogin().size(); i++) {
+                   if (usuario.getText().equals(control.getdatosdellogin().get(i)) && contraseÃ±a.getText().equals(control.getdatosdellogin().get(i+1))) {
+                       confirmacion.setText("inicio correcto");
+                       confirmacion.setForeground(Color.GREEN);
+                       System.out.println("hola");
 
-               else if (usuario.getText().equals("Ivan") && contraseña.getText().equals("2")) {
-                   confirmacion.setText("inicio correcto");
-                   confirmacion.setForeground(Color.GREEN);
-                   profesor.main();
+                       if (control.getdatosdellogin().get(i+2).equals("Profesor")){
+                           profesor.main();
+                       } else if (control.getdatosdellogin().get(i+2).equals("Jefedeestudios")){
+                           jefeEstudios.main();
+                       } else if (control.getdatosdellogin().get(i+2).equals("Alumno")){
 
-               }
+                       } else if (control.getdatosdellogin().get(i+2).equals("Padres")){
 
-              else if (usuario.getText().equals("Neus") && contraseña.getText().equals("3")) {
-                   confirmacion.setText("inicio correcto");
-                   confirmacion.setForeground(Color.GREEN);
-                   Jefedeestudios.main();
-
-               }
-
-               else if (usuario.getText().equals("padre") && contraseña.getText().equals("4")) {
-                   confirmacion.setText("inicio correcto");
-                   confirmacion.setForeground(Color.GREEN);
-                   padre.main();
-
-               }
-
-               else if (usuario.getText().equals("alumno") && contraseña.getText().equals("5")) {
-                   confirmacion.setText("inicio correcto");
-                   confirmacion.setForeground(Color.GREEN);
-                   alumnoGUI.main();
-
-               }
-
-               else{
-                   confirmacion.setForeground(Color.red);
-                   confirmacion.setText("<html> <div style = 'text-align: center;'> contraseña incorrecta <br> o <br>usuario incorrecto </div></html>");
-               }
-           }
+                       } else if (control.getdatosdellogin().get(i+2).equals("Director")){
+                           director.main();
+                       }
+                   }else{
+                       confirmacion.setForeground(Color.red);
+                       confirmacion.setText("<html> <div style = 'text-align: center;'> contraseï¿½a incorrecta <br> o <br>usuario incorrecto </div></html>");
+                   }
+                   }
+                          }
     }
 
 
