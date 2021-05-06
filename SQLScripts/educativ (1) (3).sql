@@ -369,3 +369,12 @@ INSERT INTO educativ.profesor_asignatura (id_profesor, id_asignatura, id)
 VALUES (3, 4, 7);
 INSERT INTO educativ.profesor_asignatura (id_profesor, id_asignatura, id)
 VALUES (4, 6, 8);
+
+INSERT INTO educativ.login (id_login, nombre_usuario, contraseña, seguridad, tipo_usuario, id_aj)
+VALUES (1, 'Sblanquer', '1234', 8, 'Alumno', null);
+INSERT INTO educativ.login (id_login, nombre_usuario, contraseña, seguridad, tipo_usuario, id_aj)
+VALUES (4, 'Cristina', '0000', 8, 'Director', null);
+INSERT INTO educativ.login (id_login, nombre_usuario, contraseña, seguridad, tipo_usuario, id_aj)
+VALUES (3, 'Lcalabrese', '0000', 8, 'Jefedeestudios', null);
+INSERT INTO educativ.login (id_login, nombre_usuario, contraseña, seguridad, tipo_usuario, id_aj)
+VALUES (2, 'Iajenjo', '2345', 8, 'Profesor', null);
