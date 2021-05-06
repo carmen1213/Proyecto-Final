@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 import static java.awt.Font.BOLD;
 
@@ -19,7 +18,7 @@ private JComboBox descargar;
 
     public profesor(Usuario user) {
         super("Profesores");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(HIDE_ON_CLOSE);
         this.setResizable(false);
         this.getContentPane().setBackground(new Color(227, 247, 193));
         setLayout(new FlowLayout());
@@ -134,11 +133,11 @@ private JComboBox descargar;
     public static class Listenerco implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            try {
-                tabla.main();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
+            //     try {
+            //tabla.main();
+            //       } catch (SQLException throwables) {
+            //         throwables.printStackTrace();
+            //      }
         }
     }
 
