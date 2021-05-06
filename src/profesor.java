@@ -1,5 +1,6 @@
+import models.Usuario;
+
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,7 +17,7 @@ private JComboBox descargar;
     private JComboBox horas;
     Font f = new Font("Monospaced", BOLD, 30);
 
-    public profesor() {
+    public profesor(Usuario user) {
         super("Profesores");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setResizable(false);
@@ -24,7 +25,7 @@ private JComboBox descargar;
         setLayout(new FlowLayout());
         setBackground(new Color(227, 247, 193));
 
-        JPanel general= new JPanel();
+        JPanel general = new JPanel();
         general.setBackground(new Color(227, 247, 193));
         JPanel principal = new JPanel();
         principal.setLayout( new GridLayout(4,1, 0,15));
@@ -32,31 +33,25 @@ private JComboBox descargar;
         JPanel menu = new JPanel();
         menu.setBackground(new Color(227, 247, 193));
 
-        JMenuBar barraMenu =new JMenuBar();
+        JMenuBar barraMenu = new JMenuBar();
         menu.add(barraMenu);
         JMenu Listas = new JMenu("Listas");
         JMenu Material = new JMenu("Material");
 
-        JRadioButtonMenuItem dam1l=new JRadioButtonMenuItem("1ª DAM");
+        JRadioButtonMenuItem dam1l = new JRadioButtonMenuItem("Pasar lista");
         dam1l.addActionListener(new Listenerco());
-        JRadioButtonMenuItem dam2l=new JRadioButtonMenuItem("2º DAM");
-        JRadioButtonMenuItem CIMl=new JRadioButtonMenuItem("CIN");
-        JRadioButtonMenuItem MARKETINGl=new JRadioButtonMenuItem("MARKETING");
 
-        JMenuItem dam1m=new JMenuItem("1ª DAM");
-        JMenuItem dam2m=new JMenuItem("2º DAM");
-        JMenuItem CIMm=new JMenuItem("CIM");
-        JMenuItem MARKETINGm=new JMenuItem("MARKETING");
 
+        JMenuItem dam1m = new JMenuItem("1º DAM");
+        JMenuItem dam2m = new JMenuItem("2º DAM");
+        JMenuItem CIMm = new JMenuItem("CIM");
+        JMenuItem MARKETINGm = new JMenuItem("MARKETING");
 
 
         barraMenu.add(Listas);
         barraMenu.add(Material);
 
         Listas.add(dam1l);
-        Listas.add(dam2l);
-        Listas.add(CIMl);
-        Listas.add(MARKETINGl);
 
         Material.add(dam1m);
         Material.add(dam2m);
@@ -66,7 +61,7 @@ private JComboBox descargar;
         setJMenuBar(barraMenu);
 
         JPanel titulo= new JPanel();
-        titulop=new JLabel("Bienvenido "+  inicio.usuario.getText());
+        titulop = new JLabel("<html> <div style = 'text-align: center;'> Bienvenido <br>  " + user.getNombre() + " </div></html> " + user.getNombre());
         titulop.setFont(f);
         titulop.setForeground(new Color(140, 24, 82));
         titulo.add(titulop);
@@ -117,7 +112,7 @@ private JComboBox descargar;
         disponible.add(horas);
 
 
-       // principal.add(menu);
+        // principal.add(menu);
         principal.add(titulo);
         principal.add(botones);
         principal.add(disponible);
@@ -126,12 +121,13 @@ private JComboBox descargar;
         general.add(principal);
 
 
-        add(general,BorderLayout.CENTER);
-        setSize(400,520);
+        add(general, BorderLayout.CENTER);
+        setSize(400, 520);
         setVisible(true);
     }
-    public static void main() {
-        profesor profe = new profesor();
+
+    public static void main(Usuario user) {
+        profesor profe = new profesor(user);
     }
 
 

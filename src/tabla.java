@@ -1,9 +1,9 @@
-import models.Alumno;
-import models.Asignatura;
-import models.Notas;
+import BDutils.conexionbasedatos;
+import models.*;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -13,7 +13,7 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class tabla extends JFrame{
+public class tabla extends JFrame {
 
     private JTable jTableAlumnos;
     private ControladorTabla controlador = new ControladorTabla();
@@ -23,8 +23,12 @@ public class tabla extends JFrame{
     private JButton guardar;
     private JButton modificar;
     private static Connection conn;
-    private ArrayList<Asignatura> asignaturas = controlador.getAsignaturaProfesor(2);
+    private obtencion_datos_login control = new obtencion_datos_login();
+    private Usuario user = control.iniciarSesion(inicio.usuario.getText(), inicio.contraseña.getText());
+    private Profesor id_profesor = control.getIdProfesor(inicio.usuario.getText(), inicio.contraseña.getText());
+    private ArrayList<Asignatura> asignaturas = controlador.getAsignaturaProfesor(id_profesor.getId_profesor());
     private UtilDateModel date = new UtilDateModel();
+
     public tabla() throws SQLException {
         super("Listas");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -62,6 +66,7 @@ public class tabla extends JFrame{
         asignatura.setBackground(new Color(227, 247, 193));
 
 
+
         for (int i = 0; i < asignaturas.size(); i++) {
             asignatura.addItem(asignaturas.get(i).getNombre());
         }
@@ -71,8 +76,7 @@ public class tabla extends JFrame{
         fecha.setEditable(false);
 
         ArrayList<Alumno> alumnosAsignatura = controlador.getAlumnosxAsignaturaA(asignaturas.get(asignatura.getSelectedIndex()).getId());
-        ArrayList<Notas> notasDeAlumnos = controlador.getNotasdeAlumnos(3, 3);
-        DefaultTableModel model = generarModeloTablaAlumno(alumnosAsignatura, notasDeAlumnos);
+        DefaultTableModel model = generarModeloTablaAlumno(alumnosAsignatura);
 
         jTableAlumnos = new JTable(model) {
             //private static final long serialVersionUID = 1L;
@@ -139,25 +143,13 @@ public class tabla extends JFrame{
     }
 
 
-    public JTable getjTableAlumnos() {
-        return jTableAlumnos;
-    }
+    private DefaultTableModel generarModeloTablaAlumno(ArrayList<Alumno> nombresAlumnos) {
 
-    public void setjTableAlumnos(JTable jTableAlumnos) {
-        this.jTableAlumnos = jTableAlumnos;
-    }
-
-
-    private DefaultTableModel generarModeloTablaAlumno(ArrayList<Alumno> nombresAlumnos, ArrayList<Notas> notasDeAlumnos) {
-
-        String[] cols = {"Nombre", "Asistencia", "Notas"};
+        String[] cols = {"Nombre", "Asistencia"};
         DefaultTableModel model = new DefaultTableModel(cols, 0);
         for (int i = 0; i < nombresAlumnos.size(); i++) {
-            for (int j = 0; j < notasDeAlumnos.size(); j++) {
-                Object[] data = {nombresAlumnos.get(i).getNombre(), false, notasDeAlumnos.get(j)};
-                model.addRow(data);
-            }
-
+            Object[] data = {nombresAlumnos.get(i).getNombre(), false};
+            model.addRow(data);
         }
         return model;
     }
@@ -198,5 +190,6 @@ public class tabla extends JFrame{
 
         }
     }
+
 
 }

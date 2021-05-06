@@ -1,3 +1,5 @@
+package BDutils;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -6,6 +8,7 @@ public class conexionbasedatos {
     public static void main(String[] args) {
 
     }
+
     // Librería de MySQL
     public String driver = "com.mysql.jdbc.Driver";
 
@@ -25,7 +28,7 @@ public class conexionbasedatos {
     public String username = "root";
 
     // Clave de usuario
-    public String password = "CarmenMysql12";
+    public String password = "Lulicala15@";
 
     public Connection conectarMySQL() {
         Connection conn = null;

@@ -1,3 +1,5 @@
+import BDutils.conexionbasedatos;
+import models.Profesor;
 import models.Usuario;
 
 import java.sql.Connection;
@@ -51,4 +53,25 @@ public class obtencion_datos_login {
         }
         return null;
     }
+
+    public Profesor getIdProfesor(String usuario, String contraseña) {
+        String sql = "SELECT id_profesor FROM profesor WHERE id_usuario IN(" +
+                "SELECT id_login FROM login WHERE nombre_usuario = ? AND contraseña = ?" +
+                ");";
+        try {
+            PreparedStatement pt = conn.prepareStatement(sql);
+            pt.setString(1, usuario);
+            pt.setString(2, contraseña);
+            ResultSet login = pt.executeQuery();
+            while (login.next()) {
+                int id_profesor = login.getInt(1);
+                return new Profesor(usuario, id_profesor);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+
 }
