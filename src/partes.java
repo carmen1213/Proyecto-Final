@@ -30,7 +30,7 @@ public class partes extends JFrame {
 
     public partes() {
         super("partes");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(HIDE_ON_CLOSE);
         this.setResizable(false);
         this.getContentPane().setBackground(new Color(227, 247, 193));
         setLayout(new FlowLayout());

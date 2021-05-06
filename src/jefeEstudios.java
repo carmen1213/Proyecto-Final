@@ -15,7 +15,7 @@ public class jefeEstudios extends JFrame {
 
     public jefeEstudios(){
         super("jefeEstudios");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(HIDE_ON_CLOSE);
         setLayout(new FlowLayout());
         this.getContentPane().setBackground(Color.PINK);
 

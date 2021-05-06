@@ -16,7 +16,7 @@ private JComboBox descargar;
 
     public profesor() {
         super("Profesores");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(HIDE_ON_CLOSE);
         this.setResizable(false);
         this.getContentPane().setBackground(new Color(227, 247, 193));
         setLayout(new FlowLayout());
