@@ -1,4 +1,6 @@
 
+import models.Usuario;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,13 +11,13 @@ public class padre extends JFrame {
     private JLabel titulop;
     Font f = new Font("Monospaced", BOLD, 30);
 
-    public padre() {
+    public padre(Usuario user) {
         super("padre");
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         setLayout(new FlowLayout());
 
-        JPanel titulo= new JPanel();
-        titulop=new JLabel("Bienvenido " + inicio.usuario.getText());
+        JPanel titulo = new JPanel();
+        titulop = new JLabel("<html> <div style = 'text-align: center;'> Bienvenido <br>  " + user.getNombre() + " </div></html> ");
         titulop.setFont(f);
         titulop.setForeground(new Color(140, 24, 82));
         titulo.add(titulop);
@@ -26,8 +28,8 @@ public class padre extends JFrame {
         setVisible(true);
     }
 
-    public static void main() {
-        new padre();
+    public static void main(Usuario user) {
+        new padre(user);
 
     }
 }

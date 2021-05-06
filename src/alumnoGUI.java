@@ -1,4 +1,6 @@
 
+import models.Usuario;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -10,13 +12,13 @@ public class alumnoGUI extends JFrame {
     Font f = new Font("Monospaced", BOLD, 30);
 
 
-    public alumnoGUI() {
+    public alumnoGUI(Usuario user) {
         super("alumno");
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         setLayout(new FlowLayout());
 
-        JPanel titulo= new JPanel();
-        titulop=new JLabel("Bienvenido " + inicio.usuario.getText());
+        JPanel titulo = new JPanel();
+        titulop = new JLabel("<html> <div style = 'text-align: center;'> Bienvenido <br>  " + user.getNombre() + " </div></html> ");
         titulop.setFont(f);
         titulop.setForeground(new Color(140, 24, 82));
         titulo.add(titulop);
@@ -27,8 +29,8 @@ public class alumnoGUI extends JFrame {
         setVisible(true);
     }
 
-    public static void main() {
-        new alumnoGUI();
+    public static void main(Usuario user) {
+        new alumnoGUI(user);
 
     }
 }

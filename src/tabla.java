@@ -24,8 +24,8 @@ public class tabla extends JFrame {
     private JButton modificar;
     private static Connection conn;
     private obtencion_datos_login control = new obtencion_datos_login();
-    private Usuario user = control.iniciarSesion(inicio.usuario.getText(), inicio.contraseÃ±a.getText());
-    private Profesor id_profesor = control.getIdProfesor(inicio.usuario.getText(), inicio.contraseÃ±a.getText());
+    private Usuario user = control.iniciarSesion(inicio.usuario.getText(), inicio.contraseña.getText());
+    private Profesor id_profesor = control.getIdProfesor(inicio.usuario.getText(), inicio.contraseña.getText());
     private ArrayList<Asignatura> asignaturas = controlador.getAsignaturaProfesor(id_profesor.getId_profesor());
     private UtilDateModel date = new UtilDateModel();
 
@@ -50,7 +50,6 @@ public class tabla extends JFrame {
         opciones.add(new JLabel(" "));
         opciones.add(new JLabel(" "));
 
-        listas.DatePicker fecha = new listas.DatePicker(LocalDate.now());
 
         date.setDate(2021, 3, 23);
         date.setSelected(true);
@@ -73,7 +72,7 @@ public class tabla extends JFrame {
 
         combo.add(asignatura);
         opciones.add(combo);
-        fecha.setEditable(false);
+
 
         ArrayList<Alumno> alumnosAsignatura = controlador.getAlumnosxAsignaturaA(asignaturas.get(asignatura.getSelectedIndex()).getId());
         DefaultTableModel model = generarModeloTablaAlumno(alumnosAsignatura);
