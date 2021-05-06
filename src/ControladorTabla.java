@@ -1,7 +1,7 @@
 
+import BDutils.conexionbasedatos;
 import models.Alumno;
 import models.Asignatura;
-import models.Notas;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -96,27 +96,27 @@ public class ControladorTabla {
         return resultado;
     }
 
-    public ArrayList<Notas> getNotasdeAlumnos(int id_alumno, int id_asignatura) {
-        ArrayList<Notas> resultado = new ArrayList<Notas>();
-
-        String SQL = "SELECT notas FROM notas where id_profesor = ? AND id_asignatura = ?;";
-        try {
-            PreparedStatement st = conn.prepareStatement(SQL);
-            st.setInt(1, id_alumno);
-            st.setInt(1, id_asignatura);
-
-            ResultSet alumnosAsignatura = st.executeQuery();
-            System.out.println(alumnosAsignatura);
-            while (alumnosAsignatura.next()) {
-                int nota = alumnosAsignatura.getInt(2);
-                double promedio = alumnosAsignatura.getDouble(1);
-                resultado.add(new Notas(nota, promedio));
-            }
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-
-        return resultado;
-    }
+//    public ArrayList<Notas> getNotasdeAlumnos(int id_alumno, int id_asignatura) {
+//        ArrayList<Notas> resultado = new ArrayList<Notas>();
+//
+//        String SQL = "SELECT notas FROM notas where id_profesor = ? AND id_asignatura = ?;";
+//        try {
+//            PreparedStatement st = conn.prepareStatement(SQL);
+//            st.setInt(1, id_alumno);
+//            st.setInt(1, id_asignatura);
+//
+//            ResultSet alumnosAsignatura = st.executeQuery();
+//            System.out.println(alumnosAsignatura);
+//            while (alumnosAsignatura.next()) {
+//                int nota = alumnosAsignatura.getInt(2);
+//                double promedio = alumnosAsignatura.getDouble(1);
+//                resultado.add(new Notas(nota, promedio));
+//            }
+//
+//        } catch (SQLException throwables) {
+//            throwables.printStackTrace();
+//        }
+//
+//        return resultado;
+//    }
 }
