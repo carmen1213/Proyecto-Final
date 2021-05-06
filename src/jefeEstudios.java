@@ -174,6 +174,7 @@ public class jefeEstudios extends JFrame {
         reunion.addItem("MIP");
 
 
+
         cuestionario = new JButton("Cuestionario");
         cuestionario.addActionListener(new verFomularios());
 
@@ -183,8 +184,14 @@ public class jefeEstudios extends JFrame {
         recompensas = new JComboBox();
         recompensas.addItem("-Recompensas-");
         recompensas.addItem("DAM");
+
         recompensas.addItem("CIN");
+
         recompensas.addItem("MIP");
+        recompensas.addActionListener(new VermdeHonor());
+
+
+
 
 
         primero.add(vacio);
@@ -304,7 +311,6 @@ public class jefeEstudios extends JFrame {
                 archivo = new File("..\\Proyecto-Final\\PartesYM.deHonor\\AmonestacionGrave.docx");
                 Desktop.getDesktop().open(archivo);
 
-
             } catch (IOException ex) {
 
                 System.out.println(ex);
@@ -338,7 +344,7 @@ public class jefeEstudios extends JFrame {
         public void actionPerformed(ActionEvent e) {
             WebDriver driver;
 
-            String exePath = "C:\\Users\\salva\\Desktop\\ProyectoFinal\\chromedriver.exe";
+            String exePath = "C:\\Users\\HP\\Downloads\\chromedriver.exe";
             System.setProperty("webdriver.chrome.driver", exePath);
 
             ChromeOptions options = new ChromeOptions();
@@ -346,6 +352,36 @@ public class jefeEstudios extends JFrame {
             driver = new ChromeDriver(options);
             driver.get("https://www.google.es/intl/es/forms/about/");
 
+        }
+    }
+
+    private class VermdeHonor implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (recompensas.getSelectedItem().equals("DAM")){
+                archivo = new File("C:\\Users\\salva\\Desktop\\ProyectoFinal\\PartesYM.deHonor\\MatriculaDeHonorDAM.docx");
+                try {
+                    Desktop.getDesktop().open(archivo);
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+            }
+            if (recompensas.getSelectedItem().equals("MIP")){
+                archivo = new File("C:\\Users\\salva\\Desktop\\ProyectoFinal\\PartesYM.deHonor\\MatriculaDeHonorMIP.docx");
+                try {
+                    Desktop.getDesktop().open(archivo);
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+            }
+            if (recompensas.getSelectedItem().equals("CIN")){
+                archivo = new File("C:\\Users\\salva\\Desktop\\ProyectoFinal\\PartesYM.deHonor\\MatriculaDeHonorCIN.docx");
+                try {
+                    Desktop.getDesktop().open(archivo);
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+            }
         }
     }
 }
