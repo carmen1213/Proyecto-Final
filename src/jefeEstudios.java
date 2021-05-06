@@ -7,6 +7,10 @@ import static java.awt.Font.BOLD;
 
 public class jefeEstudios extends JFrame {
     private JLabel titulop ;
+    private JComboBox reunion;
+    private JComboBox recompensas;
+    private JLabel vacio;
+    private JButton cuestionario;
     Font f = new Font("fantasy", BOLD, 30);
 
     public jefeEstudios(){
@@ -35,13 +39,6 @@ public class jefeEstudios extends JFrame {
         JRadioButtonMenuItem curso3 = new JRadioButtonMenuItem("MIP");
 
 
-        JMenu cuestionarios = new JMenu("Cuestionarios");
-
-        JRadioButtonMenuItem curso11 = new JRadioButtonMenuItem("DAM");
-
-        JRadioButtonMenuItem curso21 = new JRadioButtonMenuItem("CIN");
-
-        JRadioButtonMenuItem curso31 = new JRadioButtonMenuItem("MIP");
 
 
         JMenu amonestaciones = new JMenu("Amonestaciones");
@@ -53,13 +50,6 @@ public class jefeEstudios extends JFrame {
         JRadioButtonMenuItem curso32 = new JRadioButtonMenuItem("MIP");
 
 
-        JMenu reuniones = new JMenu("Reuniones");
-
-        JRadioButtonMenuItem curso13 = new JRadioButtonMenuItem("DAM");
-
-        JRadioButtonMenuItem curso23 = new JRadioButtonMenuItem("CIN");
-
-        JRadioButtonMenuItem curso33 = new JRadioButtonMenuItem("MIP");
 
 
         JMenu horarios = new JMenu("Horarios");
@@ -87,11 +77,6 @@ public class jefeEstudios extends JFrame {
         listas.add(curso2);
         listas.add(curso3);
 
-        barraMenu.add(cuestionarios);
-
-        cuestionarios.add(curso11);
-        cuestionarios.add(curso21);
-        cuestionarios.add(curso31);
 
         barraMenu.add(amonestaciones);
 
@@ -99,11 +84,6 @@ public class jefeEstudios extends JFrame {
         amonestaciones.add(curso22);
         amonestaciones.add(curso32);
 
-        barraMenu.add(reuniones);
-
-        reuniones.add(curso13);
-        reuniones.add(curso23);
-        reuniones.add(curso33);
 
         barraMenu.add(horarios);
 
@@ -121,7 +101,7 @@ public class jefeEstudios extends JFrame {
 
 
         JPanel principal = new JPanel();
-        principal.setLayout(new GridLayout(3,2));
+        principal.setLayout(new GridLayout(4,1));
         principal.setBackground(Color.PINK);
 
         JPanel titulo= new JPanel();
@@ -131,7 +111,52 @@ public class jefeEstudios extends JFrame {
         titulop.setForeground(new Color(59, 104, 252));
         titulo.add(titulop);
 
+        JPanel primero = new JPanel();
+        primero.setBackground(Color.PINK);
+        vacio= new JLabel();
+        vacio.setBackground(Color.PINK);
+        vacio.setBounds(10,30, 200,200);
+
+        JPanel segundo =new JPanel();
+        segundo.setLayout(new GridLayout(1,2));
+        segundo.setBackground(Color.PINK);
+
+
+        JPanel botones = new JPanel();
+       botones.setBackground(Color.PINK);
+        reunion= new JComboBox();
+
+
+        //disponibilidad.setBorder(new TitledBorder("Dias Disponibles"));
+        reunion.addItem("-Reuniones-");
+        reunion.addItem("DAM");
+        reunion.addItem("CIN");
+        reunion.addItem("MIP");
+
+
+
+        cuestionario= new JButton("Cuestionario");
+
+        JPanel tercero = new JPanel();
+        tercero.setBackground(Color.PINK);
+
+        recompensas = new JComboBox();
+        recompensas.addItem("-Recompensas-");
+        recompensas.addItem("DAM");
+        recompensas.addItem("CIN");
+        recompensas.addItem("MIP");
+
+
+
+        primero.add(vacio);
+        tercero.add(recompensas);
+        botones.add(reunion);
+        botones.add(cuestionario);
+    segundo.add(botones);
         principal.add(titulo);
+        principal.add(primero);
+        principal.add(segundo);
+        principal.add(tercero);
         general.add(principal);
         add(general);
         setSize(470,520);
@@ -148,4 +173,6 @@ public class jefeEstudios extends JFrame {
 
         }
     }
+
+
 }

@@ -11,7 +11,7 @@ public class inicio extends JFrame {
     private  JButton login,olvido;
     private JLabel confirmacion,denegacion;
     public static JTextField usuario;
-    private JTextField contraseÃ±a;
+    private JTextField contraseña;
     Font f = new Font("Monospaced", BOLD, 24);
     private obtencion_datos_login control = new obtencion_datos_login();
 
@@ -43,11 +43,11 @@ public class inicio extends JFrame {
            general.add(usuario);
 
 
-           general.add(new JLabel(" ContraseÃ±a:"));
-           contraseÃ±a=new JPasswordField("");
-           general.add(contraseÃ±a);
+           general.add(new JLabel(" Contraseña:"));
+           contraseña=new JPasswordField("");
+           general.add(contraseña);
 
-       olvido=new JButton("ContraseÃ±a olvidada");
+       olvido=new JButton("Contraseña olvidada");
        general.add(olvido);
        olvido.setBackground(new Color(232, 91, 74));
        olvido.addActionListener(new recuperar());
@@ -87,7 +87,7 @@ public class inicio extends JFrame {
                System.out.println(control.getdatosdellogin().get(0));
                System.out.println(control.getdatosdellogin().get(1));
                for (int i = 0; i < control.getdatosdellogin().size(); i++) {
-                   if (usuario.getText().equals(control.getdatosdellogin().get(i)) && contraseÃ±a.getText().equals(control.getdatosdellogin().get(i+1))) {
+                   if (usuario.getText().equals(control.getdatosdellogin().get(i)) && contraseña.getText().equals(control.getdatosdellogin().get(i+1))) {
                        confirmacion.setText("inicio correcto");
                        confirmacion.setForeground(Color.GREEN);
                        System.out.println("hola");
@@ -105,7 +105,7 @@ public class inicio extends JFrame {
                        }
                    }else{
                        confirmacion.setForeground(Color.red);
-                       confirmacion.setText("<html> <div style = 'text-align: center;'> contraseï¿½a incorrecta <br> o <br>usuario incorrecto </div></html>");
+                       confirmacion.setText("<html> <div style = 'text-align: center;'> contrase?a incorrecta <br> o <br>usuario incorrecto </div></html>");
                    }
                    }
                           }
