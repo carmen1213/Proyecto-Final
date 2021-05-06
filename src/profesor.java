@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import static java.awt.Font.BOLD;
 
@@ -60,7 +61,7 @@ private JComboBox descargar;
         setJMenuBar(barraMenu);
 
         JPanel titulo= new JPanel();
-        titulop = new JLabel("<html> <div style = 'text-align: center;'> Bienvenido <br>  " + user.getNombre() + " </div></html> " + user.getNombre());
+        titulop = new JLabel("<html> <div style = 'text-align: center;'> Bienvenido <br>  " + user.getNombre() + " </div></html> ");
         titulop.setFont(f);
         titulop.setForeground(new Color(140, 24, 82));
         titulo.add(titulop);
@@ -133,11 +134,11 @@ private JComboBox descargar;
     public static class Listenerco implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            //     try {
-            //tabla.main();
-            //       } catch (SQLException throwables) {
-            //         throwables.printStackTrace();
-            //      }
+            try {
+                tabla.main();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
         }
     }
 

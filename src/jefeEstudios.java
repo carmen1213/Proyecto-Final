@@ -1,3 +1,5 @@
+import models.Usuario;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -30,7 +32,7 @@ public class jefeEstudios extends JFrame {
 
     Font f = new Font("fantasy", BOLD, 30);
 
-    public jefeEstudios() {
+    public jefeEstudios(Usuario user) {
         super("jefeEstudios");
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         setLayout(new FlowLayout());
@@ -142,7 +144,7 @@ public class jefeEstudios extends JFrame {
 
         JPanel titulo = new JPanel();
         titulo.setBackground(Color.PINK);
-        JLabel titulop = new JLabel("Bienvenido " + inicio.usuario.getText());
+        JLabel titulop = new JLabel("<html> <div style = 'text-align: center;'> Bienvenido <br>  " + user.getNombre() + " </div></html> ");
         titulop.setFont(f);
         titulop.setForeground(new Color(59, 104, 252));
         titulo.add(titulop);
@@ -159,16 +161,14 @@ public class jefeEstudios extends JFrame {
 
 
         JPanel botones = new JPanel();
-       botones.setBackground(Color.PINK);
+        botones.setBackground(Color.PINK);
         reunion= new JComboBox();
-
 
 
         reunion.addItem("-Reuniones-");
         reunion.addItem("DAM");
         reunion.addItem("CIN");
         reunion.addItem("MIP");
-
 
 
         cuestionario= new JButton("Cuestionario");
@@ -183,12 +183,11 @@ public class jefeEstudios extends JFrame {
         recompensas.addItem("MIP");
 
 
-
         primero.add(vacio);
         tercero.add(recompensas);
         botones.add(reunion);
         botones.add(cuestionario);
-    segundo.add(botones);
+        segundo.add(botones);
         principal.add(titulo);
         principal.add(primero);
         principal.add(segundo);
@@ -199,8 +198,8 @@ public class jefeEstudios extends JFrame {
         setVisible(true);
     }
 
-    public static void main() {
-        jefeEstudios jefe = new jefeEstudios();
+    public static void main(Usuario user) {
+        jefeEstudios jefe = new jefeEstudios(user);
     }
 
 

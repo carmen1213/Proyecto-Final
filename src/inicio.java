@@ -13,7 +13,7 @@ public class inicio extends JFrame {
     private JButton login, olvido;
     private JLabel confirmacion, denegacion;
     public static JTextField usuario;
-    public static JTextField contraseÃ±a;
+    public static JTextField contraseña;
     Font f = new Font("Monospaced", BOLD, 24);
     private obtencion_datos_login control = new obtencion_datos_login();
 
@@ -44,11 +44,11 @@ public class inicio extends JFrame {
         general.add(usuario);
 
 
-        general.add(new JLabel(" ContraseÃ±a:"));
-        contraseÃ±a = new JPasswordField("");
-        general.add(contraseÃ±a);
+        general.add(new JLabel(" Contraseña:"));
+        contraseña = new JPasswordField("");
+        general.add(contraseña);
 
-        olvido = new JButton("ContraseÃ±a olvidada");
+        olvido = new JButton("Contraseña olvidada");
         general.add(olvido);
         olvido.setBackground(new Color(232, 91, 74));
         olvido.addActionListener(new recuperar());
@@ -90,21 +90,22 @@ public class inicio extends JFrame {
         }
 
         private void autenticarUsuarioBD() {
-            Usuario user = control.iniciarSesion(usuario.getText(), contraseÃ±a.getText());
+            Usuario user = control.iniciarSesion(usuario.getText(), contraseña.getText());
             if (user != null) {
                 switch (user.getTipoUsuario()) {
                     case "Alumno":
+                        alumnoGUI.main(user);
                         break;
                     case "Profesor":
                         profesor.main(user);
                         break;
                     case "Jefedeestudios":
-                        jefeEstudios.main();
+                        jefeEstudios.main(user);
                         break;
                     case "Padres":
                         break;
                     case "Director":
-                        director.main();
+                        director.main(user);
                         break;
                     default:
                         confirmacion.setForeground(Color.red);
@@ -113,7 +114,7 @@ public class inicio extends JFrame {
                 }
             } else {
                 confirmacion.setForeground(Color.red);
-                confirmacion.setText("<html> <div style = 'text-align: center;'> contraseï¿½a incorrecta <br> o <br>usuario incorrecto </div></html>");
+                confirmacion.setText("<html> <div style = 'text-align: center;'> contrase?a incorrecta <br> o <br>usuario incorrecto </div></html>");
             }
         }
     }

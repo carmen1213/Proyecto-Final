@@ -19,7 +19,7 @@ public class obtencion_datos_login {
 
     public ArrayList<String> getdatosdellogin(){
         ArrayList<String> resultado = new ArrayList<>();
-        String consulta = "SELECT nombre_usuario, contraseÃ±a, tipo_usuario,nombre FROM login";
+        String consulta = "SELECT nombre_usuario, contraseña, tipo_usuario,nombre FROM login";
         try {
             PreparedStatement pt = conn.prepareStatement(consulta);
             ResultSet login = pt.executeQuery();
@@ -36,12 +36,12 @@ public class obtencion_datos_login {
         return resultado;
     }
 
-    public Usuario iniciarSesion(String usuario, String contraseÃ±a) {
-        String sql = "SELECT nombre, tipo_usuario FROM login WHERE nombre_usuario = ? AND contraseÃ±a = ?";
+    public Usuario iniciarSesion(String usuario, String contraseña) {
+        String sql = "SELECT nombre, tipo_usuario FROM login WHERE nombre_usuario = ? AND contraseña = ?";
         try {
             PreparedStatement pt = conn.prepareStatement(sql);
             pt.setString(1, usuario);
-            pt.setString(2, contraseÃ±a);
+            pt.setString(2, contraseña);
             ResultSet login = pt.executeQuery();
             while (login.next()) {
                 String nombreUsuario = login.getString(1);
@@ -54,14 +54,14 @@ public class obtencion_datos_login {
         return null;
     }
 
-    public Profesor getIdProfesor(String usuario, String contraseÃ±a) {
+    public Profesor getIdProfesor(String usuario, String contraseña) {
         String sql = "SELECT id_profesor FROM profesor WHERE id_usuario IN(" +
-                "SELECT id_login FROM login WHERE nombre_usuario = ? AND contraseÃ±a = ?" +
+                "SELECT id_login FROM login WHERE nombre_usuario = ? AND contraseña = ?" +
                 ");";
         try {
             PreparedStatement pt = conn.prepareStatement(sql);
             pt.setString(1, usuario);
-            pt.setString(2, contraseÃ±a);
+            pt.setString(2, contraseña);
             ResultSet login = pt.executeQuery();
             while (login.next()) {
                 int id_profesor = login.getInt(1);
