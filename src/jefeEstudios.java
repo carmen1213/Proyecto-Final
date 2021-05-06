@@ -2,18 +2,35 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 import static java.awt.Font.BOLD;
 
 public class jefeEstudios extends JFrame {
-    private JLabel titulop ;
     private JComboBox reunion;
     private JComboBox recompensas;
     private JLabel vacio;
     private JButton cuestionario;
+
+    private JLabel titulop;
+
+    JRadioButtonMenuItem amonestacionesDAM;
+    JRadioButtonMenuItem amonestacionesMIP;
+    JRadioButtonMenuItem amonestacionesCIN;
+
+    JRadioButtonMenuItem leve;
+    JRadioButtonMenuItem grave;
+    JRadioButtonMenuItem muyGrave;
+
+    JRadioButtonMenuItem volverMenu;
+    JMenu amonestacionesMenu;
+    File archivo;
+
+
     Font f = new Font("fantasy", BOLD, 30);
 
-    public jefeEstudios(){
+    public jefeEstudios() {
         super("jefeEstudios");
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         setLayout(new FlowLayout());
@@ -26,87 +43,106 @@ public class jefeEstudios extends JFrame {
         JPanel menu = new JPanel();
         menu.setBackground(new Color(227, 247, 193));
 
-        JMenuBar barraMenu =new JMenuBar();
+        JMenuBar barraMenu = new JMenuBar();
 
         menu.add(barraMenu);
 
         JMenu listas = new JMenu("Listas");
 
-        JRadioButtonMenuItem curso1 = new JRadioButtonMenuItem("DAM");
+        JRadioButtonMenuItem listaDAM = new JRadioButtonMenuItem("DAM");
 
-        JRadioButtonMenuItem curso2 = new JRadioButtonMenuItem("CIN");
+        JRadioButtonMenuItem listaCIN = new JRadioButtonMenuItem("CIN");
 
-        JRadioButtonMenuItem curso3 = new JRadioButtonMenuItem("MIP");
-
-
+        JRadioButtonMenuItem listasMIP = new JRadioButtonMenuItem("MIP");
 
 
-        JMenu amonestaciones = new JMenu("Amonestaciones");
+        amonestacionesMenu = new JMenu("Amonestaciones");
 
-        JRadioButtonMenuItem curso12 = new JRadioButtonMenuItem("DAM");
+        amonestacionesDAM = new JRadioButtonMenuItem("DAM");
+        amonestacionesDAM.addActionListener(new verAmonestacionesDAM());
 
-        JRadioButtonMenuItem curso22 = new JRadioButtonMenuItem("CIN");
+        amonestacionesCIN = new JRadioButtonMenuItem("CIN");
+        amonestacionesCIN.addActionListener(new verAmonestacionesCIN());
 
-        JRadioButtonMenuItem curso32 = new JRadioButtonMenuItem("MIP");
+        amonestacionesMIP = new JRadioButtonMenuItem("MIP");
+        amonestacionesMIP.addActionListener(new verAmonestacionesMIP());
 
 
+        leve = new JRadioButtonMenuItem("leve");
+        leve.addActionListener(new AbrirLeve());
+
+        grave = new JRadioButtonMenuItem("grave");
+        grave.addActionListener(new AbrirGrave());
+
+        muyGrave = new JRadioButtonMenuItem("muy grave");
+        muyGrave.addActionListener(new AbrirMuyGrave());
+
+        volverMenu = new JRadioButtonMenuItem("volver");
+        volverMenu.addActionListener(new volverMenulist());
 
 
         JMenu horarios = new JMenu("Horarios");
 
-        JRadioButtonMenuItem curso14 = new JRadioButtonMenuItem("DAM");
+        JRadioButtonMenuItem horarioDAM = new JRadioButtonMenuItem("DAM");
 
-        JRadioButtonMenuItem curso24 = new JRadioButtonMenuItem("CIN");
+        JRadioButtonMenuItem horarioCIN = new JRadioButtonMenuItem("CIN");
 
-        JRadioButtonMenuItem curso34 = new JRadioButtonMenuItem("MIP");
+        JRadioButtonMenuItem horarioMIP = new JRadioButtonMenuItem("MIP");
 
 
         JMenu quejas = new JMenu("Quejas");
 
+        JRadioButtonMenuItem quejasDAM = new JRadioButtonMenuItem("DAM");
 
+        JRadioButtonMenuItem quejasCIN = new JRadioButtonMenuItem("CIN");
 
-        JRadioButtonMenuItem curso15 = new JRadioButtonMenuItem("DAM");
-
-        JRadioButtonMenuItem curso25= new JRadioButtonMenuItem("CIN");
-
-        JRadioButtonMenuItem curso35 = new JRadioButtonMenuItem("MIP");
+        JRadioButtonMenuItem quejasMIP = new JRadioButtonMenuItem("MIP");
 
         barraMenu.add(listas);
 
-        listas.add(curso1);
-        listas.add(curso2);
-        listas.add(curso3);
+        listas.add(listaDAM);
+        listas.add(listaCIN);
+        listas.add(listasMIP);
 
 
-        barraMenu.add(amonestaciones);
+        barraMenu.add(amonestacionesMenu);
 
-        amonestaciones.add(curso12);
-        amonestaciones.add(curso22);
-        amonestaciones.add(curso32);
+        amonestacionesMenu.add(amonestacionesDAM);
+        amonestacionesMenu.add(amonestacionesCIN);
+        amonestacionesMenu.add(amonestacionesMIP);
 
+        amonestacionesMenu.add(leve);
+        amonestacionesMenu.add(grave);
+        amonestacionesMenu.add(muyGrave);
+        amonestacionesMenu.add(volverMenu);
+
+        leve.setVisible(false);
+        grave.setVisible(false);
+        muyGrave.setVisible(false);
+        volverMenu.setVisible(false);
 
         barraMenu.add(horarios);
 
-        horarios.add(curso14);
-        horarios.add(curso24);
-        horarios.add(curso34);
+        horarios.add(horarioDAM);
+        horarios.add(horarioCIN);
+        horarios.add(horarioMIP);
 
         barraMenu.add(quejas);
 
-        quejas.add(curso15);
-        quejas.add(curso25);
-        quejas.add(curso35);
+        quejas.add(quejasDAM);
+        quejas.add(quejasCIN);
+        quejas.add(quejasMIP);
 
         setJMenuBar(barraMenu);
 
 
         JPanel principal = new JPanel();
-        principal.setLayout(new GridLayout(4,1));
+        principal.setLayout(new GridLayout(4, 1));
         principal.setBackground(Color.PINK);
 
-        JPanel titulo= new JPanel();
+        JPanel titulo = new JPanel();
         titulo.setBackground(Color.PINK);
-        titulop=new JLabel("Bienvenido " + inicio.usuario.getText());
+        JLabel titulop = new JLabel("Bienvenido " + inicio.usuario.getText());
         titulop.setFont(f);
         titulop.setForeground(new Color(59, 104, 252));
         titulo.add(titulop);
@@ -127,7 +163,7 @@ public class jefeEstudios extends JFrame {
         reunion= new JComboBox();
 
 
-        //disponibilidad.setBorder(new TitledBorder("Dias Disponibles"));
+
         reunion.addItem("-Reuniones-");
         reunion.addItem("DAM");
         reunion.addItem("CIN");
@@ -159,20 +195,140 @@ public class jefeEstudios extends JFrame {
         principal.add(tercero);
         general.add(principal);
         add(general);
-        setSize(470,520);
+        setSize(470, 520);
         setVisible(true);
     }
+
     public static void main() {
         jefeEstudios jefe = new jefeEstudios();
     }
 
 
-    private class ListercoJe implements ActionListener {
+    private class verAmonestacionesDAM implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+            volverMenu.setVisible(true);
+            leve.setVisible(true);
+            grave.setVisible(true);
+            muyGrave.setVisible(true);
 
+            amonestacionesDAM.setSelected(false);
+            volverMenu.setSelected(false);
+            amonestacionesDAM.setVisible(false);
+            amonestacionesMIP.setVisible(false);
+            amonestacionesCIN.setVisible(false);
+            amonestacionesMenu.setText("Gravedad");
         }
     }
 
+    private class verAmonestacionesCIN implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            volverMenu.setVisible(true);
+            leve.setVisible(true);
+            grave.setVisible(true);
+            muyGrave.setVisible(true);
+
+            amonestacionesCIN.setSelected(false);
+            volverMenu.setSelected(false);
+            amonestacionesDAM.setVisible(false);
+            amonestacionesMIP.setVisible(false);
+            amonestacionesCIN.setVisible(false);
+            amonestacionesMenu.setText("Gravedad");
+        }
+    }
+
+    private class verAmonestacionesMIP implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            volverMenu.setVisible(true);
+            leve.setVisible(true);
+            grave.setVisible(true);
+            muyGrave.setVisible(true);
+
+            amonestacionesMIP.setSelected(false);
+            volverMenu.setSelected(false);
+            amonestacionesDAM.setVisible(false);
+            amonestacionesMIP.setVisible(false);
+            amonestacionesCIN.setVisible(false);
+            amonestacionesMenu.setText("Gravedad");
+        }
+    }
+
+    private class volverMenulist implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            volverMenu.setSelected(false);
+            leve.setVisible(false);
+            grave.setVisible(false);
+            muyGrave.setVisible(false);
+            volverMenu.setVisible(false);
+            amonestacionesDAM.setVisible(true);
+            amonestacionesCIN.setVisible(true);
+            amonestacionesMIP.setVisible(true);
+            amonestacionesMenu.setText("Amonestaciones");
+            leve.setSelected(false);
+            grave.setSelected(false);
+            muyGrave.setSelected(false);
+        }
+
+    }
+
+    private class AbrirLeve implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            leve.setSelected(false);
+            try {
+
+                archivo = new File("..\\Proyecto-Final\\PartesYM.deHonor\\AmonestacionLeve.docx");
+                Desktop.getDesktop().open(archivo);
+
+
+            } catch (IOException ex) {
+
+                System.out.println(ex);
+
+
+            }
+        }
+    }
+
+    private class AbrirGrave implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            grave.setSelected(false);
+            try {
+
+                archivo = new File("..\\Proyecto-Final\\PartesYM.deHonor\\AmonestacionGrave.docx");
+                Desktop.getDesktop().open(archivo);
+
+
+            } catch (IOException ex) {
+
+                System.out.println(ex);
+
+
+            }
+        }
+    }
+
+    private class AbrirMuyGrave implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            muyGrave.setSelected(false);
+            try {
+
+                archivo = new File("..\\Proyecto-Final\\PartesYM.deHonor\\AmonestacionMuyGrave.docx");
+                Desktop.getDesktop().open(archivo);
+
+
+            } catch (IOException ex) {
+
+                System.out.println(ex);
+
+
+            }
+        }
+    }
 
 }
