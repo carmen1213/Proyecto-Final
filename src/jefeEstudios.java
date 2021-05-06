@@ -1,4 +1,7 @@
 import models.Usuario;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,10 +13,10 @@ import java.io.IOException;
 import static java.awt.Font.BOLD;
 
 public class jefeEstudios extends JFrame {
-    private JComboBox reunion;
-    private JComboBox recompensas;
-    private JLabel vacio;
-    private JButton cuestionario;
+    private final JComboBox reunion;
+    private final JComboBox recompensas;
+    private final JLabel vacio;
+    private final JButton cuestionario;
 
     private JLabel titulop;
 
@@ -171,7 +174,8 @@ public class jefeEstudios extends JFrame {
         reunion.addItem("MIP");
 
 
-        cuestionario= new JButton("Cuestionario");
+        cuestionario = new JButton("Cuestionario");
+        cuestionario.addActionListener(new verFomularios());
 
         JPanel tercero = new JPanel();
         tercero.setBackground(Color.PINK);
@@ -201,7 +205,6 @@ public class jefeEstudios extends JFrame {
     public static void main(Usuario user) {
         jefeEstudios jefe = new jefeEstudios(user);
     }
-
 
     private class verAmonestacionesDAM implements ActionListener {
         @Override
@@ -330,4 +333,20 @@ public class jefeEstudios extends JFrame {
         }
     }
 
+    private class verFomularios implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            WebDriver driver;
+
+            String exePath = "C:\\Users\\salva\\Desktop\\ProyectoFinal\\chromedriver.exe";
+            System.setProperty("webdriver.chrome.driver", exePath);
+
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--start-maximized");
+            driver = new ChromeDriver(options);
+            driver.get("https://www.google.es/intl/es/forms/about/");
+
+        }
+    }
 }
+

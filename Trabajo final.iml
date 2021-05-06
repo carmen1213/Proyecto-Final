@@ -62,5 +62,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="mysql-connector-java-8.0.24" level="project" />
+    <orderEntry type="library" name="selenium-java-3.141" level="project" />
   </component>
 </module>

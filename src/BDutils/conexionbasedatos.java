@@ -28,7 +28,7 @@ public class conexionbasedatos {
     public String username = "root";
 
     // Clave de usuario
-    public String password = "Lulicala15@";
+    public String password = "TairaRoot2020";
 
     public Connection conectarMySQL() {
         Connection conn = null;
