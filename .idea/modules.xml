@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../EjemploImagenJLabel/EjemploImagenJLabel.iml" filepath="$PROJECT_DIR$/../EjemploImagenJLabel/EjemploImagenJLabel.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Proyectos PRG/Proyectos PRG.iml" filepath="$PROJECT_DIR$/../Proyectos PRG/Proyectos PRG.iml" />
       <module fileurl="file://$PROJECT_DIR$/Trabajo final.iml" filepath="$PROJECT_DIR$/Trabajo final.iml" />
     </modules>
   </component>

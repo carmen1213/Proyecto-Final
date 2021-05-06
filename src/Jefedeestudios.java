@@ -24,7 +24,7 @@ private JLabel titulop ;
             JPanel general = new JPanel();
             general.setLayout(new BorderLayout());
 
-JPanel menu = new JPanel();
+            JPanel menu = new JPanel();
             JMenuBar mb = new JMenuBar();
 
             JMenu listas = new JMenu("Listas");
@@ -142,79 +142,7 @@ principal.setLayout(new GridLayout(3,2));
 
 
 
-            /*
 
-            JPanel primer = new JPanel();
-            primer.setLayout(new GridLayout(2,1));
-
-            listasBtn = new JButton("Crear Listas");
-
-
-            cuestionariosBtn = new JButton("Crear Cuestionarios");
-
-
-            amonestacionesBtn = new JButton("Crear amonestaciones");
-
-
-            reunionesBtn = new JButton("Crear reuniones");
-
-
-            horariosBtn = new JButton("Crear horarios ");
-
-            quejasBtn = new JButton("Resolver quejas");
-
-            mb.add(listas);
-
-            listas.add(curso1);
-            listas.add(curso2);
-            listas.add(curso3);
-
-            mb.add(cuestionarios);
-
-            cuestionarios.add(curso11);
-            cuestionarios.add(curso21);
-            cuestionarios.add(curso31);
-
-            mb.add(amonestaciones);
-
-            amonestaciones.add(curso12);
-            amonestaciones.add(curso22);
-            amonestaciones.add(curso32);
-
-            mb.add(reuniones);
-
-            reuniones.add(curso13);
-            reuniones.add(curso23);
-            reuniones.add(curso33);
-
-            mb.add(horarios);
-
-            horarios.add(curso14);
-            horarios.add(curso24);
-            horarios.add(curso34);
-
-            mb.add(quejas);
-
-            quejas.add(curso15);
-            quejas.add(curso25);
-            quejas.add(curso35);
-
-
-            setJMenuBar(mb);
-
-
-
-
-
-            primer.add(listasBtn);
-            primer.add(cuestionariosBtn);
-            primer.add(amonestacionesBtn);
-            primer.add(new JLabel());
-            primer.add(reunionesBtn);
-            primer.add(horariosBtn);
-            primer.add(quejasBtn);
-            general.add(primer);
-*/
             add(general);
             setSize(600, 200);
             setVisible(true);

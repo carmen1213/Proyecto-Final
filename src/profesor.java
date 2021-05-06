@@ -1,9 +1,7 @@
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 import static java.awt.Font.BOLD;
 
@@ -138,11 +136,11 @@ private JComboBox descargar;
     public static class Listenerco implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            try {
-                tabla.main();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
+            //     try {
+            //tabla.main();
+            //       } catch (SQLException throwables) {
+            //         throwables.printStackTrace();
+            //      }
         }
     }
 

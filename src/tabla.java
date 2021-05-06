@@ -28,20 +28,20 @@ public class tabla extends JFrame{
     public tabla() throws SQLException {
         super("Listas");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.getContentPane().setBackground(new Color(252, 211, 163   ));
+        this.getContentPane().setBackground(new Color(227, 247, 193));
 
 
         JPanel general = new JPanel();
         general.setLayout(new GridLayout(4, 1));
-        general.setBackground(new Color(252, 211, 163  ));
+        general.setBackground(new Color(227, 247, 193));
 
         JPanel titulo = new JPanel();
-        titulo.setBackground(new Color(252, 211, 163  ));
+        titulo.setBackground(new Color(227, 247, 193));
         titulop = new JLabel("Bienvenido");
         titulo.add(titulop);
 
         JPanel opciones = new JPanel();
-        opciones.setBackground(new Color(252, 211, 163  ));
+        opciones.setBackground(new Color(227, 247, 193));
         opciones.setLayout(new GridLayout(1, 4, 12, 0));
         opciones.add(new JLabel(" "));
         opciones.add(new JLabel(" "));
@@ -52,14 +52,14 @@ public class tabla extends JFrame{
         date.setSelected(true);
         JDatePanelImpl datePanel = new JDatePanelImpl(date);
         JDatePickerImpl datePicker = new JDatePickerImpl(datePanel);
-        datePicker.setBackground(new Color(252, 211, 163  ));
+        datePicker.setBackground(new Color(227, 247, 193));
         opciones.add(datePicker);
 
         JPanel combo = new JPanel();
         combo.setLayout(new GridLayout(3, 1));
-        combo.setBackground(new Color(252, 211, 163  ));
+        combo.setBackground(new Color(227, 247, 193));
         asignatura = new JComboBox();
-        asignatura.setBackground(new Color(252, 211, 163   ));
+        asignatura.setBackground(new Color(227, 247, 193));
 
 
         for (int i = 0; i < asignaturas.size(); i++) {
@@ -98,19 +98,19 @@ public class tabla extends JFrame{
 
         JPanel primer = new JPanel();
         primer.setLayout(new GridLayout(2,1));
-        primer.setBackground(new Color(252, 211, 163   ));
+        primer.setBackground(new Color(227, 247, 193));
         JPanel referencia = new JPanel();
-        referencia.setBackground(new Color(252, 211, 163  ));
+        referencia.setBackground(new Color(227, 247, 193));
         referencia.add(new JLabel(" "));
 
 
         JPanel botones = new JPanel();
         botones.setLayout(new GridLayout(1, 3));
-        botones.setBackground(new Color(252, 211, 163   ));
+        botones.setBackground(new Color(227, 247, 193));
         botones.add(new JLabel());
         botones.add(new JLabel());
         JPanel guardarm = new JPanel();
-        guardarm.setBackground(new Color(252, 211, 163   ));
+        guardarm.setBackground(new Color(227, 247, 193));
         guardar = new JButton("Guardar");
         modificar = new JButton("Modificar");
 
