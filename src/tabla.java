@@ -10,7 +10,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class tabla extends JFrame {
@@ -21,7 +20,7 @@ public class tabla extends JFrame {
     private JComboBox asignatura;
     private JLabel titulop;
     private JButton guardar;
-    private JButton modificar;
+    private JButton Isertarnotas;
     private static Connection conn;
     private obtencion_datos_login control = new obtencion_datos_login();
     private Usuario user = control.iniciarSesion(inicio.usuario.getText(), inicio.contraseña.getText());
@@ -65,7 +64,6 @@ public class tabla extends JFrame {
         asignatura.setBackground(new Color(227, 247, 193));
 
 
-
         for (int i = 0; i < asignaturas.size(); i++) {
             asignatura.addItem(asignaturas.get(i).getNombre());
         }
@@ -75,7 +73,8 @@ public class tabla extends JFrame {
 
 
         ArrayList<Alumno> alumnosAsignatura = controlador.getAlumnosxAsignaturaA(asignaturas.get(asignatura.getSelectedIndex()).getId());
-        DefaultTableModel model = generarModeloTablaAlumno(alumnosAsignatura);
+        ArrayList<Notas> notas = controlador.getnotasasignatura(alumnosAsignatura.get(0).getId(), asignaturas.get(asignatura.getSelectedIndex()).getId());
+        DefaultTableModel model = generarModeloTablaAlumno(alumnosAsignatura,notas);
 
         jTableAlumnos = new JTable(model) {
             //private static final long serialVersionUID = 1L;
@@ -115,13 +114,13 @@ public class tabla extends JFrame {
         JPanel guardarm = new JPanel();
         guardarm.setBackground(new Color(227, 247, 193));
         guardar = new JButton("Guardar");
-        modificar = new JButton("Modificar");
+        Isertarnotas = new JButton("Insertar notas");
 
 
         guardar.addActionListener(new guardarinformacion());
 
         guardarm.add(guardar);
-        guardarm.add(modificar);
+        guardarm.add(Isertarnotas);
         botones.add(guardarm);
         primer.add(referencia);
         primer.add(botones);
@@ -136,19 +135,20 @@ public class tabla extends JFrame {
         add(general,BorderLayout.CENTER);
 
 
-        setSize(860, 530);
+        setSize(860, 580);
         setVisible(true);
 
     }
 
 
-    private DefaultTableModel generarModeloTablaAlumno(ArrayList<Alumno> nombresAlumnos) {
+    private DefaultTableModel generarModeloTablaAlumno(ArrayList<Alumno> nombresAlumnos, ArrayList<Notas> notas) {
 
-        String[] cols = {"Nombre", "Asistencia"};
+        String[] cols = {"Nombre", "Asistencia", "Notas","Promedio"};
         DefaultTableModel model = new DefaultTableModel(cols, 0);
         for (int i = 0; i < nombresAlumnos.size(); i++) {
-            Object[] data = {nombresAlumnos.get(i).getNombre(), false};
-            model.addRow(data);
+                Object[] data = {nombresAlumnos.get(i).getNombre(), false,notas.get(i).getNota()};
+                model.addRow(data);
+
         }
         return model;
     }
