@@ -283,26 +283,18 @@ VALUES (6, 'Nsenent', '1111', null, 'Jefedeestudios', 'Neus Senent');
 INSERT INTO educativ.login (id_login, nombre_usuario, contraseña, seguridad, tipo_usuario, nombre)
 VALUES (7, 'Cvicente', '12', null, 'Director', 'Cristina Vicente');
 
-INSERT INTO educativ.alumnos (id_alumno, DNI, fecha_nacimiento, nombre, id_login)
-VALUES (3, '12345678A', '2010-04-29', 'Salvador Blanquer', 1);
-INSERT INTO educativ.alumnos (id_alumno, DNI, fecha_nacimiento, nombre, id_login)
-VALUES (4, '88888888Z', '1999-12-15', 'Lucia Calabrese', null);
-INSERT INTO educativ.alumnos (id_alumno, DNI, fecha_nacimiento, nombre, id_login)
-VALUES (5, '87654321B', '2015-11-18', 'Pedro Sanchez', null);
-INSERT INTO educativ.alumnos (id_alumno, DNI, fecha_nacimiento, nombre, id_login)
-VALUES (6, '65412321M', '1986-04-05', 'Angel Beltran', null);
-INSERT INTO educativ.alumnos (id_alumno, DNI, fecha_nacimiento, nombre, id_login)
-VALUES (7, '52155621N', '1995-04-07', 'Lucas gonsalvo', null);
-INSERT INTO educativ.alumnos (id_alumno, DNI, fecha_nacimiento, nombre, id_login)
-VALUES (8, '55864512P', '2004-11-18', 'Javier Ruiz Perez', null);
-INSERT INTO educativ.alumnos (id_alumno, DNI, fecha_nacimiento, nombre, id_login)
-VALUES (9, '56231428O', '1999-05-05', 'Nicolas Bustos', null);
-INSERT INTO educativ.alumnos (id_alumno, DNI, fecha_nacimiento, nombre, id_login)
-VALUES (10, '12369854B', '1994-04-07', 'Sergio Lorente', null);
-INSERT INTO educativ.alumnos (id_alumno, DNI, fecha_nacimiento, nombre, id_login)
-VALUES (11, '55287951P', '2014-04-04', 'Antonio Castillo', null);
-INSERT INTO educativ.alumnos (id_alumno, DNI, fecha_nacimiento, nombre, id_login)
-VALUES (12, '65212536B', '2000-09-17', 'Carmen Marti', null);
+INSERT INTO educativ.alumnos (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (3, '12345678A', '2010-04-29', 'Salvador Blanquer', 1);
+INSERT INTO educativ.alumnos (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (4, '88888888Z', '1999-12-15', 'Lucia Calabrese', null);
+INSERT INTO educativ.alumnos (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (5, '87654321B', '2015-11-18', 'Pedro Sanchez', null);
+INSERT INTO educativ.alumnos (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (6, '65412321M', '1986-04-05', 'Angel Beltran', null);
+INSERT INTO educativ.alumnos (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (7, '52155621N', '1995-04-07', 'Lucas gonsalvo', null);
+INSERT INTO educativ.alumnos (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (8, '55864512P', '2004-11-18', 'Javier Ruiz Perez', null);
+INSERT INTO educativ.alumnos (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (9, '56231428O', '1999-05-05', 'Nicolas Bustos', null);
+INSERT INTO educativ.alumnos (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (10, '12369854B', '1994-04-07', 'Sergio Lorente', null);
+INSERT INTO educativ.alumnos (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (11, '55287951P', '2014-04-04', 'Antonio Castillo', null);
+INSERT INTO educativ.alumnos (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (12, '65212536B', '2000-09-17', 'Carmen Marti', null);
+INSERT INTO educativ.alumnos (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (13, null, null, 'Pepa pig', null);
+INSERT INTO educativ.alumnos (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (14, null, null, 'Juan Perez', null);
 
 INSERT INTO educativ.curso (id_curso, nombre)
 VALUES (1, '1o Dam');
@@ -385,3 +377,93 @@ VALUES (4, 6, 8);
 
 INSERT INTO educativ.jefedeestudios (id_jefedeestudios, DNI, nombre, telefono, direccion, fechaNac, correo, id_login)
 VALUES (1, '00000000M', 'Neus Senent', 698574236, null, null, null, null);
+
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Salvador Blanquer', 3, 'Programación', 3);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Salvador Blanquer', 3, 'Bases de Datos', 5);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Salvador Blanquer', 3, 'Entornos de desarrollo', 6);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Salvador Blanquer', 3, 'Ingles Tecnico', 7);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Salvador Blanquer', 3, 'FOL', 17);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Salvador Blanquer', 3, 'Sistemas', 18);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Salvador Blanquer', 3, 'Lenguaje de marcas', 19);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Lucia Calabrese', 4, 'Programación', 3);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Lucia Calabrese', 4, 'Bases de Datos', 5);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Lucia Calabrese', 4, 'Entornos de desarrollo', 6);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Lucia Calabrese', 4, 'Ingles Tecnico', 7);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Lucia Calabrese', 4, 'FOL', 17);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Lucia Calabrese', 4, 'Sistemas', 18);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Lucia Calabrese', 4, 'Lenguaje de marcas', 19);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Pedro Sanchez', 5, 'Marketing', 4);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Pedro Sanchez', 5, 'Gestion economica y financiera de la empresa', 9);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Pedro Sanchez', 5, 'Gestion administrativa del comercio internacional', 10);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Pedro Sanchez', 5, 'Logistica de almacenamiento', 11);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Pedro Sanchez', 5, 'Transporte internacional de mercaderias', 12);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Pedro Sanchez', 5, 'Ingles', 13);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Pedro Sanchez', 5, 'FOL', 14);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Pedro Sanchez', 5, 'Ingles tecnico', 15);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Angel Beltran', 6, 'Marketing', 4);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Angel Beltran', 6, 'Gestion economica y financiera de la empresa', 9);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Angel Beltran', 6, 'Gestion administrativa del comercio internacional', 10);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Angel Beltran', 6, 'Logistica de almacenamiento', 11);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Angel Beltran', 6, 'Transporte internacional de mercaderias', 12);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Angel Beltran', 6, 'Ingles', 13);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Angel Beltran', 6, 'FOL', 14);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Angel Beltran', 6, 'Ingles tecnico', 15);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Lucas gonsalvo', 7, 'Marketing', 4);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Lucas gonsalvo', 7, 'Gestion economica y financiera de la empresa', 9);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Lucas gonsalvo', 7, 'Gestion administrativa del comercio internacional', 10);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Lucas gonsalvo', 7, 'Logistica de almacenamiento', 11);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Lucas gonsalvo', 7, 'Transporte internacional de mercaderias', 12);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Lucas gonsalvo', 7, 'Ingles', 13);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Lucas gonsalvo', 7, 'FOL', 14);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Lucas gonsalvo', 7, 'Ingles tecnico', 15);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Javier Ruiz Perez', 8, 'Programación', 3);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Javier Ruiz Perez', 8, 'Bases de Datos', 5);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Javier Ruiz Perez', 8, 'Entornos de desarrollo', 6);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Javier Ruiz Perez', 8, 'Ingles Tecnico', 7);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Javier Ruiz Perez', 8, 'FOL', 17);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Javier Ruiz Perez', 8, 'Sistemas', 18);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Javier Ruiz Perez', 8, 'Lenguaje de marcas', 19);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Nicolas Bustos', 9, 'Programación', 3);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Nicolas Bustos', 9, 'Bases de Datos', 5);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Nicolas Bustos', 9, 'Entornos de desarrollo', 6);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Nicolas Bustos', 9, 'Ingles Tecnico', 7);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Nicolas Bustos', 9, 'FOL', 17);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Nicolas Bustos', 9, 'Sistemas', 18);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Nicolas Bustos', 9, 'Lenguaje de marcas', 19);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Sergio Lorente', 10, 'Marketing', 4);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Sergio Lorente', 10, 'Gestion economica y financiera de la empresa', 9);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Sergio Lorente', 10, 'Gestion administrativa del comercio internacional', 10);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Sergio Lorente', 10, 'Logistica de almacenamiento', 11);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Sergio Lorente', 10, 'Transporte internacional de mercaderias', 12);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Sergio Lorente', 10, 'Ingles', 13);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Sergio Lorente', 10, 'FOL', 14);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Sergio Lorente', 10, 'Ingles tecnico', 15);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Antonio Castillo', 11, 'Programación', 3);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Antonio Castillo', 11, 'Bases de Datos', 5);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Antonio Castillo', 11, 'Entornos de desarrollo', 6);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Antonio Castillo', 11, 'Ingles Tecnico', 7);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Antonio Castillo', 11, 'FOL', 17);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Antonio Castillo', 11, 'Sistemas', 18);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Antonio Castillo', 11, 'Lenguaje de marcas', 19);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Carmen Marti', 12, 'Programación', 3);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Carmen Marti', 12, 'Bases de Datos', 5);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Carmen Marti', 12, 'Entornos de desarrollo', 6);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Carmen Marti', 12, 'Ingles Tecnico', 7);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Carmen Marti', 12, 'FOL', 17);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Carmen Marti', 12, 'Sistemas', 18);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Carmen Marti', 12, 'Lenguaje de marcas', 19);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Pepa pig', 13, 'Programación', 3);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Pepa pig', 13, 'Bases de Datos', 5);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Pepa pig', 13, 'Entornos de desarrollo', 6);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Pepa pig', 13, 'Ingles Tecnico', 7);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Pepa pig', 13, 'FOL', 17);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Pepa pig', 13, 'Sistemas', 18);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Pepa pig', 13, 'Lenguaje de marcas', 19);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Juan Perez', 14, 'Programación', 3);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Juan Perez', 14, 'Bases de Datos', 5);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Juan Perez', 14, 'Entornos de desarrollo', 6);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Juan Perez', 14, 'Ingles Tecnico', 7);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Juan Perez', 14, 'FOL', 17);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Juan Perez', 14, 'Sistemas', 18);
+INSERT INTO educativ.alumnos_asignatura (nombre, id_alumno, nombreAsignatura, id_asignatura) VALUES ('Juan Perez', 14, 'Lenguaje de marcas', 19);
+
