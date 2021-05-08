@@ -239,11 +239,7 @@ create table reuniones
     fecha        date        null,
     curso        varchar(45) null
 );
-
-
-
-create
-definer = root@localhost view alumnos_asignatura as
+create definer = root@localhost view alumnos_asignatura as
 select `educativ`.`alumnos`.`nombre`    AS `nombre`,
        `educativ`.`alumnos`.`id_alumno` AS `id_alumno`,
        `a`.`nombre`                     AS `nombreAsignatura`,
@@ -251,8 +247,7 @@ select `educativ`.`alumnos`.`nombre`    AS `nombre`,
 from ((`educativ`.`alumnos` left join `educativ`.`alumnos_curso` `ac` on ((`educativ`.`alumnos`.`id_alumno` = `ac`.`id_alumno`)))
          left join `educativ`.`asignatura` `a` on ((`ac`.`id_curso` = `a`.`id_curso`)));
 
-create
-definer = root@localhost view asignatura_asistencia as
+create definer = root@localhost view asignatura_asistencia as
 select `a2`.`nombre`                        AS `nombre`,
        `educativ`.`asistencia`.`asiste`     AS `asiste`,
        `educativ`.`asistencia`.`dia_semana` AS `dia_semana`,
@@ -261,14 +256,22 @@ select `a2`.`nombre`                        AS `nombre`,
 from ((`educativ`.`asistencia` left join `educativ`.`asignatura` `a` on ((`educativ`.`asistencia`.`id_asignatura` = `a`.`id_asignatura`)))
          left join `educativ`.`alumnos` `a2` on ((`a2`.`id_alumno` = `educativ`.`asistencia`.`id_alumno`)));
 
-create
-definer = root@localhost view asignatura_profesor as
+create definer = root@localhost view asignatura_profesor as
 select `educativ`.`asignatura`.`id_asignatura` AS `id_asignatura`,
        `educativ`.`asignatura`.`nombre`        AS `nombreAsig`,
        `c`.`id_profesor`                       AS `id_profesor`,
        `p`.`nombre`                            AS `nombre`
 from (((`educativ`.`asignatura` left join `educativ`.`clase` `c` on ((`educativ`.`asignatura`.`id_asignatura` = `c`.`id_asignatura`))) left join `educativ`.`profesor_asignatura` `pa` on ((`educativ`.`asignatura`.`id_asignatura` = `pa`.`id_asignatura`)))
          left join `educativ`.`profesor` `p` on ((`c`.`id_profesor` = `p`.`id_profesor`)));
+
+create definer = root@localhost view view_name as
+select `educativ`.`alumnos_curso`.`id_alumno` AS `id_alumno`,
+       `c`.`nombre`                           AS `curso`,
+       `a`.`nombre`                           AS `asignatura`,
+       `a`.`id_asignatura`                    AS `id_asignatura`,
+       `a2`.`nombre`                          AS `alumnos`
+from (((`educativ`.`alumnos_curso` left join `educativ`.`curso` `c` on ((`c`.`id_curso` = `educativ`.`alumnos_curso`.`id_curso`))) left join `educativ`.`asignatura` `a` on ((`c`.`id_curso` = `a`.`id_curso`)))
+         left join `educativ`.`alumnos` `a2` on ((`educativ`.`alumnos_curso`.`id_alumno` = `a2`.`id_alumno`)));
 
 
 

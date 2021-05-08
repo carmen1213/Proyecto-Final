@@ -4,9 +4,13 @@ public class Alumno {
     String nombre;
     int id;
 
+
+
+
     public Alumno(String nombre, int id) {
         this.nombre = nombre;
         this.id = id;
+
     }
 
     public String getNombre() {
