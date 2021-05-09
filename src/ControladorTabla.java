@@ -57,7 +57,7 @@ public class ControladorTabla {
     public ArrayList<Alumno> getAlumnosxAsignaturaA(int idAsignatura){
         ArrayList<Alumno> resultado = new ArrayList<Alumno>();
 
-        String SQL = "SELECT alumnos, id_alumno FROM alumnos_asigntatura where id_asignatura = ?;";
+        String SQL = "SELECT nombre,id_alumno FROM alumnosxasignatura where id_asignatura = ?;";
         try {
             PreparedStatement st = conn.prepareStatement(SQL);
             st.setInt(1,idAsignatura);
@@ -65,7 +65,6 @@ public class ControladorTabla {
             while (alumnosAsignatura.next()){
                 String nombre = alumnosAsignatura.getString(1);
                 int id = alumnosAsignatura.getInt(2);
-                String curso = alumnosAsignatura.getString(3);
                 resultado.add(new Alumno(nombre, id));
             }
 
