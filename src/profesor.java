@@ -135,7 +135,7 @@ private JComboBox descargar;
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                tabla.main();
+                tabla_profesor.main();
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
