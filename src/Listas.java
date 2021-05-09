@@ -1,11 +1,8 @@
-package JefeEstudios;
-
 import models.Alumno;
 import models.Curso;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static java.awt.Font.BOLD;
@@ -15,6 +12,8 @@ public class Listas extends JFrame {
     private JTable jTableAlumnos;
     private JLabel titulop;
     Font f = new Font("fantasy", BOLD, 30);
+    private JComboBox asignatura;
+
 
     public Listas(){
         super("Listas");
@@ -25,14 +24,26 @@ public class Listas extends JFrame {
         general.setLayout(new GridLayout(3, 1));
         general.setBackground(Color.PINK);
 
+        JPanel combo = new JPanel();
+        combo.setLayout(new GridLayout(3, 1));
+        combo.setBackground(new Color(227, 247, 193));
+        asignatura = new JComboBox();
+        asignatura.setBackground(new Color(227, 247, 193));
+        asignatura.addItem("DAM");
+        asignatura.addItem("MIP");
+        asignatura.addItem("CIN");
+
+        combo.add(asignatura);
+
         JPanel titulo = new JPanel();
         titulo.setBackground(Color.PINK);
-        JLabel titulop = new JLabel("HORARIO");
+        JLabel titulop = new JLabel("LISTADO DE ALUMNOS");
         titulop.setFont(f);
         titulo.add(titulop);
 
-        ArrayList<Curso> alumnosAsignatura = controlador.
-        DefaultTableModel model = generarModeloTablaAlumno(alumnosAsignatura);
+
+        ArrayList<Curso> Curso_Alumnos = controlador.getAlumnos();
+        DefaultTableModel model = generarModeloTablaAlumno(Curso_Alumnos);
         jTableAlumnos = new JTable(model) {
             //private static final long serialVersionUID = 1L;
             @Override
@@ -41,7 +52,7 @@ public class Listas extends JFrame {
                     case 0:
                         return String.class;
                     case 1:
-                        return Boolean.class;
+                        return String.class;
                     default:
                     case 2:
                         return String.class;
@@ -55,6 +66,8 @@ public class Listas extends JFrame {
         JScrollPane scrollpane = new JScrollPane(jTableAlumnos);
 
         general.add(titulo);
+        general.add(scrollpane,BorderLayout.SOUTH);
+       // general.add(combo);
         add(general,BorderLayout.CENTER);
 
 
@@ -67,15 +80,16 @@ public class Listas extends JFrame {
 
 
 
+
     public static void main() {
         Listas listas = new Listas();
     }
-    private DefaultTableModel generarModeloTablaAlumno(ArrayList<Alumno> nombresAlumnos) {
+    private DefaultTableModel generarModeloTablaAlumno(ArrayList<Curso> nombresAlumnos) {
 
         String[] cols = {"Curso", "Nombre"};
         DefaultTableModel model = new DefaultTableModel(cols, 0);
         for (int i = 0; i < nombresAlumnos.size(); i++) {
-            Object[] data = {nombresAlumnos.get(i).getNombre(), nombresAlumnos.get(i).getCurso()};
+            Object[] data = {nombresAlumnos.get(i).getNombre_curso(), nombresAlumnos.get(i).getNombre_alumno()};
             model.addRow(data);
         }
         return model;

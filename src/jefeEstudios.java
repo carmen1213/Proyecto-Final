@@ -1,7 +1,4 @@
 import models.Usuario;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 
 import javax.swing.*;
 import java.awt.*;
@@ -54,11 +51,9 @@ public class jefeEstudios extends JFrame {
 
         JMenu listas = new JMenu("Listas");
 
-        JRadioButtonMenuItem listaDAM = new JRadioButtonMenuItem("DAM");
+        JRadioButtonMenuItem listaAlumnos = new JRadioButtonMenuItem("VER LISTADO DE ALUMNOS");
+        listaAlumnos.addActionListener(new Listado_alumnos());
 
-        JRadioButtonMenuItem listaCIN = new JRadioButtonMenuItem("CIN");
-
-        JRadioButtonMenuItem listasMIP = new JRadioButtonMenuItem("MIP");
 
 
         amonestacionesMenu = new JMenu("Amonestaciones");
@@ -105,9 +100,8 @@ public class jefeEstudios extends JFrame {
 
         barraMenu.add(listas);
 
-        listas.add(listaDAM);
-        listas.add(listaCIN);
-        listas.add(listasMIP);
+        listas.add(listaAlumnos);
+
 
 
         barraMenu.add(amonestacionesMenu);
@@ -382,6 +376,13 @@ public class jefeEstudios extends JFrame {
                     ioException.printStackTrace();
                 }
             }
+        }
+    }
+
+    private class Listado_alumnos implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Listas listas = new Listas();
         }
     }
 }

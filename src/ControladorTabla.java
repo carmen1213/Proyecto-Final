@@ -100,14 +100,15 @@ public class ControladorTabla {
     public ArrayList<Curso> getAlumnos(){
         ArrayList<Curso> resultado = new ArrayList<Curso>();
 
-        String SQL = "SELECT nombre, curso FROM view_name";
+        String SQL = "SELECT Alumnos, curso FROM alumno_cursos WHERE curso = 'Mip' ";
         try {
             PreparedStatement st = conn.prepareStatement(SQL);
+         //   st.setString(1, curso);
             ResultSet alumnosAsignatura = st.executeQuery();
             while (alumnosAsignatura.next()){
                 String nombre = alumnosAsignatura.getString(1);
-                String curso= alumnosAsignatura.getString(2);
-                resultado.add(new Curso(nombre,curso));
+                String cursos= alumnosAsignatura.getString(2);
+                resultado.add(new Curso(nombre,cursos));
             }
 
         } catch (SQLException throwables) {
