@@ -1,27 +1,28 @@
 package models;
 
 public class Notas {
-    int nota;
-    double promedio;
+    String nombre_alumno;
+    String asignatura;
 
-    public int getNota() {
-        return nota;
+
+    public String getNombre_alumno() {
+        return nombre_alumno;
     }
 
-    public void setNota(int nota) {
-        this.nota = nota;
+    public void setNombre_alumno(String nombre_alumno) {
+        this.nombre_alumno = nombre_alumno;
     }
 
-    public double getPromedio() {
-        return promedio;
+    public String getAsignatura() {
+        return asignatura;
     }
 
-    public void setPromedio(double promedio) {
-        this.promedio = promedio;
+    public void setAsignatura(String asignatura) {
+        this.asignatura = asignatura;
     }
 
-    public Notas(int nota, double promedio) {
-        this.nota = nota;
-        this.promedio = promedio;
+    public Notas(String nombre_alumno, String asignatura) {
+        this.nombre_alumno = nombre_alumno;
+        this.asignatura = asignatura;
     }
 }

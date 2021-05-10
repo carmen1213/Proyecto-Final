@@ -3,6 +3,7 @@ import BDutils.conexionbasedatos;
 import models.Alumno;
 import models.Asignatura;
 import models.Curso;
+import models.Notas;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -109,6 +110,27 @@ public class ControladorTabla {
                 String nombre = alumnosAsignatura.getString(1);
                 String cursos= alumnosAsignatura.getString(2);
                 resultado.add(new Curso(nombre,cursos));
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return resultado;
+    }
+
+    public ArrayList<Notas> getAlumnosyasignaturas(int id_alumno){
+        ArrayList<Notas> resultado = new ArrayList<Notas>();
+
+        String SQL = "SELECT nombre, nombreAsignatura FROM alumnos_asignatura WHERE id_alumno = ?";
+        try {
+            PreparedStatement st = conn.prepareStatement(SQL);
+              st.setInt(1, id_alumno);
+            ResultSet alumnosAsignatura = st.executeQuery();
+            while (alumnosAsignatura.next()){
+                String nombre_alumno = alumnosAsignatura.getString(1);
+                String nombre_asignatura= alumnosAsignatura.getString(2);
+                resultado.add(new Notas(nombre_alumno,nombre_asignatura));
             }
 
         } catch (SQLException throwables) {

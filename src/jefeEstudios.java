@@ -51,8 +51,12 @@ public class jefeEstudios extends JFrame {
 
         JMenu listas = new JMenu("Listas");
 
-        JRadioButtonMenuItem listaAlumnos = new JRadioButtonMenuItem("VER LISTADO DE ALUMNOS");
+        JRadioButtonMenuItem listaAlumnos = new JRadioButtonMenuItem("DAM");
         listaAlumnos.addActionListener(new Listado_alumnos());
+        JRadioButtonMenuItem CIN = new JRadioButtonMenuItem("CIN");
+        CIN.addActionListener(new CIN_listas());
+        JRadioButtonMenuItem MIP = new JRadioButtonMenuItem("MIP");
+        MIP.addActionListener(new MIP_listas());
 
 
 
@@ -383,6 +387,20 @@ public class jefeEstudios extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             Listas listas = new Listas();
+        }
+    }
+
+    private class CIN_listas implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+        }
+    }
+
+    private class MIP_listas implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
         }
     }
 }
