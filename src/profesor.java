@@ -1,6 +1,7 @@
 import models.Usuario;
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +14,7 @@ private JLabel titulop;
 private JButton horario;
 private JButton Reuniones;
 private JComboBox descargar;
+    private JLabel icon;
     private JComboBox disponibilidad;
     private JComboBox horas;
     Font f = new Font("Monospaced", BOLD, 30);
@@ -26,10 +28,10 @@ private JComboBox descargar;
         setBackground(new Color(227, 247, 193));
 
         JPanel general = new JPanel();
+        general.setLayout(new BorderLayout());
         general.setBackground(new Color(227, 247, 193));
-        JPanel principal = new JPanel();
-        principal.setLayout( new GridLayout(4,1, 0,15));
-        principal.setBackground(new Color(227, 247, 193));
+
+
         JPanel menu = new JPanel();
         menu.setBackground(new Color(227, 247, 193));
 
@@ -60,6 +62,10 @@ private JComboBox descargar;
 
         setJMenuBar(barraMenu);
 
+        JPanel principal = new JPanel();
+        principal.setLayout( new GridLayout(2,1));
+        principal.setBackground(new Color(227, 247, 193));
+
         JPanel titulo= new JPanel();
         titulop = new JLabel("<html> <div style = 'text-align: center;'> Bienvenido <br>  " + user.getNombre() + " </div></html> ");
         titulop.setFont(f);
@@ -67,62 +73,81 @@ private JComboBox descargar;
         titulo.add(titulop);
         titulo.setBackground(new Color(227, 247, 193));
 
+
+        JPanel logo = new JPanel();
+        logo.setBackground(new Color(227, 247, 193));
+        icon = new JLabel();
+        icon.setBackground(new Color(227, 247, 193));
+        icon.setIcon(new ImageIcon("C:\\Users\\carma\\IdeaProjects\\Trabajo final\\imagenes\\profesores (1).jpg"));
+
+        logo.add(icon);
+
         JPanel botones = new JPanel();
-        botones.setLayout(new GridLayout(1,3,12,20));
+        botones.setLayout(new GridLayout(1,3,7,8));
         botones.setBackground(new Color(227, 247, 193));
+
+        JPanel Horario = new JPanel();
+        Horario.setBackground(new Color(227, 247, 193));
+        Horario.setLayout(new GridLayout(3,1));
+        JLabel vacioar = new JLabel();
+        vacioar.setBackground(new Color(227, 247, 193));
         horario = new JButton("Horario");
+        JLabel vacioab = new JLabel();
+        vacioab.setBackground(new Color(227, 247, 193));
+
+        Horario.add(vacioar);
+        Horario.add(horario);
+        Horario.add(vacioab);
+
+
+        JPanel reuniones = new JPanel();
+        reuniones.setLayout(new GridLayout(3,1));
+        reuniones.setBackground(new Color(227, 247, 193));
+        JLabel vacioarr = new JLabel();
+        vacioarr.setBackground(new Color(227, 247, 193));
         Reuniones = new JButton("Reuniones");
+        JLabel vacioaba = new JLabel();
+        vacioaba.setBackground(new Color(227, 247, 193));
+
+        reuniones.add(vacioarr);
+        reuniones.add(Reuniones);
+        reuniones.add(vacioaba);
+
+        JPanel Descargar = new JPanel();
+        Descargar.setLayout(new GridLayout(3,1));
+        Descargar.setBackground(new Color(227, 247, 193));
+        JLabel vacioarri = new JLabel();
+        vacioarri.setBackground(new Color(227, 247, 193));
         descargar = new JComboBox();
-        descargar.setBackground(new Color(227, 247, 193));
         descargar.addItem("Archivos");
         descargar.addItem("Horario");
-        botones.add(horario);
-        botones.add(Reuniones);
-        botones.add(descargar);
 
-        JPanel disponible =new JPanel();
-        disponible.setBackground(new Color(227, 247, 193));
-        disponible.setLayout(new GridLayout(4,1));
-        disponible.add(new JLabel(" "));
+        JLabel vacioabaj = new JLabel();
+        vacioabaj.setBackground(new Color(227, 247, 193));
 
-        disponibilidad= new JComboBox();
-        disponibilidad.setBackground(new Color(227, 247, 193));
-        //disponibilidad.setBorder(new TitledBorder("Dias Disponibles"));
-        disponibilidad.addItem("Lunes");
-        disponibilidad.addItem("Martes");
-        disponibilidad.addItem("Miercoles");
-        disponibilidad.addItem("Jueves");
-        disponibilidad.addItem("Viernes");
-        disponibilidad.addActionListener(new Listenerdispo());
+        Descargar.add(vacioarri);
+        Descargar.add(descargar);
+        Descargar.add(vacioabaj);
 
-        horas = new JComboBox();
-        horas.setBackground(new Color(227, 247, 193));
-        horas.addItem("08:15-09:10");
-        horas.addItem("09:10-10:05");
-        horas.addItem("10:05-11:00");
-        horas.addItem("11:30-12:25");
-        horas.addItem("12:25-13:20");
-        horas.addItem("13:20-14:15");
-        horas.addActionListener(new Listenerhora());
+        botones.add(Horario);
+        botones.add(reuniones);
+        botones.add(Descargar);
 
-
-        disponible.add(new JLabel(" "));
-
-        disponible.add(disponibilidad);
-        disponible.add(horas);
 
 
         // principal.add(menu);
-        principal.add(titulo);
+        principal.add(logo);
         principal.add(botones);
-        principal.add(disponible);
+
+
 
         general.add(menu);
-        general.add(principal);
+        general.add(titulo,BorderLayout.NORTH);
+        general.add(principal, BorderLayout.CENTER);
 
 
-        add(general, BorderLayout.CENTER);
-        setSize(400, 520);
+        add(general);
+        setSize(700, 780);
         setVisible(true);
     }
 
