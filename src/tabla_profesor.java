@@ -1,4 +1,4 @@
-import BDutils.conexionbasedatos;
+import BDutils.*;
 import models.*;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class tabla extends JFrame {
+public class tabla_profesor extends JFrame {
 
     private JTable jTableAlumnos;
     private ControladorTabla controlador = new ControladorTabla();
@@ -20,7 +20,7 @@ public class tabla extends JFrame {
     private JComboBox asignatura;
     private JLabel titulop;
     private JButton guardar;
-    private JButton Isertarnotas;
+    private JButton modificar;
     private static Connection conn;
     private obtencion_datos_login control = new obtencion_datos_login();
     private Usuario user = control.iniciarSesion(inicio.usuario.getText(), inicio.contraseña.getText());
@@ -28,7 +28,7 @@ public class tabla extends JFrame {
     private ArrayList<Asignatura> asignaturas = controlador.getAsignaturaProfesor(id_profesor.getId_profesor());
     private UtilDateModel date = new UtilDateModel();
 
-    public tabla() throws SQLException {
+    public tabla_profesor() throws SQLException {
         super("Listas");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.getContentPane().setBackground(new Color(227, 247, 193));
@@ -64,6 +64,7 @@ public class tabla extends JFrame {
         asignatura.setBackground(new Color(227, 247, 193));
 
 
+
         for (int i = 0; i < asignaturas.size(); i++) {
             asignatura.addItem(asignaturas.get(i).getNombre());
         }
@@ -73,8 +74,7 @@ public class tabla extends JFrame {
 
 
         ArrayList<Alumno> alumnosAsignatura = controlador.getAlumnosxAsignaturaA(asignaturas.get(asignatura.getSelectedIndex()).getId());
-        ArrayList<Notas> notas = controlador.getnotasasignatura(alumnosAsignatura.get(0).getId(), asignaturas.get(asignatura.getSelectedIndex()).getId());
-        DefaultTableModel model = generarModeloTablaAlumno(alumnosAsignatura,notas);
+        DefaultTableModel model = generarModeloTablaAlumno(alumnosAsignatura);
 
         jTableAlumnos = new JTable(model) {
             //private static final long serialVersionUID = 1L;
@@ -114,13 +114,13 @@ public class tabla extends JFrame {
         JPanel guardarm = new JPanel();
         guardarm.setBackground(new Color(227, 247, 193));
         guardar = new JButton("Guardar");
-        Isertarnotas = new JButton("Insertar notas");
 
 
-        guardar.addActionListener(new guardarinformacion());
+
+        guardar.addActionListener(new guardarinformacion(this));
 
         guardarm.add(guardar);
-        guardarm.add(Isertarnotas);
+
         botones.add(guardarm);
         primer.add(referencia);
         primer.add(botones);
@@ -135,44 +135,50 @@ public class tabla extends JFrame {
         add(general,BorderLayout.CENTER);
 
 
-        setSize(860, 580);
+        setSize(860, 530);
         setVisible(true);
 
     }
 
 
-    private DefaultTableModel generarModeloTablaAlumno(ArrayList<Alumno> nombresAlumnos, ArrayList<Notas> notas) {
+    private DefaultTableModel generarModeloTablaAlumno(ArrayList<Alumno> nombresAlumnos) {
 
-        String[] cols = {"Nombre", "Asistencia", "Notas","Promedio"};
+        String[] cols = {"Nombre", "Asistencia"};
         DefaultTableModel model = new DefaultTableModel(cols, 0);
         for (int i = 0; i < nombresAlumnos.size(); i++) {
-                Object[] data = {nombresAlumnos.get(i).getNombre(), false,notas.get(i).getNota()};
-                model.addRow(data);
-
+            Object[] data = {nombresAlumnos.get(i).getNombre(), false};
+            model.addRow(data);
         }
         return model;
     }
 
     public static void main()throws SQLException
     {
-        tabla tabla = new tabla();
+        tabla_profesor tabla = new tabla_profesor();
     }
 
-    private class guardarinformacion implements ActionListener {
+
+    static class guardarinformacion implements ActionListener {
+        private final tabla_profesor tabla;
+
+        public guardarinformacion(tabla_profesor tabla) {
+            this.tabla = tabla;
+        }
+
         @Override
         public void actionPerformed(ActionEvent e) {
             conexionbasedatos conexion;
             conexion = new conexionbasedatos();
-            conn = conexion.conectarMySQL();
+            tabla.conn = conexion.conectarMySQL();
             Statement stmt = null;
             try {
-                stmt = conn.createStatement();
+                stmt = tabla.conn.createStatement();
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
             Object asistencia = null;
-            for (int i = 0; i < jTableAlumnos.getRowCount(); i++) {
-                asistencia = jTableAlumnos.getValueAt(i, 1);
+            for (int i = 0; i < tabla.jTableAlumnos.getRowCount(); i++) {
+                asistencia = tabla.jTableAlumnos.getValueAt(i, 1);
 
                 System.out.println(asistencia);
                 if (asistencia.equals(false)) {
@@ -181,7 +187,7 @@ public class tabla extends JFrame {
                     asistencia = 0;
                 }
                 try {
-                    Object resultados = stmt.executeUpdate("INSERT INTO asistencia (id_alumno,asiste,id_asignatura,dia_semana,fecha) " + "VALUES('" + controlador.getidAlumnoxAsignatura(asignaturas.get(asignatura.getSelectedIndex()).getId()).get(i) + "','" + asistencia + "','" + asignaturas.get(asignatura.getSelectedIndex()).getId() + "','" + null + "','" + date.getValue() + "')");
+                    Object resultados = stmt.executeUpdate("INSERT INTO asistencia (id_alumno,asiste,id_asignatura,dia_semana,fecha) " + "VALUES('" + tabla.controlador.getidAlumnoxAsignatura(tabla.asignaturas.get(tabla.asignatura.getSelectedIndex()).getId()).get(i) + "','" + asistencia + "','" + tabla.asignaturas.get(tabla.asignatura.getSelectedIndex()).getId() + "','" + null + "','" + tabla.date.getValue() + "')");
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
@@ -189,6 +195,4 @@ public class tabla extends JFrame {
 
         }
     }
-
-
 }
