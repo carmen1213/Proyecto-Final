@@ -4,17 +4,26 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 import static java.awt.Font.BOLD;
 
 public class profesor extends JFrame {
-private JLabel titulop;
-private JButton horario;
-private JButton Reuniones;
-private JComboBox descargar;
+    private JLabel titulop;
+    private JButton horario;
+    private JButton Reuniones;
+    private JComboBox descargar;
     private JComboBox disponibilidad;
     private JComboBox horas;
+    File archivo;
+    JMenu Material;
+    JMenuItem DAM;
+    JMenuItem CIN;
+    JMenuItem MIP;
+
     Font f = new Font("Monospaced", BOLD, 30);
 
     public profesor(Usuario user) {
@@ -36,16 +45,18 @@ private JComboBox descargar;
         JMenuBar barraMenu = new JMenuBar();
         menu.add(barraMenu);
         JMenu Listas = new JMenu("Listas");
-        JMenu Material = new JMenu("Material");
+        Material = new JMenu("Material");
 
         JRadioButtonMenuItem dam1l = new JRadioButtonMenuItem("Pasar lista");
         dam1l.addActionListener(new Listenerco());
 
 
-        JMenuItem dam1m = new JMenuItem("1º DAM");
-        JMenuItem dam2m = new JMenuItem("2º DAM");
-        JMenuItem CIMm = new JMenuItem("CIM");
-        JMenuItem MARKETINGm = new JMenuItem("MARKETING");
+        DAM = new JMenuItem("DAM");
+        DAM.addActionListener(new EscMaterialDAM());
+        CIN = new JMenuItem("CIN");
+        CIN.addActionListener(new EscMaterialCIN());
+        MIP = new JMenuItem("MARKETING");
+        MIP.addActionListener(new EscMaterialMIP());
 
 
         barraMenu.add(Listas);
@@ -53,14 +64,13 @@ private JComboBox descargar;
 
         Listas.add(dam1l);
 
-        Material.add(dam1m);
-        Material.add(dam2m);
-        Material.add(CIMm);
-        Material.add(MARKETINGm);
+        Material.add(DAM);
+        Material.add(CIN);
+        Material.add(MIP);
 
         setJMenuBar(barraMenu);
 
-        JPanel titulo= new JPanel();
+        JPanel titulo = new JPanel();
         titulop = new JLabel("<html> <div style = 'text-align: center;'> Bienvenido <br>  " + user.getNombre() + " </div></html> ");
         titulop.setFont(f);
         titulop.setForeground(new Color(140, 24, 82));
@@ -188,5 +198,89 @@ private JComboBox descargar;
 
         }
     }
+
+
+    private class EscMaterialDAM implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Scanner entrada = null;
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setCurrentDirectory(new File("..\\Proyecto-Final\\MaterialDAM"));
+            int valor = fileChooser.showOpenDialog(fileChooser);
+            if (valor == JFileChooser.APPROVE_OPTION) {
+                String ruta = fileChooser.getSelectedFile().getAbsolutePath();
+                try {
+                    File f = new File(ruta);
+                    entrada = new Scanner(f);
+                    while (entrada.hasNext()) {
+                        System.out.println(entrada.nextLine());
+                    }
+                } catch (FileNotFoundException ee) {
+                    System.out.println(ee.getMessage());
+                } finally {
+                    if (entrada != null) {
+                        entrada.close();
+                    }
+                }
+
+            }
+        }
+    }
+
+    private class EscMaterialCIN implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Scanner entrada = null;
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setCurrentDirectory(new File("..\\Proyecto-Final\\MaterialCIN"));
+            int valor = fileChooser.showOpenDialog(fileChooser);
+            if (valor == JFileChooser.APPROVE_OPTION) {
+                String ruta = fileChooser.getSelectedFile().getAbsolutePath();
+                try {
+                    File f = new File(ruta);
+                    entrada = new Scanner(f);
+                    while (entrada.hasNext()) {
+                        System.out.println(entrada.nextLine());
+                    }
+                } catch (FileNotFoundException ee) {
+                    System.out.println(ee.getMessage());
+                } finally {
+                    if (entrada != null) {
+                        entrada.close();
+                    }
+                }
+            }
+        }
+    }
+
+    private class EscMaterialMIP implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Scanner entrada = null;
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setCurrentDirectory(new File("..\\Proyecto-Final\\MaterialMIP"));
+            int valor = fileChooser.showOpenDialog(fileChooser);
+            if (valor == JFileChooser.APPROVE_OPTION) {
+                String ruta = fileChooser.getSelectedFile().getAbsolutePath();
+                try {
+                    File f = new File(ruta);
+                    entrada = new Scanner(f);
+                    while (entrada.hasNext()) {
+                        System.out.println(entrada.nextLine());
+                    }
+                } catch (FileNotFoundException ee) {
+                    System.out.println(ee.getMessage());
+                } finally {
+                    if (entrada != null) {
+                        entrada.close();
+                    }
+                }
+            }
+        }
+    }
+
+
 }
+
+
 
