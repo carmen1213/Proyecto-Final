@@ -1,3 +1,4 @@
+package Controladores;
 
 import BDutils.conexionbasedatos;
 import models.Alumno;
@@ -98,6 +99,39 @@ public class ControladorTabla {
 
         return resultado;
     }
+
+    private Alumno getAlumno(int idAlumno){
+        String SQL = "Select nombre FROM alumnos WHERE id_alumno = ?";
+        try {
+            PreparedStatement st = conn.prepareStatement(SQL);
+            st.setInt(1,idAlumno);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()){
+                String nombre = rs.getString("nombre");
+                return new Alumno(nombre, idAlumno);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    private Asignatura getAsignatura(int id_asignatura){
+        String SQL = "Select nombre FROM asignatura WHERE id_asignatura = ?";
+        try {
+            PreparedStatement st = conn.prepareStatement(SQL);
+            st.setInt(1, id_asignatura);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()){
+                String nombre = rs.getString("nombre");
+                return new Asignatura(nombre, id_asignatura);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
     public ArrayList<Curso> getAlumnos(){
         ArrayList<Curso> resultado = new ArrayList<Curso>();
 
@@ -122,7 +156,7 @@ public class ControladorTabla {
     public ArrayList<Notas> getAlumnosyasignaturas(int id_alumno){
         ArrayList<Notas> resultado = new ArrayList<Notas>();
 
-        String SQL = "SELECT nombre, nombreAsignatura FROM alumnos_asignatura WHERE id_alumno = ?";
+        String SQL = "SELECT nombre, nombreAsignatura, id_alumno, id_asignatura FROM alumnos_asignatura WHERE id_alumno = ?";
         try {
             PreparedStatement st = conn.prepareStatement(SQL);
               st.setInt(1, id_alumno);
@@ -130,13 +164,35 @@ public class ControladorTabla {
             while (alumnosAsignatura.next()){
                 String nombre_alumno = alumnosAsignatura.getString(1);
                 String nombre_asignatura= alumnosAsignatura.getString(2);
-                resultado.add(new Notas(nombre_alumno,nombre_asignatura));
+                Alumno alm = getAlumno(id_alumno);
+
+                //resultado.add(new Notas(alm ,nombre_asignatura));
             }
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
+        return resultado;
+    }
+
+    public ArrayList<Notas> getNotas(int id_alumno){
+        Alumno alm = getAlumno(id_alumno);
+        ArrayList<Notas> resultado = new ArrayList<Notas>();
+        String SQL = "Select notas, id_asignaturas FROM notas WHERE id_alumno = ?";
+        try {
+            PreparedStatement st = conn.prepareStatement(SQL);
+            st.setInt(1, id_alumno);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()){
+                double notas = rs.getDouble("notas");
+                int id_asignatura = rs.getInt("id_asignaturas");
+                Asignatura asig = getAsignatura(id_asignatura);
+                resultado.add(new Notas(alm, asig, notas));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         return resultado;
     }
 }

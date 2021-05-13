@@ -1,28 +1,45 @@
 package models;
 
 public class Notas {
-    String nombre_alumno;
-    String asignatura;
-
-
-    public String getNombre_alumno() {
-        return nombre_alumno;
+    Alumno alumno;
+    Asignatura asignatura;
+    double nota;
+    public Notas(Alumno alumno, Asignatura asignatura, double nota) {
+        this.alumno = alumno;
+        this.asignatura = asignatura;
+        this.nota = nota;
     }
 
-    public void setNombre_alumno(String nombre_alumno) {
-        this.nombre_alumno = nombre_alumno;
+    public Alumno getAlumno() {
+        return alumno;
     }
 
-    public String getAsignatura() {
+    public void setAlumno(Alumno alumno) {
+        this.alumno = alumno;
+    }
+
+    public Asignatura getAsignatura() {
         return asignatura;
     }
 
-    public void setAsignatura(String asignatura) {
+    public void setAsignatura(Asignatura asignatura) {
         this.asignatura = asignatura;
     }
 
-    public Notas(String nombre_alumno, String asignatura) {
-        this.nombre_alumno = nombre_alumno;
-        this.asignatura = asignatura;
+    public double getNota() {
+        return nota;
+    }
+
+    public void setNota(double nota) {
+        this.nota = nota;
+    }
+
+    @Override
+    public String toString() {
+        return "Notas{" +
+                "alumno=" + alumno +
+                ", asignatura=" + asignatura +
+                ", nota=" + nota +
+                '}';
     }
 }

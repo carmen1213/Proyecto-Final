@@ -1,4 +1,4 @@
-import models.Alumno;
+import Controladores.ControladorTabla;
 import models.Curso;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
