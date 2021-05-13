@@ -1,4 +1,4 @@
-import BDutils.conexionbasedatos;
+import Controladores.ControladorTabla;
 import models.*;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
@@ -11,10 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-
-import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class Notas_alumnos  extends JFrame{
     private JTable jTableAlumnos;
@@ -52,30 +49,30 @@ public class Notas_alumnos  extends JFrame{
         opciones.add(new JLabel(" "));
 
 
-        date.setDate(2021, 3, 23);
-        date.setSelected(true);
-        JDatePanelImpl datePanel = new JDatePanelImpl(date);
-        JDatePickerImpl datePicker = new JDatePickerImpl(datePanel);
-        datePicker.setBackground(new Color(227, 247, 193));
-        opciones.add(datePicker);
+//        date.setDate(2021, 3, 23);
+//        date.setSelected(true);
+//        JDatePanelImpl datePanel = new JDatePanelImpl(date);
+//        JDatePickerImpl datePicker = new JDatePickerImpl(datePanel);
+//        datePicker.setBackground(new Color(227, 247, 193));
+//        opciones.add(datePicker);
 
-        JPanel combo = new JPanel();
-        combo.setLayout(new GridLayout(3, 1));
-        combo.setBackground(new Color(227, 247, 193));
-        asignatura = new JComboBox();
-        asignatura.setBackground(new Color(227, 247, 193));
+//        JPanel combo = new JPanel();
+//        combo.setLayout(new GridLayout(3, 1));
+//        combo.setBackground(new Color(227, 247, 193));
+//        asignatura = new JComboBox();
+//        asignatura.setBackground(new Color(227, 247, 193));
+//
+//
+//
+//        for (int i = 0; i < asignaturas.size(); i++) {
+//            asignatura.addItem(asignaturas.get(i).getNombre());
+//        }
+//
+//        combo.add(asignatura);
+      //  opciones.add(combo);
 
 
-
-        for (int i = 0; i < asignaturas.size(); i++) {
-            asignatura.addItem(asignaturas.get(i).getNombre());
-        }
-
-        combo.add(asignatura);
-        opciones.add(combo);
-
-
-        ArrayList<Notas> alumnosAsignatura = controlador.getAlumnosyasignaturas(3);
+        ArrayList<Notas> alumnosAsignatura = controlador.getNotas(3);
         DefaultTableModel model = generarModeloTablaAlumno(alumnosAsignatura);
 
         jTableAlumnos = new JTable(model) {
@@ -108,24 +105,24 @@ public class Notas_alumnos  extends JFrame{
         referencia.add(new JLabel(" "));
 
 
-        JPanel botones = new JPanel();
-        botones.setLayout(new GridLayout(1, 3));
-        botones.setBackground(new Color(227, 247, 193));
-        botones.add(new JLabel());
-        botones.add(new JLabel());
-        JPanel guardarm = new JPanel();
-        guardarm.setBackground(new Color(227, 247, 193));
-        guardar = new JButton("Guardar");
+//        JPanel botones = new JPanel();
+//        botones.setLayout(new GridLayout(1, 3));
+//        botones.setBackground(new Color(227, 247, 193));
+//        botones.add(new JLabel());
+//        botones.add(new JLabel());
+//        JPanel guardarm = new JPanel();
+//        guardarm.setBackground(new Color(227, 247, 193));
+//        guardar = new JButton("Guardar");
 
 
 
-        guardar.addActionListener(new guardarinformaciones());
+    //    guardar.addActionListener(new guardarinformaciones());
 
-        guardarm.add(guardar);
-
-        botones.add(guardarm);
+//        guardarm.add(guardar);
+//
+//        botones.add(guardarm);
         primer.add(referencia);
-        primer.add(botones);
+//        primer.add(botones);
 
 
 
@@ -148,7 +145,7 @@ public class Notas_alumnos  extends JFrame{
         String[] cols = {"Nombre Alumno", "Nombre Asignatura", "Notas"};
         DefaultTableModel model = new DefaultTableModel(cols, 0);
         for (int i = 0; i < nombresAlumnos.size(); i++) {
-            Object[] data = {nombresAlumnos.get(i).getNombre_alumno(), nombresAlumnos.get(i).getAsignatura()};
+            Object[] data = {nombresAlumnos.get(i).getAlumno().getNombre(), nombresAlumnos.get(i).getAsignatura().getNombre(), nombresAlumnos.get(i).getNota()};
             model.addRow(data);
         }
         return model;

@@ -1,4 +1,5 @@
 import BDutils.*;
+import Controladores.ControladorTabla;
 import models.*;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
