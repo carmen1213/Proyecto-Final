@@ -1,22 +1,29 @@
 import models.Usuario;
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 import static java.awt.Font.BOLD;
 
 public class profesor extends JFrame {
-private JLabel titulop;
-private JButton horario;
-private JButton Reuniones;
-private JComboBox descargar;
-    private JLabel icon;
+    private JLabel titulop;
+    private JButton horario;
+    private JButton Reuniones;
+    private JComboBox descargar;
     private JComboBox disponibilidad;
     private JComboBox horas;
+    File archivo;
+    JMenu Material;
+    JMenuItem DAM;
+    JMenuItem CIN;
+    JMenuItem MIP;
+
     Font f = new Font("Monospaced", BOLD, 30);
 
     public profesor(Usuario user) {
@@ -28,26 +35,28 @@ private JComboBox descargar;
         setBackground(new Color(227, 247, 193));
 
         JPanel general = new JPanel();
-        general.setLayout(new BorderLayout());
         general.setBackground(new Color(227, 247, 193));
-
-
+        JPanel principal = new JPanel();
+        principal.setLayout( new GridLayout(4,1, 0,15));
+        principal.setBackground(new Color(227, 247, 193));
         JPanel menu = new JPanel();
         menu.setBackground(new Color(227, 247, 193));
 
         JMenuBar barraMenu = new JMenuBar();
         menu.add(barraMenu);
         JMenu Listas = new JMenu("Listas");
-        JMenu Material = new JMenu("Material");
+        Material = new JMenu("Material");
 
         JRadioButtonMenuItem dam1l = new JRadioButtonMenuItem("Pasar lista");
         dam1l.addActionListener(new Listenerco());
 
 
-        JMenuItem dam1m = new JMenuItem("1º DAM");
-        JMenuItem dam2m = new JMenuItem("2º DAM");
-        JMenuItem CIMm = new JMenuItem("CIM");
-        JMenuItem MARKETINGm = new JMenuItem("MARKETING");
+        DAM = new JMenuItem("DAM");
+        DAM.addActionListener(new EscMaterialDAM());
+        CIN = new JMenuItem("CIN");
+        CIN.addActionListener(new EscMaterialCIN());
+        MIP = new JMenuItem("MARKETING");
+        MIP.addActionListener(new EscMaterialMIP());
 
 
         barraMenu.add(Listas);
@@ -55,99 +64,75 @@ private JComboBox descargar;
 
         Listas.add(dam1l);
 
-        Material.add(dam1m);
-        Material.add(dam2m);
-        Material.add(CIMm);
-        Material.add(MARKETINGm);
+        Material.add(DAM);
+        Material.add(CIN);
+        Material.add(MIP);
 
         setJMenuBar(barraMenu);
 
-        JPanel principal = new JPanel();
-        principal.setLayout( new GridLayout(2,1));
-        principal.setBackground(new Color(227, 247, 193));
-
-        JPanel titulo= new JPanel();
+        JPanel titulo = new JPanel();
         titulop = new JLabel("<html> <div style = 'text-align: center;'> Bienvenido <br>  " + user.getNombre() + " </div></html> ");
         titulop.setFont(f);
         titulop.setForeground(new Color(140, 24, 82));
         titulo.add(titulop);
         titulo.setBackground(new Color(227, 247, 193));
 
-
-        JPanel logo = new JPanel();
-        logo.setBackground(new Color(227, 247, 193));
-        icon = new JLabel();
-        icon.setBackground(new Color(227, 247, 193));
-        icon.setIcon(new ImageIcon("C:\\Users\\carma\\IdeaProjects\\Trabajo final\\imagenes\\profesores (1).jpg"));
-
-        logo.add(icon);
-
         JPanel botones = new JPanel();
-        botones.setLayout(new GridLayout(1,3,7,8));
+        botones.setLayout(new GridLayout(1,3,12,20));
         botones.setBackground(new Color(227, 247, 193));
-
-        JPanel Horario = new JPanel();
-        Horario.setBackground(new Color(227, 247, 193));
-        Horario.setLayout(new GridLayout(3,1));
-        JLabel vacioar = new JLabel();
-        vacioar.setBackground(new Color(227, 247, 193));
         horario = new JButton("Horario");
-        JLabel vacioab = new JLabel();
-        vacioab.setBackground(new Color(227, 247, 193));
-
-        Horario.add(vacioar);
-        Horario.add(horario);
-        Horario.add(vacioab);
-
-
-        JPanel reuniones = new JPanel();
-        reuniones.setLayout(new GridLayout(3,1));
-        reuniones.setBackground(new Color(227, 247, 193));
-        JLabel vacioarr = new JLabel();
-        vacioarr.setBackground(new Color(227, 247, 193));
         Reuniones = new JButton("Reuniones");
-        JLabel vacioaba = new JLabel();
-        vacioaba.setBackground(new Color(227, 247, 193));
-
-        reuniones.add(vacioarr);
-        reuniones.add(Reuniones);
-        reuniones.add(vacioaba);
-
-        JPanel Descargar = new JPanel();
-        Descargar.setLayout(new GridLayout(3,1));
-        Descargar.setBackground(new Color(227, 247, 193));
-        JLabel vacioarri = new JLabel();
-        vacioarri.setBackground(new Color(227, 247, 193));
         descargar = new JComboBox();
+        descargar.setBackground(new Color(227, 247, 193));
         descargar.addItem("Archivos");
         descargar.addItem("Horario");
+        botones.add(horario);
+        botones.add(Reuniones);
+        botones.add(descargar);
 
-        JLabel vacioabaj = new JLabel();
-        vacioabaj.setBackground(new Color(227, 247, 193));
+        JPanel disponible =new JPanel();
+        disponible.setBackground(new Color(227, 247, 193));
+        disponible.setLayout(new GridLayout(4,1));
+        disponible.add(new JLabel(" "));
 
-        Descargar.add(vacioarri);
-        Descargar.add(descargar);
-        Descargar.add(vacioabaj);
+        disponibilidad= new JComboBox();
+        disponibilidad.setBackground(new Color(227, 247, 193));
+        //disponibilidad.setBorder(new TitledBorder("Dias Disponibles"));
+        disponibilidad.addItem("Lunes");
+        disponibilidad.addItem("Martes");
+        disponibilidad.addItem("Miercoles");
+        disponibilidad.addItem("Jueves");
+        disponibilidad.addItem("Viernes");
+        disponibilidad.addActionListener(new Listenerdispo());
 
-        botones.add(Horario);
-        botones.add(reuniones);
-        botones.add(Descargar);
+        horas = new JComboBox();
+        horas.setBackground(new Color(227, 247, 193));
+        horas.addItem("08:15-09:10");
+        horas.addItem("09:10-10:05");
+        horas.addItem("10:05-11:00");
+        horas.addItem("11:30-12:25");
+        horas.addItem("12:25-13:20");
+        horas.addItem("13:20-14:15");
+        horas.addActionListener(new Listenerhora());
 
+
+        disponible.add(new JLabel(" "));
+
+        disponible.add(disponibilidad);
+        disponible.add(horas);
 
 
         // principal.add(menu);
-        principal.add(logo);
+        principal.add(titulo);
         principal.add(botones);
-
-
+        principal.add(disponible);
 
         general.add(menu);
-        general.add(titulo,BorderLayout.NORTH);
-        general.add(principal, BorderLayout.CENTER);
+        general.add(principal);
 
 
-        add(general);
-        setSize(700, 780);
+        add(general, BorderLayout.CENTER);
+        setSize(400, 520);
         setVisible(true);
     }
 
@@ -213,5 +198,89 @@ private JComboBox descargar;
 
         }
     }
+
+
+    private class EscMaterialDAM implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Scanner entrada = null;
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setCurrentDirectory(new File("..\\Proyecto-Final\\MaterialDAM"));
+            int valor = fileChooser.showOpenDialog(fileChooser);
+            if (valor == JFileChooser.APPROVE_OPTION) {
+                String ruta = fileChooser.getSelectedFile().getAbsolutePath();
+                try {
+                    File f = new File(ruta);
+                    entrada = new Scanner(f);
+                    while (entrada.hasNext()) {
+                        System.out.println(entrada.nextLine());
+                    }
+                } catch (FileNotFoundException ee) {
+                    System.out.println(ee.getMessage());
+                } finally {
+                    if (entrada != null) {
+                        entrada.close();
+                    }
+                }
+
+            }
+        }
+    }
+
+    private class EscMaterialCIN implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Scanner entrada = null;
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setCurrentDirectory(new File("..\\Proyecto-Final\\MaterialCIN"));
+            int valor = fileChooser.showOpenDialog(fileChooser);
+            if (valor == JFileChooser.APPROVE_OPTION) {
+                String ruta = fileChooser.getSelectedFile().getAbsolutePath();
+                try {
+                    File f = new File(ruta);
+                    entrada = new Scanner(f);
+                    while (entrada.hasNext()) {
+                        System.out.println(entrada.nextLine());
+                    }
+                } catch (FileNotFoundException ee) {
+                    System.out.println(ee.getMessage());
+                } finally {
+                    if (entrada != null) {
+                        entrada.close();
+                    }
+                }
+            }
+        }
+    }
+
+    private class EscMaterialMIP implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Scanner entrada = null;
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setCurrentDirectory(new File("..\\Proyecto-Final\\MaterialMIP"));
+            int valor = fileChooser.showOpenDialog(fileChooser);
+            if (valor == JFileChooser.APPROVE_OPTION) {
+                String ruta = fileChooser.getSelectedFile().getAbsolutePath();
+                try {
+                    File f = new File(ruta);
+                    entrada = new Scanner(f);
+                    while (entrada.hasNext()) {
+                        System.out.println(entrada.nextLine());
+                    }
+                } catch (FileNotFoundException ee) {
+                    System.out.println(ee.getMessage());
+                } finally {
+                    if (entrada != null) {
+                        entrada.close();
+                    }
+                }
+            }
+        }
+    }
+
+
 }
+
+
 
