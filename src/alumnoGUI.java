@@ -3,6 +3,9 @@ import models.Usuario;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import static java.awt.Font.BOLD;
 
@@ -78,6 +81,7 @@ public class alumnoGUI extends JFrame {
         nota.setBackground(new Color(179, 253, 255));
         JLabel vacioarr = new JLabel();
         notas = new JButton("Notas");
+        notas.addActionListener(new guardarnotas());
         JLabel vacioaba = new JLabel();
 
         JPanel vaciode = new JPanel();
@@ -127,6 +131,15 @@ public class alumnoGUI extends JFrame {
     }
 
 
-
+    private class guardarnotas implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                Notas_alumnos notas_alumnos = new Notas_alumnos();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+    }
 }
 
