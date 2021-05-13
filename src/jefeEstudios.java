@@ -105,6 +105,8 @@ public class jefeEstudios extends JFrame {
         barraMenu.add(listas);
 
         listas.add(listaAlumnos);
+        listas.add(CIN);
+        listas.add(MIP);
 
 
 
