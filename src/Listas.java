@@ -1,4 +1,4 @@
-import Controladores.ControladorTabla;
+import Controladores.ControladorTablaJefeEstudios;
 import models.Curso;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import static java.awt.Font.BOLD;
 
 public class Listas extends JFrame {
-    private ControladorTabla controlador = new ControladorTabla();
+    private ControladorTablaJefeEstudios controladorJefeestudios = new ControladorTablaJefeEstudios();
     private JTable jTableAlumnos;
     private JLabel titulop;
     Font f = new Font("fantasy", BOLD, 30);
@@ -42,7 +42,7 @@ public class Listas extends JFrame {
         titulo.add(titulop);
 
 
-        ArrayList<Curso> Curso_Alumnos = controlador.getAlumnos();
+        ArrayList<Curso> Curso_Alumnos = controladorJefeestudios.getAlumnosxCurso();
         DefaultTableModel model = generarModeloTablaAlumno(Curso_Alumnos);
         jTableAlumnos = new JTable(model) {
             //private static final long serialVersionUID = 1L;

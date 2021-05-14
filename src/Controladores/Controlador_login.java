@@ -1,3 +1,5 @@
+package Controladores;
+
 import BDutils.conexionbasedatos;
 import models.Profesor;
 import models.Usuario;
@@ -8,10 +10,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class obtencion_datos_login {
+public class Controlador_login {
     private static Connection conn;
 
-    public obtencion_datos_login() {
+    public Controlador_login() {
         conexionbasedatos conexion;
         conexion = new conexionbasedatos();
         conn = conexion.conectarMySQL();

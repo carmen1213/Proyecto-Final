@@ -1,3 +1,5 @@
+import Controladores.Controlador_login;
+import Controladores.Controlador_login;
 import models.Usuario;
 
 import javax.swing.*;
@@ -15,7 +17,7 @@ public class inicio extends JFrame {
     public static JTextField usuario;
     public static JTextField contraseña;
     Font f = new Font("Monospaced", BOLD, 24);
-    private obtencion_datos_login control = new obtencion_datos_login();
+    private Controlador_login control = new Controlador_login();
 
     public inicio() {
         super("Inicio");
@@ -103,6 +105,7 @@ public class inicio extends JFrame {
                         jefeEstudios.main(user);
                         break;
                     case "Padres":
+                        padre.main(user);
                         break;
                     case "Director":
                         director.main(user);
