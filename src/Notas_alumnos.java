@@ -20,7 +20,6 @@ public class Notas_alumnos  extends JFrame{
     private JComboBox asignatura;
     private JLabel titulop;
     private JButton guardar;
-    private JButton modificar;
     private static Connection connecion;
     private obtencion_datos_login control = new obtencion_datos_login();
    // private Profesor id_profesor = control.getIdProfesor(inicio.usuario.getText(), inicio.contraseña.getText());
@@ -34,7 +33,7 @@ public class Notas_alumnos  extends JFrame{
 
 
         JPanel general = new JPanel();
-        general.setLayout(new GridLayout(4, 1));
+        general.setLayout(new GridLayout(5, 1));
         general.setBackground(new Color(227, 247, 193));
 
         JPanel titulo = new JPanel();
@@ -104,6 +103,51 @@ public class Notas_alumnos  extends JFrame{
         referencia.setBackground(new Color(227, 247, 193));
         referencia.add(new JLabel(" "));
 
+        JPanel boton = new JPanel();
+        boton.setBackground(new Color(227, 247, 193));
+        boton.setLayout(new GridLayout(1,3));
+        JLabel vacioar = new JLabel(" ");
+        vacioar.setBackground(new Color(227, 247, 193));
+        JLabel vacioab = new JLabel(" ");
+        vacioab.setBackground(new Color(227, 247, 193));
+
+        JPanel guarda = new JPanel();
+        guarda.setLayout(new GridLayout(3,1));
+        JLabel vacioarriba = new JLabel(" ");
+        vacioar.setBackground(new Color(227, 247, 193));
+        JLabel vacioabajo = new JLabel(" ");
+        vacioab.setBackground(new Color(227, 247, 193));
+
+        JPanel botones =new JPanel();
+        botones.setBackground(new Color(227, 247, 193));
+        JLabel vacioarr = new JLabel(" ");
+        vacioar.setBackground(new Color(227, 247, 193));
+        guarda.setBackground(new Color(227, 247, 193));
+
+        guardar = new JButton("Guardar");
+
+        JLabel vacioaba = new JLabel(" ");
+        vacioab.setBackground(new Color(227, 247, 193));
+
+
+
+        botones.add(vacioarr);
+        botones.add(guardar);
+        botones.add(vacioaba);
+
+        guarda.add(vacioarriba);
+        guarda.add(botones);
+        guarda.add(vacioabajo);
+
+        boton.add(vacioar);
+        boton.add(vacioab);
+        boton.add(guarda);
+
+
+
+
+
+
 
 //        JPanel botones = new JPanel();
 //        botones.setLayout(new GridLayout(1, 3));
@@ -130,6 +174,7 @@ public class Notas_alumnos  extends JFrame{
         general.add(opciones);
         general.add(scrollpane);
         general.add(primer);
+        general.add(boton);
 
         add(general,BorderLayout.CENTER);
 
