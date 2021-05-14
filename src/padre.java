@@ -50,7 +50,7 @@ public class padre {
         JLayeredPane layeredPane = new JLayeredPane();
         frame.getContentPane().add(layeredPane, BorderLayout.CENTER);
 
-        JLabel Titulo = new JLabel("Bienvenido");
+        JLabel Titulo = new JLabel(" Bienvenido ");
         Titulo.setHorizontalAlignment(SwingConstants.CENTER);
         Titulo.setFont(new Font("Segoe Script", Font.BOLD | Font.ITALIC, 34));
         Titulo.setBounds(555, 25, 348, 82);
