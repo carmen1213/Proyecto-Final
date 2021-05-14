@@ -1,6 +1,8 @@
 import BDutils.*;
-import Controladores.ControladorTabla;
+import Controladores.ControladorTablaProfesores;
+import Controladores.Controlador_login;
 import models.*;
+import models.Alumno;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
@@ -16,17 +18,16 @@ import java.util.ArrayList;
 public class tabla_profesor extends JFrame {
 
     private JTable jTableAlumnos;
-    private ControladorTabla controlador = new ControladorTabla();
-    static ArrayList<String> resultadosdam = new ArrayList<>();
+    private ControladorTablaProfesores controladorProfesores = new ControladorTablaProfesores();
     private JComboBox asignatura;
     private JLabel titulop;
     private JButton guardar;
     private JButton modificar;
     private static Connection conn;
-    private obtencion_datos_login control = new obtencion_datos_login();
+    private Controlador_login control = new Controlador_login();
     private Usuario user = control.iniciarSesion(inicio.usuario.getText(), inicio.contraseña.getText());
     private Profesor id_profesor = control.getIdProfesor(inicio.usuario.getText(), inicio.contraseña.getText());
-    private ArrayList<Asignatura> asignaturas = controlador.getAsignaturaProfesor(id_profesor.getId_profesor());
+    private ArrayList<Asignatura> asignaturas = controladorProfesores.getAsignaturaProfesor(id_profesor.getId_profesor());
     private UtilDateModel date = new UtilDateModel();
 
     public tabla_profesor() throws SQLException {
@@ -74,7 +75,7 @@ public class tabla_profesor extends JFrame {
         opciones.add(combo);
 
 
-        ArrayList<Alumno> alumnosAsignatura = controlador.getAlumnosxAsignaturaA(asignaturas.get(asignatura.getSelectedIndex()).getId());
+        ArrayList<Alumno> alumnosAsignatura = controladorProfesores.getAlumnosxAsignaturaA(asignaturas.get(asignatura.getSelectedIndex()).getId());
         DefaultTableModel model = generarModeloTablaAlumno(alumnosAsignatura);
 
         jTableAlumnos = new JTable(model) {
@@ -188,7 +189,7 @@ public class tabla_profesor extends JFrame {
                     asistencia = 0;
                 }
                 try {
-                    Object resultados = stmt.executeUpdate("INSERT INTO asistencia (id_alumno,asiste,id_asignatura,dia_semana,fecha) " + "VALUES('" + tabla.controlador.getidAlumnoxAsignatura(tabla.asignaturas.get(tabla.asignatura.getSelectedIndex()).getId()).get(i) + "','" + asistencia + "','" + tabla.asignaturas.get(tabla.asignatura.getSelectedIndex()).getId() + "','" + null + "','" + tabla.date.getValue() + "')");
+                    Object resultados = stmt.executeUpdate("INSERT INTO asistencia (id_alumno,asiste,id_asignatura,dia_semana,fecha) " + "VALUES('" + tabla.controladorProfesores.getidAlumno(tabla.asignaturas.get(tabla.asignatura.getSelectedIndex()).getId()).get(i) + "','" + asistencia + "','" + tabla.asignaturas.get(tabla.asignatura.getSelectedIndex()).getId() + "','" + null + "','" + tabla.date.getValue() + "')");
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
