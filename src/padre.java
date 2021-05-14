@@ -1,109 +1,144 @@
 
+//imports necesarios
+
 import models.Usuario;
 
-import java.awt.EventQueue;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
-import javax.swing.JFrame;
-import java.awt.BorderLayout;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import java.awt.FlowLayout;
-import javax.swing.JButton;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import javax.swing.ImageIcon;
-import java.awt.event.ActionListener;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
-import javax.swing.JLayeredPane;
-import java.awt.Font;
-import java.awt.Color;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+
+/**
+ * @author Carmen Martí,Salva Blanquer,Lucia Calabrese
+ */
 
 public class padre {
 
-    private JFrame frame;
-    private final JButton btnNewButton_2 = new JButton("Papeleria");
+    //Declaración de Variables
 
-    /**
-     * Launch the application.
-     */
+    private final JLayeredPane principal;
 
+    private final JLabel Titulo;
+    private final JLabel imagenPadres;
 
-    /**
-     * Create the application.
-     * @param user
-     */
+    private final JButton notasBtn;
+    private final JButton reunionesBtn;
+    private final JButton xarxaBtn;
+    private final JButton compraPapeleria;
+
+    private final JFrame general;
+
     public padre(Usuario user) {
-        initialize();
-    }
 
-    /**
-     * Initialize the contents of the frame.
-     */
-    private void initialize() {
-        frame = new JFrame();
-        frame.getContentPane().setBackground(new Color(230, 230, 250));
+        general = new JFrame();
+        principal = new JLayeredPane();
 
-        JLayeredPane layeredPane = new JLayeredPane();
-        frame.getContentPane().add(layeredPane, BorderLayout.CENTER);
+        general.getContentPane().setBackground(new Color(230, 230, 250));
+        general.getContentPane().add(principal, BorderLayout.CENTER);
 
-        JLabel Titulo = new JLabel(" Bienvenido ");
+        Titulo = new JLabel(" Bienvenido ");
         Titulo.setHorizontalAlignment(SwingConstants.CENTER);
         Titulo.setFont(new Font("Segoe Script", Font.BOLD | Font.ITALIC, 34));
         Titulo.setBounds(555, 25, 348, 82);
-        layeredPane.add(Titulo);
 
-        JButton Notas = new JButton("Notas");
-        Notas.setToolTipText("");
-        Notas.setBackground(new Color(245, 255, 250));
-        Notas.setIcon(new ImageIcon("C:\\Users\\carma\\Downloads\\notasicono.jpg"));
-        Notas.setFont(new Font("Matura MT Script Capitals", Font.BOLD | Font.ITALIC, 22));
-        Notas.setBounds(91, 635, 184, 77);
-        layeredPane.add(Notas);
+        notasBtn = new JButton("Notas");
+        notasBtn.setToolTipText("");
+        notasBtn.setBackground(new Color(245, 255, 250));
+        notasBtn.setIcon(new ImageIcon("C:\\Users\\carma\\Downloads\\notasIcono.jpg"));
+        notasBtn.setFont(new Font("Matura MT Script Capitals", Font.BOLD | Font.ITALIC, 22));
+        notasBtn.setBounds(91, 635, 184, 77);
 
-        JLabel Imagenpadres = new JLabel("");
-        Imagenpadres.setIcon(new ImageIcon("C:\\Users\\carma\\Downloads\\padres-mirando-sus-hijos-dibujando_13339-171519 (1).jpg"));
-        Imagenpadres.setBounds(523, 177, 560, 331);
-        layeredPane.add(Imagenpadres);
+        imagenPadres = new JLabel("");
+        imagenPadres.setIcon(new ImageIcon("C:\\Users\\carma\\Downloads\\padres-mirando-sus-hijos-dibujando_13339-171519 (1).jpg"));
+        imagenPadres.setBounds(523, 177, 560, 331);
 
-        JButton btnNewButton = new JButton("Reuniones");
-        btnNewButton.setBackground(new Color(245, 255, 250));
-        btnNewButton.setIcon(new ImageIcon("C:\\Users\\carma\\Downloads\\reuniones.jpg"));
-        btnNewButton.setFont(new Font("Matura MT Script Capitals", Font.BOLD | Font.ITALIC, 22));
-        btnNewButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
-        btnNewButton.setBounds(430, 636, 234, 74);
-        layeredPane.add(btnNewButton);
+        reunionesBtn = new JButton("Reuniones");
+        reunionesBtn.setBackground(new Color(245, 255, 250));
+        reunionesBtn.setIcon(new ImageIcon("C:\\Users\\carma\\Downloads\\reuniones.jpg"));
+        reunionesBtn.setFont(new Font("Matura MT Script Capitals", Font.BOLD | Font.ITALIC, 22));
+        reunionesBtn.setBounds(430, 636, 234, 74);
 
-        JButton btnNewButton_1 = new JButton("Libros");
-        btnNewButton_1.setBackground(new Color(245, 255, 250));
-        btnNewButton_1.setIcon(new ImageIcon("C:\\Users\\carma\\Downloads\\kisspng-clip-art-book-image-cartoon-desktop-wallpaper-fancy-reindeer-cliparts-free-download-clip-art-c-5c58934c924d13.8492565215493087485993 (1).jpg"));
-        btnNewButton_1.setFont(new Font("Matura MT Script Capitals", Font.BOLD | Font.ITALIC, 22));
-        btnNewButton_1.setBounds(827, 635, 222, 77);
-        layeredPane.add(btnNewButton_1);
-        btnNewButton_2.setBackground(new Color(245, 255, 250));
-        btnNewButton_2.setFont(new Font("Matura MT Script Capitals", Font.BOLD | Font.ITALIC, 22));
-        btnNewButton_2.setIcon(new ImageIcon("C:\\Users\\carma\\Downloads\\cestacompra (1).jpg"));
-        btnNewButton_2.setBounds(1203, 635, 245, 77);
-        layeredPane.add(btnNewButton_2);
-        frame.setForeground(new Color(230, 230, 250));
-        frame.setBackground(new Color(230, 230, 250));
-        frame.setBounds(100, 100, 1545, 759);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        xarxaBtn = new JButton("Libros");
+        xarxaBtn.setBackground(new Color(245, 255, 250));
+        xarxaBtn.setIcon(new ImageIcon("C:\\Users\\carma\\Downloads\\libros.jpg"));
+        xarxaBtn.setFont(new Font("Matura MT Script Capitals", Font.BOLD | Font.ITALIC, 22));
+        xarxaBtn.setBounds(827, 635, 222, 77);
 
-        frame.setVisible(true);
+        compraPapeleria = new JButton("Papeleria");
+        compraPapeleria.setBackground(new Color(245, 255, 250));
+        compraPapeleria.setFont(new Font("Matura MT Script Capitals", Font.BOLD | Font.ITALIC, 22));
+        compraPapeleria.setIcon(new ImageIcon("C:\\Users\\carma\\Downloads\\cestaCompra.jpg"));
+        compraPapeleria.setBounds(1203, 635, 245, 77);
 
+        general.setForeground(new Color(230, 230, 250));
+        general.setBackground(new Color(230, 230, 250));
+        general.setBounds(100, 100, 1545, 759);
+        general.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        general.setVisible(true);
+
+        //Insercciones a la GUI
+        principal.add(notasBtn);
+        principal.add(Titulo);
+        principal.add(imagenPadres);
+        principal.add(reunionesBtn);
+        principal.add(xarxaBtn);
+        principal.add(compraPapeleria);
+
+        //Acciones
+        reunionesBtn.addActionListener(new abrirCorreo());
+        xarxaBtn.addActionListener(new inscripcionXarxa());
+        compraPapeleria.addActionListener(new Compra());
     }
-
 
     public static void main(Usuario user) {
         new padre(user);
-
     }
-}
 
+    private class abrirCorreo implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            WebDriver driver;
+
+            String exePath = "C:\\Users\\Salvador\\Desktop\\Proyecto-Final\\chromedriver.exe";
+            System.setProperty("webdriver.chrome.driver", exePath);
+
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--start-maximized");
+
+            driver = new ChromeDriver(options);
+            driver.get("https://outlook.live.com/owa/");
+        }}
+
+    private class inscripcionXarxa implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            WebDriver driver;
+
+            String exePath = "C:\\Users\\Salvador\\Desktop\\Proyecto-Final\\chromedriver.exe";
+            System.setProperty("webdriver.chrome.driver", exePath);
+
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--start-maximized");
+
+            driver = new ChromeDriver(options);
+            driver.get("https://www.gva.es/es/inicio/procedimientos?id_proc=18094");
+        }}
+
+    private class Compra implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            WebDriver driver;
+
+            String exePath = "C:\\Users\\Salvador\\Desktop\\Proyecto-Final\\chromedriver.exe";
+            System.setProperty("webdriver.chrome.driver", exePath);
+
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--start-maximized");
+
+            driver = new ChromeDriver(options);
+            driver.get("https://www.abacus.coop/es/papeleria-y-manualidades");
+        }}}
