@@ -37,20 +37,20 @@ public class padre {
      * @param user
      */
     public padre(Usuario user) {
-        initialize();
+        initialize(user);
     }
 
     /**
      * Initialize the contents of the frame.
      */
-    private void initialize() {
+    private void initialize(Usuario user) {
         frame = new JFrame();
         frame.getContentPane().setBackground(new Color(230, 230, 250));
 
         JLayeredPane layeredPane = new JLayeredPane();
         frame.getContentPane().add(layeredPane, BorderLayout.CENTER);
 
-        JLabel Titulo = new JLabel(" Bienvenido ");
+        JLabel Titulo = new JLabel( "<html> <div style = 'text-align: center;'> Bienvenido <br>  " + user.getNombre() + " </div></html>");
         Titulo.setHorizontalAlignment(SwingConstants.CENTER);
         Titulo.setFont(new Font("Segoe Script", Font.BOLD | Font.ITALIC, 34));
         Titulo.setBounds(555, 25, 348, 82);
@@ -102,7 +102,7 @@ public class padre {
 
 
     public static void main(Usuario user) {
-        new padre(user);
+       padre padre = new padre(user);
 
     }
 }

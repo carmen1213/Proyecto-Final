@@ -1,4 +1,4 @@
-import Controladores.ControladorTabla;
+import Controladores.ControladorTablaJefeEstudios;
 import models.Curso;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import static java.awt.Font.BOLD;
 
 public class Listas extends JFrame {
-    private ControladorTabla controlador = new ControladorTabla();
+    private ControladorTablaJefeEstudios controladorJefeestudios = new ControladorTablaJefeEstudios();
     private JTable jTableAlumnos;
     private JLabel titulop;
     Font f = new Font("fantasy", BOLD, 30);
@@ -30,6 +30,7 @@ public class Listas extends JFrame {
         asignatura = new JComboBox();
         asignatura.setBackground(new Color(227, 247, 193));
         asignatura.addItem("DAM");
+
         asignatura.addItem("MIP");
         asignatura.addItem("CIN");
 
@@ -41,26 +42,66 @@ public class Listas extends JFrame {
         titulop.setFont(f);
         titulo.add(titulop);
 
+if (asignatura.getSelectedItem().equals("DAM")){
+    ArrayList<Curso> Curso_Alumnos = controladorJefeestudios.getAlumnosxCurso("DAM");
+    DefaultTableModel model = generarModeloTablaAlumno(Curso_Alumnos);
+    jTableAlumnos = new JTable(model) {
+        //private static final long serialVersionUID = 1L;
+        @Override
+        public Class getColumnClass(int column) {
+            switch (column) {
+                case 0:
+                    return String.class;
+                case 1:
+                    return String.class;
+                default:
+                case 2:
+                    return String.class;
 
-        ArrayList<Curso> Curso_Alumnos = controlador.getAlumnos();
-        DefaultTableModel model = generarModeloTablaAlumno(Curso_Alumnos);
-        jTableAlumnos = new JTable(model) {
-            //private static final long serialVersionUID = 1L;
-            @Override
-            public Class getColumnClass(int column) {
-                switch (column) {
-                    case 0:
-                        return String.class;
-                    case 1:
-                        return String.class;
-                    default:
-                    case 2:
-                        return String.class;
-
-                }
             }
-        };
+        }
+    };
+} else if(asignatura.getSelectedItem().equals("CIN")){
+    ArrayList<Curso> Curso_Alumnos = controladorJefeestudios.getAlumnosxCurso("CIN");
+    DefaultTableModel model = generarModeloTablaAlumno(Curso_Alumnos);
+    jTableAlumnos = new JTable(model) {
+        //private static final long serialVersionUID = 1L;
+        @Override
+        public Class getColumnClass(int column) {
+            switch (column) {
+                case 0:
+                    return String.class;
+                case 1:
+                    return String.class;
+                default:
+                case 2:
+                    return String.class;
 
+            }
+        }
+    };
+
+} else if(asignatura.getSelectedItem().equals("MIP")){
+    ArrayList<Curso> Curso_Alumnos = controladorJefeestudios.getAlumnosxCurso("MIP");
+    DefaultTableModel model = generarModeloTablaAlumno(Curso_Alumnos);
+    jTableAlumnos = new JTable(model) {
+        //private static final long serialVersionUID = 1L;
+        @Override
+        public Class getColumnClass(int column) {
+            switch (column) {
+                case 0:
+                    return String.class;
+                case 1:
+                    return String.class;
+                default:
+                case 2:
+                    return String.class;
+
+            }
+        }
+    };
+
+}
 
         jTableAlumnos.setBounds(30,40,200,300);
         JScrollPane scrollpane = new JScrollPane(jTableAlumnos);

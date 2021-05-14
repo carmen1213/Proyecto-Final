@@ -1,7 +1,8 @@
-import Controladores.ControladorTabla;
+import Controladores.ControladorTablaNotas;
+import Controladores.ControladorTablaProfesores;
+import Controladores.Controlador_login;
 import models.*;
-import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
-import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
+import models.Notas;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
 
 import javax.swing.*;
@@ -15,15 +16,15 @@ import java.util.ArrayList;
 
 public class Notas_alumnos  extends JFrame{
     private JTable jTableAlumnos;
-    private ControladorTabla controlador = new ControladorTabla();
-    static ArrayList<String> resultadosdam = new ArrayList<>();
+    private ControladorTablaNotas controladorNotas = new ControladorTablaNotas();
+    private ControladorTablaProfesores controladorProfesores = new ControladorTablaProfesores();
     private JComboBox asignatura;
     private JLabel titulop;
     private JButton guardar;
     private static Connection connecion;
-    private obtencion_datos_login control = new obtencion_datos_login();
-   // private Profesor id_profesor = control.getIdProfesor(inicio.usuario.getText(), inicio.contraseña.getText());
-    private ArrayList<Asignatura> asignaturas = controlador.getAsignaturaProfesor(2);
+    private Controlador_login controllogin = new Controlador_login();
+    private Profesor id_profesor = controllogin.getIdProfesor(inicio.usuario.getText(), inicio.contraseña.getText());
+    private ArrayList<Asignatura> asignaturas = controladorProfesores.getAsignaturaProfesor(2);
     private UtilDateModel date = new UtilDateModel();
 
     public Notas_alumnos() throws SQLException {
@@ -71,7 +72,7 @@ public class Notas_alumnos  extends JFrame{
       //  opciones.add(combo);
 
 
-        ArrayList<Notas> alumnosAsignatura = controlador.getNotas(3);
+        ArrayList<Notas> alumnosAsignatura = controladorNotas.getNotas(3);
         DefaultTableModel model = generarModeloTablaAlumno(alumnosAsignatura);
 
         jTableAlumnos = new JTable(model) {
