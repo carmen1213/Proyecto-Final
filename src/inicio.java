@@ -1,23 +1,24 @@
 import Controladores.Controlador_login;
-import Controladores.Controlador_login;
 import models.Usuario;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import static java.awt.Font.BOLD;
 
 public class inicio extends JFrame {
-    private JLabel logo;
-    private JLabel titulop;
-    private JButton login, olvido;
-    private JLabel confirmacion, denegacion;
     public static JTextField usuario;
     public static JTextField contraseña;
+    private static JLabel confirmacion;
+    private static final Controlador_login controlLogin = new Controlador_login();
+    private final JLabel denegacion;
     Font f = new Font("Monospaced", BOLD, 24);
-    private Controlador_login control = new Controlador_login();
+    private final JLabel titulo;
+    private final JButton login;
 
     public inicio() {
         super("Inicio");
@@ -28,32 +29,45 @@ public class inicio extends JFrame {
         JPanel pricipal = new JPanel();
         pricipal.setLayout(new GridLayout(2, 1));
 
-
-        JPanel titulo = new JPanel();
-        titulo.setLayout(new BorderLayout());
-        titulop = new JLabel("<html> <div style = 'text-align: center;'> Bienvenido, <br> Accede a tus datos! </div></html>");
-        titulop.setFont(f);
-        titulop.setForeground(new Color(140, 24, 82));
-        titulo.add(titulop);
-
+        JPanel encabezado = new JPanel();
+        encabezado.setLayout(new BorderLayout());
+        this.titulo = new JLabel("<html> <div style = 'text-align: center;'> Bienvenido, <br> Accede a tus datos! </div></html>");
+        this.titulo.setFont(f);
+        this.titulo.setForeground(new Color(140, 24, 82));
+        encabezado.add(this.titulo);
 
         JPanel general = new JPanel();
         general.setLayout(new GridLayout(5, 2, 20, 20));
-
 
         general.add(new JLabel(" Usuario:"));
         usuario = new JTextField("");
         general.add(usuario);
 
-
         general.add(new JLabel(" Contraseña:"));
         contraseña = new JPasswordField("");
         general.add(contraseña);
 
-        olvido = new JButton("Contraseña olvidada");
-        general.add(olvido);
-        olvido.setBackground(new Color(232, 91, 74));
-        olvido.addActionListener(new recuperar());
+        KeyListener keyListener = new KeyListener() {
+            public void keyPressed(KeyEvent keyEvent) {
+                if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER) {
+                    ListenerButton.autenticarUsuarioBD();
+                }
+            }
+
+            public void keyReleased(KeyEvent keyEvent) {
+
+            }
+
+            public void keyTyped(KeyEvent keyEvent) {
+
+            }
+        };
+        contraseña.addKeyListener(keyListener);
+
+        JButton contraOlvidada = new JButton("Contraseña olvidada");
+        general.add(contraOlvidada);
+        contraOlvidada.setBackground(new Color(232, 91, 74));
+        contraOlvidada.addActionListener(new recuperar());
 
         login = new JButton("Login");
         general.add(login);
@@ -66,11 +80,11 @@ public class inicio extends JFrame {
 
         denegacion = new JLabel("");
         general.add(denegacion);
-        pricipal.add(titulo);
+        pricipal.add(encabezado);
         pricipal.add(general);
 
 
-        add(titulo, BorderLayout.NORTH);
+        add(encabezado, BorderLayout.NORTH);
 
 
         add(pricipal, BorderLayout.CENTER);
@@ -84,15 +98,11 @@ public class inicio extends JFrame {
         inicio inicios = new inicio();
     }
 
-    private class ListenerButton implements ActionListener {
 
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            autenticarUsuarioBD();
-        }
+    private static class ListenerButton implements ActionListener {
 
-        private void autenticarUsuarioBD() {
-            Usuario user = control.iniciarSesion(usuario.getText(), contraseña.getText());
+        private static void autenticarUsuarioBD() {
+            Usuario user = controlLogin.iniciarSesion(usuario.getText(), contraseña.getText());
             if (user != null) {
                 switch (user.getTipoUsuario()) {
                     case "Alumno":
@@ -107,9 +117,6 @@ public class inicio extends JFrame {
                     case "Padres":
                         padre.main(user);
                         break;
-                    case "Director":
-                        director.main(user);
-                        break;
                     default:
                         confirmacion.setForeground(Color.red);
                         confirmacion.setText("<html> <div style = 'text-align: center;'> Tipo usuario incorrecto </div></html>");
@@ -117,11 +124,15 @@ public class inicio extends JFrame {
                 }
             } else {
                 confirmacion.setForeground(Color.red);
-                confirmacion.setText("<html> <div style = 'text-align: center;'> contrase?a incorrecta <br> o <br>usuario incorrecto </div></html>");
+                confirmacion.setText("<html> <div style = 'text-align: center;'> contraseña incorrecta <br> o <br> usuario incorrecto </div></html>");
             }
         }
-    }
 
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            autenticarUsuarioBD();
+        }
+    }
 
     private class recuperar implements ActionListener {
         @Override
@@ -129,7 +140,7 @@ public class inicio extends JFrame {
             denegacion.setForeground(Color.blue);
             denegacion.setText("");
         }
-
     }
 }
+
 

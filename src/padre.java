@@ -18,57 +18,42 @@ import java.awt.event.ActionListener;
 
 public class padre {
 
-    //Declaración de Variables
-
-    private final JLayeredPane principal;
-
-    private final JLabel Titulo;
-    private final JLabel imagenPadres;
-
-    private final JButton notasBtn;
-    private final JButton reunionesBtn;
-    private final JButton xarxaBtn;
-    private final JButton compraPapeleria;
-
-    private final JFrame general;
-
     public padre(Usuario user) {
 
-        general = new JFrame();
-        principal = new JLayeredPane();
+        JFrame general = new JFrame();
+        JLayeredPane principal = new JLayeredPane();
 
         general.getContentPane().setBackground(new Color(230, 230, 250));
         general.getContentPane().add(principal, BorderLayout.CENTER);
 
-        Titulo = new JLabel(" Bienvenido ");
-        Titulo.setHorizontalAlignment(SwingConstants.CENTER);
-        Titulo.setFont(new Font("Segoe Script", Font.BOLD | Font.ITALIC, 34));
-        Titulo.setBounds(555, 25, 348, 82);
+        JLabel titulo = new JLabel("<html> <div style = 'text-align: center;'> Bienvenido <br>  " + user.getNombre() + " </div></html>");
+        titulo.setFont(new Font("Segoe Script", Font.BOLD | Font.ITALIC, 34));
+        titulo.setBounds(555, 25, 348, 82);
 
-        notasBtn = new JButton("Notas");
+        JButton notasBtn = new JButton("Notas");
         notasBtn.setToolTipText("");
         notasBtn.setBackground(new Color(245, 255, 250));
         notasBtn.setIcon(new ImageIcon("C:\\Users\\carma\\Downloads\\notasIcono.jpg"));
         notasBtn.setFont(new Font("Matura MT Script Capitals", Font.BOLD | Font.ITALIC, 22));
         notasBtn.setBounds(91, 635, 184, 77);
 
-        imagenPadres = new JLabel("");
+        JLabel imagenPadres = new JLabel("");
         imagenPadres.setIcon(new ImageIcon("C:\\Users\\carma\\Downloads\\padres-mirando-sus-hijos-dibujando_13339-171519 (1).jpg"));
         imagenPadres.setBounds(523, 177, 560, 331);
 
-        reunionesBtn = new JButton("Reuniones");
+        JButton reunionesBtn = new JButton("Reuniones");
         reunionesBtn.setBackground(new Color(245, 255, 250));
         reunionesBtn.setIcon(new ImageIcon("C:\\Users\\carma\\Downloads\\reuniones.jpg"));
         reunionesBtn.setFont(new Font("Matura MT Script Capitals", Font.BOLD | Font.ITALIC, 22));
         reunionesBtn.setBounds(430, 636, 234, 74);
 
-        xarxaBtn = new JButton("Libros");
+        JButton xarxaBtn = new JButton("Libros");
         xarxaBtn.setBackground(new Color(245, 255, 250));
         xarxaBtn.setIcon(new ImageIcon("C:\\Users\\carma\\Downloads\\libros.jpg"));
         xarxaBtn.setFont(new Font("Matura MT Script Capitals", Font.BOLD | Font.ITALIC, 22));
         xarxaBtn.setBounds(827, 635, 222, 77);
 
-        compraPapeleria = new JButton("Papeleria");
+        JButton compraPapeleria = new JButton("Papeleria");
         compraPapeleria.setBackground(new Color(245, 255, 250));
         compraPapeleria.setFont(new Font("Matura MT Script Capitals", Font.BOLD | Font.ITALIC, 22));
         compraPapeleria.setIcon(new ImageIcon("C:\\Users\\carma\\Downloads\\cestaCompra.jpg"));
@@ -82,7 +67,7 @@ public class padre {
 
         //Insercciones a la GUI
         principal.add(notasBtn);
-        principal.add(Titulo);
+        principal.add(titulo);
         principal.add(imagenPadres);
         principal.add(reunionesBtn);
         principal.add(xarxaBtn);
@@ -98,7 +83,7 @@ public class padre {
         new padre(user);
     }
 
-    private class abrirCorreo implements ActionListener {
+    private static class abrirCorreo implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             WebDriver driver;
@@ -113,7 +98,7 @@ public class padre {
             driver.get("https://outlook.live.com/owa/");
         }}
 
-    private class inscripcionXarxa implements ActionListener {
+    private static class inscripcionXarxa implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             WebDriver driver;
@@ -128,7 +113,7 @@ public class padre {
             driver.get("https://www.gva.es/es/inicio/procedimientos?id_proc=18094");
         }}
 
-    private class Compra implements ActionListener {
+    private static class Compra implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             WebDriver driver;
