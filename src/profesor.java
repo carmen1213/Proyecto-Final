@@ -1,6 +1,10 @@
 import models.Usuario;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,6 +20,7 @@ public class profesor extends JFrame {
     private JButton horario;
     private JButton Reuniones;
     private JComboBox descargar;
+    private JLabel icon;
     private JComboBox disponibilidad;
     private JComboBox horas;
     File archivo;
@@ -35,17 +40,17 @@ public class profesor extends JFrame {
         setBackground(new Color(227, 247, 193));
 
         JPanel general = new JPanel();
+        general.setLayout(new BorderLayout());
         general.setBackground(new Color(227, 247, 193));
-        JPanel principal = new JPanel();
-        principal.setLayout( new GridLayout(4,1, 0,15));
-        principal.setBackground(new Color(227, 247, 193));
+
+
         JPanel menu = new JPanel();
         menu.setBackground(new Color(227, 247, 193));
 
         JMenuBar barraMenu = new JMenuBar();
         menu.add(barraMenu);
         JMenu Listas = new JMenu("Listas");
-        Material = new JMenu("Material");
+        JMenu Material = new JMenu("Material");
 
         JRadioButtonMenuItem dam1l = new JRadioButtonMenuItem("Pasar lista");
         dam1l.addActionListener(new Listenerco());
@@ -55,7 +60,7 @@ public class profesor extends JFrame {
         DAM.addActionListener(new EscMaterialDAM());
         CIN = new JMenuItem("CIN");
         CIN.addActionListener(new EscMaterialCIN());
-        MIP = new JMenuItem("MARKETING");
+        MIP = new JMenuItem("MIP");
         MIP.addActionListener(new EscMaterialMIP());
 
 
@@ -70,69 +75,93 @@ public class profesor extends JFrame {
 
         setJMenuBar(barraMenu);
 
-        JPanel titulo = new JPanel();
+        JPanel principal = new JPanel();
+        principal.setLayout( new GridLayout(2,1));
+        principal.setBackground(new Color(227, 247, 193));
+
+        JPanel titulo= new JPanel();
         titulop = new JLabel("<html> <div style = 'text-align: center;'> Bienvenido <br>  " + user.getNombre() + " </div></html> ");
         titulop.setFont(f);
         titulop.setForeground(new Color(140, 24, 82));
         titulo.add(titulop);
         titulo.setBackground(new Color(227, 247, 193));
 
+
+        JPanel logo = new JPanel();
+        logo.setBackground(new Color(227, 247, 193));
+        icon = new JLabel();
+        icon.setBackground(new Color(227, 247, 193));
+        icon.setIcon(new ImageIcon("C:\\Users\\Salvador\\Desktop\\Proyecto-Final\\imagenes\\profesores (1).jpg"));
+
+        logo.add(icon);
+
         JPanel botones = new JPanel();
-        botones.setLayout(new GridLayout(1,3,12,20));
+        botones.setLayout(new GridLayout(1,3,7,8));
         botones.setBackground(new Color(227, 247, 193));
+
+        JPanel Horario = new JPanel();
+        Horario.setBackground(new Color(227, 247, 193));
+        Horario.setLayout(new GridLayout(3,1));
+        JLabel vacioar = new JLabel();
+        vacioar.setBackground(new Color(227, 247, 193));
         horario = new JButton("Horario");
+        JLabel vacioab = new JLabel();
+        vacioab.setBackground(new Color(227, 247, 193));
+
+        Horario.add(vacioar);
+        Horario.add(horario);
+        Horario.add(vacioab);
+
+
+        JPanel reuniones = new JPanel();
+        reuniones.setLayout(new GridLayout(3,1));
+        reuniones.setBackground(new Color(227, 247, 193));
+        JLabel vacioarr = new JLabel();
+        vacioarr.setBackground(new Color(227, 247, 193));
         Reuniones = new JButton("Reuniones");
+        Reuniones.addActionListener( new AbrirCorreo());
+        JLabel vacioaba = new JLabel();
+        vacioaba.setBackground(new Color(227, 247, 193));
+
+        reuniones.add(vacioarr);
+        reuniones.add(Reuniones);
+        reuniones.add(vacioaba);
+
+        JPanel Descargar = new JPanel();
+        Descargar.setLayout(new GridLayout(3,1));
+        Descargar.setBackground(new Color(227, 247, 193));
+        JLabel vacioarri = new JLabel();
+        vacioarri.setBackground(new Color(227, 247, 193));
         descargar = new JComboBox();
-        descargar.setBackground(new Color(227, 247, 193));
         descargar.addItem("Archivos");
         descargar.addItem("Horario");
-        botones.add(horario);
-        botones.add(Reuniones);
-        botones.add(descargar);
 
-        JPanel disponible =new JPanel();
-        disponible.setBackground(new Color(227, 247, 193));
-        disponible.setLayout(new GridLayout(4,1));
-        disponible.add(new JLabel(" "));
+        JLabel vacioabaj = new JLabel();
+        vacioabaj.setBackground(new Color(227, 247, 193));
 
-        disponibilidad= new JComboBox();
-        disponibilidad.setBackground(new Color(227, 247, 193));
-        //disponibilidad.setBorder(new TitledBorder("Dias Disponibles"));
-        disponibilidad.addItem("Lunes");
-        disponibilidad.addItem("Martes");
-        disponibilidad.addItem("Miercoles");
-        disponibilidad.addItem("Jueves");
-        disponibilidad.addItem("Viernes");
-        disponibilidad.addActionListener(new Listenerdispo());
+        Descargar.add(vacioarri);
+        Descargar.add(descargar);
+        Descargar.add(vacioabaj);
 
-        horas = new JComboBox();
-        horas.setBackground(new Color(227, 247, 193));
-        horas.addItem("08:15-09:10");
-        horas.addItem("09:10-10:05");
-        horas.addItem("10:05-11:00");
-        horas.addItem("11:30-12:25");
-        horas.addItem("12:25-13:20");
-        horas.addItem("13:20-14:15");
-        horas.addActionListener(new Listenerhora());
+        botones.add(Horario);
+        botones.add(reuniones);
+        botones.add(Descargar);
 
-
-        disponible.add(new JLabel(" "));
-
-        disponible.add(disponibilidad);
-        disponible.add(horas);
 
 
         // principal.add(menu);
-        principal.add(titulo);
+        principal.add(logo);
         principal.add(botones);
-        principal.add(disponible);
+
+
 
         general.add(menu);
-        general.add(principal);
+        general.add(titulo,BorderLayout.NORTH);
+        general.add(principal, BorderLayout.CENTER);
 
 
-        add(general, BorderLayout.CENTER);
-        setSize(400, 520);
+        add(general);
+        setSize(700, 780);
         setVisible(true);
     }
 
@@ -198,7 +227,6 @@ public class profesor extends JFrame {
 
         }
     }
-
 
     private class EscMaterialDAM implements ActionListener {
         @Override
@@ -280,7 +308,17 @@ public class profesor extends JFrame {
     }
 
 
+    private class AbrirCorreo implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            WebDriver driver;
+
+           String exePath = "C:\\Users\\Salvador\\Desktop\\Proyecto-Final\\chromedriver.exe";
+           System.setProperty("webdriver.chrome.driver", exePath);
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--start-maximized");
+           driver = new ChromeDriver(options);
+           driver.get("https://outlook.live.com/owa/");
+        }
+    }
 }
-
-
-
