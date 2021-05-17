@@ -103,6 +103,7 @@ public class Notas_alumnos  extends JFrame{
         guarda.setBackground(new Color(227, 247, 193));
 
         guardar = new JButton("Guardar");
+        guardar.addActionListener(new Guardar());
 
         JLabel vacioaba = new JLabel(" ");
         vacioab.setBackground(new Color(227, 247, 193));
@@ -167,6 +168,16 @@ public class Notas_alumnos  extends JFrame{
         @Override
         public void actionPerformed(ActionEvent e) {
 
+        }
+    }
+    private class Guardar implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                Notas_alumnos notas_alumnos = new Notas_alumnos();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
         }
     }
 }
