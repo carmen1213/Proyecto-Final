@@ -7,12 +7,15 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import javax.swing.*;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class profesor {
@@ -65,6 +68,7 @@ public class profesor {
 
 
         JMenu listasMenu = new JMenu("Listas");
+        listasMenu.addMenuListener(new verasistencia());
         listasMenu.setFont(new Font("Rockwell Condensed", Font.BOLD, 18));
         BarraMenu.add(listasMenu);
 
@@ -204,4 +208,24 @@ public class profesor {
     }
 
 
+    private class verasistencia implements MenuListener {
+        @Override
+        public void menuSelected(MenuEvent e) {
+            try {
+                new tabla_profesor();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+
+        @Override
+        public void menuDeselected(MenuEvent e) {
+
+        }
+
+        @Override
+        public void menuCanceled(MenuEvent e) {
+
+        }
+    }
 }
