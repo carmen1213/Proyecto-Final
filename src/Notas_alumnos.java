@@ -1,7 +1,8 @@
-import BDutils.conexionbasedatos;
+import Controladores.ControladorTablaNotas;
+import Controladores.ControladorTablaProfesores;
+import Controladores.Controlador_login;
 import models.*;
-import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
-import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
+import models.Notas;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
 
 import javax.swing.*;
@@ -11,23 +12,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-
-import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class Notas_alumnos  extends JFrame{
     private JTable jTableAlumnos;
-    private ControladorTabla controlador = new ControladorTabla();
-    static ArrayList<String> resultadosdam = new ArrayList<>();
+    private ControladorTablaNotas controladorNotas = new ControladorTablaNotas();
+    private ControladorTablaProfesores controladorProfesores = new ControladorTablaProfesores();
     private JComboBox asignatura;
     private JLabel titulop;
     private JButton guardar;
-    private JButton modificar;
     private static Connection connecion;
-    private obtencion_datos_login control = new obtencion_datos_login();
-   // private Profesor id_profesor = control.getIdProfesor(inicio.usuario.getText(), inicio.contraseña.getText());
-    private ArrayList<Asignatura> asignaturas = controlador.getAsignaturaProfesor(2);
+    private Controlador_login controllogin = new Controlador_login();
+    private Profesor id_profesor = controllogin.getIdProfesor(inicio.usuario.getText(), inicio.contraseña.getText());
+    private ArrayList<Asignatura> asignaturas = controladorProfesores.getAsignaturaProfesor(2);
     private UtilDateModel date = new UtilDateModel();
 
     public Notas_alumnos() throws SQLException {
@@ -37,7 +34,7 @@ public class Notas_alumnos  extends JFrame{
 
 
         JPanel general = new JPanel();
-        general.setLayout(new GridLayout(4, 1));
+        general.setLayout(new GridLayout(5, 1));
         general.setBackground(new Color(227, 247, 193));
 
         JPanel titulo = new JPanel();
@@ -52,30 +49,7 @@ public class Notas_alumnos  extends JFrame{
         opciones.add(new JLabel(" "));
 
 
-        date.setDate(2021, 3, 23);
-        date.setSelected(true);
-        JDatePanelImpl datePanel = new JDatePanelImpl(date);
-        JDatePickerImpl datePicker = new JDatePickerImpl(datePanel);
-        datePicker.setBackground(new Color(227, 247, 193));
-        opciones.add(datePicker);
-
-        JPanel combo = new JPanel();
-        combo.setLayout(new GridLayout(3, 1));
-        combo.setBackground(new Color(227, 247, 193));
-        asignatura = new JComboBox();
-        asignatura.setBackground(new Color(227, 247, 193));
-
-
-
-        for (int i = 0; i < asignaturas.size(); i++) {
-            asignatura.addItem(asignaturas.get(i).getNombre());
-        }
-
-        combo.add(asignatura);
-        opciones.add(combo);
-
-
-        ArrayList<Notas> alumnosAsignatura = controlador.getAlumnosyasignaturas(3);
+        ArrayList<Notas> alumnosAsignatura = controladorNotas.getNotas(3);
         DefaultTableModel model = generarModeloTablaAlumno(alumnosAsignatura);
 
         jTableAlumnos = new JTable(model) {
@@ -107,32 +81,56 @@ public class Notas_alumnos  extends JFrame{
         referencia.setBackground(new Color(227, 247, 193));
         referencia.add(new JLabel(" "));
 
+        JPanel boton = new JPanel();
+        boton.setBackground(new Color(227, 247, 193));
+        boton.setLayout(new GridLayout(1,3));
+        JLabel vacioar = new JLabel(" ");
+        vacioar.setBackground(new Color(227, 247, 193));
+        JLabel vacioab = new JLabel(" ");
+        vacioab.setBackground(new Color(227, 247, 193));
 
-        JPanel botones = new JPanel();
-        botones.setLayout(new GridLayout(1, 3));
+        JPanel guarda = new JPanel();
+        guarda.setLayout(new GridLayout(3,1));
+        JLabel vacioarriba = new JLabel(" ");
+        vacioar.setBackground(new Color(227, 247, 193));
+        JLabel vacioabajo = new JLabel(" ");
+        vacioab.setBackground(new Color(227, 247, 193));
+
+        JPanel botones =new JPanel();
         botones.setBackground(new Color(227, 247, 193));
-        botones.add(new JLabel());
-        botones.add(new JLabel());
-        JPanel guardarm = new JPanel();
-        guardarm.setBackground(new Color(227, 247, 193));
+        JLabel vacioarr = new JLabel(" ");
+        vacioar.setBackground(new Color(227, 247, 193));
+        guarda.setBackground(new Color(227, 247, 193));
+
         guardar = new JButton("Guardar");
+        guardar.addActionListener(new Guardar());
+
+        JLabel vacioaba = new JLabel(" ");
+        vacioab.setBackground(new Color(227, 247, 193));
 
 
 
-        guardar.addActionListener(new guardarinformaciones());
+        botones.add(vacioarr);
+        botones.add(guardar);
+        botones.add(vacioaba);
 
-        guardarm.add(guardar);
+        guarda.add(vacioarriba);
+        guarda.add(botones);
+        guarda.add(vacioabajo);
 
-        botones.add(guardarm);
+        boton.add(vacioar);
+        boton.add(vacioab);
+        boton.add(guarda);
+
+
+
         primer.add(referencia);
-        primer.add(botones);
-
-
 
         general.add(titulo);
         general.add(opciones);
         general.add(scrollpane);
         general.add(primer);
+        general.add(boton);
 
         add(general,BorderLayout.CENTER);
 
@@ -148,7 +146,7 @@ public class Notas_alumnos  extends JFrame{
         String[] cols = {"Nombre Alumno", "Nombre Asignatura", "Notas"};
         DefaultTableModel model = new DefaultTableModel(cols, 0);
         for (int i = 0; i < nombresAlumnos.size(); i++) {
-            Object[] data = {nombresAlumnos.get(i).getNombre_alumno(), nombresAlumnos.get(i).getAsignatura()};
+            Object[] data = {nombresAlumnos.get(i).getAlumno().getNombre(), nombresAlumnos.get(i).getAsignatura().getNombre(), nombresAlumnos.get(i).getNota()};
             model.addRow(data);
         }
         return model;
@@ -170,6 +168,16 @@ public class Notas_alumnos  extends JFrame{
         @Override
         public void actionPerformed(ActionEvent e) {
 
+        }
+    }
+    private class Guardar implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                Notas_alumnos notas_alumnos = new Notas_alumnos();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
         }
     }
 }

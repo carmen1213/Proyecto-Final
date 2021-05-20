@@ -1,28 +1,57 @@
 package models;
-
+/**
+ * @author Carmen Martí,Salva Blanquer,Lucia Calabrese
+ */
 public class Notas {
-    String nombre_alumno;
-    String asignatura;
 
+    //Variables para crear el objeto notas, de tipo alumno son los datos que obtiene del objeto ya creado Alumno y de tipo asignatura son los datos que obtiene del objeto ya creado asignatura
+    Alumno alumno;
+    Asignatura asignatura;
+    double nota;
 
-    public String getNombre_alumno() {
-        return nombre_alumno;
+    //Creacion del constructor para definir que datos debe tener ese objeto
+    public Notas(Alumno alumno, Asignatura asignatura, double nota) {
+        this.alumno = alumno;
+        this.asignatura = asignatura;
+        this.nota = nota;
     }
 
-    public void setNombre_alumno(String nombre_alumno) {
-        this.nombre_alumno = nombre_alumno;
+    //Metodo que sirve para obtener del objeto ya creado en la clase Alumno, su respectivo nombre
+    public Alumno getAlumno() {
+        return alumno;
     }
 
-    public String getAsignatura() {
+    public void setAlumno(Alumno alumno) {
+        this.alumno = alumno;
+    }
+
+    //Metodo que sirve para obtener del objeto ya creado en la clase Asignatura, su respectivo nombre
+    public Asignatura getAsignatura() {
         return asignatura;
     }
 
-    public void setAsignatura(String asignatura) {
+    //Metodo que permite cambiar el nombre del alumno ya creado anteriormente
+    public void setAsignatura(Asignatura asignatura) {
         this.asignatura = asignatura;
     }
 
-    public Notas(String nombre_alumno, String asignatura) {
-        this.nombre_alumno = nombre_alumno;
-        this.asignatura = asignatura;
+    //Metodo que sirve para obtener el valor de la nota ya creada
+    public double getNota() {
+        return nota;
+    }
+
+    //Metodo que permite cambiar el valor de la nota ya creada anteriormente
+    public void setNota(double nota) {
+        this.nota = nota;
+    }
+
+    //Metodo que devuelve los diferentes datos del objeto correspondiente
+    @Override
+    public String toString() {
+        return "Notas{" +
+                "alumno=" + alumno +
+                ", asignatura=" + asignatura +
+                ", nota=" + nota +
+                '}';
     }
 }

@@ -6,62 +6,62 @@ use
 educativ;
 create table cuestionario
 (
-    id_cuestionario int         not null
+    id_cuestionario int not null
         primary key,
-    nombre          varchar(45) null,
-    apellidos       varchar(45) null,
-    curso           varchar(45) null,
-    fecha           date        null,
-    asigntaturas    varchar(45) null,
-    profesor        varchar(45) null
+    nombre varchar(45) null,
+    apellidos varchar(45) null,
+    curso varchar(45) null,
+    fecha date null,
+    asigntaturas varchar(45) null,
+    profesor varchar(45) null
 );
 
 create table curso
 (
     id_curso int auto_increment
         primary key,
-    nombre   varchar(45) null
+    nombre varchar(45) null
 );
 
 create table asignatura
 (
-    nombre        varchar(45) null,
+    nombre varchar(45) null,
     id_asignatura int auto_increment
         primary key,
-    id_curso      int         null,
+    id_curso int null,
     constraint asignatura_curso_id_curso_fk
         foreign key (id_curso) references curso (id_curso)
 );
 
 create table examenes
 (
-    id_examen    int auto_increment
+    id_examen int auto_increment
         primary key,
-    fecha_Examen date              null,
-    id_nota      int               null,
-    puntos       double default 10 null
+    fecha_Examen date null,
+    id_nota int null,
+    puntos double default 10 null
 );
 
 create table login
 (
-    id_login       int auto_increment
+    id_login int auto_increment
         primary key,
-    nombre_usuario varchar(45)  null,
-    contraseña     varchar(45)  null,
-    seguridad      int          null,
-    tipo_usuario   varchar(45)  null,
-    id_aj          int          null,
-    nombre         varchar(100) null
+    nombre_usuario varchar(45) null,
+    contraseña varchar(45) null,
+    seguridad int null,
+    tipo_usuario varchar(45) null,
+    id_aj int null,
+    nombre varchar(100) null
 );
 
 create table alumnos
 (
-    id_alumno        int auto_increment
+    id_alumno int auto_increment
         primary key,
-    DNI              varchar(45)  null,
-    fecha_nacimiento date         null,
-    nombre           varchar(100) null,
-    id_login         int          null,
+    DNI varchar(45) null,
+    fecha_nacimiento date null,
+    nombre varchar(100) null,
+    id_login int null,
     constraint alumnos_login_id_login_fk
         foreign key (id_login) references login (id_login)
 );
@@ -69,8 +69,8 @@ create table alumnos
 create table alumnos_curso
 (
     id_alumno int null,
-    id_curso  int null,
-    id        int auto_increment
+    id_curso int null,
+    id int auto_increment
         primary key,
     constraint alumnos_curso_alumnos_id_alumnos_fk
         foreign key (id_alumno) references alumnos (id_alumno),
@@ -82,12 +82,12 @@ create table amonestaciones
 (
     id_amonestaciones int auto_increment
         primary key,
-    motivo            varchar(45) null,
-    peticiones        varchar(45) null,
-    gravedad          varchar(45) null,
-    id_alumno         int         null,
-    correo            varchar(45) null,
-    id_curso          int         null,
+    motivo varchar(45) null,
+    peticiones varchar(45) null,
+    gravedad varchar(45) null,
+    id_alumno int null,
+    correo varchar(45) null,
+    id_curso int null,
     constraint amonestaciones_alumnos_id_alumno_fk
         foreign key (id_alumno) references alumnos (id_alumno),
     constraint amonestaciones_curso_id_curso_fk
@@ -98,11 +98,11 @@ create table asistencia
 (
     id_asistencia int auto_increment
         primary key,
-    id_alumno     int         null,
-    asiste        tinyint(1)  null,
-    id_asignatura int         null,
-    dia_semana    varchar(45) null,
-    fecha         varchar(45) null,
+    id_alumno int null,
+    asiste tinyint(1) null,
+    id_asignatura int null,
+    dia_semana varchar(45) null,
+    fecha varchar(45) null,
     constraint asistencia_alumnos_id_alumnos_fk
         foreign key (id_alumno) references alumnos (id_alumno),
     constraint asistencia_asignatura_id_asignatura_fk
@@ -113,23 +113,23 @@ create table jefedeestudios
 (
     id_jefedeestudios int auto_increment
         primary key,
-    DNI               varchar(45)  null,
-    nombre            varchar(100) null,
-    telefono          int          null,
-    direccion         varchar(45)  null,
-    fechaNac          date         null,
-    correo            varchar(45)  null,
-    id_login          int          null,
+    DNI varchar(45) null,
+    nombre varchar(100) null,
+    telefono int null,
+    direccion varchar(45) null,
+    fechaNac date null,
+    correo varchar(45) null,
+    id_login int null,
     constraint jefedeestudios_login_id_login_fk
         foreign key (id_login) references login (id_login)
 );
 
 create table materialclase
 (
-    tema              varchar(45) null,
+    tema varchar(45) null,
     id_material_clase int auto_increment
         primary key,
-    id_curso          int         null,
+    id_curso int null,
     constraint materialclase_curso_id_curso_fk
         foreign key (id_curso) references curso (id_curso)
 );
@@ -138,21 +138,21 @@ create table matricula
 (
     id_matricula int auto_increment
         primary key,
-    id_alumno    int         null,
-    IBAN         varchar(45) null,
+    id_alumno int null,
+    IBAN varchar(45) null,
     constraint matricula_alumnos_id_alumno_fk
         foreign key (id_alumno) references alumnos (id_alumno)
 );
 
 create table notas
 (
-    id_boletin           int auto_increment
+    id_boletin int auto_increment
         primary key,
-    notas                int         null,
-    Observaciones        varchar(45) null,
+    notas int null,
+    Observaciones varchar(45) null,
     Documentacion_centro varchar(45) null,
-    id_asignaturas       int         null,
-    id_alumno            int         null,
+    id_asignaturas int null,
+    id_alumno int null,
     constraint notas_alumnos_id_alumno_fk
         foreign key (id_alumno) references alumnos (id_alumno),
     constraint notas_asignatura_id_asignatura_fk
@@ -161,43 +161,46 @@ create table notas
 
 create table padres
 (
-    id_padres            int auto_increment
+    id_padres int auto_increment
         primary key,
-    nombre               varchar(45) null,
-    DNi                  varchar(45) null,
-    telefono             int         null,
-    email                varchar(45) null,
-    estado_civil         varchar(45) null,
-    fecha_nacimiento     date        null,
-    direccion            varchar(45) null,
+    nombre varchar(45) null,
+    DNi varchar(45) null,
+    telefono int null,
+    email varchar(45) null,
+    estado_civil varchar(45) null,
+    fecha_nacimiento date null,
+    direccion varchar(45) null,
     Documentos_bancarios varchar(45) null,
-    id_alumno            int         null,
+    id_alumno int null,
+    id_login int null,
     constraint padres_alumnos_id_alumno_fk
-        foreign key (id_alumno) references alumnos (id_alumno)
+        foreign key (id_alumno) references alumnos (id_alumno),
+    constraint padres_login_id_login_fk
+        foreign key (id_login) references login (id_login)
 );
 
 create table profesor
 (
     id_profesor int auto_increment
         primary key,
-    DNI         varchar(45)  null,
-    nombre      varchar(100) null,
-    telefono    int          null,
-    direccion   varchar(45)  null,
-    fecha_Nac   date         null,
-    correo      varchar(45)  null,
-    id_usuario  int          null,
+    DNI varchar(45) null,
+    nombre varchar(100) null,
+    telefono int null,
+    direccion varchar(45) null,
+    fecha_Nac date null,
+    correo varchar(45) null,
+    id_usuario int null,
     constraint profesor_login_id_login_fk
         foreign key (id_usuario) references login (id_login)
 );
 
 create table clase
 (
-    id_clase      int auto_increment
+    id_clase int auto_increment
         primary key,
-    id_asignatura int      null,
-    id_profesor   int      null,
-    fecha         datetime null,
+    id_asignatura int null,
+    id_profesor int null,
+    fecha datetime null,
     constraint clase_asignaturas_id_asignatura_fk
         foreign key (id_asignatura) references asignatura (id_asignatura),
     constraint clase_profesor_id_profesor_fk
@@ -206,13 +209,13 @@ create table clase
 
 create table horario
 (
-    id_horario    int auto_increment
+    id_horario int auto_increment
         primary key,
-    id_asignatura int  null,
-    id_profesor   int  null,
-    hora_inicio   time null,
-    hora_fin      time null,
-    dia_semana    int  null,
+    id_asignatura int null,
+    id_profesor int null,
+    hora_inicio time null,
+    hora_fin time null,
+    dia_semana int null,
     constraint horario_asignatura_id_asignatura_fk
         foreign key (id_asignatura) references asignatura (id_asignatura),
     constraint horario_profesor_id_profesor_fk
@@ -221,9 +224,9 @@ create table horario
 
 create table profesor_asignatura
 (
-    id_profesor   int null,
+    id_profesor int null,
     id_asignatura int null,
-    id            int auto_increment
+    id int auto_increment
         primary key,
     constraint profesor_asignatura_asignatura_id_asignatura_fk
         foreign key (id_asignatura) references asignatura (id_asignatura),
@@ -235,10 +238,11 @@ create table reuniones
 (
     id_reuniones int auto_increment
         primary key,
-    lugar        varchar(45) null,
-    fecha        date        null,
-    curso        varchar(45) null
+    lugar varchar(45) null,
+    fecha date null,
+    curso varchar(45) null
 );
+
 
 create definer = root@localhost view alumno_cursos as
 select `a`.`nombre` AS `Alumnos`, `c`.`nombre` AS `curso`
@@ -277,6 +281,7 @@ INSERT INTO educativ.login (id_login, nombre_usuario, contraseña, seguridad, ti
 INSERT INTO educativ.login (id_login, nombre_usuario, contraseña, seguridad, tipo_usuario, id_aj, nombre) VALUES (5, 'Fmiralles', '0000', null, 'Profesor', null, 'Fernando Miralles');
 INSERT INTO educativ.login (id_login, nombre_usuario, contraseña, seguridad, tipo_usuario, id_aj, nombre) VALUES (6, 'Nsenent', '1111', null, 'Jefedeestudios', null, 'Neus Senent');
 INSERT INTO educativ.login (id_login, nombre_usuario, contraseña, seguridad, tipo_usuario, id_aj, nombre) VALUES (7, 'Cvicente', '12', null, 'Director', null, 'Cristina Vicente');
+INSERT INTO educativ.login (id_login, nombre_usuario, contraseña, seguridad, tipo_usuario, id_aj, nombre) VALUES (8, 'Ppapa', '11', null, 'Padres', null, 'Pepe papa');
 
 INSERT INTO educativ.alumnos (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (3, '12345678A', '2010-04-29', 'Salvador Blanquer', 1);
 INSERT INTO educativ.alumnos (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (4, '88888888Z', '1999-12-15', 'Lucia Calabrese', null);
@@ -335,3 +340,5 @@ INSERT INTO educativ.profesor_asignatura (id_profesor, id_asignatura, id) VALUES
 INSERT INTO educativ.profesor_asignatura (id_profesor, id_asignatura, id) VALUES (4, 6, 8);
 
 INSERT INTO educativ.jefedeestudios (id_jefedeestudios, DNI, nombre, telefono, direccion, fechaNac, correo, id_login) VALUES (1, '00000000M', 'Neus Senent', 698574236, null, null, null, null);
+
+INSERT INTO educativ.padres (id_padres, nombre, DNi, telefono, email, estado_civil, fecha_nacimiento, direccion, Documentos_bancarios, id_alumno, id_login) VALUES (1, 'Pepe papa', null, null, null, null, null, null, null, 3, 8);

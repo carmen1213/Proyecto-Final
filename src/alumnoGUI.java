@@ -1,132 +1,112 @@
 
+//import necesarios
+
 import models.Usuario;
-
 import javax.swing.*;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
-import static java.awt.Font.BOLD;
+/**
+ * @author Carmen Martí,Salva Blanquer,Lucia Calabrese
+ */
 
-public class alumnoGUI extends JFrame {
-
-    private JLabel titulop;
-    private JLabel icon;
-    private JButton notas;
-    private JButton horario;
-    private JLabel vacioderecha;
-    private JLabel vacioizquierda;
-    Font f = new Font("Monospaced", BOLD, 30);
-
+public class alumnoGUI {
 
     public alumnoGUI(Usuario user) {
-        super("Alumno");
-        setDefaultCloseOperation(HIDE_ON_CLOSE);
-        setLayout(new FlowLayout());
-        this.getContentPane().setBackground(new Color(179, 253, 255 ));
 
-        JPanel general = new JPanel();
-        general.setLayout(new BorderLayout());
-        general.setBackground(Color.PINK);
+         JFrame general = new JFrame();
+        general.setIconImage(Toolkit.getDefaultToolkit().getImage("..\\Proyecto-Final\\imagenes\\logoEncabezado.png"));
+        general.setTitle("Alumnos");
+        general.getContentPane().setBackground(new Color(250, 250, 210));
 
-        JPanel menu = new JPanel();
-        this.getContentPane().setBackground(new Color(179, 253, 255 ));
+        JLayeredPane principal = new JLayeredPane();
+        general.getContentPane().add(principal, BorderLayout.CENTER);
+
+        JLabel titulo = new JLabel("<html> <div style = 'text-align: center;'> Bienvenido <br>  " + user.getNombre() + " </div></html>");
+        titulo.setHorizontalAlignment(SwingConstants.CENTER);
+        titulo.setFont(new Font("Segoe Script", Font.BOLD | Font.ITALIC, 34));
+        titulo.setBounds(615, 0, 303, 184);
+        principal.add(titulo);
+
+        JLabel alumnosImagen = new JLabel("");
+        alumnosImagen.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenAlumnos.jpg"));
+        alumnosImagen.setBounds(371, 158, 840, 438);
+        principal.add(alumnosImagen);
+
+        JButton notasBtn = new JButton("Notas");
+        notasBtn.setBackground(new Color(255, 222, 173));
+        notasBtn.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenNotas.png"));
+        notasBtn.setFont(new Font("Berlin Sans FB", Font.BOLD | Font.ITALIC, 22));
+        notasBtn.setBounds(371, 663, 216, 71);
+        principal.add(notasBtn);
+
+        JButton horarioBtn = new JButton("Horario");
+        horarioBtn.setBackground(new Color(255, 222, 173));
+        horarioBtn.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenHorario.png"));
+        horarioBtn.setFont(new Font("Berlin Sans FB", Font.BOLD | Font.ITALIC, 22));
+        horarioBtn.setBounds(1006, 663, 216, 71);
+        principal.add(horarioBtn);
+        general.setBounds(100, 100, 1364, 828);
+        general.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
         JMenuBar barraMenu = new JMenuBar();
+        barraMenu.setBackground(new Color(250, 250, 210));
+        barraMenu.setForeground(new Color(255, 255, 255));
+        general.setJMenuBar(barraMenu);
 
-        menu.add(barraMenu);
+        JMenu expedientesMenu = new JMenu("Expedientes");
+        expedientesMenu.setHorizontalAlignment(SwingConstants.CENTER);
+        expedientesMenu.setFont(new Font("Rockwell", Font.BOLD, 17));
+        barraMenu.add(expedientesMenu);
 
+        JMenu quejasMenu = new JMenu("Quejas");
+        quejasMenu.addMenuListener(new abrirQuejas());
+        quejasMenu.setFont(new Font("Rockwell", Font.BOLD, 17));
+        barraMenu.add(quejasMenu);
 
-        JMenu expediente = new JMenu("Expediente");
-        JMenu quejas = new JMenu("Quejas");
-        JMenu cuestionarios = new JMenu("Cuestioarios");
-        JMenu tareas = new JMenu("Tareas");
+        JMenu cuestionariosMenu = new JMenu("Cuestionarios");
+        cuestionariosMenu.setFont(new Font("Rockwell", Font.BOLD, 17));
+        barraMenu.add(cuestionariosMenu);
 
+        JMenu TareasMenu = new JMenu("Tareas");
+        TareasMenu.setFont(new Font("Rockwell", Font.BOLD, 17));
+        barraMenu.add(TareasMenu);
 
-        barraMenu.add(expediente);
-        barraMenu.add(quejas);
-        barraMenu.add(cuestionarios);
-        barraMenu.add(tareas);
-        setJMenuBar(barraMenu);
-
-        JPanel principal = new JPanel();
-        principal.setLayout(new GridLayout(3, 1));
-        principal.setBackground(new Color(179, 253, 255));
-
-        JPanel titulo = new JPanel();
-        titulo.setBackground(new Color(179, 253, 255 ));
-        titulop = new JLabel("<html> <div style = 'text-align: center;'> Bienvenido <br>  " + user.getNombre() + " </div></html> ");
-        titulop.setFont(f);
-        titulop.setForeground(new Color(140, 24, 82));
-        titulo.add(titulop);
-
-        JPanel logo = new JPanel();
-        logo.setBackground(new Color(179, 253, 255));
-        icon = new JLabel();
-        icon.setBackground(new Color(179, 253, 255));
-        icon.setIcon(new ImageIcon("C:\\Users\\carma\\IdeaProjects\\Trabajo final\\imagenes\\alumno.jpg"));
-
-        JPanel botones = new JPanel();
-        botones.setBackground(new Color(179, 253, 255));
-        botones.setLayout(new GridLayout(1,4));
-
-        JPanel vacioiz = new JPanel();
-        vacioiz.setBackground(new Color(179, 253, 255));
-        vacioizquierda = new JLabel();
-        vacioizquierda.setBackground(new Color(179, 253, 255));
-
-        JPanel nota = new JPanel();
-        nota.setLayout(new GridLayout(3,1));
-        nota.setBackground(new Color(179, 253, 255));
-        JLabel vacioarr = new JLabel();
-        notas = new JButton("Notas");
-        JLabel vacioaba = new JLabel();
-
-        JPanel vaciode = new JPanel();
-        vaciode.setBackground(new Color(179, 253, 255));
-        vacioderecha = new JLabel();
-        vacioderecha.setBackground(new Color(179, 253, 255));
-
-        JPanel Horario = new JPanel();
-        Horario.setLayout(new GridLayout(3,1));
-        Horario.setBackground(new Color(179, 253, 255));
-        JLabel vacioar = new JLabel();
-        horario = new JButton("Horario");
-        horario.setSize(3,4);
-        JLabel vacioab = new JLabel();
-
-
-        vacioiz.add(vacioizquierda);
-        nota.add(vacioarr);
-        nota.add(notas);
-        nota.add(vacioaba);
-        vaciode.add(vacioderecha);
-        Horario.add(vacioar);
-        Horario.add(horario);
-        Horario.add(vacioab);
-
-
-        botones.add(nota);
-        botones.add(vacioiz);
-        botones.add(vaciode);
-        botones.add(Horario);
-
-
-        logo.add(icon);
-        principal.add(titulo);
-        principal.add(logo);
-        principal.add(botones, BorderLayout.SOUTH);
-        general.add(principal);
-        add(general);
-
-        setSize(700, 700);
-        setVisible(true);
+        general.setVisible(true);
     }
+
 
     public static void main(Usuario user) {
-        new alumnoGUI(user);
+      new alumnoGUI(user);
 
     }
 
+    private class abrirQuejas implements MenuListener {
+        @Override
+        public void menuSelected(MenuEvent e) {
+            try {
 
+                File archivo = new File("..\\Proyecto-Final\\Quejas\\alumnoQueja.docx");
+                Desktop.getDesktop().open(archivo);
 
+            } catch (IOException ex) {
+
+                System.out.println(ex);
+            }
+        }
+
+        @Override
+        public void menuDeselected(MenuEvent e) {
+
+        }
+
+        @Override
+        public void menuCanceled(MenuEvent e) {
+
+        }
+    }
 }
 
