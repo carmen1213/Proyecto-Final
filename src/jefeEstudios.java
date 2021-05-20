@@ -3,6 +3,8 @@ import javax.swing.*;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class jefeEstudios {
 
@@ -60,18 +62,21 @@ public class jefeEstudios {
         general.setJMenuBar(barraMenu);
 
         JMenu listasMenu = new JMenu("Listas");
-        listasMenu.addMenuListener(new verlistas());
+
         listasMenu.setBackground(new Color(102, 204, 255));
         listasMenu.setFont(new Font("MV Boli", Font.PLAIN, 15));
         barraMenu.add(listasMenu);
 
         JCheckBoxMenuItem damCheckItem = new JCheckBoxMenuItem("DAM");
+        damCheckItem.addActionListener(new verlistasDam());
         listasMenu.add(damCheckItem);
 
         JCheckBoxMenuItem cinCheckItem = new JCheckBoxMenuItem("CIN");
+        damCheckItem.addActionListener(new verlistasCin());
         listasMenu.add(cinCheckItem);
 
         JCheckBoxMenuItem mipCheckItem = new JCheckBoxMenuItem("MIP");
+        damCheckItem.addActionListener(new verlistasMip());
         listasMenu.add(mipCheckItem);
 
         JMenu amonestacionesMenu = new JMenu("Amonestaciones");
@@ -105,6 +110,27 @@ public class jefeEstudios {
   @Override
   public void menuCanceled(MenuEvent e) {
 
+  }
+ }
+
+ private class verlistasDam implements ActionListener {
+  @Override
+  public void actionPerformed(ActionEvent e) {
+   new Listas();
+  }
+ }
+
+ private class verlistasMip implements ActionListener {
+  @Override
+  public void actionPerformed(ActionEvent e) {
+   new Listas();
+  }
+ }
+
+ private class verlistasCin implements ActionListener {
+  @Override
+  public void actionPerformed(ActionEvent e) {
+   new Listas();
   }
  }
 }
