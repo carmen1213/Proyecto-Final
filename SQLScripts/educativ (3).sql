@@ -275,13 +275,12 @@ from (((`educativ`.`asignatura` left join `educativ`.`clase` `c` on ((`educativ`
          left join `educativ`.`profesor` `p` on ((`c`.`id_profesor` = `p`.`id_profesor`)));
 
 
-
 INSERT INTO educativ.login (id_login, nombre_usuario, contraseña, seguridad, tipo_usuario, id_aj, nombre) VALUES (1, 'Sblanquer', '1234', 8, 'Alumno', null, 'Salvador Blanquer');
 INSERT INTO educativ.login (id_login, nombre_usuario, contraseña, seguridad, tipo_usuario, id_aj, nombre) VALUES (2, 'Iajenjo', '2345', 8, 'Profesor', null, 'Ivan Ajenjo');
 INSERT INTO educativ.login (id_login, nombre_usuario, contraseña, seguridad, tipo_usuario, id_aj, nombre) VALUES (5, 'Fmiralles', '0000', null, 'Profesor', null, 'Fernando Miralles');
 INSERT INTO educativ.login (id_login, nombre_usuario, contraseña, seguridad, tipo_usuario, id_aj, nombre) VALUES (6, 'Nsenent', '1111', null, 'Jefedeestudios', null, 'Neus Senent');
 INSERT INTO educativ.login (id_login, nombre_usuario, contraseña, seguridad, tipo_usuario, id_aj, nombre) VALUES (7, 'Cvicente', '12', null, 'Director', null, 'Cristina Vicente');
-INSERT INTO educativ.login (id_login, nombre_usuario, contraseña, seguridad, tipo_usuario, id_aj, nombre) VALUES (8, 'Ppapa', '11', null, 'Padres', null, 'Pepe papa');
+INSERT INTO educativ.login (id_login, nombre_usuario, contraseña, seguridad, tipo_usuario, id_aj, nombre) VALUES (8, 'Pescobar', '11', null, 'Padres', null, 'Pablo Escobar');
 
 INSERT INTO educativ.alumnos (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (3, '12345678A', '2010-04-29', 'Salvador Blanquer', 1);
 INSERT INTO educativ.alumnos (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (4, '88888888Z', '1999-12-15', 'Lucia Calabrese', null);
@@ -341,4 +340,4 @@ INSERT INTO educativ.profesor_asignatura (id_profesor, id_asignatura, id) VALUES
 
 INSERT INTO educativ.jefedeestudios (id_jefedeestudios, DNI, nombre, telefono, direccion, fechaNac, correo, id_login) VALUES (1, '00000000M', 'Neus Senent', 698574236, null, null, null, null);
 
-INSERT INTO educativ.padres (id_padres, nombre, DNi, telefono, email, estado_civil, fecha_nacimiento, direccion, Documentos_bancarios, id_alumno, id_login) VALUES (1, 'Pepe papa', null, null, null, null, null, null, null, 3, 8);
+INSERT INTO educativ.padres (id_padres, nombre, DNi, telefono, email, estado_civil, fecha_nacimiento, direccion, Documentos_bancarios, id_alumno, id_login) VALUES (1, 'Pablo Escobar', null, null, null, null, null, null, null, 3, 8);
