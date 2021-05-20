@@ -1,112 +1,82 @@
+
+//import necesarios
+
 import models.Usuario;
 
-import java.awt.EventQueue;
+import javax.swing.*;
+import java.awt.*;
 
-import javax.swing.JFrame;
-import javax.swing.JLayeredPane;
-import java.awt.BorderLayout;
-import javax.swing.JLabel;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.SwingConstants;
-import java.awt.Color;
-import javax.swing.ImageIcon;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JButton;
-import java.awt.Toolkit;
+/**
+ * @author Carmen Martí,Salva Blanquer,Lucia Calabrese
+ */
 
 public class alumnoGUI {
 
-    private JFrame frmAlumnos;
-
-    /**
-     * Launch the application.
-     */
-
-
-    /**
-     * Create the application.
-     */
     public alumnoGUI(Usuario user) {
-        initialize(user);
-    }
 
-    /**
-     * Initialize the contents of the frame.
-     */
-    private void initialize(Usuario user) {
-        frmAlumnos = new JFrame();
-        frmAlumnos.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\carma\\Downloads\\MicrosoftTeams-image.png"));
-        frmAlumnos.setTitle("Alumnos");
-        frmAlumnos.getContentPane().setBackground(new Color(250, 250, 210));
+         JFrame general = new JFrame();
+        general.setIconImage(Toolkit.getDefaultToolkit().getImage("..\\Proyecto-Final\\imagenes\\logoEncabezado.png"));
+        general.setTitle("Alumnos");
+        general.getContentPane().setBackground(new Color(250, 250, 210));
 
-        JLayeredPane layeredPane = new JLayeredPane();
-        frmAlumnos.getContentPane().add(layeredPane, BorderLayout.CENTER);
+        JLayeredPane principal = new JLayeredPane();
+        general.getContentPane().add(principal, BorderLayout.CENTER);
 
-        JLabel lblNewLabel = new JLabel("Bienvenido");
-        lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        lblNewLabel.setFont(new Font("Segoe Script", Font.BOLD | Font.ITALIC, 34));
-        lblNewLabel.setBounds(615, 0, 303, 184);
-        layeredPane.add(lblNewLabel);
+        JLabel titulo = new JLabel("<html> <div style = 'text-align: center;'> Bienvenido <br>  " + user.getNombre() + " </div></html>");
+        titulo.setHorizontalAlignment(SwingConstants.CENTER);
+        titulo.setFont(new Font("Segoe Script", Font.BOLD | Font.ITALIC, 34));
+        titulo.setBounds(615, 0, 303, 184);
+        principal.add(titulo);
 
-        JLabel lblNewLabel_1 = new JLabel("New label");
-        lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\carma\\Downloads\\conectar-con-los-alumnos.jpg"));
-        lblNewLabel_1.setBounds(371, 158, 840, 438);
-        layeredPane.add(lblNewLabel_1);
+        JLabel alumnosImagen = new JLabel("");
+        alumnosImagen.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenAlumnos.jpg"));
+        alumnosImagen.setBounds(371, 158, 840, 438);
+        principal.add(alumnosImagen);
 
-        JButton btnNewButton = new JButton("Notas");
-        btnNewButton.setBackground(new Color(255, 222, 173));
-        btnNewButton.setIcon(new ImageIcon("C:\\Users\\carma\\Downloads\\icono-de-mezcla-para-port\u00E1tiles-estudiantes-y-notas-editorial-escritor-diario-papel-conocimiento-estudiante-161744179 (1).jpg"));
-        btnNewButton.setFont(new Font("Berlin Sans FB", Font.BOLD | Font.ITALIC, 22));
-        btnNewButton.setBounds(371, 663, 216, 71);
-        layeredPane.add(btnNewButton);
+        JButton notasBtn = new JButton("Notas");
+        notasBtn.setBackground(new Color(255, 222, 173));
+        notasBtn.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenNotas.png"));
+        notasBtn.setFont(new Font("Berlin Sans FB", Font.BOLD | Font.ITALIC, 22));
+        notasBtn.setBounds(371, 663, 216, 71);
+        principal.add(notasBtn);
 
-        JButton btnNewButton_1 = new JButton("Horario");
-        btnNewButton_1.setBackground(new Color(255, 222, 173));
-        btnNewButton_1.setIcon(new ImageIcon("C:\\Users\\carma\\Downloads\\horario.jpg"));
-        btnNewButton_1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
-        btnNewButton_1.setFont(new Font("Berlin Sans FB", Font.BOLD | Font.ITALIC, 22));
-        btnNewButton_1.setBounds(1006, 663, 216, 71);
-        layeredPane.add(btnNewButton_1);
-        frmAlumnos.setBounds(100, 100, 1364, 828);
-        frmAlumnos.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JButton horarioBtn = new JButton("Horario");
+        horarioBtn.setBackground(new Color(255, 222, 173));
+        horarioBtn.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenHorario.png"));
+        horarioBtn.setFont(new Font("Berlin Sans FB", Font.BOLD | Font.ITALIC, 22));
+        horarioBtn.setBounds(1006, 663, 216, 71);
+        principal.add(horarioBtn);
+        general.setBounds(100, 100, 1364, 828);
+        general.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
-        JMenuBar menuBar = new JMenuBar();
-        menuBar.setBackground(new Color(250, 250, 210));
-        menuBar.setForeground(new Color(255, 255, 255));
-        frmAlumnos.setJMenuBar(menuBar);
+        JMenuBar barraMenu = new JMenuBar();
+        barraMenu.setBackground(new Color(250, 250, 210));
+        barraMenu.setForeground(new Color(255, 255, 255));
+        general.setJMenuBar(barraMenu);
 
-        JMenu mnNewMenu = new JMenu("Expedientes");
-        mnNewMenu.setHorizontalAlignment(SwingConstants.CENTER);
-        mnNewMenu.setFont(new Font("Rockwell", Font.BOLD, 17));
-        menuBar.add(mnNewMenu);
+        JMenu expedientesMenu = new JMenu("Expedientes");
+        expedientesMenu.setHorizontalAlignment(SwingConstants.CENTER);
+        expedientesMenu.setFont(new Font("Rockwell", Font.BOLD, 17));
+        barraMenu.add(expedientesMenu);
 
-        JMenu mnNewMenu_1 = new JMenu("Quejas");
-        mnNewMenu_1.setFont(new Font("Rockwell", Font.BOLD, 17));
-        menuBar.add(mnNewMenu_1);
+        JMenu quejasMenu = new JMenu("Quejas");
+        quejasMenu.setFont(new Font("Rockwell", Font.BOLD, 17));
+        barraMenu.add(quejasMenu);
 
-        JMenu Cuestionarios = new JMenu("Cuestionarios");
-        Cuestionarios.setFont(new Font("Rockwell", Font.BOLD, 17));
-        menuBar.add(Cuestionarios);
+        JMenu cuestionariosMenu = new JMenu("Cuestionarios");
+        cuestionariosMenu.setFont(new Font("Rockwell", Font.BOLD, 17));
+        barraMenu.add(cuestionariosMenu);
 
-        JMenu Tareas = new JMenu("Tareas");
-        Tareas.setFont(new Font("Rockwell", Font.BOLD, 17));
-        menuBar.add(Tareas);
+        JMenu TareasMenu = new JMenu("Tareas");
+        TareasMenu.setFont(new Font("Rockwell", Font.BOLD, 17));
+        barraMenu.add(TareasMenu);
 
-        frmAlumnos.setVisible(true);
+        general.setVisible(true);
     }
 
 
     public static void main(Usuario user) {
-     alumnoGUI alumnoGUI  = new alumnoGUI(user);
+      new alumnoGUI(user);
 
     }
 
