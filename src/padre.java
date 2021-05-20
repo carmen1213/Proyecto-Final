@@ -87,7 +87,7 @@ public class padre {
         public void actionPerformed(ActionEvent e) {
             WebDriver driver;
 
-            String exePath = "C:\\Users\\Salvador\\Desktop\\Proyecto-Final\\chromedriver.exe";
+            String exePath = "..\\Proyecto-Final\\chromedriver.exe";
             System.setProperty("webdriver.chrome.driver", exePath);
 
             ChromeOptions options = new ChromeOptions();
@@ -102,7 +102,7 @@ public class padre {
         public void actionPerformed(ActionEvent e) {
             WebDriver driver;
 
-            String exePath = "C:\\Users\\Salvador\\Desktop\\Proyecto-Final\\chromedriver.exe";
+            String exePath = "..\\Proyecto-Final\\chromedriver.exe";
             System.setProperty("webdriver.chrome.driver", exePath);
 
             ChromeOptions options = new ChromeOptions();
@@ -117,7 +117,7 @@ public class padre {
         public void actionPerformed(ActionEvent e) {
             WebDriver driver;
 
-            String exePath = "C:\\Users\\Salvador\\Desktop\\Proyecto-Final\\chromedriver.exe";
+            String exePath = "..\\Proyecto-Final\\chromedriver.exe";
             System.setProperty("webdriver.chrome.driver", exePath);
 
             ChromeOptions options = new ChromeOptions();
