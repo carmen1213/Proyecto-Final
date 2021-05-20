@@ -1,5 +1,7 @@
 import models.Usuario;
 import javax.swing.*;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
 import java.awt.*;
 
 public class jefeEstudios {
@@ -58,6 +60,7 @@ public class jefeEstudios {
         general.setJMenuBar(barraMenu);
 
         JMenu listasMenu = new JMenu("Listas");
+        listasMenu.addMenuListener(new verlistas());
         listasMenu.setBackground(new Color(102, 204, 255));
         listasMenu.setFont(new Font("MV Boli", Font.PLAIN, 15));
         barraMenu.add(listasMenu);
@@ -87,4 +90,21 @@ public class jefeEstudios {
     public static void main(Usuario user) {
         new jefeEstudios(user);
     }
+
+ private class verlistas implements MenuListener {
+  @Override
+  public void menuSelected(MenuEvent e) {
+  new Listas();
+  }
+
+  @Override
+  public void menuDeselected(MenuEvent e) {
+
+  }
+
+  @Override
+  public void menuCanceled(MenuEvent e) {
+
+  }
+ }
 }
