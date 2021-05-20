@@ -49,29 +49,6 @@ public class Notas_alumnos  extends JFrame{
         opciones.add(new JLabel(" "));
 
 
-//        date.setDate(2021, 3, 23);
-//        date.setSelected(true);
-//        JDatePanelImpl datePanel = new JDatePanelImpl(date);
-//        JDatePickerImpl datePicker = new JDatePickerImpl(datePanel);
-//        datePicker.setBackground(new Color(227, 247, 193));
-//        opciones.add(datePicker);
-
-//        JPanel combo = new JPanel();
-//        combo.setLayout(new GridLayout(3, 1));
-//        combo.setBackground(new Color(227, 247, 193));
-//        asignatura = new JComboBox();
-//        asignatura.setBackground(new Color(227, 247, 193));
-//
-//
-//
-//        for (int i = 0; i < asignaturas.size(); i++) {
-//            asignatura.addItem(asignaturas.get(i).getNombre());
-//        }
-//
-//        combo.add(asignatura);
-      //  opciones.add(combo);
-
-
         ArrayList<Notas> alumnosAsignatura = controladorNotas.getNotas(3);
         DefaultTableModel model = generarModeloTablaAlumno(alumnosAsignatura);
 
@@ -147,30 +124,7 @@ public class Notas_alumnos  extends JFrame{
 
 
 
-
-
-
-
-//        JPanel botones = new JPanel();
-//        botones.setLayout(new GridLayout(1, 3));
-//        botones.setBackground(new Color(227, 247, 193));
-//        botones.add(new JLabel());
-//        botones.add(new JLabel());
-//        JPanel guardarm = new JPanel();
-//        guardarm.setBackground(new Color(227, 247, 193));
-//        guardar = new JButton("Guardar");
-
-
-
-    //    guardar.addActionListener(new guardarinformaciones());
-
-//        guardarm.add(guardar);
-//
-//        botones.add(guardarm);
         primer.add(referencia);
-//        primer.add(botones);
-
-
 
         general.add(titulo);
         general.add(opciones);
