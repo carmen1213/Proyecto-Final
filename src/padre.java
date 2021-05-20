@@ -33,7 +33,7 @@ public class padre {
         JButton notasBtn = new JButton("Notas");
         notasBtn.setToolTipText("");
         notasBtn.setBackground(new Color(245, 255, 250));
-        notasBtn.setIcon(new ImageIcon("C:\\Users\\carma\\Downloads\\notasIcono.jpg"));
+        notasBtn.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenNotas.png"));
         notasBtn.setFont(new Font("Matura MT Script Capitals", Font.BOLD | Font.ITALIC, 22));
         notasBtn.setBounds(91, 635, 184, 77);
 
@@ -43,20 +43,20 @@ public class padre {
 
         JButton reunionesBtn = new JButton("Reuniones");
         reunionesBtn.setBackground(new Color(245, 255, 250));
-        reunionesBtn.setIcon(new ImageIcon("C:\\Users\\carma\\Downloads\\reuniones.jpg"));
+        reunionesBtn.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenReuniones.png"));
         reunionesBtn.setFont(new Font("Matura MT Script Capitals", Font.BOLD | Font.ITALIC, 22));
         reunionesBtn.setBounds(430, 636, 234, 74);
 
         JButton xarxaBtn = new JButton("Libros");
         xarxaBtn.setBackground(new Color(245, 255, 250));
-        xarxaBtn.setIcon(new ImageIcon("C:\\Users\\carma\\Downloads\\libros.jpg"));
+        xarxaBtn.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenLibros.png"));
         xarxaBtn.setFont(new Font("Matura MT Script Capitals", Font.BOLD | Font.ITALIC, 22));
         xarxaBtn.setBounds(827, 635, 222, 77);
 
         JButton compraPapeleria = new JButton("Papeleria");
         compraPapeleria.setBackground(new Color(245, 255, 250));
         compraPapeleria.setFont(new Font("Matura MT Script Capitals", Font.BOLD | Font.ITALIC, 22));
-        compraPapeleria.setIcon(new ImageIcon("C:\\Users\\carma\\Downloads\\cestaCompra.jpg"));
+        compraPapeleria.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenCestaCompra.png"));
         compraPapeleria.setBounds(1203, 635, 245, 77);
 
         general.setForeground(new Color(230, 230, 250));
