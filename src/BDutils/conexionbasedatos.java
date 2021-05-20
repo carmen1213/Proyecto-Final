@@ -12,7 +12,7 @@ public class conexionbasedatos {
     // Librería de MySQL
     public String driver = "com.mysql.cj.jdbc.Driver";
 
-    // Nombre de la base de datos
+           // Nombre de la base de datos
     public String database = "educativ";
 
     // Host
@@ -28,7 +28,7 @@ public class conexionbasedatos {
     public String username = "root";
 
     // Clave de usuario
-    public String password = "Lulicala15@";
+    public String password = "CarmenMysql12";
 
     public Connection conectarMySQL() {
         Connection conn = null;
