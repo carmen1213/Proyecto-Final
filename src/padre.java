@@ -2,7 +2,6 @@
 //imports necesarios
 
 import models.Usuario;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -37,9 +36,9 @@ public class padre {
         notasBtn.setFont(new Font("Matura MT Script Capitals", Font.BOLD | Font.ITALIC, 22));
         notasBtn.setBounds(91, 635, 184, 77);
 
-        JLabel imagenPadres = new JLabel("");
-        imagenPadres.setIcon(new ImageIcon("C:\\Users\\carma\\Downloads\\padres-mirando-sus-hijos-dibujando_13339-171519 (1).jpg"));
-        imagenPadres.setBounds(523, 177, 560, 331);
+        JLabel padresImagen = new JLabel("");
+        padresImagen.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\padres-mirando-sus-hijos-dibujando_13339-171519 (1).jpg"));
+        padresImagen.setBounds(523, 177, 560, 331); //falta foto
 
         JButton reunionesBtn = new JButton("Reuniones");
         reunionesBtn.setBackground(new Color(245, 255, 250));
@@ -68,7 +67,7 @@ public class padre {
         //Insercciones a la GUI
         principal.add(notasBtn);
         principal.add(titulo);
-        principal.add(imagenPadres);
+        principal.add(padresImagen);
         principal.add(reunionesBtn);
         principal.add(xarxaBtn);
         principal.add(compraPapeleria);
@@ -126,4 +125,6 @@ public class padre {
 
             driver = new ChromeDriver(options);
             driver.get("https://www.abacus.coop/es/papeleria-y-manualidades");
-        }}}
+        }}
+
+}

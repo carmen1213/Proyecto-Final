@@ -19,7 +19,7 @@ public class profesor {
 
     public profesor(Usuario user) {
 
-       JFrame general = new JFrame();
+        JFrame general = new JFrame();
         general.setVisible(true);
         general.getContentPane().setBackground(new Color(204, 255, 204));
 
@@ -60,7 +60,7 @@ public class profesor {
         listasMenu.setFont(new Font("Rockwell Condensed", Font.BOLD, 18));
         barraMenu.add(listasMenu);
 
-        JMenu materialMenu = new JMenu("Material");
+         JMenu materialMenu = new JMenu("Material");
          materialMenu.setFont(new Font("Rockwell Condensed", Font.BOLD, 17));
 
          JMenuItem DAM;

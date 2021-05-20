@@ -2,9 +2,12 @@
 //import necesarios
 
 import models.Usuario;
-
 import javax.swing.*;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * @author Carmen Martí,Salva Blanquer,Lucia Calabrese
@@ -60,6 +63,7 @@ public class alumnoGUI {
         barraMenu.add(expedientesMenu);
 
         JMenu quejasMenu = new JMenu("Quejas");
+        quejasMenu.addMenuListener(new abrirQuejas());
         quejasMenu.setFont(new Font("Rockwell", Font.BOLD, 17));
         barraMenu.add(quejasMenu);
 
@@ -80,5 +84,29 @@ public class alumnoGUI {
 
     }
 
+    private class abrirQuejas implements MenuListener {
+        @Override
+        public void menuSelected(MenuEvent e) {
+            try {
+
+                File archivo = new File("..\\Proyecto-Final\\Quejas\\alumnoQueja.docx");
+                Desktop.getDesktop().open(archivo);
+
+            } catch (IOException ex) {
+
+                System.out.println(ex);
+            }
+        }
+
+        @Override
+        public void menuDeselected(MenuEvent e) {
+
+        }
+
+        @Override
+        public void menuCanceled(MenuEvent e) {
+
+        }
+    }
 }
 
