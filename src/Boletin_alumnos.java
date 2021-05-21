@@ -17,17 +17,17 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class Boletin_alumnos extends JFrame{
-    private final JTable jTableAlumnos;
-    private final ControladorTablaNotas controladorNotas = new ControladorTablaNotas();
-    private final ControladorTablaProfesores controladorProfesores = new ControladorTablaProfesores();
+    private JTable jTableAlumnos;
+    private ControladorTablaNotas controladorNotas = new ControladorTablaNotas();
+    private ControladorTablaProfesores controladorProfesores = new ControladorTablaProfesores();
     private JComboBox asignatura;
-    private final JLabel titulop;
-    private final JButton guardar;
+    private JLabel titulop;
+    private JButton guardar;
     private static Connection connecion;
-    private final Controlador_login controllogin = new Controlador_login();
-    private final Profesor id_profesor = controllogin.getIdProfesor(inicio.usuario.getText(), inicio.contraseña.getText());
-    private final ArrayList<Asignatura> asignaturas = controladorProfesores.getAsignaturaProfesor(2);
-    private final UtilDateModel date = new UtilDateModel();
+    private Controlador_login controllogin = new Controlador_login();
+    private Profesor id_profesor = controllogin.getIdProfesor(inicio.usuario.getText(), inicio.contraseña.getText());
+    private ArrayList<Asignatura> asignaturas = controladorProfesores.getAsignaturaProfesor(2);
+    private UtilDateModel date = new UtilDateModel();
     private static Connection conn;
 
     public Boletin_alumnos() throws SQLException {
@@ -190,10 +190,10 @@ public class Boletin_alumnos extends JFrame{
                 {
                     conexionbasedatos conexion;
                     conexion = new conexionbasedatos();
-                    conn = conexion.conectarMySQL();
+                    notas_alumnos.conn = conexion.conectarMySQL();
                     Statement stmt = null;
                     try {
-                        stmt = conn.createStatement();
+                        stmt = notas_alumnos.conn.createStatement();
                     } catch (SQLException throwables) {
                         throwables.printStackTrace();
                     }

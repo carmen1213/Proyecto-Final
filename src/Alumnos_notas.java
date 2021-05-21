@@ -14,18 +14,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Alumnos_notas extends JFrame {
-    private final JTable jTableAlumnos;
-    private final ControladorTablaNotas controladorNotas = new ControladorTablaNotas();
-    private final ControladorTablaProfesores controladorProfesores = new ControladorTablaProfesores();
+    private JTable jTableAlumnos;
+    private ControladorTablaNotas controladorNotas = new ControladorTablaNotas();
+    private ControladorTablaProfesores controladorProfesores = new ControladorTablaProfesores();
     private JComboBox asignatura;
-    private final JLabel titulop;
+    private JLabel titulop;
     private JButton guardar;
     private static Connection connecion;
-    private final Controlador_login controllogin = new Controlador_login();
-    private final Profesor id_profesor = controllogin.getIdProfesor(inicio.usuario.getText(), inicio.contraseña.getText());
-    private final ArrayList<Asignatura> asignaturas = controladorProfesores.getAsignaturaProfesor(2);
-    private final ArrayList<Notas> notas = controladorNotas.getNotas(3);
-    private final UtilDateModel date = new UtilDateModel();
+    private Controlador_login controllogin = new Controlador_login();
+    private Profesor id_profesor = controllogin.getIdProfesor(inicio.usuario.getText(), inicio.contraseña.getText());
+    private ArrayList<Asignatura> asignaturas = controladorProfesores.getAsignaturaProfesor(2);
+    private ArrayList<Notas> notas = controladorNotas.getNotas(3);
+    private UtilDateModel date = new UtilDateModel();
     private static Connection conn;
 
     public Alumnos_notas() throws SQLException {
