@@ -148,11 +148,12 @@ public class Boletin_alumnos extends JFrame{
 
         String[] cols = {"Nombre Alumno", "Nombre Asignatura", "Notas"};
         DefaultTableModel model = new DefaultTableModel(cols, 0);
-
+        //Ciclo para ingresar los nombres de los alumnos.
             for (int j = 0; j < nombresAlumnos.size(); j++) {
                 for (int i = 0; i < asignaturas.size(); i++) {
                     Object[] data = {nombresAlumnos.get(j).getNombre(),asignaturas.get(i).getNombre()};
                     model.addRow(data);
+
                 }
         }
 
