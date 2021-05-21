@@ -1,3 +1,4 @@
+import BDutils.conexionbasedatos;
 import Controladores.ControladorTablaNotas;
 import Controladores.ControladorTablaProfesores;
 import Controladores.Controlador_login;
@@ -12,9 +13,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
-public class Notas_alumnos  extends JFrame{
+public class Boletin_alumnos extends JFrame{
     private JTable jTableAlumnos;
     private ControladorTablaNotas controladorNotas = new ControladorTablaNotas();
     private ControladorTablaProfesores controladorProfesores = new ControladorTablaProfesores();
@@ -26,10 +28,11 @@ public class Notas_alumnos  extends JFrame{
     private Profesor id_profesor = controllogin.getIdProfesor(inicio.usuario.getText(), inicio.contraseña.getText());
     private ArrayList<Asignatura> asignaturas = controladorProfesores.getAsignaturaProfesor(2);
     private UtilDateModel date = new UtilDateModel();
+    private static Connection conn;
 
-    public Notas_alumnos() throws SQLException {
+    public Boletin_alumnos() throws SQLException {
         super("Listas");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(HIDE_ON_CLOSE);
         this.getContentPane().setBackground(new Color(227, 247, 193));
 
 
@@ -49,8 +52,8 @@ public class Notas_alumnos  extends JFrame{
         opciones.add(new JLabel(" "));
 
 
-        ArrayList<Notas> alumnosAsignatura = controladorNotas.getNotas(3);
-        DefaultTableModel model = generarModeloTablaAlumno(alumnosAsignatura);
+        ArrayList<Alumno> alumnosAsignatura = controladorProfesores.getAlumnosxAsignaturaA(3);
+        DefaultTableModel model = generarModeloTablaAlumno(alumnosAsignatura,asignaturas);
 
         jTableAlumnos = new JTable(model) {
             //private static final long serialVersionUID = 1L;
@@ -103,7 +106,7 @@ public class Notas_alumnos  extends JFrame{
         guarda.setBackground(new Color(227, 247, 193));
 
         guardar = new JButton("Guardar");
-        guardar.addActionListener(new Guardar());
+        guardar.addActionListener(new Guardar(this ));
 
         JLabel vacioaba = new JLabel(" ");
         vacioab.setBackground(new Color(227, 247, 193));
@@ -141,27 +144,30 @@ public class Notas_alumnos  extends JFrame{
     }
 
 
-    private DefaultTableModel generarModeloTablaAlumno(ArrayList<Notas> nombresAlumnos) {
+    private DefaultTableModel generarModeloTablaAlumno(ArrayList<Alumno> nombresAlumnos, ArrayList<Asignatura> asignaturas) {
 
         String[] cols = {"Nombre Alumno", "Nombre Asignatura", "Notas"};
         DefaultTableModel model = new DefaultTableModel(cols, 0);
-        for (int i = 0; i < nombresAlumnos.size(); i++) {
-            Object[] data = {nombresAlumnos.get(i).getAlumno().getNombre(), nombresAlumnos.get(i).getAsignatura().getNombre(), nombresAlumnos.get(i).getNota()};
-            model.addRow(data);
+
+            for (int j = 0; j < asignaturas.size(); j++) {
+                Object[] data = {nombresAlumnos.get(j).getNombre(), asignaturas.get(j).getNombre()};
+                model.addRow(data);
+
+
         }
         return model;
     }
 
     public static void main(String[] args) {
         try {
-            Notas_alumnos notas_alumnos = new  Notas_alumnos();
+           Boletin_alumnos notas_alumnos = new Boletin_alumnos();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
     }
     public static void main()throws SQLException
     {
-        Notas_alumnos tabla = new Notas_alumnos();
+        Boletin_alumnos tabla = new Boletin_alumnos();
     }
 
     private class guardarinformaciones implements ActionListener {
@@ -171,13 +177,44 @@ public class Notas_alumnos  extends JFrame{
         }
     }
     private class Guardar implements ActionListener {
-        @Override
+        private final Boletin_alumnos notas_alumnos;
+
+
+
+        public Guardar(Boletin_alumnos notas_alumnos) {
+            this.notas_alumnos = notas_alumnos;
+        }
+
         public void actionPerformed(ActionEvent e) {
-            try {
-                Notas_alumnos notas_alumnos = new Notas_alumnos();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
+
+                {
+                    conexionbasedatos conexion;
+                    conexion = new conexionbasedatos();
+                    notas_alumnos.conn = conexion.conectarMySQL();
+                    Statement stmt = null;
+                    try {
+                        stmt = notas_alumnos.conn.createStatement();
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
+                    ArrayList<Asignatura> asignaturaid;
+
+                    Object notas = null;
+                    for (int i = 0; i < jTableAlumnos.getRowCount(); i++) {
+                        notas = jTableAlumnos.getValueAt(i, 2);
+
+                        System.out.println(notas);
+
+                        try {
+
+                                Object resultados = stmt.executeUpdate("INSERT INTO notas (notas,id_asignaturas,id_alumno) " + "VALUES('" + notas + "','" + asignaturas.get(i).getId() + "','" + 3 + "')");
+
+                        } catch (SQLException throwables) {
+                            throwables.printStackTrace();
+                        }
+                    }
+
+                }
             }
         }
     }
-}
