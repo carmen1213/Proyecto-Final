@@ -1,6 +1,8 @@
+import Controladores.ControladorNotasALumnos;
 import Controladores.ControladorTablaNotas;
 import Controladores.ControladorTablaProfesores;
 import Controladores.Controlador_login;
+import models.Alumno;
 import models.Asignatura;
 import models.Notas;
 import models.Profesor;
@@ -17,14 +19,12 @@ public class Alumnos_notas extends JFrame {
     private JTable jTableAlumnos;
     private ControladorTablaNotas controladorNotas = new ControladorTablaNotas();
     private ControladorTablaProfesores controladorProfesores = new ControladorTablaProfesores();
-    private JComboBox asignatura;
+    private ControladorNotasALumnos controladorTablanotasAlumnos = new ControladorNotasALumnos();
     private JLabel titulop;
-    private JButton guardar;
-    private static Connection connecion;
     private Controlador_login controllogin = new Controlador_login();
     private Profesor id_profesor = controllogin.getIdProfesor(inicio.usuario.getText(), inicio.contraseña.getText());
     private ArrayList<Asignatura> asignaturas = controladorProfesores.getAsignaturaProfesor(2);
-    private ArrayList<Notas> notas = controladorNotas.getNotas(3);
+    ArrayList<Integer> notitas = controladorTablanotasAlumnos.getNotasalumnos();
     private UtilDateModel date = new UtilDateModel();
     private static Connection conn;
 
@@ -49,9 +49,9 @@ public class Alumnos_notas extends JFrame {
         opciones.add(new JLabel(" "));
         opciones.add(new JLabel(" "));
 
+        ArrayList<Alumno> alumnosAsignatura = controladorProfesores.getAlumnosxAsignaturaA(3);
 
-    ArrayList<Notas> alumnosAsignatura = controladorNotas.getNotas(3);
-    DefaultTableModel model = generarModeloTablaNotasProfesor(alumnosAsignatura,asignaturas,notas);
+        DefaultTableModel model = generarModeloTablaNotasProfesor(alumnosAsignatura,asignaturas,notitas);
 
     jTableAlumnos = new JTable(model) {
         //private static final long serialVersionUID = 1L;
@@ -139,16 +139,22 @@ public class Alumnos_notas extends JFrame {
 
 }
 
-    private DefaultTableModel generarModeloTablaNotasProfesor(ArrayList<Notas> alumnosAsignatura, ArrayList<Asignatura> asignaturas, ArrayList<Notas> notas) {
+    private DefaultTableModel generarModeloTablaNotasProfesor(ArrayList<Alumno> alumnosAsignatura, ArrayList<Asignatura> asignaturas, ArrayList<Integer> notitas) {
         String[] cols = {"Nombre Alumno", "Nombre Asignatura", "Notas"};
         DefaultTableModel model = new DefaultTableModel(cols, 0);
 
-        for (int j = 0; j < asignaturas.size(); j++) {
-            Object[] data = {alumnosAsignatura.get(j).getAlumno().getNombre(), asignaturas.get(j).getNombre(), notas.get(j).getNota()};
-            model.addRow(data);
 
+        //Ciclo para ingresar los nombres de los alumnos.
+        for (int j = 0; j < alumnosAsignatura.size(); j++) {
+            for (int i = 0; i < asignaturas.size(); i++) {
+                for (int k = 0; k < notitas.size(); k++) {
+                    Object[] data = {alumnosAsignatura.get(j).getNombre(), asignaturas.get(i).getNombre(), notitas.get(k)};
+                    model.addRow(data);
+                }
 
+            }
         }
+
         return model;
     }
     }
