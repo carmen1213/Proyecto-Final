@@ -80,7 +80,6 @@ public class tabla_profesor extends JFrame {
         DefaultTableModel model = generarModeloTablaAlumno(alumnosAsignatura);
 
         jTableAlumnos = new JTable(model) {
-            //private static final long serialVersionUID = 1L;
             @Override
             public Class getColumnClass(int column) {
                 switch (column) {
@@ -116,10 +115,9 @@ public class tabla_profesor extends JFrame {
         botones.add(new JLabel());
         JPanel guardarm = new JPanel();
         guardarm.setBackground(new Color(227, 247, 193));
+
+
         guardar = new JButton("Guardar");
-
-
-
         guardar.addActionListener(new guardarinformacion(this));
 
         guardarm.add(guardar);
