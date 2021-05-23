@@ -26,7 +26,7 @@ public class Boletin_alumnos extends JFrame{
     private static Connection connecion;
     private Controlador_login controllogin = new Controlador_login();
     private Profesor id_profesor = controllogin.getIdProfesor(inicio.usuario.getText(), inicio.contraseña.getText());
-    private ArrayList<Asignatura> asignaturas = controladorProfesores.getAsignaturaProfesor(2);
+    private ArrayList<Asignatura> asignaturas = controladorProfesores.getAsignaturaProfesor(controllogin.getIdProfesor(inicio.usuario.getText(), inicio.contraseña.getText()).getId_profesor());
     private UtilDateModel date = new UtilDateModel();
     private static Connection conn;
 
@@ -52,7 +52,7 @@ public class Boletin_alumnos extends JFrame{
         opciones.add(new JLabel(" "));
 
 
-        ArrayList<Alumno> alumnosAsignatura = controladorProfesores.getAlumnosxAsignaturaA(3);
+        ArrayList<Alumno> alumnosAsignatura = controladorProfesores.getAlumnosxAsignaturaA(controladorNotas.getid_asignatura(controllogin.getIdProfesor(inicio.usuario.getText(), inicio.contraseña.getText()).getId_profesor()));
         DefaultTableModel model = generarModeloTablaAlumno(alumnosAsignatura,asignaturas);
 
         jTableAlumnos = new JTable(model) {

@@ -104,6 +104,25 @@ public class Controlador_login {
         }
         return null;
     }
+public String getNombreusuario(String usuario){
+        String SQL = "Select nombre FROM login WHERE nombre_usuario = ?";
+        try {
+            //Conecta con la base de datos y realiza a la misma la consulta correspondiente
+            PreparedStatement st = conn.prepareStatement(SQL);
+            //Ingresa el dato faltante en la consulta, reemplazando el signo de pregunta por el dato del id_usuario que le envia la persona
+            st.setString(1,usuario);
+            //Obtiene los resultados
+            ResultSet rs = st.executeQuery();
 
+            //Mientras que los resultados tengan datos, guarda los mismos en las diferentes variables y crea un objeto alumno donde almacena esos datos obtenidos
+            while (rs.next()){
+                String nombre = rs.getString("nombre");
+                return nombre;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
 
 }

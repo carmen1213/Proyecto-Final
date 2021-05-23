@@ -18,6 +18,26 @@ public class ControladorTablaProfesores {
         conexion = new conexionbasedatos();
         conn = conexion.conectarMySQL();
     }
+    public int getidProfesor(String nombre){
+        String SQL = "Select id_profesor FROM profesor WHERE nombre = ?";
+        try {
+            //Conecta con la base de datos y realiza a la misma la consulta correspondiente
+            PreparedStatement st = conn.prepareStatement(SQL);
+            //Ingresa el dato faltante en la consulta, reemplazando el signo de pregunta por el dato del id_usuario que le envia la persona
+            st.setString(1,nombre);
+            //Obtiene los resultados
+            ResultSet rs = st.executeQuery();
+
+            //Mientras que los resultados tengan datos, guarda los mismos en las diferentes variables y crea un objeto alumno donde almacena esos datos obtenidos
+            while (rs.next()){
+                int id_profesor = rs.getInt("id_profesor");
+                return id_profesor;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return -1;
+    }
 
     //Obtiene para el id del alumno para poder obtener las asignaturas que le corresponnda, para la tabla de asistencia de la clase de profesor
     public ArrayList<String> getidAlumno(int idAsignatura) {
