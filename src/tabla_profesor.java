@@ -19,6 +19,7 @@ public class tabla_profesor extends JFrame {
 
     private JTable jTableAlumnos;
     private ControladorTablaProfesores controladorProfesores = new ControladorTablaProfesores();
+    private Controlador_login controllogin = new Controlador_login();
     private JComboBox asignatura;
     private JLabel titulop;
     private JButton guardar;
@@ -27,7 +28,7 @@ public class tabla_profesor extends JFrame {
     private Controlador_login control = new Controlador_login();
     private Usuario user = control.iniciarSesion(inicio.usuario.getText(), inicio.contraseña.getText());
     private Profesor id_profesor = control.getIdProfesor(inicio.usuario.getText(), inicio.contraseña.getText());
-    private ArrayList<Asignatura> asignaturas = controladorProfesores.getAsignaturaProfesor(id_profesor.getId_profesor());
+    private ArrayList<Asignatura> asignaturas = controladorProfesores.getAsignaturaProfesor(controllogin.getIdProfesor(inicio.usuario.getText(), inicio.contraseña.getText()).getId_profesor());
     private UtilDateModel date = new UtilDateModel();
 
     public tabla_profesor() throws SQLException {
