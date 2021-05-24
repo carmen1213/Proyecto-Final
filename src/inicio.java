@@ -90,8 +90,6 @@ public class inicio {
         general.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         general.add(principal);
         general.setVisible(true);
-
-
     }
 
     public static void main() {

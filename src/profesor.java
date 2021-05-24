@@ -229,9 +229,9 @@ public class profesor {
                 new Boletin_alumnos();
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
-            }
-        }
-    }
+            }}}
+
+
 
     private class verasistencia implements MenuListener {
         @Override
