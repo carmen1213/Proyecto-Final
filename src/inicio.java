@@ -13,7 +13,6 @@ public class inicio {
   //  private static JLabel datosErroneos;
     private final JFrame general;
     boolean a = true;
-    JOptionPane confirmacion;
     JButton verContraseñaBtn;
 
 
@@ -87,7 +86,6 @@ public class inicio {
         principal.add(contraseña);
         general.setBackground(new Color(204, 255, 255));
         general.setBounds(100, 100, 1449, 810);
-        general.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         general.add(principal);
         general.setVisible(true);
     }
@@ -155,11 +153,12 @@ public class inicio {
         public void windowClosing(WindowEvent e) {
 
             int codigo= JOptionPane.showConfirmDialog(null, "¿Quieres un euro para una buena causa?", "Donacion", JOptionPane.YES_NO_OPTION);
-            if (codigo== JOptionPane.YES_OPTION){
+            if (codigo == JOptionPane.YES_OPTION){
                general.dispose();
             }else{
-                confirmacion.setEnabled(false);
-            }}
+                general.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+            }
+        }
 
         @Override
         public void windowClosed(WindowEvent e) {
