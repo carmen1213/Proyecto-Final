@@ -39,22 +39,31 @@ public class jefeEstudios {
         reunionesComboBox.setBackground(new Color(204, 255, 255));
         reunionesComboBox.setModel(new DefaultComboBoxModel(new String[] {"-Reuniones-", "DAM", "CIN", "MIP"}));
         reunionesComboBox.setToolTipText("");
-        reunionesComboBox.setBounds(162, 555, 262, 67);
+        reunionesComboBox.setBounds(35, 555, 262, 67);
         principal.add(reunionesComboBox);
 
         JButton cuestionariosBtn = new JButton("Cuestionarios");
-       cuestionariosBtn.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenCuestionarios.png"));
+        cuestionariosBtn.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenCuestionarios.png"));
         cuestionariosBtn.setBackground(new Color(204, 255, 255));
         cuestionariosBtn.setFont(new Font("Wide Latin", Font.PLAIN, 17));
-        cuestionariosBtn.setBounds(675, 555, 310, 67);
+        cuestionariosBtn.setBounds(815, 555, 310, 67);
         principal.add(cuestionariosBtn);
 
         JComboBox recompensasComboBox = new JComboBox();
         recompensasComboBox.setBackground(new Color(204, 255, 255));
         recompensasComboBox.setModel(new DefaultComboBoxModel(new String[] {"-Recompensas-", "DAM", "CIN ", "MIP"}));
         recompensasComboBox.setFont(new Font("Wide Latin", Font.PLAIN, 17));
-        recompensasComboBox.setBounds(1172, 555, 262, 67);
+        recompensasComboBox.setBounds(1217, 555, 262, 67);
         principal.add(recompensasComboBox);
+        general.setBounds(100, 100, 1503, 827);
+
+        JButton botoncrear_alumnos = new JButton("Crear Alumnos");
+        botoncrear_alumnos.addActionListener(new crearalumnos());
+        botoncrear_alumnos.setBackground(new Color(204, 255, 255));
+        botoncrear_alumnos.setIcon(new ImageIcon("C:\\Users\\carma\\Downloads\\persona.jpg"));
+        botoncrear_alumnos.setFont(new Font("Wide Latin", Font.BOLD | Font.ITALIC, 17));
+        botoncrear_alumnos.setBounds(378, 555, 346, 67);
+        principal.add(botoncrear_alumnos);
         general.setBounds(100, 100, 1503, 827);
 
         JMenuBar barraMenu = new JMenuBar();
@@ -131,6 +140,13 @@ public class jefeEstudios {
   @Override
   public void actionPerformed(ActionEvent e) {
    new Listas();
+  }
+ }
+
+ private class crearalumnos implements ActionListener {
+  @Override
+  public void actionPerformed(ActionEvent e) {
+   new Ingresar_alumnos().setVisible(true);
   }
  }
 }
