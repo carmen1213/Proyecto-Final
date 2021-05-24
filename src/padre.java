@@ -10,16 +10,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 /**
  * @author Carmen Martí,Salva Blanquer,Lucia Calabrese
  */
 
 public class padre {
-
+    JFrame general;
     public padre(Usuario user) {
 
-        JFrame general = new JFrame();
+        general = new JFrame();
         JLayeredPane principal = new JLayeredPane();
 
         general.getContentPane().setBackground(new Color(230, 230, 250));
@@ -37,7 +39,7 @@ public class padre {
         notasBtn.setBounds(91, 635, 184, 77);
 
         JLabel padresImagen = new JLabel("");
-        padresImagen.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\padres-mirando-sus-hijos-dibujando_13339-171519 (1).jpg"));
+        padresImagen.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenPadres.png"));
         padresImagen.setBounds(523, 177, 560, 331); //falta foto
 
         JButton reunionesBtn = new JButton("Reuniones");
@@ -63,6 +65,19 @@ public class padre {
         general.setBounds(100, 100, 1545, 759);
         general.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         general.setVisible(true);
+
+        JButton volverBtn = new JButton("");
+        volverBtn.addMouseListener(new volverInicio());
+
+        volverBtn.setBackground(new Color(204, 255, 204));
+        volverBtn.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenVolver.png"));
+        volverBtn.setBounds(10, 10, 80, 49);
+
+        volverBtn.setBorderPainted(false);
+        volverBtn.setContentAreaFilled(false);
+        volverBtn.setFocusPainted(false);
+        volverBtn.setOpaque(false);
+        principal.add(volverBtn);
 
         //Insercciones a la GUI
         principal.add(notasBtn);
@@ -126,5 +141,33 @@ public class padre {
             driver = new ChromeDriver(options);
             driver.get("https://www.abacus.coop/es/papeleria-y-manualidades");
         }}
+    private class volverInicio implements MouseListener {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            general.dispose();
+            inicio.usuario.setText("");
+            inicio.contraseña.setText("");
 
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+
+        }
+    }
 }

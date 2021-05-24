@@ -6,6 +6,8 @@ import javax.swing.*;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 
@@ -14,10 +16,10 @@ import java.io.IOException;
  */
 
 public class alumnoGUI {
-
+    JFrame general;
     public alumnoGUI(Usuario user) {
 
-         JFrame general = new JFrame();
+         general = new JFrame();
         general.setIconImage(Toolkit.getDefaultToolkit().getImage("..\\Proyecto-Final\\imagenes\\logoEncabezado.png"));
         general.setTitle("Alumnos");
         general.getContentPane().setBackground(new Color(250, 250, 210));
@@ -74,8 +76,21 @@ public class alumnoGUI {
         JMenu TareasMenu = new JMenu("Tareas");
         TareasMenu.setFont(new Font("Rockwell", Font.BOLD, 17));
         barraMenu.add(TareasMenu);
-
         general.setVisible(true);
+
+        JButton volverBtn = new JButton("");
+        volverBtn.addMouseListener(new volverInicio());
+
+        volverBtn.setBackground(new Color(204, 255, 204));
+        volverBtn.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenVolver.png"));
+        volverBtn.setBounds(10, 10, 80, 49);
+
+        volverBtn.setBorderPainted(false);
+        volverBtn.setContentAreaFilled(false);
+        volverBtn.setFocusPainted(false);
+        volverBtn.setOpaque(false);
+        principal.add(volverBtn);
+
     }
 
 
@@ -105,6 +120,36 @@ public class alumnoGUI {
 
         @Override
         public void menuCanceled(MenuEvent e) {
+
+        }
+    }
+
+    private class volverInicio implements MouseListener {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            general.dispose();
+            inicio.usuario.setText("");
+            inicio.contraseña.setText("");
+
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
 
         }
     }
