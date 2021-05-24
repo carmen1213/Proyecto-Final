@@ -1,5 +1,5 @@
 Drop
-DATABASE educativ;
+DATABASE if exists educativ;
 CREATE
 DATABASE if not exists educativ;
 use
@@ -54,7 +54,7 @@ create table login
     nombre varchar(100) null
 );
 
-create table alumnos
+create table alumno
 (
     id_alumno int auto_increment
         primary key,
@@ -73,7 +73,7 @@ create table alumnos_curso
     id int auto_increment
         primary key,
     constraint alumnos_curso_alumnos_id_alumnos_fk
-        foreign key (id_alumno) references alumnos (id_alumno),
+        foreign key (id_alumno) references alumno (id_alumno),
     constraint alumnos_curso_curso_id_curso_fk
         foreign key (id_curso) references curso (id_curso)
 );
@@ -89,7 +89,7 @@ create table amonestaciones
     correo varchar(45) null,
     id_curso int null,
     constraint amonestaciones_alumnos_id_alumno_fk
-        foreign key (id_alumno) references alumnos (id_alumno),
+        foreign key (id_alumno) references alumno (id_alumno),
     constraint amonestaciones_curso_id_curso_fk
         foreign key (id_curso) references curso (id_curso)
 );
@@ -104,7 +104,7 @@ create table asistencia
     dia_semana varchar(45) null,
     fecha varchar(45) null,
     constraint asistencia_alumnos_id_alumnos_fk
-        foreign key (id_alumno) references alumnos (id_alumno),
+        foreign key (id_alumno) references alumno (id_alumno),
     constraint asistencia_asignatura_id_asignatura_fk
         foreign key (id_asignatura) references asignatura (id_asignatura)
 );
@@ -141,7 +141,7 @@ create table matricula
     id_alumno int null,
     IBAN varchar(45) null,
     constraint matricula_alumnos_id_alumno_fk
-        foreign key (id_alumno) references alumnos (id_alumno)
+        foreign key (id_alumno) references alumno (id_alumno)
 );
 
 create table notas
@@ -154,7 +154,7 @@ create table notas
     id_asignaturas int null,
     id_alumno int null,
     constraint notas_alumnos_id_alumno_fk
-        foreign key (id_alumno) references alumnos (id_alumno),
+        foreign key (id_alumno) references alumno (id_alumno),
     constraint notas_asignatura_id_asignatura_fk
         foreign key (id_asignaturas) references asignatura (id_asignatura)
 );
@@ -174,7 +174,7 @@ create table padres
     id_alumno int null,
     id_login int null,
     constraint padres_alumnos_id_alumno_fk
-        foreign key (id_alumno) references alumnos (id_alumno),
+        foreign key (id_alumno) references alumno (id_alumno),
     constraint padres_login_id_login_fk
         foreign key (id_login) references login (id_login)
 );
@@ -247,14 +247,14 @@ create table reuniones
 create definer = root@localhost view alumno_cursos as
 select `a`.`nombre` AS `Alumnos`, `c`.`nombre` AS `curso`
 from ((`educativ`.`alumnos_curso` left join `educativ`.`curso` `c` on ((`c`.`id_curso` = `educativ`.`alumnos_curso`.`id_curso`)))
-         left join `educativ`.`alumnos` `a` on ((`a`.`id_alumno` = `educativ`.`alumnos_curso`.`id_alumno`)));
+         left join `educativ`.`alumno` `a` on ((`a`.`id_alumno` = `educativ`.`alumnos_curso`.`id_alumno`)));
 
 create definer = root@localhost view alumnos_asignatura as
-select `educativ`.`alumnos`.`nombre`    AS `nombre`,
-       `educativ`.`alumnos`.`id_alumno` AS `id_alumno`,
+select `educativ`.`alumno`.`nombre`    AS `nombre`,
+       `educativ`.`alumno`.`id_alumno` AS `id_alumno`,
        `a`.`nombre`                     AS `nombreAsignatura`,
        `a`.`id_asignatura`              AS `id_asignatura`
-from ((`educativ`.`alumnos` left join `educativ`.`alumnos_curso` `ac` on ((`educativ`.`alumnos`.`id_alumno` = `ac`.`id_alumno`)))
+from ((`educativ`.`alumno` left join `educativ`.`alumnos_curso` `ac` on ((`educativ`.`alumno`.`id_alumno` = `ac`.`id_alumno`)))
          left join `educativ`.`asignatura` `a` on ((`ac`.`id_curso` = `a`.`id_curso`)));
 
 create definer = root@localhost view asignatura_asistencia as
@@ -264,7 +264,7 @@ select `a2`.`nombre`                        AS `nombre`,
        `a`.`nombre`                         AS `asignaturanombre`,
        `educativ`.`asistencia`.`fecha`      AS `fecha`
 from ((`educativ`.`asistencia` left join `educativ`.`asignatura` `a` on ((`educativ`.`asistencia`.`id_asignatura` = `a`.`id_asignatura`)))
-         left join `educativ`.`alumnos` `a2` on ((`a2`.`id_alumno` = `educativ`.`asistencia`.`id_alumno`)));
+         left join `educativ`.`alumno` `a2` on ((`a2`.`id_alumno` = `educativ`.`asistencia`.`id_alumno`)));
 
 create definer = root@localhost view asignatura_profesor as
 select `educativ`.`asignatura`.`id_asignatura` AS `id_asignatura`,
