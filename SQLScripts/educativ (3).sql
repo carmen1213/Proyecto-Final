@@ -329,20 +329,44 @@ INSERT INTO educativ.clase (id_clase, id_asignatura, id_profesor, fecha) VALUES 
 INSERT INTO educativ.clase (id_clase, id_asignatura, id_profesor, fecha) VALUES (3, 6, 4, '2021-04-26 11:30:00');
 INSERT INTO educativ.clase (id_clase, id_asignatura, id_profesor, fecha) VALUES (4, 5, 2, '2021-04-30 10:53:42');
 
-
 INSERT INTO educativ.horario (id_horario, id_asignatura, id_profesor, hora_inicio, hora_fin, dia_semana) VALUES (3, 3, 2, '08:15:00', '11:00:00', 1);
+INSERT INTO educativ.horario (id_horario, id_asignatura, id_profesor, hora_inicio, hora_fin, dia_semana) VALUES (8, 6, null, '11:30:00', '14:15:00', 1);
+INSERT INTO educativ.horario (id_horario, id_asignatura, id_profesor, hora_inicio, hora_fin, dia_semana) VALUES (9, 7, null, '08:15:00', '09:10:00', 2);
+INSERT INTO educativ.horario (id_horario, id_asignatura, id_profesor, hora_inicio, hora_fin, dia_semana) VALUES (10, 8, null, '09:10:00', '10:05:00', 2);
+INSERT INTO educativ.horario (id_horario, id_asignatura, id_profesor, hora_inicio, hora_fin, dia_semana) VALUES (11, 9, null, '10:05:00', '11:00:00', 2);
+INSERT INTO educativ.horario (id_horario, id_asignatura, id_profesor, hora_inicio, hora_fin, dia_semana) VALUES (12, 9, null, '11:30:00', '14:15:00', 2);
+INSERT INTO educativ.horario (id_horario, id_asignatura, id_profesor, hora_inicio, hora_fin, dia_semana) VALUES (13, 10, null, '08:15:00', '11:00:00', 3);
+INSERT INTO educativ.horario (id_horario, id_asignatura, id_profesor, hora_inicio, hora_fin, dia_semana) VALUES (16, 8, null, '11:30:00', '13:20:00', 3);
+INSERT INTO educativ.horario (id_horario, id_asignatura, id_profesor, hora_inicio, hora_fin, dia_semana) VALUES (17, 7, null, '13:20:00', '14:15:00', 3);
 INSERT INTO educativ.horario (id_horario, id_asignatura, id_profesor, hora_inicio, hora_fin, dia_semana) VALUES (4, 3, 2, '11:30:00', '14:15:00', 4);
 INSERT INTO educativ.horario (id_horario, id_asignatura, id_profesor, hora_inicio, hora_fin, dia_semana) VALUES (5, 5, 2, '08:15:00', '11:30:00', 4);
 INSERT INTO educativ.horario (id_horario, id_asignatura, id_profesor, hora_inicio, hora_fin, dia_semana) VALUES (6, 3, 2, '09:10:00', '11:00:00', 5);
 INSERT INTO educativ.horario (id_horario, id_asignatura, id_profesor, hora_inicio, hora_fin, dia_semana) VALUES (7, 5, 2, '11:30:00', '13:20:00', 5);
+INSERT INTO educativ.horario (id_horario, id_asignatura, id_profesor, hora_inicio, hora_fin, dia_semana) VALUES (14, 9, null, '08:15:00', '09:10:00', 5);
+INSERT INTO educativ.horario (id_horario, id_asignatura, id_profesor, hora_inicio, hora_fin, dia_semana) VALUES (15, 7, null, '13:20:00', '14:15:00', 5);
 
 
-
-
-INSERT INTO educativ.profesor_asignatura (id_profesor, id_asignatura, id) VALUES (2, 3, 5);
-INSERT INTO educativ.profesor_asignatura (id_profesor, id_asignatura, id) VALUES (2, 5, 6);
-INSERT INTO educativ.profesor_asignatura (id_profesor, id_asignatura, id) VALUES (3, 4, 7);
-INSERT INTO educativ.profesor_asignatura (id_profesor, id_asignatura, id) VALUES (4, 6, 8);
+INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Programación', 3, 1);
+INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Marketing digital', 4, 2);
+INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Bases de Datos', 5, 1);
+INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Entornos de desarrollo', 6, 1);
+INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Ingles Tecnico', 7, 1);
+INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Fol', 8, 1);
+INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Sistemas', 9, 1);
+INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Lenguaje de marcas', 10, 1);
+INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Gestion economica y financiera de la empresa', 13, 3);
+INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Gestion administrativa del comercio internacional', 14, 3);
+INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Logica del almacenamiento', 15, 3);
+INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Transporte internacional de mercancias', 16, 3);
+INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Ingles', 17, 3);
+INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('FOL', 18, 3);
+INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Ingles tecnico', 19, 3);
+INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Gestion economica y financiera de la empresa', 20, 2);
+INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Politicas de marketing', 21, 2);
+INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Investigacion comercial', 22, 2);
+INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Ingles', 23, 2);
+INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Fol', 24, 2);
+INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Ingles Tecnico', 25, 2);
 
 INSERT INTO educativ.jefedeestudios (id_jefedeestudios, DNI, nombre, telefono, direccion, fechaNac, correo, id_login) VALUES (1, '00000000M', 'Neus Senent', 698574236, null, null, null, null);
 
