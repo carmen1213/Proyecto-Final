@@ -23,7 +23,6 @@ public class Ingresar_alumnos extends JFrame {
 
     private void initComponents() {
 
-
         datos_dni = new javax.swing.JTextField();
         Nombre = new javax.swing.JLabel();
         Datos_nombre = new javax.swing.JTextField();
@@ -37,7 +36,6 @@ public class Ingresar_alumnos extends JFrame {
         Mensaje_informativo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-
 
         Nombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         Nombre.setText("Nombre completo");
@@ -128,6 +126,10 @@ public class Ingresar_alumnos extends JFrame {
         initComponents();
     }
 
+    public static void main()throws SQLException
+    {
+        new Ingresar_alumnos().setVisible(true);
+    }
     public static void main(String[] args) {
         new Ingresar_alumnos().setVisible(true);
     }
