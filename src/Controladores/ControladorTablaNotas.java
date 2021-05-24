@@ -101,4 +101,23 @@ public class ControladorTablaNotas {
         }
         return resultado;
     }
+
+    public int getid_asignatura(int id_profesor){
+        ArrayList<Integer> resultado = new ArrayList<Integer>();
+        //Conecta con la base de datos y realiza a la misma la consulta correspondiente
+        String SQL = "Select id_asignatura FROM profesor_asignatura WHERE id_profesor = ?";
+        try {
+            PreparedStatement st = conn.prepareStatement(SQL);
+            st.setInt(1, id_profesor);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()){
+                int id_asignatura = rs.getInt("id_asignatura");
+                resultado.add(id_asignatura);
+                return id_asignatura;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return -1;
+    }
 }

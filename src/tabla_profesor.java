@@ -19,6 +19,7 @@ public class tabla_profesor extends JFrame {
 
     private JTable jTableAlumnos;
     private ControladorTablaProfesores controladorProfesores = new ControladorTablaProfesores();
+    private Controlador_login controllogin = new Controlador_login();
     private JComboBox asignatura;
     private JLabel titulop;
     private JButton guardar;
@@ -27,7 +28,7 @@ public class tabla_profesor extends JFrame {
     private Controlador_login control = new Controlador_login();
     private Usuario user = control.iniciarSesion(inicio.usuario.getText(), inicio.contraseña.getText());
     private Profesor id_profesor = control.getIdProfesor(inicio.usuario.getText(), inicio.contraseña.getText());
-    private ArrayList<Asignatura> asignaturas = controladorProfesores.getAsignaturaProfesor(id_profesor.getId_profesor());
+    private ArrayList<Asignatura> asignaturas = controladorProfesores.getAsignaturaProfesor(controllogin.getIdProfesor(inicio.usuario.getText(), inicio.contraseña.getText()).getId_profesor());
     private UtilDateModel date = new UtilDateModel();
 
     public tabla_profesor() throws SQLException {
@@ -79,7 +80,6 @@ public class tabla_profesor extends JFrame {
         DefaultTableModel model = generarModeloTablaAlumno(alumnosAsignatura);
 
         jTableAlumnos = new JTable(model) {
-            //private static final long serialVersionUID = 1L;
             @Override
             public Class getColumnClass(int column) {
                 switch (column) {
@@ -115,10 +115,9 @@ public class tabla_profesor extends JFrame {
         botones.add(new JLabel());
         JPanel guardarm = new JPanel();
         guardarm.setBackground(new Color(227, 247, 193));
+
+
         guardar = new JButton("Guardar");
-
-
-
         guardar.addActionListener(new guardarinformacion(this));
 
         guardarm.add(guardar);

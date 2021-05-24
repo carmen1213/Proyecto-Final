@@ -1,5 +1,5 @@
 Drop
-DATABASE educativ;
+DATABASE if exists educativ;
 CREATE
 DATABASE if not exists educativ;
 use
@@ -54,7 +54,7 @@ create table login
     nombre varchar(100) null
 );
 
-create table alumnos
+create table alumno
 (
     id_alumno int auto_increment
         primary key,
@@ -73,7 +73,7 @@ create table alumnos_curso
     id int auto_increment
         primary key,
     constraint alumnos_curso_alumnos_id_alumnos_fk
-        foreign key (id_alumno) references alumnos (id_alumno),
+        foreign key (id_alumno) references alumno (id_alumno),
     constraint alumnos_curso_curso_id_curso_fk
         foreign key (id_curso) references curso (id_curso)
 );
@@ -89,7 +89,7 @@ create table amonestaciones
     correo varchar(45) null,
     id_curso int null,
     constraint amonestaciones_alumnos_id_alumno_fk
-        foreign key (id_alumno) references alumnos (id_alumno),
+        foreign key (id_alumno) references alumno (id_alumno),
     constraint amonestaciones_curso_id_curso_fk
         foreign key (id_curso) references curso (id_curso)
 );
@@ -104,7 +104,7 @@ create table asistencia
     dia_semana varchar(45) null,
     fecha varchar(45) null,
     constraint asistencia_alumnos_id_alumnos_fk
-        foreign key (id_alumno) references alumnos (id_alumno),
+        foreign key (id_alumno) references alumno (id_alumno),
     constraint asistencia_asignatura_id_asignatura_fk
         foreign key (id_asignatura) references asignatura (id_asignatura)
 );
@@ -141,7 +141,7 @@ create table matricula
     id_alumno int null,
     IBAN varchar(45) null,
     constraint matricula_alumnos_id_alumno_fk
-        foreign key (id_alumno) references alumnos (id_alumno)
+        foreign key (id_alumno) references alumno (id_alumno)
 );
 
 create table notas
@@ -154,7 +154,7 @@ create table notas
     id_asignaturas int null,
     id_alumno int null,
     constraint notas_alumnos_id_alumno_fk
-        foreign key (id_alumno) references alumnos (id_alumno),
+        foreign key (id_alumno) references alumno (id_alumno),
     constraint notas_asignatura_id_asignatura_fk
         foreign key (id_asignaturas) references asignatura (id_asignatura)
 );
@@ -174,7 +174,7 @@ create table padres
     id_alumno int null,
     id_login int null,
     constraint padres_alumnos_id_alumno_fk
-        foreign key (id_alumno) references alumnos (id_alumno),
+        foreign key (id_alumno) references alumno (id_alumno),
     constraint padres_login_id_login_fk
         foreign key (id_login) references login (id_login)
 );
@@ -247,14 +247,14 @@ create table reuniones
 create definer = root@localhost view alumno_cursos as
 select `a`.`nombre` AS `Alumnos`, `c`.`nombre` AS `curso`
 from ((`educativ`.`alumnos_curso` left join `educativ`.`curso` `c` on ((`c`.`id_curso` = `educativ`.`alumnos_curso`.`id_curso`)))
-         left join `educativ`.`alumnos` `a` on ((`a`.`id_alumno` = `educativ`.`alumnos_curso`.`id_alumno`)));
+         left join `educativ`.`alumno` `a` on ((`a`.`id_alumno` = `educativ`.`alumnos_curso`.`id_alumno`)));
 
 create definer = root@localhost view alumnos_asignatura as
-select `educativ`.`alumnos`.`nombre`    AS `nombre`,
-       `educativ`.`alumnos`.`id_alumno` AS `id_alumno`,
+select `educativ`.`alumno`.`nombre`    AS `nombre`,
+       `educativ`.`alumno`.`id_alumno` AS `id_alumno`,
        `a`.`nombre`                     AS `nombreAsignatura`,
        `a`.`id_asignatura`              AS `id_asignatura`
-from ((`educativ`.`alumnos` left join `educativ`.`alumnos_curso` `ac` on ((`educativ`.`alumnos`.`id_alumno` = `ac`.`id_alumno`)))
+from ((`educativ`.`alumno` left join `educativ`.`alumnos_curso` `ac` on ((`educativ`.`alumno`.`id_alumno` = `ac`.`id_alumno`)))
          left join `educativ`.`asignatura` `a` on ((`ac`.`id_curso` = `a`.`id_curso`)));
 
 create definer = root@localhost view asignatura_asistencia as
@@ -264,7 +264,7 @@ select `a2`.`nombre`                        AS `nombre`,
        `a`.`nombre`                         AS `asignaturanombre`,
        `educativ`.`asistencia`.`fecha`      AS `fecha`
 from ((`educativ`.`asistencia` left join `educativ`.`asignatura` `a` on ((`educativ`.`asistencia`.`id_asignatura` = `a`.`id_asignatura`)))
-         left join `educativ`.`alumnos` `a2` on ((`a2`.`id_alumno` = `educativ`.`asistencia`.`id_alumno`)));
+         left join `educativ`.`alumno` `a2` on ((`a2`.`id_alumno` = `educativ`.`asistencia`.`id_alumno`)));
 
 create definer = root@localhost view asignatura_profesor as
 select `educativ`.`asignatura`.`id_asignatura` AS `id_asignatura`,
@@ -282,16 +282,19 @@ INSERT INTO educativ.login (id_login, nombre_usuario, contraseña, seguridad, ti
 INSERT INTO educativ.login (id_login, nombre_usuario, contraseña, seguridad, tipo_usuario, id_aj, nombre) VALUES (7, 'Cvicente', '12', null, 'Director', null, 'Cristina Vicente');
 INSERT INTO educativ.login (id_login, nombre_usuario, contraseña, seguridad, tipo_usuario, id_aj, nombre) VALUES (8, 'Pescobar', '11', null, 'Padres', null, 'Pablo Escobar');
 
-INSERT INTO educativ.alumnos (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (3, '12345678A', '2010-04-29', 'Salvador Blanquer', 1);
-INSERT INTO educativ.alumnos (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (4, '88888888Z', '1999-12-15', 'Lucia Calabrese', null);
-INSERT INTO educativ.alumnos (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (5, '87654321B', '2015-11-18', 'Pedro Sanchez', null);
-INSERT INTO educativ.alumnos (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (6, '65412321M', '1986-04-05', 'Angel Beltran', null);
-INSERT INTO educativ.alumnos (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (7, '52155621N', '1995-04-07', 'Lucas gonsalvo', null);
-INSERT INTO educativ.alumnos (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (8, '55864512P', '2004-11-18', 'Javier Ruiz Perez', null);
-INSERT INTO educativ.alumnos (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (9, '56231428O', '1999-05-05', 'Nicolas Bustos', null);
-INSERT INTO educativ.alumnos (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (10, '12369854B', '1994-04-07', 'Sergio Lorente', null);
-INSERT INTO educativ.alumnos (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (11, '55287951P', '2014-04-04', 'Antonio Castillo', null);
-INSERT INTO educativ.alumnos (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (12, '65212536B', '2000-09-17', 'Carmen Marti', null);
+INSERT INTO educativ.alumno (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (3, '12345678A', '2010-04-29', 'Salvador Blanquer', 1);
+INSERT INTO educativ.alumno (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (4, '88888888Z', '1999-12-15', 'Lucia Calabrese', null);
+INSERT INTO educativ.alumno (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (5, '87654321B', '2015-11-18', 'Pedro Sanchez', null);
+INSERT INTO educativ.alumno (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (6, '65412321M', '1986-04-05', 'Angel Beltran', null);
+INSERT INTO educativ.alumno (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (7, '52155621N', '1995-04-07', 'Lucas gonsalvo', null);
+INSERT INTO educativ.alumno (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (8, '55864512P', '2004-11-18', 'Javier Ruiz Perez', null);
+INSERT INTO educativ.alumno (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (9, '56231428O', '1999-05-05', 'Nicolas Bustos', null);
+INSERT INTO educativ.alumno (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (10, '12369854B', '1994-04-07', 'Sergio Lorente', null);
+INSERT INTO educativ.alumno (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (11, '55287951P', '2014-04-04', 'Antonio Castillo', null);
+INSERT INTO educativ.alumno (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (12, '65212536B', '2000-09-17', 'Carmen Marti', null);
+INSERT INTO educativ.alumno (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (14, '11234356N', '1998-03-03', 'Juana de Arco', null);
+INSERT INTO educativ.alumno (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (15, '12345467N', '1998-04-04', 'Lucas Pan', null);
+INSERT INTO educativ.alumno (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (16, '12345678N', '1990-03-04', 'Juan Cruz', null);
 
 INSERT INTO educativ.curso (id_curso, nombre) VALUES (1, 'Dam');
 INSERT INTO educativ.curso (id_curso, nombre) VALUES (2, 'Mip');
@@ -307,6 +310,9 @@ INSERT INTO educativ.alumnos_curso (id_alumno, id_curso, id) VALUES (9, 1, 7);
 INSERT INTO educativ.alumnos_curso (id_alumno, id_curso, id) VALUES (10, 2, 8);
 INSERT INTO educativ.alumnos_curso (id_alumno, id_curso, id) VALUES (11, 1, 9);
 INSERT INTO educativ.alumnos_curso (id_alumno, id_curso, id) VALUES (12, 1, 10);
+INSERT INTO educativ.alumnos_curso (id_alumno, id_curso, id) VALUES (15, 3, 11);
+INSERT INTO educativ.alumnos_curso (id_alumno, id_curso, id) VALUES (16, 1, 12);
+
 
 INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Programación', 3, 1);
 INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Marketing', 4, 2);
