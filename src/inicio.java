@@ -10,26 +10,12 @@ public class inicio {
     public static final Controlador_login controlLogin = new Controlador_login();
     public static JPasswordField contraseña;
     public static JTextField usuario;
-    private static JLabel confirmacion;
+  //  private static JLabel datosErroneos;
     private final JFrame general;
     boolean a = true;
-
+    JOptionPane confirmacion;
     JButton verContraseñaBtn;
-    KeyListener keyListener = new KeyListener() {
-        public void keyPressed(KeyEvent keyEvent) {
-            if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER) {
-                validarLogin.autenticarUsuarioBD();
-            }
-        }
 
-        public void keyReleased(KeyEvent keyEvent) {
-
-        }
-
-        public void keyTyped(KeyEvent keyEvent) {
-
-        }
-    };
 
     public inicio() {
 
@@ -38,6 +24,8 @@ public class inicio {
 
         JLayeredPane principal = new JLayeredPane();
         general.getContentPane().add(principal, BorderLayout.CENTER);
+        general.addWindowListener(new cerrarVentana());
+
 
         JLabel encabezado = new JLabel("Bienvenid@,");
         encabezado.setForeground(new Color(204, 0, 102));
@@ -80,25 +68,22 @@ public class inicio {
         loginBtn.setBackground(new Color(50, 205, 50));
         loginBtn.setFont(new Font("Stencil", Font.BOLD | Font.ITALIC, 20));
         loginBtn.setBounds(949, 661, 368, 63);
-        loginBtn.addActionListener(new validarLogin());
+         loginBtn.addActionListener(new validarLogin());
         principal.add(loginBtn);
 
-        confirmacion = new JLabel("");
-        general.add(confirmacion);
 
         verContraseñaBtn = new JButton("");
         verContraseñaBtn.setBackground(Color.WHITE);
 
         verContraseñaBtn.setBounds(1136, 444, 41, 56);
-        verContraseñaBtn.addActionListener(new verContraseña());
-        verContraseñaBtn.addMouseListener(new jButton1MouseClicked());
+        verContraseñaBtn.addMouseListener(new verContraseña());
         principal.add(verContraseñaBtn);
 
 
         contraseña = new JPasswordField();
         contraseña.setBounds(849, 444, 289, 56);
         verContraseñaBtn.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenOjo.png"));
-        contraseña.addKeyListener(keyListener);
+        contraseña.addKeyListener(loginEnter);
         principal.add(contraseña);
         general.setBackground(new Color(204, 255, 255));
         general.setBounds(100, 100, 1449, 810);
@@ -112,6 +97,22 @@ public class inicio {
     public static void main() {
         new inicio();
     }
+
+    KeyListener loginEnter = new KeyListener() {
+        public void keyPressed(KeyEvent keyEvent) {
+            if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER) {
+               validarLogin.autenticarUsuarioBD();
+            }}
+
+
+        public void keyReleased(KeyEvent keyEvent) {
+
+        }
+
+        public void keyTyped(KeyEvent keyEvent) {
+
+        }
+    };
 
     public static class validarLogin implements ActionListener {
 
@@ -132,13 +133,13 @@ public class inicio {
                         padre.main(user);
                         break;
                     default:
-                        confirmacion.setForeground(Color.red);
-                        confirmacion.setText("<html> <div style = 'text-align: center;'> Tipo usuario incorrecto </div></html>");
+                      //  datosErroneos.setForeground(Color.red);
+                     //   datosErroneos.setText("<html> <div style = 'text-align: center;'> Tipo usuario incorrecto </div></html>");
                         break;
                 }
             } else {
-                confirmacion.setForeground(Color.red);
-                confirmacion.setText("<html> <div style = 'text-align: center;'> contraseña incorrecta <br> o <br> usuario incorrecto </div></html>");
+              //  datosErroneos.setForeground(Color.red);
+              //  datosErroneos.setText("<html> <div style = 'text-align: center;'> contraseña incorrecta <br> o <br> usuario incorrecto </div></html>");
             }
         }
 
@@ -148,9 +149,45 @@ public class inicio {
         }
     }
 
-    private class verContraseña implements ActionListener {
+    private class cerrarVentana implements WindowListener {
         @Override
-        public void actionPerformed(ActionEvent e) {
+        public void windowOpened(WindowEvent e) {
+        }
+        @Override
+        public void windowClosing(WindowEvent e) {
+
+            int codigo= JOptionPane.showConfirmDialog(null, "¿Quieres un euro para una buena causa?", "Donacion", JOptionPane.YES_NO_OPTION);
+            if (codigo== JOptionPane.YES_OPTION){
+               general.dispose();
+            }else{
+                confirmacion.setEnabled(false);
+            }}
+
+        @Override
+        public void windowClosed(WindowEvent e) {
+
+        }
+        @Override
+        public void windowIconified(WindowEvent e) {
+
+        }
+        @Override
+        public void windowDeiconified(WindowEvent e) {
+
+        }
+        @Override
+        public void windowActivated(WindowEvent e) {
+
+        }
+        @Override
+        public void windowDeactivated(WindowEvent e) {
+        }
+    }
+
+    private class verContraseña implements MouseListener {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+
 
             if (a) {  // a es una variable boolean en true
                 contraseña.setEchoChar((char) 0); // este método es el que hace visible el texto del jPasswordField
@@ -160,12 +197,7 @@ public class inicio {
                 contraseña.setEchoChar('•'); // i es el char
                 a = true;
             }
-        }
-    }
 
-    private class jButton1MouseClicked implements MouseListener {
-        @Override
-        public void mouseClicked(MouseEvent e) {
 
             if (!a) {
                 verContraseñaBtn.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenOjo.png"));
