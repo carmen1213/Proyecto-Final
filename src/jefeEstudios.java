@@ -23,17 +23,25 @@ public class jefeEstudios {
         JLayeredPane principal = new JLayeredPane();
         general.getContentPane().add(principal, BorderLayout.CENTER);
 
+        JLabel titulo = new JLabel( "Bienvenida" );
 
-        JLabel titulo = new JLabel("Bienvenido");
+
         titulo.setHorizontalAlignment(SwingConstants.CENTER);
         titulo.setFont(new Font("Kristen ITC", Font.BOLD | Font.ITALIC, 34));
         titulo.setBounds(687, -24, 298, 137);
         principal.add(titulo);
 
+        JLabel nombre = new JLabel( user.getNombre());
+        nombre.setHorizontalAlignment(SwingConstants.CENTER);
+        nombre.setFont(new Font("Kristen ITC", Font.BOLD | Font.ITALIC, 34));
+        nombre.setBounds(468, 69, 720, 49);
+        principal.add(nombre);
+
+
         JLabel jefaEstudiosImagen = new JLabel("");
         jefaEstudiosImagen.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenJefaEstudios.jpg"));
         jefaEstudiosImagen.setHorizontalAlignment(SwingConstants.CENTER);
-        jefaEstudiosImagen.setBounds(378, 99, 853, 399);
+        jefaEstudiosImagen.setBounds(378, 135, 853, 399);
         principal.add(jefaEstudiosImagen);
 
         JComboBox reunionesComboBox = new JComboBox();
@@ -114,6 +122,7 @@ public class jefeEstudios {
         volverBtn.setFocusPainted(false);
         volverBtn.setOpaque(false);
         principal.add(volverBtn);
+
     }
 
     public static void main(Usuario user) {

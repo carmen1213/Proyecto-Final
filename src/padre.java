@@ -29,7 +29,7 @@ public class padre {
 
         JLabel titulo = new JLabel("<html> <div style = 'text-align: center;'> Bienvenido <br>  " + user.getNombre() + " </div></html>");
         titulo.setFont(new Font("Segoe Script", Font.BOLD | Font.ITALIC, 34));
-        titulo.setBounds(555, 25, 348, 82);
+        titulo.setBounds(567, 25, 348, 82);
 
         JButton notasBtn = new JButton("Notas");
         notasBtn.setToolTipText("");
