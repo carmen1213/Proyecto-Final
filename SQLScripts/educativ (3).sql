@@ -4,18 +4,6 @@ CREATE
 DATABASE if not exists educativ;
 use
 educativ;
-create table cuestionario
-(
-    id_cuestionario int not null
-        primary key,
-    nombre varchar(45) null,
-    apellidos varchar(45) null,
-    curso varchar(45) null,
-    fecha date null,
-    asigntaturas varchar(45) null,
-    profesor varchar(45) null
-);
-
 create table curso
 (
     id_curso int auto_increment
@@ -25,7 +13,7 @@ create table curso
 
 create table asignatura
 (
-    nombre varchar(45) null,
+    nombre varchar(100) null,
     id_asignatura int auto_increment
         primary key,
     id_curso int null,
@@ -78,22 +66,6 @@ create table alumnos_curso
         foreign key (id_curso) references curso (id_curso)
 );
 
-create table amonestaciones
-(
-    id_amonestaciones int auto_increment
-        primary key,
-    motivo varchar(45) null,
-    peticiones varchar(45) null,
-    gravedad varchar(45) null,
-    id_alumno int null,
-    correo varchar(45) null,
-    id_curso int null,
-    constraint amonestaciones_alumnos_id_alumno_fk
-        foreign key (id_alumno) references alumno (id_alumno),
-    constraint amonestaciones_curso_id_curso_fk
-        foreign key (id_curso) references curso (id_curso)
-);
-
 create table asistencia
 (
     id_asistencia int auto_increment
@@ -122,26 +94,6 @@ create table jefedeestudios
     id_login int null,
     constraint jefedeestudios_login_id_login_fk
         foreign key (id_login) references login (id_login)
-);
-
-create table materialclase
-(
-    tema varchar(45) null,
-    id_material_clase int auto_increment
-        primary key,
-    id_curso int null,
-    constraint materialclase_curso_id_curso_fk
-        foreign key (id_curso) references curso (id_curso)
-);
-
-create table matricula
-(
-    id_matricula int auto_increment
-        primary key,
-    id_alumno int null,
-    IBAN varchar(45) null,
-    constraint matricula_alumnos_id_alumno_fk
-        foreign key (id_alumno) references alumno (id_alumno)
 );
 
 create table notas
@@ -243,7 +195,6 @@ create table reuniones
     curso varchar(45) null
 );
 
-
 create definer = root@localhost view alumno_cursos as
 select `a`.`nombre` AS `Alumnos`, `c`.`nombre` AS `curso`
 from ((`educativ`.`alumnos_curso` left join `educativ`.`curso` `c` on ((`c`.`id_curso` = `educativ`.`alumnos_curso`.`id_curso`)))
@@ -252,8 +203,8 @@ from ((`educativ`.`alumnos_curso` left join `educativ`.`curso` `c` on ((`c`.`id_
 create definer = root@localhost view alumnos_asignatura as
 select `educativ`.`alumno`.`nombre`    AS `nombre`,
        `educativ`.`alumno`.`id_alumno` AS `id_alumno`,
-       `a`.`nombre`                     AS `nombreAsignatura`,
-       `a`.`id_asignatura`              AS `id_asignatura`
+       `a`.`nombre`                    AS `nombreAsignatura`,
+       `a`.`id_asignatura`             AS `id_asignatura`
 from ((`educativ`.`alumno` left join `educativ`.`alumnos_curso` `ac` on ((`educativ`.`alumno`.`id_alumno` = `ac`.`id_alumno`)))
          left join `educativ`.`asignatura` `a` on ((`ac`.`id_curso` = `a`.`id_curso`)));
 
@@ -273,6 +224,7 @@ select `educativ`.`asignatura`.`id_asignatura` AS `id_asignatura`,
        `p`.`nombre`                            AS `nombre`
 from (((`educativ`.`asignatura` left join `educativ`.`clase` `c` on ((`educativ`.`asignatura`.`id_asignatura` = `c`.`id_asignatura`))) left join `educativ`.`profesor_asignatura` `pa` on ((`educativ`.`asignatura`.`id_asignatura` = `pa`.`id_asignatura`)))
          left join `educativ`.`profesor` `p` on ((`c`.`id_profesor` = `p`.`id_profesor`)));
+
 
 
 INSERT INTO educativ.login (id_login, nombre_usuario, contraseña, seguridad, tipo_usuario, id_aj, nombre) VALUES (1, 'Sblanquer', '1234', 8, 'Alumno', null, 'Salvador Blanquer');
