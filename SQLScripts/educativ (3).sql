@@ -249,9 +249,9 @@ INSERT INTO educativ.alumno (id_alumno, DNI, fecha_nacimiento, nombre, id_login)
 INSERT INTO educativ.alumno (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (10, '12369854B', '1994-04-07', 'Sergio Lorente', null);
 INSERT INTO educativ.alumno (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (11, '55287951P', '2014-04-04', 'Antonio Castillo', null);
 INSERT INTO educativ.alumno (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (12, '65212536B', '2000-09-17', 'Carmen Marti', null);
-INSERT INTO educativ.alumno (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (14, '11234356N', '1998-03-03', 'Juana de Arco', null);
 INSERT INTO educativ.alumno (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (15, '12345467N', '1998-04-04', 'Lucas Pan', null);
 INSERT INTO educativ.alumno (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (16, '12345678N', '1990-03-04', 'Juan Cruz', null);
+INSERT INTO educativ.alumno (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (17, '11253695N', '1998-02-03', 'Pepa Pig', null);
 
 INSERT INTO educativ.curso (id_curso, nombre) VALUES (1, 'Dam');
 INSERT INTO educativ.curso (id_curso, nombre) VALUES (2, 'Mip');
@@ -269,13 +269,30 @@ INSERT INTO educativ.alumnos_curso (id_alumno, id_curso, id) VALUES (11, 1, 9);
 INSERT INTO educativ.alumnos_curso (id_alumno, id_curso, id) VALUES (12, 1, 10);
 INSERT INTO educativ.alumnos_curso (id_alumno, id_curso, id) VALUES (15, 3, 11);
 INSERT INTO educativ.alumnos_curso (id_alumno, id_curso, id) VALUES (16, 1, 12);
-
+INSERT INTO educativ.alumnos_curso (id_alumno, id_curso, id) VALUES (17, 1, 13);
 
 INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Programación', 3, 1);
-INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Marketing', 4, 2);
+INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Marketing digital', 4, 2);
 INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Bases de Datos', 5, 1);
 INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Entornos de desarrollo', 6, 1);
 INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Ingles Tecnico', 7, 1);
+INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Fol', 8, 1);
+INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Sistemas', 9, 1);
+INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Lenguaje de marcas', 10, 1);
+INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Gestion economica y financiera de la empresa', 13, 3);
+INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Gestion administrativa del comercio internacional', 14, 3);
+INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Logica del almacenamiento', 15, 3);
+INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Transporte internacional de mercancias', 16, 3);
+INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Ingles', 17, 3);
+INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('FOL', 18, 3);
+INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Ingles tecnico', 19, 3);
+INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Gestion economica y financiera de la empresa', 20, 2);
+INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Politicas de marketing', 21, 2);
+INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Investigacion comercial', 22, 2);
+INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Ingles', 23, 2);
+INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Fol', 24, 2);
+INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Ingles Tecnico', 25, 2);
+
 
 INSERT INTO educativ.profesor (id_profesor, DNI, nombre, telefono, direccion, fecha_Nac, correo, id_usuario) VALUES (2, '00000000C', 'Ivan Ajenjo', 666666666, 'Calle Colon 1', '1997-09-30', 'i@i.com', 2);
 INSERT INTO educativ.profesor (id_profesor, DNI, nombre, telefono, direccion, fecha_Nac, correo, id_usuario) VALUES (3, '11111111M', 'Fernando Miralles', 654654654, 'Calle Xativa 4', '2006-04-26', 'f@f.com', 5);
