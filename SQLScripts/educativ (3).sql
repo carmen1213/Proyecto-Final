@@ -225,6 +225,11 @@ select `educativ`.`asignatura`.`id_asignatura` AS `id_asignatura`,
 from (((`educativ`.`asignatura` left join `educativ`.`clase` `c` on ((`educativ`.`asignatura`.`id_asignatura` = `c`.`id_asignatura`))) left join `educativ`.`profesor_asignatura` `pa` on ((`educativ`.`asignatura`.`id_asignatura` = `pa`.`id_asignatura`)))
          left join `educativ`.`profesor` `p` on ((`c`.`id_profesor` = `p`.`id_profesor`)));
 
+create definer = root@localhost view profesores_cursos as
+select `p`.`id_profesor` AS `id_profesor`, `educativ`.`curso`.`nombre` AS `curso`
+from (((`educativ`.`curso` left join `educativ`.`asignatura` `a` on ((`educativ`.`curso`.`id_curso` = `a`.`id_curso`))) left join `educativ`.`profesor_asignatura` `pa` on ((`a`.`id_asignatura` = `pa`.`id_asignatura`)))
+         left join `educativ`.`profesor` `p` on ((`pa`.`id_profesor` = `p`.`id_profesor`)));
+
 
 
 INSERT INTO educativ.login (id_login, nombre_usuario, contraseña, seguridad, tipo_usuario, id_aj, nombre) VALUES (1, 'Sblanquer', '1234', 8, 'Alumno', null, 'Salvador Blanquer');

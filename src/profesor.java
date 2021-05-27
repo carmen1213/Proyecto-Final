@@ -1,6 +1,10 @@
 
 //imports necesarios
 
+import Controladores.ControladorTablaProfesores;
+import Controladores.Controlador_cursos_material_profesores;
+import Controladores.Controlador_login;
+import models.Asignatura;
 import models.Usuario;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -15,11 +19,16 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class profesor {
 
     JFrame general;
+    private Controlador_login control = new Controlador_login();
+    private Controlador_cursos_material_profesores controlador_cursos_material_profesores = new Controlador_cursos_material_profesores();
+    private String cursos = Controlador_cursos_material_profesores.getCursoProfesor(control.getIdProfesor(inicio.usuario.getText(), inicio.contraseña.getText()).getId_profesor());
+
 
     public profesor(Usuario user) {
 
@@ -89,20 +98,14 @@ public class profesor {
         JMenu materialMenu = new JMenu("Material");
         materialMenu.setFont(new Font("Rockwell Condensed", Font.BOLD, 17));
 
-        JMenuItem DAM;
-        JMenuItem CIN;
-        JMenuItem MIP;
+        JMenuItem curso;
 
-        DAM = new JMenuItem("DAM");
-        DAM.addActionListener(new EscMaterialDAM());
-        CIN = new JMenuItem("CIN");
-        CIN.addActionListener(new EscMaterialCIN());
-        MIP = new JMenuItem("MIP");
-        MIP.addActionListener(new EscMaterialMIP());
 
-        materialMenu.add(DAM);
-        materialMenu.add(CIN);
-        materialMenu.add(MIP);
+        curso = new JMenuItem(String.valueOf(cursos));
+        curso.addActionListener(new EscMaterial());
+
+
+        materialMenu.add(curso);
         reunionesBtn.addActionListener(new abrirCorreo());
 
         BarraMenu.add(materialMenu);
@@ -111,99 +114,6 @@ public class profesor {
 
     public static void main(Usuario user) {
         new profesor(user);
-    }
-
-    private class EscMaterialDAM implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            Scanner entrada = null;
-            JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setCurrentDirectory(new File("..\\Proyecto-Final\\MaterialDAM"));
-            int valor = fileChooser.showOpenDialog(fileChooser);
-            if (valor == JFileChooser.APPROVE_OPTION) {
-                String ruta = fileChooser.getSelectedFile().getAbsolutePath();
-                try {
-                    Desktop.getDesktop().open(new File(ruta));
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
-                try {
-                    File f = new File(ruta);
-                    entrada = new Scanner(f);
-                    while (entrada.hasNext()) {
-                        System.out.println(entrada.nextLine());
-                    }
-                } catch (FileNotFoundException ee) {
-                    System.out.println(ee.getMessage());
-                } finally {
-                    if (entrada != null) {
-                        entrada.close();
-                    }
-                }
-            }
-        }
-    }
-
-    private class EscMaterialCIN implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            Scanner entrada = null;
-            JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setCurrentDirectory(new File("..\\Proyecto-Final\\MaterialCIN"));
-            int valor = fileChooser.showOpenDialog(fileChooser);
-            if (valor == JFileChooser.APPROVE_OPTION) {
-                String ruta = fileChooser.getSelectedFile().getAbsolutePath();
-                try {
-                    Desktop.getDesktop().open(new File(ruta));
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
-                try {
-                    File f = new File(ruta);
-                    entrada = new Scanner(f);
-                    while (entrada.hasNext()) {
-                        System.out.println(entrada.nextLine());
-                    }
-                } catch (FileNotFoundException ee) {
-                    System.out.println(ee.getMessage());
-                } finally {
-                    if (entrada != null) {
-                        entrada.close();
-                    }
-                }
-            }
-        }
-    }
-
-    private class EscMaterialMIP implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            Scanner entrada = null;
-            JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setCurrentDirectory(new File("..\\Proyecto-Final\\MaterialMIP"));
-            int valor = fileChooser.showOpenDialog(fileChooser);
-            if (valor == JFileChooser.APPROVE_OPTION) {
-                String ruta = fileChooser.getSelectedFile().getAbsolutePath();
-                try {
-                    Desktop.getDesktop().open(new File(ruta));
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
-                try {
-                    File f = new File(ruta);
-                    entrada = new Scanner(f);
-                    while (entrada.hasNext()) {
-                        System.out.println(entrada.nextLine());
-                    }
-                } catch (FileNotFoundException ee) {
-                    System.out.println(ee.getMessage());
-                } finally {
-                    if (entrada != null) {
-                        entrada.close();
-                    }
-                }
-            }
-        }
     }
 
     private static class abrirCorreo implements ActionListener {
@@ -230,7 +140,6 @@ public class profesor {
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }}}
-
 
 
     private class verasistencia implements MenuListener {
@@ -286,4 +195,91 @@ public class profesor {
     }
 
 
+    private class EscMaterial implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (cursos.equals("Dam")) {
+                Scanner entrada = null;
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setCurrentDirectory(new File("..\\Proyecto-Final\\MaterialDAM"));
+                int valor = fileChooser.showOpenDialog(fileChooser);
+                if (valor == JFileChooser.APPROVE_OPTION) {
+                    String ruta = fileChooser.getSelectedFile().getAbsolutePath();
+                    try {
+                        Desktop.getDesktop().open(new File(ruta));
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    try {
+                        File f = new File(ruta);
+                        entrada = new Scanner(f);
+                        while (entrada.hasNext()) {
+                            System.out.println(entrada.nextLine());
+                        }
+                    } catch (FileNotFoundException ee) {
+                        System.out.println(ee.getMessage());
+                    } finally {
+                        if (entrada != null) {
+                            entrada.close();
+                        }
+                    }
+                }
+            }
+            if (cursos.equals("Mip")){
+                Scanner entrada = null;
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setCurrentDirectory(new File("..\\Proyecto-Final\\MaterialMIP"));
+                int valor = fileChooser.showOpenDialog(fileChooser);
+                if (valor == JFileChooser.APPROVE_OPTION) {
+                    String ruta = fileChooser.getSelectedFile().getAbsolutePath();
+                    try {
+                        Desktop.getDesktop().open(new File(ruta));
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    try {
+                        File f = new File(ruta);
+                        entrada = new Scanner(f);
+                        while (entrada.hasNext()) {
+                            System.out.println(entrada.nextLine());
+                        }
+                    } catch (FileNotFoundException ee) {
+                        System.out.println(ee.getMessage());
+                    } finally {
+                        if (entrada != null) {
+                            entrada.close();
+                        }
+                    }
+                }
+            }
+            if (cursos.equals("CIN")){
+                Scanner entrada = null;
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setCurrentDirectory(new File("..\\Proyecto-Final\\MaterialCIN"));
+                int valor = fileChooser.showOpenDialog(fileChooser);
+                if (valor == JFileChooser.APPROVE_OPTION) {
+                    String ruta = fileChooser.getSelectedFile().getAbsolutePath();
+                    try {
+                        Desktop.getDesktop().open(new File(ruta));
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    try {
+                        File f = new File(ruta);
+                        entrada = new Scanner(f);
+                        while (entrada.hasNext()) {
+                            System.out.println(entrada.nextLine());
+                        }
+                    } catch (FileNotFoundException ee) {
+                        System.out.println(ee.getMessage());
+                    } finally {
+                        if (entrada != null) {
+                            entrada.close();
+                        }
+                    }
+                }
+
+            }
+        }
+    }
 }
