@@ -10,6 +10,11 @@ import java.awt.event.MouseListener;
 
 public class jefeEstudios {
  JFrame general;
+
+    public static Font fuenteGeneral=new Font("Wide Latin", Font.PLAIN, 17);
+    public static Font fuenteTitulo=new Font("Kristen ITC", Font.BOLD | Font.ITALIC, 34);
+    public static Font fuenteMenu=new Font("MV Boli", Font.PLAIN, 15);
+
     public jefeEstudios(Usuario user) {
 
         general = new JFrame();
@@ -27,13 +32,13 @@ public class jefeEstudios {
 
 
         titulo.setHorizontalAlignment(SwingConstants.CENTER);
-        titulo.setFont(new Font("Kristen ITC", Font.BOLD | Font.ITALIC, 34));
+        titulo.setFont(fuenteTitulo);
         titulo.setBounds(687, -24, 298, 137);
         principal.add(titulo);
 
         JLabel nombre = new JLabel( user.getNombre());
         nombre.setHorizontalAlignment(SwingConstants.CENTER);
-        nombre.setFont(new Font("Kristen ITC", Font.BOLD | Font.ITALIC, 34));
+        nombre.setFont(fuenteTitulo);
         nombre.setBounds(468, 69, 720, 49);
         principal.add(nombre);
 
@@ -45,7 +50,7 @@ public class jefeEstudios {
         principal.add(jefaEstudiosImagen);
 
         JComboBox reunionesComboBox = new JComboBox();
-        reunionesComboBox.setFont(new Font("Wide Latin", Font.PLAIN, 17));
+        reunionesComboBox.setFont(fuenteGeneral);
         reunionesComboBox.setBackground(new Color(204, 255, 255));
         reunionesComboBox.setModel(new DefaultComboBoxModel(new String[] {"-Reuniones-", "DAM", "CIN", "MIP"}));
         reunionesComboBox.setToolTipText("");
@@ -55,25 +60,26 @@ public class jefeEstudios {
         JButton cuestionariosBtn = new JButton("Cuestionarios");
         cuestionariosBtn.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenCuestionarios.png"));
         cuestionariosBtn.setBackground(new Color(204, 255, 255));
-        cuestionariosBtn.setFont(new Font("Wide Latin", Font.PLAIN, 17));
+        cuestionariosBtn.setFont(fuenteGeneral);
         cuestionariosBtn.setBounds(815, 555, 310, 67);
         principal.add(cuestionariosBtn);
 
         JComboBox recompensasComboBox = new JComboBox();
         recompensasComboBox.setBackground(new Color(204, 255, 255));
         recompensasComboBox.setModel(new DefaultComboBoxModel(new String[] {"-Recompensas-", "DAM", "CIN ", "MIP"}));
-        recompensasComboBox.setFont(new Font("Wide Latin", Font.PLAIN, 17));
+        recompensasComboBox.setFont(fuenteGeneral);
         recompensasComboBox.setBounds(1217, 555, 262, 67);
         principal.add(recompensasComboBox);
         general.setBounds(100, 100, 1503, 827);
 
-        JButton botoncrear_alumnos = new JButton("Crear Alumnos");
-        botoncrear_alumnos.addActionListener(new crearalumnos());
-        botoncrear_alumnos.setBackground(new Color(204, 255, 255));
-        botoncrear_alumnos.setIcon(new ImageIcon("C:\\Users\\carma\\Downloads\\persona.jpg"));
-        botoncrear_alumnos.setFont(new Font("Wide Latin", Font.BOLD | Font.ITALIC, 17));
-        botoncrear_alumnos.setBounds(378, 555, 346, 67);
-        principal.add(botoncrear_alumnos);
+
+        JButton crearAlumnosBtn = new JButton("Crear Alumnos");
+        crearAlumnosBtn.addActionListener(new añadirAlumnos());
+        crearAlumnosBtn.setBackground(new Color(204, 255, 255));
+        crearAlumnosBtn.setIcon(new ImageIcon("C:\\Users\\carma\\Downloads\\persona.jpg"));
+        crearAlumnosBtn.setFont(fuenteGeneral);
+        crearAlumnosBtn.setBounds(378, 555, 346, 67);
+        principal.add(crearAlumnosBtn);
         general.setBounds(100, 100, 1503, 827);
 
         JMenuBar barraMenu = new JMenuBar();
@@ -83,7 +89,7 @@ public class jefeEstudios {
         JMenu listasMenu = new JMenu("Listas");
 
         listasMenu.setBackground(new Color(102, 204, 255));
-        listasMenu.setFont(new Font("MV Boli", Font.PLAIN, 15));
+        listasMenu.setFont(fuenteMenu);
         barraMenu.add(listasMenu);
 
         JCheckBoxMenuItem damCheckItem = new JCheckBoxMenuItem("DAM");
@@ -99,15 +105,15 @@ public class jefeEstudios {
         listasMenu.add(mipCheckItem);
 
         JMenu amonestacionesMenu = new JMenu("Amonestaciones");
-        amonestacionesMenu.setFont(new Font("MV Boli", Font.PLAIN, 15));
+        amonestacionesMenu.setFont(fuenteMenu);
         barraMenu.add(amonestacionesMenu);
 
         JMenu horariosMenu = new JMenu("Horarios");
-        horariosMenu.setFont(new Font("MV Boli", Font.PLAIN, 15));
+        horariosMenu.setFont(fuenteMenu);
         barraMenu.add(horariosMenu);
 
         JMenu quejasMenu = new JMenu("Quejas");
-        quejasMenu.setFont(new Font("MV Boli", Font.PLAIN, 15));
+        quejasMenu.setFont(fuenteMenu);
         barraMenu.add(quejasMenu);
 
         JButton volverBtn = new JButton("");
@@ -167,7 +173,7 @@ public class jefeEstudios {
   }
  }
 
- private class crearalumnos implements ActionListener {
+ private class añadirAlumnos implements ActionListener {
   @Override
   public void actionPerformed(ActionEvent e) {
    new Ingresar_alumnos().setVisible(true);
