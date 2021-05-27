@@ -236,8 +236,8 @@ INSERT INTO educativ.login (id_login, nombre_usuario, contraseña, seguridad, ti
 INSERT INTO educativ.login (id_login, nombre_usuario, contraseña, seguridad, tipo_usuario, id_aj, nombre) VALUES (2, 'Iajenjo', '2345', 8, 'Profesor', null, 'Ivan Ajenjo');
 INSERT INTO educativ.login (id_login, nombre_usuario, contraseña, seguridad, tipo_usuario, id_aj, nombre) VALUES (5, 'Fmiralles', '0000', null, 'Profesor', null, 'Fernando Miralles');
 INSERT INTO educativ.login (id_login, nombre_usuario, contraseña, seguridad, tipo_usuario, id_aj, nombre) VALUES (6, 'Nsenent', '1111', null, 'Jefedeestudios', null, 'Neus Senent');
-INSERT INTO educativ.login (id_login, nombre_usuario, contraseña, seguridad, tipo_usuario, id_aj, nombre) VALUES (7, 'Cvicente', '12', null, 'Director', null, 'Cristina Vicente');
 INSERT INTO educativ.login (id_login, nombre_usuario, contraseña, seguridad, tipo_usuario, id_aj, nombre) VALUES (8, 'Pescobar', '11', null, 'Padres', null, 'Pablo Escobar');
+INSERT INTO educativ.login (id_login, nombre_usuario, contraseña, seguridad, tipo_usuario, id_aj, nombre) VALUES (9, 'Mdomingo', '33', null, 'Profesor', null, 'Marga domingo');
 
 INSERT INTO educativ.alumno (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (3, '12345678A', '2010-04-29', 'Salvador Blanquer', 1);
 INSERT INTO educativ.alumno (id_alumno, DNI, fecha_nacimiento, nombre, id_login) VALUES (4, '88888888Z', '1999-12-15', 'Lucia Calabrese', null);
@@ -280,6 +280,7 @@ INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Ingle
 INSERT INTO educativ.profesor (id_profesor, DNI, nombre, telefono, direccion, fecha_Nac, correo, id_usuario) VALUES (2, '00000000C', 'Ivan Ajenjo', 666666666, 'Calle Colon 1', '1997-09-30', 'i@i.com', 2);
 INSERT INTO educativ.profesor (id_profesor, DNI, nombre, telefono, direccion, fecha_Nac, correo, id_usuario) VALUES (3, '11111111M', 'Fernando Miralles', 654654654, 'Calle Xativa 4', '2006-04-26', 'f@f.com', 5);
 INSERT INTO educativ.profesor (id_profesor, DNI, nombre, telefono, direccion, fecha_Nac, correo, id_usuario) VALUES (4, '22222222N', 'Laura Trillo', 111111111, 'Calle pepe 5', '1987-04-24', 'l@l.com', null);
+INSERT INTO educativ.profesor (id_profesor, DNI, nombre, telefono, direccion, fecha_Nac, correo, id_usuario) VALUES (5, null, 'Marga Domingo', null, null, null, null, 9);
 
 INSERT INTO educativ.clase (id_clase, id_asignatura, id_profesor, fecha) VALUES (1, 3, 2, '2021-04-23 08:15:00');
 INSERT INTO educativ.clase (id_clase, id_asignatura, id_profesor, fecha) VALUES (2, 4, 3, '2021-04-29 09:45:38');
@@ -328,3 +329,9 @@ INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso) VALUES ('Ingle
 INSERT INTO educativ.jefedeestudios (id_jefedeestudios, DNI, nombre, telefono, direccion, fechaNac, correo, id_login) VALUES (1, '00000000M', 'Neus Senent', 698574236, null, null, null, null);
 
 INSERT INTO educativ.padres (id_padres, nombre, DNi, telefono, email, estado_civil, fecha_nacimiento, direccion, Documentos_bancarios, id_alumno, id_login) VALUES (1, 'Pablo Escobar', null, null, null, null, null, null, null, 3, 8);
+
+INSERT INTO educativ.profesor_asignatura (id_profesor, id_asignatura, id) VALUES (2, 3, 5);
+INSERT INTO educativ.profesor_asignatura (id_profesor, id_asignatura, id) VALUES (2, 5, 6);
+INSERT INTO educativ.profesor_asignatura (id_profesor, id_asignatura, id) VALUES (3, 4, 7);
+INSERT INTO educativ.profesor_asignatura (id_profesor, id_asignatura, id) VALUES (4, 6, 8);
+INSERT INTO educativ.profesor_asignatura (id_profesor, id_asignatura, id) VALUES (5, 13, 11);
