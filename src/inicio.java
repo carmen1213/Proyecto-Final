@@ -10,10 +10,14 @@ public class inicio {
     public static final Controlador_login controlLogin = new Controlador_login();
     public static JPasswordField contraseña;
     public static JTextField usuario;
-  //  private static JLabel datosErroneos;
+    private static JLabel datosErroneos;
     private final JFrame general;
     boolean a = true;
     JButton verContraseñaBtn;
+
+    public static Font fuenteTitulo=new Font("Snap ITC", Font.BOLD | Font.ITALIC, 45);
+    private static final Font fuenteGeneral=new Font("Poor Richard", Font.BOLD | Font.ITALIC, 30);
+    private static final Font fuenteBotones=new Font("Stencil", Font.BOLD | Font.ITALIC, 20);
 
 
     public inicio() {
@@ -25,22 +29,21 @@ public class inicio {
         general.getContentPane().add(principal, BorderLayout.CENTER);
         general.addWindowListener(new cerrarVentana());
 
-
         JLabel encabezado = new JLabel("Bienvenid@,");
         encabezado.setForeground(new Color(204, 0, 102));
-        encabezado.setFont(new Font("Snap ITC", Font.BOLD | Font.ITALIC, 45));
+        encabezado.setFont(fuenteTitulo);
         encabezado.setBounds(654, 10, 349, 109);
         principal.add(encabezado);
 
         JLabel titulo = new JLabel("Accede a tus datos!");
         titulo.setForeground(new Color(204, 0, 102));
-        titulo.setFont(new Font("Snap ITC", Font.BOLD | Font.ITALIC, 45));
+        titulo.setFont(fuenteTitulo);
         titulo.setBounds(569, 37, 562, 163);
         principal.add(titulo);
 
         JLabel lblNewLabel_2 = new JLabel("Usuario:");
         lblNewLabel_2.setForeground(new Color(0, 51, 255));
-        lblNewLabel_2.setFont(new Font("Poor Richard", Font.BOLD | Font.ITALIC, 30));
+        lblNewLabel_2.setFont(fuenteGeneral);
         lblNewLabel_2.setBounds(510, 250, 127, 97);
         principal.add(lblNewLabel_2);
 
@@ -51,12 +54,12 @@ public class inicio {
 
         JLabel lblNewLabel_3 = new JLabel("Contraseña:");
         lblNewLabel_3.setForeground(new Color(0, 51, 255));
-        lblNewLabel_3.setFont(new Font("Poor Richard", Font.BOLD | Font.ITALIC, 30));
+        lblNewLabel_3.setFont(fuenteGeneral);
         lblNewLabel_3.setBounds(510, 433, 177, 63);
         principal.add(lblNewLabel_3);
 
         JButton contraseñaOlvidadaBtn = new JButton("Contraseña olvidada");
-        contraseñaOlvidadaBtn.setFont(new Font("Stencil", Font.BOLD | Font.ITALIC, 20));
+        contraseñaOlvidadaBtn.setFont(fuenteBotones);
         contraseñaOlvidadaBtn.setForeground(new Color(255, 255, 255));
         contraseñaOlvidadaBtn.setBackground(new Color(255, 0, 0));
         contraseñaOlvidadaBtn.setBounds(336, 661, 308, 63);
@@ -65,7 +68,7 @@ public class inicio {
         JButton loginBtn = new JButton("Login");
         loginBtn.setForeground(new Color(255, 255, 255));
         loginBtn.setBackground(new Color(50, 205, 50));
-        loginBtn.setFont(new Font("Stencil", Font.BOLD | Font.ITALIC, 20));
+        loginBtn.setFont(fuenteBotones);
         loginBtn.setBounds(949, 661, 368, 63);
          loginBtn.addActionListener(new validarLogin());
         principal.add(loginBtn);
@@ -129,19 +132,20 @@ public class inicio {
                         padre.main(user);
                         break;
                     default:
-                      //  datosErroneos.setForeground(Color.red);
-                     //   datosErroneos.setText("<html> <div style = 'text-align: center;'> Tipo usuario incorrecto </div></html>");
+                        datosErroneos.setForeground(Color.red);
+                        datosErroneos.setText("<html> <div style = 'text-align: center;'> Tipo usuario incorrecto </div></html>");
                         break;
                 }
             } else {
-              //  datosErroneos.setForeground(Color.red);
-              //  datosErroneos.setText("<html> <div style = 'text-align: center;'> contraseña incorrecta <br> o <br> usuario incorrecto </div></html>");
+                datosErroneos.setForeground(Color.red);
+                datosErroneos.setText("<html> <div style = 'text-align: center;'> contraseña incorrecta <br> o <br> usuario incorrecto </div></html>");
             }
         }
 
         @Override
         public void actionPerformed(ActionEvent e) {
             autenticarUsuarioBD();
+
         }
     }
 
@@ -152,7 +156,7 @@ public class inicio {
         @Override
         public void windowClosing(WindowEvent e) {
 
-            int codigo= JOptionPane.showConfirmDialog(null, "¿Quieres un euro para una buena causa?", "Donacion", JOptionPane.YES_NO_OPTION);
+            int codigo= JOptionPane.showConfirmDialog(null, "¿Estas seguro de que quieres cerrar?", "Confirmacion", JOptionPane.YES_NO_OPTION);
             if (codigo == JOptionPane.YES_OPTION){
                general.dispose();
             }else{

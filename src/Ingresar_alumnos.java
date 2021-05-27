@@ -1,7 +1,7 @@
 import BDutils.conexionbasedatos;
-import models.Curso;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
@@ -20,6 +20,8 @@ public class Ingresar_alumnos extends JFrame {
     private javax.swing.JLabel fecha_nacimiento;
     private Connection conn;
 
+    public static Font fuenteGeneral=new Font("Tahoma", 0, 14);
+    public static Font fuenteTitulo=new Font("Tahoma", 1, 24);
 
     private void initComponents() {
 
@@ -37,28 +39,26 @@ public class Ingresar_alumnos extends JFrame {
 
         setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 
-        Nombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        Nombre.setFont(fuenteGeneral); // NOI18N
         Nombre.setText("Nombre completo");
 
 
-        Dni.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        Dni.setFont(fuenteGeneral); // NOI18N
         Dni.setText("DNI");
 
-        fecha_nacimiento.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        fecha_nacimiento.setFont(fuenteGeneral); // NOI18N
         fecha_nacimiento.setText("Fecha de nacimiento");
 
-        Curso.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        Curso.setFont(fuenteGeneral); // NOI18N
         Curso.setText("Curso");
 
-        Mensaje_bienvenida.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        Mensaje_bienvenida.setFont(fuenteTitulo); // NOI18N
         Mensaje_bienvenida.setText("Bienvenido");
-
-
 
         Enviar_nuevo_alumno.setText("Enviar");
         Enviar_nuevo_alumno.addActionListener(new crearAlumno(this));
 
-        Mensaje_informativo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        Mensaje_informativo.setFont(fuenteGeneral); // NOI18N
         Mensaje_informativo.setText("Ingrese a continuacion los datos del alumno");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -150,7 +150,7 @@ public class Ingresar_alumnos extends JFrame {
         return -4;
     }
     private class crearAlumno implements ActionListener {
-        private Ingresar_alumnos datos;
+        private final Ingresar_alumnos datos;
 
         public crearAlumno(Ingresar_alumnos datos) {
             this.datos = datos;

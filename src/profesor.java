@@ -1,10 +1,8 @@
 
 //imports necesarios
 
-import Controladores.ControladorTablaProfesores;
 import Controladores.Controlador_cursos_material_profesores;
 import Controladores.Controlador_login;
-import models.Asignatura;
 import models.Usuario;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -14,20 +12,28 @@ import javax.swing.*;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class profesor {
 
     JFrame general;
-    private Controlador_login control = new Controlador_login();
-    private Controlador_cursos_material_profesores controlador_cursos_material_profesores = new Controlador_cursos_material_profesores();
-    private String cursos = Controlador_cursos_material_profesores.getCursoProfesor(control.getIdProfesor(inicio.usuario.getText(), inicio.contraseña.getText()).getId_profesor());
+    private final Controlador_login control = new Controlador_login();
+    private final Controlador_cursos_material_profesores controlador_cursos_material_profesores = new Controlador_cursos_material_profesores();
+    private final String cursos = Controlador_cursos_material_profesores.getCursoProfesor(control.getIdProfesor(inicio.usuario.getText(), inicio.contraseña.getText()).getId_profesor());
+
+    public static Font fuenteBotones=new Font("Copperplate Gothic Bold", Font.PLAIN, 22);
+
+    public static Font fuenteTitulo=new Font("Mongolian Baiti", Font.BOLD | Font.ITALIC, 51);
+
+    public static Font fuenteMenu=new Font("Rockwell Condensed", Font.BOLD, 18);
 
 
     public profesor(Usuario user) {
@@ -40,14 +46,14 @@ public class profesor {
         general.getContentPane().add(principal, BorderLayout.CENTER);
 
         JLabel titulo = new JLabel("Bienvenido");
-        titulo.setFont(new Font("Mongolian Baiti", Font.BOLD | Font.ITALIC, 51));
+        titulo.setFont(fuenteTitulo);
         titulo.setBounds(640, -11, 278, 110);
         principal.add(titulo);
 
         JLabel nombre = new JLabel(user.getNombre());
         nombre.setForeground(new Color(199, 21, 133));
         nombre.setHorizontalAlignment(SwingConstants.CENTER);
-        nombre.setFont(new Font("Mongolian Baiti", Font.BOLD | Font.ITALIC, 51));
+        nombre.setFont(fuenteTitulo);
         nombre.setBounds(111, 68, 1301, 76);
         principal.add(nombre);
 
@@ -59,14 +65,14 @@ public class profesor {
         JButton horarioBtn = new JButton("Horario");
         horarioBtn.setBackground(new Color(204, 255, 255));
         horarioBtn.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenHorario.png"));
-        horarioBtn.setFont(new Font("Copperplate Gothic Bold", Font.PLAIN, 22));
+        horarioBtn.setFont(fuenteBotones);
         horarioBtn.setBounds(111, 645, 247, 81);
         principal.add(horarioBtn);
 
         JButton reunionesBtn = new JButton("Reuniones");
         reunionesBtn.setBackground(new Color(204, 255, 255));
         reunionesBtn.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenReuniones.png"));
-        reunionesBtn.setFont(new Font("Copperplate Gothic Bold", Font.BOLD, 22));
+        reunionesBtn.setFont(fuenteBotones);
         reunionesBtn.setBounds(1243, 645, 247, 81);
         principal.add(reunionesBtn);
         general.setBounds(100, 100, 1554, 1140);
@@ -80,7 +86,7 @@ public class profesor {
         notasBtn.addActionListener(new agregarNotas());
         notasBtn.setBackground(new Color(204, 255, 255));
         notasBtn.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenNotas.png"));
-        notasBtn.setFont(new Font("Copperplate Gothic Bold", Font.BOLD, 22));
+        notasBtn.setFont(fuenteBotones);
         notasBtn.setBounds(694, 656, 247, 70);
         principal.add(notasBtn);
 
@@ -99,11 +105,11 @@ public class profesor {
 
         JMenu listasMenu = new JMenu("Listas");
         listasMenu.addMenuListener(new verasistencia());
-        listasMenu.setFont(new Font("Rockwell Condensed", Font.BOLD, 18));
+        listasMenu.setFont(fuenteMenu);
         BarraMenu.add(listasMenu);
 
         JMenu materialMenu = new JMenu("Material");
-        materialMenu.setFont(new Font("Rockwell Condensed", Font.BOLD, 17));
+        materialMenu.setFont(fuenteMenu);
 
         JMenuItem curso;
 

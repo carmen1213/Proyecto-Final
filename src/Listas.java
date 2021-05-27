@@ -5,14 +5,13 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.ArrayList;
 
-import static java.awt.Font.BOLD;
-
 public class Listas extends JFrame {
-    private ControladorTablaJefeEstudios controladorJefeestudios = new ControladorTablaJefeEstudios();
+    private final ControladorTablaJefeEstudios controladorJefeestudios = new ControladorTablaJefeEstudios();
+
     private JTable jTableAlumnos;
-    private JLabel titulop;
-    Font f = new Font("fantasy", BOLD, 30);
-    private JComboBox asignatura;
+    public static Font fuenteGeneral = new Font("fantasy", Font.BOLD, 30);
+
+    private final JComboBox asignatura;
 
 
     public Listas(){
@@ -39,7 +38,7 @@ public class Listas extends JFrame {
         JPanel titulo = new JPanel();
         titulo.setBackground(Color.PINK);
         JLabel titulop = new JLabel("LISTADO DE ALUMNOS");
-        titulop.setFont(f);
+        titulop.setFont(fuenteGeneral);
         titulo.add(titulop);
 
 if (asignatura.getSelectedItem().equals("DAM")){
