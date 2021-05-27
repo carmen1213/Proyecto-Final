@@ -5,12 +5,14 @@ import javax.swing.event.MenuListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class jefeEstudios {
-
+ JFrame general;
     public jefeEstudios(Usuario user) {
 
-       JFrame general = new JFrame();
+        general = new JFrame();
         general.setVisible(true);
         general.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         general.setBackground(new Color(255, 192, 203));
@@ -21,17 +23,25 @@ public class jefeEstudios {
         JLayeredPane principal = new JLayeredPane();
         general.getContentPane().add(principal, BorderLayout.CENTER);
 
+        JLabel titulo = new JLabel( "Bienvenida" );
 
-        JLabel titulo = new JLabel("Bienvenido");
+
         titulo.setHorizontalAlignment(SwingConstants.CENTER);
         titulo.setFont(new Font("Kristen ITC", Font.BOLD | Font.ITALIC, 34));
         titulo.setBounds(687, -24, 298, 137);
         principal.add(titulo);
 
+        JLabel nombre = new JLabel( user.getNombre());
+        nombre.setHorizontalAlignment(SwingConstants.CENTER);
+        nombre.setFont(new Font("Kristen ITC", Font.BOLD | Font.ITALIC, 34));
+        nombre.setBounds(468, 69, 720, 49);
+        principal.add(nombre);
+
+
         JLabel jefaEstudiosImagen = new JLabel("");
         jefaEstudiosImagen.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenJefaEstudios.jpg"));
         jefaEstudiosImagen.setHorizontalAlignment(SwingConstants.CENTER);
-        jefaEstudiosImagen.setBounds(378, 99, 853, 399);
+        jefaEstudiosImagen.setBounds(378, 135, 853, 399);
         principal.add(jefaEstudiosImagen);
 
         JComboBox reunionesComboBox = new JComboBox();
@@ -99,6 +109,20 @@ public class jefeEstudios {
         JMenu quejasMenu = new JMenu("Quejas");
         quejasMenu.setFont(new Font("MV Boli", Font.PLAIN, 15));
         barraMenu.add(quejasMenu);
+
+        JButton volverBtn = new JButton("");
+        volverBtn.addMouseListener(new volverInicio());
+
+        volverBtn.setBackground(new Color(204, 255, 204));
+        volverBtn.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenVolverJefeEstudios.png"));
+        volverBtn.setBounds(10, 10, 80, 49);
+
+        volverBtn.setBorderPainted(false);
+        volverBtn.setContentAreaFilled(false);
+        volverBtn.setFocusPainted(false);
+        volverBtn.setOpaque(false);
+        principal.add(volverBtn);
+
     }
 
     public static void main(Usuario user) {
@@ -147,6 +171,37 @@ public class jefeEstudios {
   @Override
   public void actionPerformed(ActionEvent e) {
    new Ingresar_alumnos().setVisible(true);
+  }
+
+
+ }
+
+ private class volverInicio implements MouseListener {
+  @Override
+  public void mouseClicked(MouseEvent e) {
+   general.dispose();
+   inicio.usuario.setText("");
+   inicio.contraseña.setText("");
+  }
+
+  @Override
+  public void mousePressed(MouseEvent e) {
+
+  }
+
+  @Override
+  public void mouseReleased(MouseEvent e) {
+
+  }
+
+  @Override
+  public void mouseEntered(MouseEvent e) {
+
+  }
+
+  @Override
+  public void mouseExited(MouseEvent e) {
+
   }
  }
 }

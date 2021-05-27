@@ -39,10 +39,17 @@ public class profesor {
         JLayeredPane principal = new JLayeredPane();
         general.getContentPane().add(principal, BorderLayout.CENTER);
 
-        JLabel titulo = new JLabel("<html> <div style = 'text-align: center;'> Bienvenido <br>  " + user.getNombre() + " </div></html>");
-        titulo.setFont(new Font("Script MT Bold", Font.BOLD | Font.ITALIC, 51));
-        titulo.setBounds(663, 10, 278, 110);
+        JLabel titulo = new JLabel("Bienvenido");
+        titulo.setFont(new Font("Mongolian Baiti", Font.BOLD | Font.ITALIC, 51));
+        titulo.setBounds(640, -11, 278, 110);
         principal.add(titulo);
+
+        JLabel nombre = new JLabel(user.getNombre());
+        nombre.setForeground(new Color(199, 21, 133));
+        nombre.setHorizontalAlignment(SwingConstants.CENTER);
+        nombre.setFont(new Font("Mongolian Baiti", Font.BOLD | Font.ITALIC, 51));
+        nombre.setBounds(111, 68, 1301, 76);
+        principal.add(nombre);
 
         JLabel profesoresImagen = new JLabel("");
         profesoresImagen.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenProfesores.jpg"));
