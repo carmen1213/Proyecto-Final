@@ -2,9 +2,8 @@ import BDutils.conexionbasedatos;
 import Controladores.ControladorTablaNotas;
 import Controladores.ControladorTablaProfesores;
 import Controladores.Controlador_login;
+import Interfaz.Metodos_repetitivos;
 import models.*;
-import models.Notas;
-import net.sourceforge.jdatepicker.impl.UtilDateModel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -20,14 +19,9 @@ public class Boletin_alumnos extends JFrame{
     private JTable jTableAlumnos;
     private ControladorTablaNotas controladorNotas = new ControladorTablaNotas();
     private ControladorTablaProfesores controladorProfesores = new ControladorTablaProfesores();
-    private JComboBox asignatura;
-    private JLabel titulop;
     private JButton guardar;
-    private static Connection connecion;
     private Controlador_login controllogin = new Controlador_login();
-    private Profesor id_profesor = controllogin.getIdProfesor(inicio.usuario.getText(), inicio.contraseña.getText());
     private ArrayList<Asignatura> asignaturas = controladorProfesores.getAsignaturaProfesor(controllogin.getIdProfesor(inicio.usuario.getText(), inicio.contraseña.getText()).getId_profesor());
-    private UtilDateModel date = new UtilDateModel();
     private static Connection conn;
 
     public Boletin_alumnos() throws SQLException {
@@ -40,10 +34,6 @@ public class Boletin_alumnos extends JFrame{
         general.setLayout(new GridLayout(5, 1));
         general.setBackground(new Color(227, 247, 193));
 
-        JPanel titulo = new JPanel();
-        titulo.setBackground(new Color(227, 247, 193));
-        titulop = new JLabel("Bienvenido");
-        titulo.add(titulop);
 
         JPanel opciones = new JPanel();
         opciones.setBackground(new Color(227, 247, 193));
@@ -129,7 +119,7 @@ public class Boletin_alumnos extends JFrame{
 
         primer.add(referencia);
 
-        general.add(titulo);
+        general.add(Metodos_repetitivos.getjPanel());
         general.add(opciones);
         general.add(scrollpane);
         general.add(primer);
@@ -142,6 +132,8 @@ public class Boletin_alumnos extends JFrame{
         setVisible(true);
 
     }
+
+
 
 
     private DefaultTableModel generarModeloTablaAlumno(ArrayList<Alumno> nombresAlumnos, ArrayList<Asignatura> asignaturas) {
