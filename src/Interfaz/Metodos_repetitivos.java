@@ -8,7 +8,8 @@ import java.awt.*;
 public class Metodos_repetitivos extends JFrame{
 
     private static JLabel titulop;
-    public static Font fuenteTitulo=new Font("Kristen ITC", Font.BOLD | Font.ITALIC, 34);
+    public static Font fuenteTitulo=new Font("Mongolian Baiti", Font.BOLD | Font.ITALIC, 51);
+    public static Font fuenteBotones=new Font("Matura MT Script Capitals", Font.BOLD | Font.ITALIC, 22);
 
     public static JPanel getjPanel() {
         JPanel titulo = new JPanel();
@@ -32,5 +33,24 @@ public class Metodos_repetitivos extends JFrame{
         nombre.setBounds(468, 69, 720, 49);
         return nombre;
     }
+    public static Component Botones(JButton boton) {
+        boton.setToolTipText("");
+        boton.setBackground(new Color(245, 255, 250));
+        boton.setFont(fuenteBotones);
+        boton.setBounds(91, 635, 184, 77);
+        return boton;
+    }
+    public static Component volverBoton(JButton volverBtn) {
+        volverBtn.setBackground(new Color(204, 255, 204));
+        volverBtn.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenVolver.png"));
+        volverBtn.setBounds(10, 10, 80, 49);
+
+        volverBtn.setBorderPainted(false);
+        volverBtn.setContentAreaFilled(false);
+        volverBtn.setFocusPainted(false);
+        volverBtn.setOpaque(false);
+        return volverBtn;
+    }
+
 
 }

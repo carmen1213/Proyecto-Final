@@ -1,6 +1,7 @@
 
 //import necesarios
 
+import Interfaz.Metodos_repetitivos;
 import models.Usuario;
 
 import javax.swing.*;
@@ -33,21 +34,8 @@ public class alumnoGUI {
         JLayeredPane principal = new JLayeredPane();
         general.getContentPane().add(principal, BorderLayout.CENTER);
 
-       
-       
-
-        JLabel titulo = new JLabel(" Bienvenido");
-
-        titulo.setHorizontalAlignment(SwingConstants.CENTER);
-        titulo.setFont(fuenteTitulo);
-        titulo.setBounds(614, -47, 303, 184);
-        principal.add(titulo);
-
-        JLabel nombre = new JLabel(user.getNombre());
-        nombre.setFont(fuenteTitulo);
-        nombre.setHorizontalAlignment(SwingConstants.CENTER);
-        nombre.setBounds(392, 74, 755, 65);
-        principal.add(nombre);
+        principal.add(Metodos_repetitivos.Titulo());
+        principal.add(Metodos_repetitivos.Usuario(user));
 
         JLabel alumnosImagen = new JLabel("");
         alumnosImagen.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenAlumnos.jpg"));
@@ -96,16 +84,7 @@ public class alumnoGUI {
 
         JButton volverBtn = new JButton("");
         volverBtn.addMouseListener(new volverInicio());
-
-        volverBtn.setBackground(new Color(204, 255, 204));
-        volverBtn.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenVolver.png"));
-        volverBtn.setBounds(10, 10, 80, 49);
-
-        volverBtn.setBorderPainted(false);
-        volverBtn.setContentAreaFilled(false);
-        volverBtn.setFocusPainted(false);
-        volverBtn.setOpaque(false);
-        principal.add(volverBtn);
+        principal.add(Metodos_repetitivos.volverBoton(volverBtn));
 
     }
 

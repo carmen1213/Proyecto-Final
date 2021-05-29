@@ -1,6 +1,7 @@
 import BDutils.*;
 import Controladores.ControladorTablaProfesores;
 import Controladores.Controlador_login;
+import Interfaz.Metodos_repetitivos;
 import models.*;
 import models.Alumno;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
@@ -41,10 +42,6 @@ public class tabla_profesor extends JFrame {
         general.setLayout(new GridLayout(4, 1));
         general.setBackground(new Color(227, 247, 193));
 
-        JPanel titulo = new JPanel();
-        titulo.setBackground(new Color(227, 247, 193));
-        titulop = new JLabel("Bienvenido");
-        titulo.add(titulop);
 
         JPanel opciones = new JPanel();
         opciones.setBackground(new Color(227, 247, 193));
@@ -128,7 +125,7 @@ public class tabla_profesor extends JFrame {
 
 
 
-        general.add(titulo);
+        general.add(Metodos_repetitivos.Titulo());
         general.add(opciones);
         general.add(scrollpane);
         general.add(primer);

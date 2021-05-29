@@ -1,6 +1,7 @@
 
 //imports necesarios
 
+import Interfaz.Metodos_repetitivos;
 import models.Usuario;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -31,16 +32,9 @@ public class padre {
         general.getContentPane().setBackground(new Color(230, 230, 250));
         general.getContentPane().add(principal, BorderLayout.CENTER);
 
-        JLabel titulo = new JLabel("<html> <div style = 'text-align: center;'> Bienvenido <br>  " + user.getNombre() + " </div></html>");
-        titulo.setFont(fuenteTitulo);
-        titulo.setBounds(567, 25, 348, 82);
-
         JButton notasBtn = new JButton("Notas");
-        notasBtn.setToolTipText("");
-        notasBtn.setBackground(new Color(245, 255, 250));
         notasBtn.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenNotas.png"));
-        notasBtn.setFont(fuenteBotones);
-        notasBtn.setBounds(91, 635, 184, 77);
+
 
         JLabel padresImagen = new JLabel("");
         padresImagen.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenPadres.png"));
@@ -48,8 +42,8 @@ public class padre {
 
         JButton reunionesBtn = new JButton("Reuniones");
         reunionesBtn.setBackground(new Color(245, 255, 250));
-        reunionesBtn.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenReuniones.png"));
         reunionesBtn.setFont(fuenteBotones);
+        reunionesBtn.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenReuniones.png"));
         reunionesBtn.setBounds(430, 636, 234, 74);
 
         JButton xarxaBtn = new JButton("Libros");
@@ -72,20 +66,12 @@ public class padre {
 
         JButton volverBtn = new JButton("");
         volverBtn.addMouseListener(new volverInicio());
-
-        volverBtn.setBackground(new Color(204, 255, 204));
-        volverBtn.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenVolver.png"));
-        volverBtn.setBounds(10, 10, 80, 49);
-
-        volverBtn.setBorderPainted(false);
-        volverBtn.setContentAreaFilled(false);
-        volverBtn.setFocusPainted(false);
-        volverBtn.setOpaque(false);
-        principal.add(volverBtn);
+        principal.add(Metodos_repetitivos.volverBoton(volverBtn));
 
         //Insercciones a la GUI
-        principal.add(notasBtn);
-        principal.add(titulo);
+        principal.add(Metodos_repetitivos.Botones(notasBtn));
+        principal.add(Metodos_repetitivos.Titulo());
+        principal.add(Metodos_repetitivos.Usuario(user));
         principal.add(padresImagen);
         principal.add(reunionesBtn);
         principal.add(xarxaBtn);
@@ -96,6 +82,7 @@ public class padre {
         xarxaBtn.addActionListener(new inscripcionXarxa());
         compraPapeleriaBtn.addActionListener(new Compra());
     }
+
 
     public static void main(Usuario user) {
         new padre(user);

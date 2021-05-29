@@ -3,6 +3,7 @@
 
 import Controladores.Controlador_cursos_material_profesores;
 import Controladores.Controlador_login;
+import Interfaz.Metodos_repetitivos;
 import models.Usuario;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -45,17 +46,9 @@ public class profesor {
         JLayeredPane principal = new JLayeredPane();
         general.getContentPane().add(principal, BorderLayout.CENTER);
 
-        JLabel titulo = new JLabel("Bienvenido");
-        titulo.setFont(fuenteTitulo);
-        titulo.setBounds(640, -11, 278, 110);
-        principal.add(titulo);
 
-        JLabel nombre = new JLabel(user.getNombre());
-        nombre.setForeground(new Color(199, 21, 133));
-        nombre.setHorizontalAlignment(SwingConstants.CENTER);
-        nombre.setFont(fuenteTitulo);
-        nombre.setBounds(111, 68, 1301, 76);
-        principal.add(nombre);
+        principal.add(Metodos_repetitivos.Titulo());
+        principal.add(Metodos_repetitivos.Usuario(user));
 
         JLabel profesoresImagen = new JLabel("");
         profesoresImagen.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenProfesores.jpg"));
@@ -92,16 +85,7 @@ public class profesor {
 
         JButton volverBtn = new JButton("");
         volverBtn.addMouseListener(new volverInicio());
-
-        volverBtn.setBackground(new Color(204, 255, 204));
-        volverBtn.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenVolver.png"));
-        volverBtn.setBounds(10, 10, 80, 49);
-
-        volverBtn.setBorderPainted(false);
-        volverBtn.setContentAreaFilled(false);
-        volverBtn.setFocusPainted(false);
-        volverBtn.setOpaque(false);
-        principal.add(volverBtn);
+        principal.add(Metodos_repetitivos.volverBoton(volverBtn));
 
         JMenu listasMenu = new JMenu("Listas");
         listasMenu.addMenuListener(new verasistencia());
@@ -124,6 +108,7 @@ public class profesor {
         BarraMenu.add(materialMenu);
 
     }
+
 
     public static void main(Usuario user) {
         new profesor(user);
