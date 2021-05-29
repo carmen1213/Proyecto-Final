@@ -1,3 +1,4 @@
+import Interfaz.Metodos_repetitivos;
 import models.Usuario;
 import javax.swing.*;
 import javax.swing.event.MenuEvent;
@@ -12,7 +13,7 @@ public class jefeEstudios {
  JFrame general;
 
     public static Font fuenteGeneral=new Font("Wide Latin", Font.PLAIN, 17);
-    public static Font fuenteTitulo=new Font("Kristen ITC", Font.BOLD | Font.ITALIC, 34);
+
     public static Font fuenteMenu=new Font("MV Boli", Font.PLAIN, 15);
 
     public jefeEstudios(Usuario user) {
@@ -28,19 +29,9 @@ public class jefeEstudios {
         JLayeredPane principal = new JLayeredPane();
         general.getContentPane().add(principal, BorderLayout.CENTER);
 
-        JLabel titulo = new JLabel( "Bienvenida" );
 
-
-        titulo.setHorizontalAlignment(SwingConstants.CENTER);
-        titulo.setFont(fuenteTitulo);
-        titulo.setBounds(687, -24, 298, 137);
-        principal.add(titulo);
-
-        JLabel nombre = new JLabel( user.getNombre());
-        nombre.setHorizontalAlignment(SwingConstants.CENTER);
-        nombre.setFont(fuenteTitulo);
-        nombre.setBounds(468, 69, 720, 49);
-        principal.add(nombre);
+        principal.add(Metodos_repetitivos.Titulo());
+        principal.add(Metodos_repetitivos.Usuario(user));
 
 
         JLabel jefaEstudiosImagen = new JLabel("");
@@ -131,6 +122,8 @@ public class jefeEstudios {
 
     }
 
+
+
     public static void main(Usuario user) {
         new jefeEstudios(user);
     }
@@ -162,7 +155,7 @@ public class jefeEstudios {
  private class verlistasMip implements ActionListener {
   @Override
   public void actionPerformed(ActionEvent e) {
-   new Listas();
+      System.out.println("hola");
   }
  }
 
