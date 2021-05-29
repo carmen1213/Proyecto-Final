@@ -1,6 +1,7 @@
 package Controladores;
 
 import BDutils.conexionbasedatos;
+import models.Alumno;
 import models.Profesor;
 import models.Usuario;
 
@@ -98,6 +99,28 @@ public class Controlador_login {
             while (login.next()) {
                 int id_profesor = login.getInt(1);
                 return new Profesor(usuario, id_profesor);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+    public Alumno getIdalumno(String usuario, String contraseña) {
+        //Conecta con la base de datos y realiza a la misma la consulta correspondiente
+        String sql = "SELECT nombre, id_alumno FROM alumno WHERE id_login IN(" +
+                "SELECT id_login FROM login WHERE nombre_usuario = ? AND contraseña = ?" +
+                ");";
+        try {
+            PreparedStatement pt = conn.prepareStatement(sql);
+            //Ingresa el dato faltante en la consulta, reemplazando el signo de pregunta por el dato de usuario y contraseña que le envia la persona
+            pt.setString(1, usuario);
+            pt.setString(2, contraseña);
+            ResultSet login = pt.executeQuery();
+            //Mientras que los resultados tengan datos, guarda los mismos en las diferentes variables y crea un objeto Notas donde almacena esos datos obtenidos
+            while (login.next()) {
+                String nombre = login.getString(1);
+                int id_alumno = login.getInt(2);
+                return new Alumno(nombre,id_alumno);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();

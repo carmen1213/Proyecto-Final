@@ -8,10 +8,13 @@ import javax.swing.*;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 
 /**
  * @author Carmen Martí,Salva Blanquer,Lucia Calabrese
@@ -22,8 +25,8 @@ public class alumnoGUI {
     public static Font fuenteGeneral=new Font("Rockwell", Font.BOLD, 17);
     public static Font fuenteTitulo=new Font("Segoe Script",Font.BOLD | Font.ITALIC, 34);
     public static Font fuenteBotones=new Font("Berlin Sans FB", Font.BOLD | Font.ITALIC, 22);
-
     JFrame general;
+
     public alumnoGUI(Usuario user) {
 
         general = new JFrame();
@@ -43,6 +46,7 @@ public class alumnoGUI {
         principal.add(alumnosImagen);
 
         JButton notasBtn = new JButton("Notas");
+        notasBtn.addActionListener(new verNotas());
         notasBtn.setBackground(new Color(255, 222, 173));
         notasBtn.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenNotas.png"));
         notasBtn.setFont(fuenteBotones);
@@ -55,6 +59,7 @@ public class alumnoGUI {
         horarioBtn.setFont(fuenteBotones);
         horarioBtn.setBounds(1006, 663, 216, 71);
         principal.add(horarioBtn);
+
         general.setBounds(100, 100, 1364, 828);
         general.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
@@ -146,6 +151,17 @@ public class alumnoGUI {
         @Override
         public void mouseExited(MouseEvent e) {
 
+        }
+    }
+
+    private class verNotas implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                new Alumnos_notas();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
         }
     }
 }
