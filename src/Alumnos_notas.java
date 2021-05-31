@@ -1,28 +1,27 @@
 import Controladores.ControladorNotasALumnos;
-import Controladores.ControladorTablaNotas;
-import Controladores.ControladorTablaProfesores;
 import Controladores.Controlador_login;
-import models.Alumno;
+import Interfaz.Metodos_repetitivos;
 import models.Asignatura;
-import models.Notas;
-import models.Profesor;
-import net.sourceforge.jdatepicker.impl.UtilDateModel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * @author Carmen Martí,Salva Blanquer,Lucia Calabrese
+ */
 public class Alumnos_notas extends JFrame {
+
+    //Variable para crear la tabla
     private JTable jTableAlumnos;
-    private ControladorTablaNotas controladorNotas = new ControladorTablaNotas();
-    private ControladorTablaProfesores controladorProfesores = new ControladorTablaProfesores();
+    //llama a la clase controlador notas para poder usar a continuacion sus diferentes metodos
     private ControladorNotasALumnos controladorTablanotasAlumnos = new ControladorNotasALumnos();
-    private JLabel titulop;
+    //llama a la clase controlador notas para poder usar a continuacion sus diferentes metodos
     private Controlador_login controllogin = new Controlador_login();
-    private ArrayList<Integer> notitas = controladorTablanotasAlumnos.getNotasalumnos(controllogin.getIdalumno(inicio.usuario.getText(),inicio.contraseña.getText()).getId());
+    //Crea un Arraylist de ints que obtiene los datos de las notas desde la base de datos y las va guardando en la misma
+    private ArrayList<Integer> notas = controladorTablanotasAlumnos.getNotasalumnos(controllogin.getIdalumno(inicio.usuario.getText(), inicio.contraseña.getText()).getId());
 
 
     public Alumnos_notas() throws SQLException {
@@ -35,10 +34,7 @@ public class Alumnos_notas extends JFrame {
         general.setLayout(new GridLayout(5, 1));
         general.setBackground(new Color(227, 247, 193));
 
-        JPanel titulo = new JPanel();
-        titulo.setBackground(new Color(227, 247, 193));
-        titulop = new JLabel("Bienvenido");
-        titulo.add(titulop);
+
 
         JPanel opciones = new JPanel();
         opciones.setBackground(new Color(227, 247, 193));
@@ -46,12 +42,15 @@ public class Alumnos_notas extends JFrame {
         opciones.add(new JLabel(" "));
         opciones.add(new JLabel(" "));
 
-        ArrayList<Asignatura> asignaturas = controladorTablanotasAlumnos.getasignaturas(inicio.usuario.getText(),inicio.contraseña.getText(),3);
-        System.out.println(asignaturas);
-        String alumnosAsignatura = controllogin.getIdalumno(inicio.usuario.getText(),inicio.contraseña.getText()).getNombre();
-        System.out.println(alumnosAsignatura);
-        DefaultTableModel model = generarModeloTablaNotasProfesor(alumnosAsignatura, asignaturas, notitas);
+        //Crea un Arraylist de objetos asignatura que obtiene los datos de las asignaturas desde la base de datos y los va guardando en el mismo
+        ArrayList<Asignatura> asignaturas = controladorTablanotasAlumnos.getasignaturas(inicio.usuario.getText(), inicio.contraseña.getText(), 3);
+        //Guarda en una variable de tipo String los diferentes nombres de los alumnos, consultandoselo a la base de datos
+        String alumnosAsignatura = controllogin.getIdalumno(inicio.usuario.getText(), inicio.contraseña.getText()).getNombre();
 
+        //Crea una variable de tipo Defaulttablemodel llamada model que genera un modelo de tabla pidiendo los datos al usuario
+        DefaultTableModel model = generarModeloTablaNotasProfesor(alumnosAsignatura, asignaturas, notas);
+
+        //Asigna el tipo de variables que debe tener la tabla
         jTableAlumnos = new JTable(model) {
             //private static final long serialVersionUID = 1L;
             @Override
@@ -120,7 +119,7 @@ public class Alumnos_notas extends JFrame {
 
         primer.add(referencia);
 
-        general.add(titulo);
+        general.add(Metodos_repetitivos.Titulo());
         general.add(opciones);
         general.add(scrollpane);
         general.add(primer);
@@ -134,16 +133,24 @@ public class Alumnos_notas extends JFrame {
 
     }
 
-    private DefaultTableModel generarModeloTablaNotasProfesor(String alumnosAsignatura, ArrayList<Asignatura> asignaturas, ArrayList<Integer> notitas) {
+    /**
+     * Metodo que genera el diseño de la tabla
+     * @param alumnosAsignatura String para insertar los datos de los alumnos a la tabla
+     * @param asignaturas Arraylist de tipo asignatura, que obtiene los diferentes nombres de las asignaturas de la base de datos
+     * @param notas Arraylist de tipo int que obtiene las diferentes notas de la base de datos
+     * @return devuelve el modelo de la tabla ya con los datos
+     */
+    //Metodo que devuelve los datos que iran posteriormente en la tabla, obteniendo los mismos de la base de datos con los metodos que se encuentran en los controladores
+    private DefaultTableModel generarModeloTablaNotasProfesor(String alumnosAsignatura, ArrayList<Asignatura> asignaturas, ArrayList<Integer> notas) {
+       //Crea un array de tipo string para darle nombre a las diferentes columnas principales de la tabla
         String[] cols = {"Nombre Alumno", "Nombre Asignatura", "Notas"};
+
         DefaultTableModel model = new DefaultTableModel(cols, 0);
 
         //Ciclo para ingresar los nombres de los alumnos.
-
-
-            for (int k = 0; k < notitas.size(); k++) {
-                    Object[] data = {alumnosAsignatura, asignaturas.get(k).getNombre(),notitas.get(k) };
-                    model.addRow(data);
+        for (int k = 0; k < notas.size(); k++) {
+            Object[] data = {alumnosAsignatura, asignaturas.get(k).getNombre(), notas.get(k)};
+            model.addRow(data);
         }
 
         return model;
