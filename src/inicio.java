@@ -1,4 +1,5 @@
 import Controladores.Controlador_login;
+import Interfaz.Metodos_repetitivos;
 import models.Usuario;
 
 import javax.swing.*;
@@ -15,9 +16,9 @@ public class inicio {
     boolean a = true;
     JButton verContraseñaBtn;
 
-    public static Font fuenteTitulo=new Font("Snap ITC", Font.BOLD | Font.ITALIC, 45);
-    private static final Font fuenteGeneral=new Font("Poor Richard", Font.BOLD | Font.ITALIC, 30);
-    private static final Font fuenteBotones=new Font("Stencil", Font.BOLD | Font.ITALIC, 20);
+    public static Font fuenteTitulo = new Font("Snap ITC", Font.BOLD | Font.ITALIC, 45);
+    private static final Font fuenteGeneral = new Font("Poor Richard", Font.BOLD | Font.ITALIC, 30);
+    private static final Font fuenteBotones = new Font("Stencil", Font.BOLD | Font.ITALIC, 20);
 
 
     public inicio() {
@@ -29,11 +30,8 @@ public class inicio {
         general.getContentPane().add(principal, BorderLayout.CENTER);
         general.addWindowListener(new cerrarVentana());
 
-        JLabel encabezado = new JLabel("Bienvenid@,");
-        encabezado.setForeground(new Color(204, 0, 102));
-        encabezado.setFont(fuenteTitulo);
-        encabezado.setBounds(654, 10, 349, 109);
-        principal.add(encabezado);
+
+        principal.add(Metodos_repetitivos.Titulo());
 
         JLabel titulo = new JLabel("Accede a tus datos!");
         titulo.setForeground(new Color(204, 0, 102));
@@ -70,7 +68,7 @@ public class inicio {
         loginBtn.setBackground(new Color(50, 205, 50));
         loginBtn.setFont(fuenteBotones);
         loginBtn.setBounds(949, 661, 368, 63);
-         loginBtn.addActionListener(new validarLogin());
+        loginBtn.addActionListener(new validarLogin());
         principal.add(loginBtn);
 
 
@@ -100,8 +98,9 @@ public class inicio {
     KeyListener loginEnter = new KeyListener() {
         public void keyPressed(KeyEvent keyEvent) {
             if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER) {
-               validarLogin.autenticarUsuarioBD();
-            }}
+                validarLogin.autenticarUsuarioBD();
+            }
+        }
 
 
         public void keyReleased(KeyEvent keyEvent) {
@@ -153,13 +152,14 @@ public class inicio {
         @Override
         public void windowOpened(WindowEvent e) {
         }
+
         @Override
         public void windowClosing(WindowEvent e) {
 
-            int codigo= JOptionPane.showConfirmDialog(null, "¿Estas seguro de que quieres cerrar?", "Confirmacion", JOptionPane.YES_NO_OPTION);
-            if (codigo == JOptionPane.YES_OPTION){
-               general.dispose();
-            }else{
+            int codigo = JOptionPane.showConfirmDialog(null, "¿Estas seguro de que quieres cerrar?", "Confirmacion", JOptionPane.YES_NO_OPTION);
+            if (codigo == JOptionPane.YES_OPTION) {
+                general.dispose();
+            } else {
                 general.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
             }
         }
@@ -168,18 +168,22 @@ public class inicio {
         public void windowClosed(WindowEvent e) {
 
         }
+
         @Override
         public void windowIconified(WindowEvent e) {
 
         }
+
         @Override
         public void windowDeiconified(WindowEvent e) {
 
         }
+
         @Override
         public void windowActivated(WindowEvent e) {
 
         }
+
         @Override
         public void windowDeactivated(WindowEvent e) {
         }
