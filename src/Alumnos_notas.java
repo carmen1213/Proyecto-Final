@@ -2,27 +2,22 @@ import Controladores.ControladorNotasALumnos;
 import Controladores.ControladorTablaNotas;
 import Controladores.ControladorTablaProfesores;
 import Controladores.Controlador_login;
-import models.Alumno;
 import models.Asignatura;
-import models.Notas;
-import models.Profesor;
-import net.sourceforge.jdatepicker.impl.UtilDateModel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Alumnos_notas extends JFrame {
-    private JTable jTableAlumnos;
-    private ControladorTablaNotas controladorNotas = new ControladorTablaNotas();
-    private ControladorTablaProfesores controladorProfesores = new ControladorTablaProfesores();
-    private ControladorNotasALumnos controladorTablanotasAlumnos = new ControladorNotasALumnos();
-    private JLabel titulop;
-    private Controlador_login controllogin = new Controlador_login();
-    private ArrayList<Integer> notitas = controladorTablanotasAlumnos.getNotasalumnos(controllogin.getIdalumno(inicio.usuario.getText(),inicio.contraseña.getText()).getId());
+    private final JTable jTableAlumnos;
+    private final ControladorTablaNotas controladorNotas = new ControladorTablaNotas();
+    private final ControladorTablaProfesores controladorProfesores = new ControladorTablaProfesores();
+    private final ControladorNotasALumnos controladorTablanotasAlumnos = new ControladorNotasALumnos();
+    private final JLabel titulo;
+    private final Controlador_login controllogin = new Controlador_login();
+    private final ArrayList<Integer> notitas = controladorTablanotasAlumnos.getNotasalumnos(controllogin.getIdalumno(inicio.usuario.getText(), inicio.contraseña.getText()).getId());
 
 
     public Alumnos_notas() throws SQLException {
@@ -35,10 +30,10 @@ public class Alumnos_notas extends JFrame {
         general.setLayout(new GridLayout(5, 1));
         general.setBackground(new Color(227, 247, 193));
 
-        JPanel titulo = new JPanel();
-        titulo.setBackground(new Color(227, 247, 193));
-        titulop = new JLabel("Bienvenido");
-        titulo.add(titulop);
+        JPanel encabezado = new JPanel();
+        encabezado.setBackground(new Color(227, 247, 193));
+        titulo = new JLabel("Bienvenido");
+        encabezado.add(titulo);
 
         JPanel opciones = new JPanel();
         opciones.setBackground(new Color(227, 247, 193));
@@ -46,9 +41,9 @@ public class Alumnos_notas extends JFrame {
         opciones.add(new JLabel(" "));
         opciones.add(new JLabel(" "));
 
-        ArrayList<Asignatura> asignaturas = controladorTablanotasAlumnos.getasignaturas(inicio.usuario.getText(),inicio.contraseña.getText(),3);
+        ArrayList<Asignatura> asignaturas = controladorTablanotasAlumnos.getasignaturas(inicio.usuario.getText(), inicio.contraseña.getText(), 3);
         System.out.println(asignaturas);
-        String alumnosAsignatura = controllogin.getIdalumno(inicio.usuario.getText(),inicio.contraseña.getText()).getNombre();
+        String alumnosAsignatura = controllogin.getIdalumno(inicio.usuario.getText(), inicio.contraseña.getText()).getNombre();
         System.out.println(alumnosAsignatura);
         DefaultTableModel model = generarModeloTablaNotasProfesor(alumnosAsignatura, asignaturas, notitas);
 
@@ -120,7 +115,7 @@ public class Alumnos_notas extends JFrame {
 
         primer.add(referencia);
 
-        general.add(titulo);
+        general.add(encabezado);
         general.add(opciones);
         general.add(scrollpane);
         general.add(primer);
@@ -141,9 +136,9 @@ public class Alumnos_notas extends JFrame {
         //Ciclo para ingresar los nombres de los alumnos.
 
 
-            for (int k = 0; k < notitas.size(); k++) {
-                    Object[] data = {alumnosAsignatura, asignaturas.get(k).getNombre(),notitas.get(k) };
-                    model.addRow(data);
+        for (int k = 0; k < notitas.size(); k++) {
+            Object[] data = {alumnosAsignatura, asignaturas.get(k).getNombre(), notitas.get(k)};
+            model.addRow(data);
         }
 
         return model;

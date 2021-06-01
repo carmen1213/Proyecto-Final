@@ -34,7 +34,7 @@ public class Horario_alumno extends JFrame {
 
     public Horario_alumno() throws SQLException {
         super("Listas");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(HIDE_ON_CLOSE);
         this.getContentPane().setBackground(new Color(227, 247, 193));
 
 
@@ -42,10 +42,10 @@ public class Horario_alumno extends JFrame {
         general.setLayout(new GridLayout(4, 1));
         general.setBackground(new Color(227, 247, 193));
 
-        JPanel titulo = new JPanel();
-        titulo.setBackground(new Color(227, 247, 193));
-        titulop = new JLabel("Bienvenido");
-        titulo.add(titulop);
+        JPanel encabezado = new JPanel();
+        encabezado.setBackground(new Color(227, 247, 193));
+        titulo = new JLabel("Bienvenido");
+        encabezado.add(titulo);
 
         JPanel opciones = new JPanel();
         opciones.setBackground(new Color(227, 247, 193));
@@ -105,8 +105,7 @@ public class Horario_alumno extends JFrame {
         primer.add(botones);
 
 
-
-        general.add(titulo);
+        general.add(encabezado);
         general.add(opciones);
         general.add(scrollpane);
         general.add(primer);
