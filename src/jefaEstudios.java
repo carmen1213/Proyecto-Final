@@ -1,3 +1,6 @@
+
+//imports necesarios
+
 import Interfaz.Metodos_repetitivos;
 import models.Usuario;
 import org.openqa.selenium.WebDriver;
@@ -13,142 +16,178 @@ import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 
-public class jefeEstudios {
+/**
+ * @author Carmen Martí,Salva Blanquer,Lucia Calabrese
+ */
+
+public class jefaEstudios {
+
     public static Font fuenteGeneral = new Font("Wide Latin", Font.PLAIN, 17);
     public static Font fuenteMenu = new Font("MV Boli", Font.PLAIN, 15);
     public static JMenu listasMenu;
+
     JFrame general;
+
     JRadioButtonMenuItem amonestacionesDAM;
     JRadioButtonMenuItem amonestacionesMIP;
     JRadioButtonMenuItem amonestacionesCIN;
+
     JRadioButtonMenuItem leve;
     JRadioButtonMenuItem grave;
     JRadioButtonMenuItem muyGrave;
+
     JRadioButtonMenuItem quejasDAM;
     JRadioButtonMenuItem quejasCIN;
     JRadioButtonMenuItem quejasMIP;
     JRadioButtonMenuItem listasDAM;
     JRadioButtonMenuItem volverMenu;
+
     JMenu amonestacionesMenu;
     File archivo;
 
-    public jefeEstudios(Usuario user) {
+    public jefaEstudios(Usuario user) {
+
+        //Declaración de JFrame y JLayeredPane
 
         general = new JFrame();
-        general.setVisible(true);
-        general.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        general.setBackground(new Color(255, 192, 203));
-        general.setTitle("Jefa de Estudios");
-        general.setIconImage(Toolkit.getDefaultToolkit().getImage("..\\Proyecto-Final\\imagenes\\logoEncabezado.png"));
+
         general.getContentPane().setBackground(new Color(255, 192, 203));
 
         JLayeredPane principal = new JLayeredPane();
         general.getContentPane().add(principal, BorderLayout.CENTER);
 
-
-        principal.add(Metodos_repetitivos.Titulo());
-        principal.add(Metodos_repetitivos.Usuario(user));
-
+        //Declaración de JLabel y JComboBox
 
         JLabel jefaEstudiosImagen = new JLabel("");
+
+        JComboBox recompensasComboBox = new JComboBox();
+
+        //Declaración de JButton
+
+        JButton reunionesBtn = new JButton("Reuniones");
+
+        JButton cuestionariosBtn = new JButton("Cuestionarios");
+
+        JButton crearAlumnosBtn = new JButton("Crear Alumnos");
+
+        JButton volverBtn = new JButton("");
+
+        //Declaración de JMenuBar y JMenu
+
+        JMenuBar barraMenu = new JMenuBar();
+
+        listasMenu = new JMenu("Listas");
+
+        amonestacionesMenu = new JMenu("Amonestaciones");
+
+        JMenu horariosMenu = new JMenu("Horarios");
+
+        JMenu quejasMenu = new JMenu("Quejas");
+
+        //Declaración de JRadioButtonMenuItem
+
+        listasDAM = new JRadioButtonMenuItem("DAM");
+
+        volverMenu = new JRadioButtonMenuItem("volver");
+
+        quejasDAM = new JRadioButtonMenuItem("DAM");
+        quejasCIN = new JRadioButtonMenuItem("CIN");
+        quejasMIP = new JRadioButtonMenuItem("MIP");
+
+        leve = new JRadioButtonMenuItem("LEVE");
+        grave = new JRadioButtonMenuItem("GRAVE");
+        muyGrave = new JRadioButtonMenuItem("MUY GRAVE");
+        volverMenu = new JRadioButtonMenuItem("VOLVER");
+
+        amonestacionesDAM = new JRadioButtonMenuItem("DAM");
+        amonestacionesCIN = new JRadioButtonMenuItem("CIN");
+        amonestacionesMIP = new JRadioButtonMenuItem("MIP");
+
+        /* Modificaciones */
+
+        //general
+
+        general.setVisible(true);
+        general.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        general.setBackground(new Color(255, 192, 203));
+        general.setTitle("Jefa de Estudios");
+        general.setIconImage(Toolkit.getDefaultToolkit().getImage("..\\Proyecto-Final\\imagenes\\logoEncabezado.png"));
+        general.setBounds(100, 100, 1503, 827);
+        general.setJMenuBar(barraMenu);
+
+        //jefaEstudiosImagen
+
         jefaEstudiosImagen.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenJefaEstudios.jpg"));
         jefaEstudiosImagen.setHorizontalAlignment(SwingConstants.CENTER);
         jefaEstudiosImagen.setBounds(378, 135, 853, 399);
-        principal.add(jefaEstudiosImagen);
 
-        JButton reunionesBtn = new JButton("Reuniones");
-        reunionesBtn.addActionListener( new abrirReuniones());
+        //reunionesBtn
+
         reunionesBtn.setFont(fuenteGeneral);
         reunionesBtn.setBackground(new Color(204, 255, 255));
         reunionesBtn.setBounds(35, 555, 262, 67);
-        principal.add(reunionesBtn);
 
-        JButton cuestionariosBtn = new JButton("Cuestionarios");
-        cuestionariosBtn.addActionListener(new verFormularios());
+        //cuestionariosBtn
+
         cuestionariosBtn.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenCuestionarios.png"));
         cuestionariosBtn.setBackground(new Color(204, 255, 255));
         cuestionariosBtn.setFont(fuenteGeneral);
         cuestionariosBtn.setBounds(815, 555, 310, 67);
-        principal.add(cuestionariosBtn);
 
-        JComboBox recompensasComboBox = new JComboBox();
+        //recompensasComboBox
+
         recompensasComboBox.setBackground(new Color(204, 255, 255));
         recompensasComboBox.setModel(new DefaultComboBoxModel(new String[]{"-Recompensas-", "DAM", "CIN ", "MIP"}));
         recompensasComboBox.setFont(fuenteGeneral);
         recompensasComboBox.setBounds(1217, 555, 262, 67);
-        principal.add(recompensasComboBox);
-        general.setBounds(100, 100, 1503, 827);
 
 
-        JButton crearAlumnosBtn = new JButton("Crear Alumnos");
-        crearAlumnosBtn.addActionListener(new añadirAlumnos());
+        //crearAlumnosBtn
+
         crearAlumnosBtn.setBackground(new Color(204, 255, 255));
         crearAlumnosBtn.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenPersona.png"));
         crearAlumnosBtn.setFont(fuenteGeneral);
         crearAlumnosBtn.setBounds(378, 555, 346, 67);
-        principal.add(crearAlumnosBtn);
-        general.setBounds(100, 100, 1503, 827);
-
-        JMenuBar barraMenu = new JMenuBar();
-        barraMenu.setBackground(new Color(255, 192, 203));
-        general.setJMenuBar(barraMenu);
-
-        listasMenu = new JMenu("Listas");
-
         listasMenu.setBackground(new Color(102, 204, 255));
-        listasMenu.setFont(fuenteMenu);
-        barraMenu.add(listasMenu);
 
-        listasDAM = new JRadioButtonMenuItem("DAM");
-        listasDAM.addActionListener(new verListasDAM());
+
+        //JMenus
+
+        barraMenu.setBackground(new Color(255, 192, 203));
+        listasMenu.setFont(fuenteMenu);
+        amonestacionesMenu.setFont(fuenteMenu);
+        horariosMenu.setFont(fuenteMenu);
+        quejasMenu.setFont(fuenteMenu);
+
+
+        //leve,grave,muyGrave y volverMenu
+
+        leve.setVisible(false);
+        grave.setVisible(false);
+        muyGrave.setVisible(false);
+        volverMenu.setVisible(false);
+
+        //Insercciones a la GUI
+
+        principal.add(Metodos_repetitivos.Titulo());
+        principal.add(Metodos_repetitivos.Usuario(user));
+        principal.add(jefaEstudiosImagen);
+        principal.add(reunionesBtn);
+
+        principal.add(cuestionariosBtn);
+        principal.add(recompensasComboBox);
+        principal.add(crearAlumnosBtn);
+
+        barraMenu.add(listasMenu);
         listasMenu.add(listasDAM);
 
-        amonestacionesMenu = new JMenu("Amonestaciones");
-        amonestacionesMenu.setFont(fuenteMenu);
         barraMenu.add(amonestacionesMenu);
-
-        volverMenu = new JRadioButtonMenuItem("volver");
-        volverMenu.addActionListener(new volverMenulist());
-
-        JMenu horariosMenu = new JMenu("Horarios");
-        horariosMenu.setFont(fuenteMenu);
         barraMenu.add(horariosMenu);
-
-        JMenu quejasMenu = new JMenu("Quejas");
-        quejasMenu.setFont(fuenteMenu);
         barraMenu.add(quejasMenu);
-
-        quejasDAM = new JRadioButtonMenuItem("DAM");
-
-        quejasCIN = new JRadioButtonMenuItem("CIN");
-
-        quejasMIP = new JRadioButtonMenuItem("MIP");
 
         quejasMenu.add(quejasDAM);
         quejasMenu.add(quejasCIN);
         quejasMenu.add(quejasMIP);
-
-        leve = new JRadioButtonMenuItem("LEVE");
-        leve.addActionListener(new abrirLeve());
-
-        grave = new JRadioButtonMenuItem("GRAVE");
-        grave.addActionListener(new abrirGrave());
-
-        muyGrave = new JRadioButtonMenuItem("MUY GRAVE");
-        muyGrave.addActionListener(new abrirMuyGrave());
-
-        volverMenu = new JRadioButtonMenuItem("VOLVER");
-        volverMenu.addActionListener(new volverMenulist());
-
-
-        amonestacionesDAM = new JRadioButtonMenuItem("DAM");
-        amonestacionesDAM.addActionListener(new verAmonestacionesDAM());
-
-        amonestacionesCIN = new JRadioButtonMenuItem("CIN");
-        amonestacionesCIN.addActionListener(new verAmonestacionesCIN());
-
-        amonestacionesMIP = new JRadioButtonMenuItem("MIP");
-        amonestacionesMIP.addActionListener(new verAmonestacionesMIP());
 
         amonestacionesMenu.add(amonestacionesDAM);
         amonestacionesMenu.add(amonestacionesCIN);
@@ -159,22 +198,33 @@ public class jefeEstudios {
         amonestacionesMenu.add(muyGrave);
         amonestacionesMenu.add(volverMenu);
 
-        leve.setVisible(false);
-        grave.setVisible(false);
-        muyGrave.setVisible(false);
-        volverMenu.setVisible(false);
-
-
-        JButton volverBtn = new JButton("");
-        volverBtn.addMouseListener(new volverInicio());
         principal.add(Metodos_repetitivos.volverBoton(volverBtn));
+
+        //Acciones
+
+        reunionesBtn.addActionListener( new abrirReuniones());
+
+        cuestionariosBtn.addActionListener(new verFormularios());
+        crearAlumnosBtn.addActionListener(new añadirAlumnos());
+
+        listasDAM.addActionListener(new verListasDAM());
+        volverMenu.addActionListener(new volverMenulist());
+
+        leve.addActionListener(new abrirLeve());
+        grave.addActionListener(new abrirGrave());
+        muyGrave.addActionListener(new abrirMuyGrave());
+        volverMenu.addActionListener(new volverMenulist());
+
+        amonestacionesDAM.addActionListener(new verAmonestacionesDAM());
+        amonestacionesCIN.addActionListener(new verAmonestacionesCIN());
+        amonestacionesMIP.addActionListener(new verAmonestacionesMIP());
+
+        volverBtn.addMouseListener(new volverInicio());
     }
 
     public static void main(Usuario user) {
-        new jefeEstudios(user);
-        System.out.println(listasMenu.isSelected());
+        new jefaEstudios(user);
     }
-
 
     private class añadirAlumnos implements ActionListener {
         @Override
@@ -213,7 +263,6 @@ public class jefeEstudios {
 
         }
     }
-
 
     private class verAmonestacionesDAM implements ActionListener {
         @Override
