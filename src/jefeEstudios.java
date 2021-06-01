@@ -1,5 +1,8 @@
 import Interfaz.Metodos_repetitivos;
 import models.Usuario;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import javax.swing.*;
 import java.awt.*;
@@ -53,15 +56,15 @@ public class jefeEstudios {
         jefaEstudiosImagen.setBounds(378, 135, 853, 399);
         principal.add(jefaEstudiosImagen);
 
-        JComboBox reunionesComboBox = new JComboBox();
-        reunionesComboBox.setFont(fuenteGeneral);
-        reunionesComboBox.setBackground(new Color(204, 255, 255));
-        reunionesComboBox.setModel(new DefaultComboBoxModel(new String[]{"-Reuniones-", "DAM", "CIN", "MIP"}));
-        reunionesComboBox.setToolTipText("");
-        reunionesComboBox.setBounds(35, 555, 262, 67);
-        principal.add(reunionesComboBox);
+        JButton reunionesBtn = new JButton("Reuniones");
+        reunionesBtn.addActionListener( new abrirReuniones());
+        reunionesBtn.setFont(fuenteGeneral);
+        reunionesBtn.setBackground(new Color(204, 255, 255));
+        reunionesBtn.setBounds(35, 555, 262, 67);
+        principal.add(reunionesBtn);
 
         JButton cuestionariosBtn = new JButton("Cuestionarios");
+        cuestionariosBtn.addActionListener(new verFormularios());
         cuestionariosBtn.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenCuestionarios.png"));
         cuestionariosBtn.setBackground(new Color(204, 255, 255));
         cuestionariosBtn.setFont(fuenteGeneral);
@@ -80,7 +83,7 @@ public class jefeEstudios {
         JButton crearAlumnosBtn = new JButton("Crear Alumnos");
         crearAlumnosBtn.addActionListener(new añadirAlumnos());
         crearAlumnosBtn.setBackground(new Color(204, 255, 255));
-        crearAlumnosBtn.setIcon(new ImageIcon("C:\\Users\\carma\\Downloads\\persona.jpg"));
+        crearAlumnosBtn.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenPersona.png"));
         crearAlumnosBtn.setFont(fuenteGeneral);
         crearAlumnosBtn.setBounds(378, 555, 346, 67);
         principal.add(crearAlumnosBtn);
@@ -288,7 +291,7 @@ public class jefeEstudios {
             leve.setSelected(false);
             try {
 
-                archivo = new File("..\\Proyecto-Final\\plantilla_Amonestaciones\\AmonestacionLeve.docx");
+                archivo = new File("..\\Proyecto-Final\\plantilla__Amonestaciones\\AmonestacionLeve.docx");
                 Desktop.getDesktop().open(archivo);
 
 
@@ -307,7 +310,7 @@ public class jefeEstudios {
             grave.setSelected(false);
             try {
 
-                archivo = new File("..\\Proyecto-Final\\plantilla_Amonestaciones\\AmonestacionGrave.docx");
+                archivo = new File("..\\Proyecto-Final\\plantilla__Amonestaciones\\AmonestacionGrave.docx");
                 Desktop.getDesktop().open(archivo);
 
 
@@ -326,7 +329,7 @@ public class jefeEstudios {
             muyGrave.setSelected(false);
             try {
 
-                archivo = new File("..\\Proyecto-Final\\PartesYM.deHonor\\AmonestacionMuyGrave.docx");
+                archivo = new File("..\\Proyecto-Final\\plantilla__Amonestaciones\\AmonestacionMuyGrave.docx");
                 Desktop.getDesktop().open(archivo);
 
 
@@ -348,6 +351,38 @@ public class jefeEstudios {
             listasDAM.setSelected(false);
             new Listas();
 
+        }
+    }
+
+    private class abrirReuniones implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            WebDriver driver;
+
+            String exePath = "..\\Proyecto-Final\\chromedriver.exe";
+            System.setProperty("webdriver.chrome.driver",exePath);
+
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--start-maximized");
+            driver = new ChromeDriver(options);
+            driver.get("https://outlook.office.com/mail/inbox");
+
+        }
+    }
+
+    private class verFormularios implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            WebDriver driver;
+
+            String exePath = "..\\Proyecto-Final\\chromedriver.exe";
+            System.setProperty("webdriver.chrome.driver",exePath);
+
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--start-maximized");
+            driver = new ChromeDriver(options);
+            driver.get("https://www.google.es/intl/es/forms/about/");
         }
     }
 }
