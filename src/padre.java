@@ -19,19 +19,17 @@ import java.awt.event.MouseListener;
 
 public class padre {
 
-    JFrame general;
     public static Font fuenteBotones = new Font("Matura MT Script Capitals", Font.BOLD | Font.ITALIC, 22);
     public static Font fuenteTitulo = new Font("Segoe Script", Font.BOLD | Font.ITALIC, 34);
+    JFrame general;
 
     public padre(Usuario user) {
 
         //Declaración de JFrame y JLayeredPane
 
         general = new JFrame();
-        JLayeredPane principal = new JLayeredPane();
 
-        general.getContentPane().setBackground(new Color(230, 230, 250));
-        general.getContentPane().add(principal, BorderLayout.CENTER);
+        JLayeredPane principal = new JLayeredPane();
 
         //Declaración de JLabel
 
@@ -50,6 +48,10 @@ public class padre {
         JButton volverBtn = new JButton("");
 
         /* Modificaciones */
+
+        //general
+
+        general.getContentPane().setBackground(new Color(230, 230, 250));
 
         //notasBtn
 
@@ -92,6 +94,8 @@ public class padre {
 
         //Insercciones a la GUI
 
+        general.getContentPane().add(principal, BorderLayout.CENTER);
+
         principal.add(Metodos_repetitivos.Botones(notasBtn));
         principal.add(Metodos_repetitivos.Titulo());
         principal.add(Metodos_repetitivos.Usuario(user));
@@ -104,8 +108,11 @@ public class padre {
         //Acciones
 
         reunionesBtn.addActionListener(new abrirCorreo());
+
         xarxaBtn.addActionListener(new inscripcionXarxa());
+
         compraPapeleriaBtn.addActionListener(new Compra());
+
         volverBtn.addMouseListener(new volverInicio());
 
     }

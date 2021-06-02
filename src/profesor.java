@@ -22,6 +22,10 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+/**
+ * @author Carmen Martí,Salva Blanquer,Lucia Calabrese
+ */
+
 public class profesor {
 
     public static Font fuenteBotones = new Font("Copperplate Gothic Bold", Font.PLAIN, 22);
@@ -32,79 +36,116 @@ public class profesor {
     private final String cursos = Controlador_cursos_material_profesores.getCursoProfesor(control.getIdProfesor(inicio.usuario.getText(), inicio.contraseña.getText()).getId_profesor());
     JFrame general;
 
-
     public profesor(Usuario user) {
 
+        //Declaración de JFrame y JLayeredPane
+
         general = new JFrame();
-        general.setVisible(true);
-        general.getContentPane().setBackground(new Color(204, 255, 204));
 
         JLayeredPane principal = new JLayeredPane();
-        general.getContentPane().add(principal, BorderLayout.CENTER);
 
-
-        principal.add(Metodos_repetitivos.Titulo());
-        principal.add(Metodos_repetitivos.Usuario(user));
+        //Declaración de JLabel
 
         JLabel profesoresImagen = new JLabel("");
-        profesoresImagen.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenProfesores.jpg"));
-        profesoresImagen.setBounds(444, 130, 704, 474);
-        principal.add(profesoresImagen);
+
+        //Declaración de JButton
 
         JButton horarioBtn = new JButton("Horario");
+
+        JButton reunionesBtn = new JButton("Reuniones");
+
+        JButton notasBtn = new JButton("Notas");
+
+        JButton volverBtn = new JButton("");
+
+        //Declaración de JMenu,JMenuBar y JMenuItem
+
+        JMenuBar BarraMenu = new JMenuBar();
+
+        JMenu listasMenu = new JMenu("Listas");
+
+        JMenu materialMenu = new JMenu("Material");
+
+        JMenuItem curso;
+
+        curso = new JMenuItem(String.valueOf(cursos));
+
+        /* Modificaciones */
+
+        //general
+
+        general.getContentPane().setBackground(new Color(204, 255, 204));
+        general.setVisible(true);
+        general.setBounds(100, 100, 1554, 1140);
+        general.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        general.setJMenuBar(BarraMenu);
+
+        //profesorImagen
+
+        profesoresImagen.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenProfesores.jpg"));
+        profesoresImagen.setBounds(444, 130, 704, 474);
+
+        //horarioBtn
+
         horarioBtn.setBackground(new Color(204, 255, 255));
         horarioBtn.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenHorario.png"));
         horarioBtn.setFont(fuenteBotones);
         horarioBtn.setBounds(111, 645, 247, 81);
-        principal.add(horarioBtn);
 
-        JButton reunionesBtn = new JButton("Reuniones");
+        //reunionesBtn
+
         reunionesBtn.setBackground(new Color(204, 255, 255));
         reunionesBtn.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenReuniones.png"));
         reunionesBtn.setFont(fuenteBotones);
         reunionesBtn.setBounds(1243, 645, 247, 81);
-        principal.add(reunionesBtn);
-        general.setBounds(100, 100, 1554, 1140);
-        general.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
-        JMenuBar BarraMenu = new JMenuBar();
-        BarraMenu.setBackground(new Color(204, 255, 204));
-        general.setJMenuBar(BarraMenu);
+        //notasBtn
 
-        JButton notasBtn = new JButton("Notas");
-        notasBtn.addActionListener(new agregarNotas());
         notasBtn.setBackground(new Color(204, 255, 255));
         notasBtn.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenNotas.png"));
         notasBtn.setFont(fuenteBotones);
         notasBtn.setBounds(694, 656, 247, 70);
-        principal.add(notasBtn);
 
-        JButton volverBtn = new JButton("");
-        volverBtn.addMouseListener(new volverInicio());
-        principal.add(Metodos_repetitivos.volverBoton(volverBtn));
+        //Menus
 
-        JMenu listasMenu = new JMenu("Listas");
-        listasMenu.addMenuListener(new verasistencia());
+        BarraMenu.setBackground(new Color(204, 255, 204));
+
         listasMenu.setFont(fuenteMenu);
-        BarraMenu.add(listasMenu);
 
-        JMenu materialMenu = new JMenu("Material");
         materialMenu.setFont(fuenteMenu);
 
-        JMenuItem curso;
+        //Insercciones a la GUI
 
+        general.getContentPane().add(principal, BorderLayout.CENTER);
 
-        curso = new JMenuItem(String.valueOf(cursos));
-        curso.addActionListener(new EscMaterial());
+        principal.add(notasBtn);
+        principal.add(Metodos_repetitivos.volverBoton(volverBtn));
 
+        BarraMenu.add(listasMenu);
 
         materialMenu.add(curso);
-        reunionesBtn.addActionListener(new abrirCorreo());
 
         BarraMenu.add(materialMenu);
 
-    }
+        principal.add(Metodos_repetitivos.Titulo());
+        principal.add(Metodos_repetitivos.Usuario(user));
+        principal.add(profesoresImagen);
+        principal.add(horarioBtn);
+        principal.add(reunionesBtn);
 
+        //Acciones
+
+        notasBtn.addActionListener(new agregarNotas());
+
+        volverBtn.addMouseListener(new volverInicio());
+
+        listasMenu.addMenuListener(new verasistencia());
+
+        curso.addActionListener(new EscMaterial());
+
+        reunionesBtn.addActionListener(new abrirCorreo());
+
+    }
 
     public static void main(Usuario user) {
         new profesor(user);

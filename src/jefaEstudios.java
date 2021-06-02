@@ -1,4 +1,3 @@
-
 //imports necesarios
 
 import Interfaz.Metodos_repetitivos;
@@ -51,10 +50,7 @@ public class jefaEstudios {
 
         general = new JFrame();
 
-        general.getContentPane().setBackground(new Color(255, 192, 203));
-
         JLayeredPane principal = new JLayeredPane();
-        general.getContentPane().add(principal, BorderLayout.CENTER);
 
         //Declaración de JLabel y JComboBox
 
@@ -107,6 +103,7 @@ public class jefaEstudios {
 
         //general
 
+        general.getContentPane().setBackground(new Color(255, 192, 203));
         general.setVisible(true);
         general.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         general.setBackground(new Color(255, 192, 203));
@@ -169,11 +166,12 @@ public class jefaEstudios {
 
         //Insercciones a la GUI
 
+        general.getContentPane().add(principal, BorderLayout.CENTER);
+
         principal.add(Metodos_repetitivos.Titulo());
         principal.add(Metodos_repetitivos.Usuario(user));
         principal.add(jefaEstudiosImagen);
         principal.add(reunionesBtn);
-
         principal.add(cuestionariosBtn);
         principal.add(recompensasComboBox);
         principal.add(crearAlumnosBtn);
@@ -192,7 +190,6 @@ public class jefaEstudios {
         amonestacionesMenu.add(amonestacionesDAM);
         amonestacionesMenu.add(amonestacionesCIN);
         amonestacionesMenu.add(amonestacionesMIP);
-
         amonestacionesMenu.add(leve);
         amonestacionesMenu.add(grave);
         amonestacionesMenu.add(muyGrave);
@@ -202,17 +199,22 @@ public class jefaEstudios {
 
         //Acciones
 
-        reunionesBtn.addActionListener( new abrirReuniones());
+        reunionesBtn.addActionListener(new abrirReuniones());
 
         cuestionariosBtn.addActionListener(new verFormularios());
+
         crearAlumnosBtn.addActionListener(new añadirAlumnos());
 
         listasDAM.addActionListener(new verListasDAM());
+
         volverMenu.addActionListener(new volverMenulist());
 
         leve.addActionListener(new abrirLeve());
+
         grave.addActionListener(new abrirGrave());
+
         muyGrave.addActionListener(new abrirMuyGrave());
+
         volverMenu.addActionListener(new volverMenulist());
 
         amonestacionesDAM.addActionListener(new verAmonestacionesDAM());
@@ -410,7 +412,7 @@ public class jefaEstudios {
             WebDriver driver;
 
             String exePath = "..\\Proyecto-Final\\chromedriver.exe";
-            System.setProperty("webdriver.chrome.driver",exePath);
+            System.setProperty("webdriver.chrome.driver", exePath);
 
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--start-maximized");
@@ -426,7 +428,7 @@ public class jefaEstudios {
             WebDriver driver;
 
             String exePath = "..\\Proyecto-Final\\chromedriver.exe";
-            System.setProperty("webdriver.chrome.driver",exePath);
+            System.setProperty("webdriver.chrome.driver", exePath);
 
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--start-maximized");

@@ -20,10 +20,6 @@ public class inicio {
     boolean visible = true;
     JButton verContraseñaBtn;
 
-    public static Font fuenteTitulo=new Font("Snap ITC", Font.BOLD | Font.ITALIC, 45);
-    private static final Font fuenteGeneral=new Font("Poor Richard", Font.BOLD | Font.ITALIC, 30);
-    private static final Font fuenteBotones=new Font("Stencil", Font.BOLD | Font.ITALIC, 20);
-
 
     public inicio() {
 
@@ -106,7 +102,7 @@ public class inicio {
         contraseña = new JPasswordField();
         contraseña.setBounds(849, 444, 289, 56);
         verContraseñaBtn.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenOjo.png"));
-        contraseña.addKeyListener(loginEnter);
+        contraseña.addKeyListener(new loginEnter());
         principal.add(contraseña);
         general.setBackground(new Color(204, 255, 255));
         general.setBounds(100, 100, 1449, 810);
@@ -127,13 +123,13 @@ public class inicio {
             if (user != null) {
                 switch (user.getTipoUsuario()) {
                     case "Alumno":
-                        alumnoGUI.main(user);
+                        alumno.main(user);
                         break;
                     case "Profesor":
                         profesor.main(user);
                         break;
                     case "Jefedeestudios":
-                        jefeEstudios.main(user);
+                        jefaEstudios.main(user);
                         break;
                     case "Padres":
                         padre.main(user);
@@ -242,5 +238,23 @@ public class inicio {
     }
 
 
+    private class loginEnter implements KeyListener {
+        @Override
+        public void keyTyped(KeyEvent e) {
+
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+            if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                validarLogin.autenticarUsuarioBD();
+            }
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+
+        }
+    }
 }
 

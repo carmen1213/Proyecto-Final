@@ -22,83 +22,111 @@ import java.sql.SQLException;
  * @author Carmen Martí,Salva Blanquer,Lucia Calabrese
  */
 
-public class alumnoGUI {
+public class alumno {
 
     public static Font fuenteGeneral = new Font("Rockwell", Font.BOLD, 17);
     public static Font fuenteTitulo = new Font("Segoe Script", Font.BOLD | Font.ITALIC, 34);
     public static Font fuenteBotones = new Font("Berlin Sans FB", Font.BOLD | Font.ITALIC, 22);
     JFrame general;
 
-    public alumnoGUI(Usuario user) {
+    public alumno(Usuario user) {
+
+        //Declaración de JFrame y JLayeredPane
 
         general = new JFrame();
-        general.setIconImage(Toolkit.getDefaultToolkit().getImage("..\\Proyecto-Final\\imagenes\\logoEncabezado.png"));
-        general.setTitle("Alumnos");
-        general.getContentPane().setBackground(new Color(250, 250, 210));
 
         JLayeredPane principal = new JLayeredPane();
-        general.getContentPane().add(principal, BorderLayout.CENTER);
 
-        principal.add(Metodos_repetitivos.Titulo());
-        principal.add(Metodos_repetitivos.Usuario(user));
+        //Declaración de JLabel
 
         JLabel alumnosImagen = new JLabel("");
-        alumnosImagen.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenAlumnos.jpg"));
-        alumnosImagen.setBounds(371, 158, 840, 438);
-        principal.add(alumnosImagen);
+
+        //Declaración de JButton
 
         JButton notasBtn = new JButton("Notas");
-        notasBtn.addActionListener(new verNotas());
+        JButton horarioBtn = new JButton("Horario");
+        JButton volverBtn = new JButton("");
+
+        //Declaración de JMenu y JMenuBar
+
+        JMenu expedientesMenu = new JMenu("Expedientes");
+        JMenu quejasMenu = new JMenu("Quejas");
+        JMenu cuestionariosMenu = new JMenu("Cuestionarios");
+        JMenu TareasMenu = new JMenu("Tareas");
+        JMenuBar barraMenu = new JMenuBar();
+
+        /* Modificaciones */
+
+        //general
+
+        general.getContentPane().setBackground(new Color(250, 250, 210));
+        general.setTitle("Alumnos");
+        general.setVisible(true);
+        general.setIconImage(Toolkit.getDefaultToolkit().getImage("..\\Proyecto-Final\\imagenes\\logoEncabezado.png"));
+        general.setBounds(100, 100, 1364, 828);
+        general.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        general.setJMenuBar(barraMenu);
+
+        //alumnosImagen
+
+        alumnosImagen.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenAlumnos.jpg"));
+        alumnosImagen.setBounds(371, 158, 840, 438);
+
+        //notasBtn
+
         notasBtn.setBackground(new Color(255, 222, 173));
         notasBtn.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenNotas.png"));
         notasBtn.setFont(fuenteBotones);
         notasBtn.setBounds(371, 663, 216, 71);
-        principal.add(notasBtn);
 
-        JButton horarioBtn = new JButton("Horario");
+        //horarioBtn
+
         horarioBtn.setBackground(new Color(255, 222, 173));
         horarioBtn.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenHorario.png"));
         horarioBtn.setFont(fuenteBotones);
         horarioBtn.setBounds(1006, 663, 216, 71);
-        principal.add(horarioBtn);
 
-        general.setBounds(100, 100, 1364, 828);
-        general.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        //Menus
 
-        JMenuBar barraMenu = new JMenuBar();
         barraMenu.setBackground(new Color(250, 250, 210));
         barraMenu.setForeground(new Color(255, 255, 255));
-        general.setJMenuBar(barraMenu);
 
-        JMenu expedientesMenu = new JMenu("Expedientes");
         expedientesMenu.setHorizontalAlignment(SwingConstants.CENTER);
         expedientesMenu.setFont(fuenteGeneral);
-        barraMenu.add(expedientesMenu);
 
-        JMenu quejasMenu = new JMenu("Quejas");
-        quejasMenu.addMenuListener(new abrirQuejas());
         quejasMenu.setFont(fuenteGeneral);
-        barraMenu.add(quejasMenu);
 
-        JMenu cuestionariosMenu = new JMenu("Cuestionarios");
-        cuestionariosMenu.addActionListener(new verFormularios());
         cuestionariosMenu.setFont(fuenteGeneral);
-        barraMenu.add(cuestionariosMenu);
 
-        JMenu TareasMenu = new JMenu("Tareas");
         TareasMenu.setFont(fuenteGeneral);
-        barraMenu.add(TareasMenu);
-        general.setVisible(true);
 
-        JButton volverBtn = new JButton("");
-        volverBtn.addMouseListener(new volverInicio());
+        //Insercciones a la GUI
+
+        general.getContentPane().add(principal, BorderLayout.CENTER);
+        principal.add(Metodos_repetitivos.Titulo());
+        principal.add(Metodos_repetitivos.Usuario(user));
+        principal.add(alumnosImagen);
+        principal.add(notasBtn);
+        principal.add(horarioBtn);
+
+        barraMenu.add(expedientesMenu);
+        barraMenu.add(quejasMenu);
+        barraMenu.add(cuestionariosMenu);
+        barraMenu.add(TareasMenu);
+
         principal.add(Metodos_repetitivos.volverBoton(volverBtn));
+
+        //Acciones
+
+        quejasMenu.addMenuListener(new abrirQuejas());
+        cuestionariosMenu.addActionListener(new verFormularios());
+        volverBtn.addMouseListener(new volverInicio());
+        notasBtn.addActionListener(new verNotas());
 
     }
 
-
     public static void main(Usuario user) {
-        new alumnoGUI(user);
+        new alumno(user);
 
     }
 
@@ -174,7 +202,7 @@ public class alumnoGUI {
             WebDriver driver;
 
             String exePath = "..\\Proyecto-Final\\chromedriver.exe";
-            System.setProperty("webdriver.chrome.driver",exePath);
+            System.setProperty("webdriver.chrome.driver", exePath);
 
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--start-maximized");
