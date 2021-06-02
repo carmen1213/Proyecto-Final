@@ -194,6 +194,11 @@ create table reuniones
     fecha        date null,
     curso        varchar(45) null
 );
+create definer = root@localhost view view_name as
+select `a`.`id_asignatura` AS `id_asignatura`, `a`.`nombre` AS `nombre`
+from (`educativ`.`curso`
+    left join `educativ`.`asignatura` `a` on ((`educativ`.`curso`.`id_curso` = `a`.`id_curso`)))
+where ((`educativ`.`curso`.`nombre` = 'Dam') and (`educativ`.`curso`.`id_curso` = `a`.`id_curso`));
 
 create
 definer = root@localhost view alumno_cursos as
