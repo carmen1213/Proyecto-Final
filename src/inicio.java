@@ -1,5 +1,4 @@
 import Controladores.Controlador_login;
-import Interfaz.Metodos_repetitivos;
 import models.Usuario;
 
 import javax.swing.*;
@@ -9,16 +8,21 @@ import java.awt.event.*;
 
 public class inicio {
     public static final Controlador_login controlLogin = new Controlador_login();
-    public static JPasswordField contraseña;
-    public static JTextField usuario;
-    private static JLabel datosErroneos;
-    private final JFrame general;
-    boolean a = true;
-    JButton verContraseñaBtn;
-
-    public static Font fuenteTitulo = new Font("Snap ITC", Font.BOLD | Font.ITALIC, 45);
     private static final Font fuenteGeneral = new Font("Poor Richard", Font.BOLD | Font.ITALIC, 30);
     private static final Font fuenteBotones = new Font("Stencil", Font.BOLD | Font.ITALIC, 20);
+    public static JPasswordField contraseña;
+    public static JTextField usuario;
+    public static JLabel usuarioIncorrecto;
+    public static JLabel contraIncorrecta;
+    public static Font fuenteTitulo = new Font("Snap ITC", Font.BOLD | Font.ITALIC, 45);
+    private final JFrame general;
+    JLabel labelUsuario;
+    boolean visible = true;
+    JButton verContraseñaBtn;
+
+    public static Font fuenteTitulo=new Font("Snap ITC", Font.BOLD | Font.ITALIC, 45);
+    private static final Font fuenteGeneral=new Font("Poor Richard", Font.BOLD | Font.ITALIC, 30);
+    private static final Font fuenteBotones=new Font("Stencil", Font.BOLD | Font.ITALIC, 20);
 
 
     public inicio() {
@@ -30,8 +34,11 @@ public class inicio {
         general.getContentPane().add(principal, BorderLayout.CENTER);
         general.addWindowListener(new cerrarVentana());
 
-
-        principal.add(Metodos_repetitivos.Titulo());
+        JLabel encabezado = new JLabel("Bienvenid@,");
+        encabezado.setForeground(new Color(204, 0, 102));
+        encabezado.setFont(fuenteTitulo);
+        encabezado.setBounds(654, 10, 349, 109);
+        principal.add(encabezado);
 
         JLabel titulo = new JLabel("Accede a tus datos!");
         titulo.setForeground(new Color(204, 0, 102));
@@ -39,29 +46,45 @@ public class inicio {
         titulo.setBounds(569, 37, 562, 163);
         principal.add(titulo);
 
-        JLabel lblNewLabel_2 = new JLabel("Usuario:");
-        lblNewLabel_2.setForeground(new Color(0, 51, 255));
-        lblNewLabel_2.setFont(fuenteGeneral);
-        lblNewLabel_2.setBounds(510, 250, 127, 97);
-        principal.add(lblNewLabel_2);
+        JLabel labelUsuario = new JLabel("Usuario:");
+        labelUsuario.setForeground(new Color(0, 51, 255));
+        labelUsuario.setFont(fuenteGeneral);
+        labelUsuario.setBounds(510, 250, 127, 97);
+        principal.add(labelUsuario);
+
 
         usuario = new JTextField();
         usuario.setBounds(849, 278, 328, 56);
         principal.add(usuario);
         usuario.setColumns(10);
 
-        JLabel lblNewLabel_3 = new JLabel("Contraseña:");
-        lblNewLabel_3.setForeground(new Color(0, 51, 255));
-        lblNewLabel_3.setFont(fuenteGeneral);
-        lblNewLabel_3.setBounds(510, 433, 177, 63);
-        principal.add(lblNewLabel_3);
+        JLabel labelContraseña = new JLabel("Contraseña:");
+        labelContraseña.setForeground(new Color(0, 51, 255));
+        labelContraseña.setFont(fuenteGeneral);
+        labelContraseña.setBounds(510, 433, 177, 63);
+        principal.add(labelContraseña);
 
-        JButton contraseñaOlvidadaBtn = new JButton("Contraseña olvidada");
+        usuarioIncorrecto = new JLabel(" usuario incorrecto");
+        usuarioIncorrecto.setForeground(Color.red);
+        usuarioIncorrecto.setFont(fuenteGeneral);
+        usuarioIncorrecto.setBounds(850, 314, 230, 63);
+        usuarioIncorrecto.setVisible(false);
+        principal.add(usuarioIncorrecto);
+
+        contraIncorrecta = new JLabel(" contraseña incorrecta");
+        contraIncorrecta.setForeground(Color.red);
+        contraIncorrecta.setFont(fuenteGeneral);
+        contraIncorrecta.setBounds(850, 480, 270, 63);
+        contraIncorrecta.setVisible(false);
+        principal.add(contraIncorrecta);
+
+        JButton contraseñaOlvidadaBtn = new JButton("Contraseña Olvidada");
         contraseñaOlvidadaBtn.setFont(fuenteBotones);
         contraseñaOlvidadaBtn.setForeground(new Color(255, 255, 255));
         contraseñaOlvidadaBtn.setBackground(new Color(255, 0, 0));
         contraseñaOlvidadaBtn.setBounds(336, 661, 308, 63);
         principal.add(contraseñaOlvidadaBtn);
+
 
         JButton loginBtn = new JButton("Login");
         loginBtn.setForeground(new Color(255, 255, 255));
@@ -89,28 +112,13 @@ public class inicio {
         general.setBounds(100, 100, 1449, 810);
         general.add(principal);
         general.setVisible(true);
+
+
     }
 
     public static void main() {
         new inicio();
     }
-
-    KeyListener loginEnter = new KeyListener() {
-        public void keyPressed(KeyEvent keyEvent) {
-            if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER) {
-                validarLogin.autenticarUsuarioBD();
-            }
-        }
-
-
-        public void keyReleased(KeyEvent keyEvent) {
-
-        }
-
-        public void keyTyped(KeyEvent keyEvent) {
-
-        }
-    };
 
     public static class validarLogin implements ActionListener {
 
@@ -131,13 +139,14 @@ public class inicio {
                         padre.main(user);
                         break;
                     default:
-                        datosErroneos.setForeground(Color.red);
-                        datosErroneos.setText("<html> <div style = 'text-align: center;'> Tipo usuario incorrecto </div></html>");
+                        usuarioIncorrecto.setVisible(true);
+                        contraIncorrecta.setVisible(true);
+
                         break;
                 }
             } else {
-                datosErroneos.setForeground(Color.red);
-                datosErroneos.setText("<html> <div style = 'text-align: center;'> contraseña incorrecta <br> o <br> usuario incorrecto </div></html>");
+
+
             }
         }
 
@@ -194,17 +203,17 @@ public class inicio {
         public void mouseClicked(MouseEvent e) {
 
 
-            if (a) {  // a es una variable boolean en true
+            if (visible) {  // a es una variable boolean en true
                 contraseña.setEchoChar((char) 0); // este método es el que hace visible el texto del jPasswordField
-                a = false;
+                visible = false;
             } else {
                 char i = 0;
                 contraseña.setEchoChar('•'); // i es el char
-                a = true;
+                visible = true;
             }
 
 
-            if (!a) {
+            if (!visible) {
                 verContraseñaBtn.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenOjo.png"));
             } else {
                 verContraseñaBtn.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenOjoTachado.png"));
@@ -231,4 +240,7 @@ public class inicio {
 
         }
     }
+
+
 }
+

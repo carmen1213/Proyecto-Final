@@ -1,4 +1,3 @@
-
 //imports necesarios
 
 import Controladores.Controlador_cursos_material_profesores;
@@ -25,16 +24,13 @@ import java.util.Scanner;
 
 public class profesor {
 
-    JFrame general;
+    public static Font fuenteBotones = new Font("Copperplate Gothic Bold", Font.PLAIN, 22);
+    public static Font fuenteTitulo = new Font("Mongolian Baiti", Font.BOLD | Font.ITALIC, 51);
+    public static Font fuenteMenu = new Font("Rockwell Condensed", Font.BOLD, 18);
     private final Controlador_login control = new Controlador_login();
     private final Controlador_cursos_material_profesores controlador_cursos_material_profesores = new Controlador_cursos_material_profesores();
     private final String cursos = Controlador_cursos_material_profesores.getCursoProfesor(control.getIdProfesor(inicio.usuario.getText(), inicio.contraseña.getText()).getId_profesor());
-
-    public static Font fuenteBotones=new Font("Copperplate Gothic Bold", Font.PLAIN, 22);
-
-    public static Font fuenteTitulo=new Font("Mongolian Baiti", Font.BOLD | Font.ITALIC, 51);
-
-    public static Font fuenteMenu=new Font("Rockwell Condensed", Font.BOLD, 18);
+    JFrame general;
 
 
     public profesor(Usuario user) {
@@ -137,7 +133,9 @@ public class profesor {
                 new Boletin_alumnos();
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
-            }}}
+            }
+        }
+    }
 
 
     private class verasistencia implements MenuListener {
@@ -223,7 +221,7 @@ public class profesor {
                     }
                 }
             }
-            if (cursos.equals("Mip")){
+            if (cursos.equals("Mip")) {
                 Scanner entrada = null;
                 JFileChooser fileChooser = new JFileChooser();
                 fileChooser.setCurrentDirectory(new File("..\\Proyecto-Final\\MaterialMIP"));
@@ -250,7 +248,7 @@ public class profesor {
                     }
                 }
             }
-            if (cursos.equals("CIN")){
+            if (cursos.equals("CIN")) {
                 Scanner entrada = null;
                 JFileChooser fileChooser = new JFileChooser();
                 fileChooser.setCurrentDirectory(new File("..\\Proyecto-Final\\MaterialCIN"));

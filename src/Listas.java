@@ -1,23 +1,21 @@
 import Controladores.ControladorTablaJefeEstudios;
 import models.Curso;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
 public class Listas extends JFrame {
-    private final ControladorTablaJefeEstudios controladorJefeestudios = new ControladorTablaJefeEstudios();
-
-    private JTable jTableAlumnos;
     public static Font fuenteGeneral = new Font("fantasy", Font.BOLD, 30);
-
+    private final ControladorTablaJefeEstudios controladorJefeestudios = new ControladorTablaJefeEstudios();
     private final JComboBox asignatura;
+    private JTable jTableAlumnos;
 
 
-    public Listas(){
+    public Listas() {
         super("Listas");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(HIDE_ON_CLOSE);
         this.getContentPane().setBackground(Color.PINK);
 
         JPanel general = new JPanel();
@@ -38,36 +36,15 @@ public class Listas extends JFrame {
 
         combo.add(asignatura);
 
-        JPanel titulo = new JPanel();
-        titulo.setBackground(Color.PINK);
-        JLabel titulop = new JLabel("LISTADO DE ALUMNOS");
-        titulop.setFont(fuenteGeneral);
-        titulo.add(titulop);
+        JPanel encabezado = new JPanel();
+        encabezado.setBackground(Color.PINK);
+        JLabel titulo = new JLabel("LISTADO DE ALUMNOS");
+        titulo.setFont(fuenteGeneral);
+        encabezado.add(titulo);
 
 
-
-if (asignatura.getSelectedItem().equals("DAM")){
-    ArrayList<Curso> Curso_Alumnos = controladorJefeestudios.getAlumnosxCurso("DAM");
-    DefaultTableModel model = generarModeloTablaAlumno(Curso_Alumnos);
-    jTableAlumnos = new JTable(model) {
-        //private static final long serialVersionUID = 1L;
-        @Override
-        public Class getColumnClass(int column) {
-            switch (column) {
-                case 0:
-                    return String.class;
-                case 1:
-                    return String.class;
-                default:
-                case 2:
-                    return String.class;
-
-            }
-        }
-    };
-}
-        if (asignatura.getSelectedItem()== "CIN") {
-            ArrayList<Curso> Curso_Alumnos = controladorJefeestudios.getAlumnosxCurso("CIN");
+        if (asignatura.getSelectedItem().equals("DAM")) {
+            ArrayList<Curso> Curso_Alumnos = controladorJefeestudios.getAlumnosxCurso("DAM");
             DefaultTableModel model = generarModeloTablaAlumno(Curso_Alumnos);
             jTableAlumnos = new JTable(model) {
                 //private static final long serialVersionUID = 1L;
@@ -85,55 +62,30 @@ if (asignatura.getSelectedItem().equals("DAM")){
                     }
                 }
             };
-
-        }
-        if (asignatura.getSelectedItem().equals("MIP")) {
-            ArrayList<Curso> Curso_Alumnos = controladorJefeestudios.getAlumnosxCurso("Mip");
-            DefaultTableModel model = generarModeloTablaAlumno(Curso_Alumnos);
-            jTableAlumnos = new JTable(model) {
-                //private static final long serialVersionUID = 1L;
-                @Override
-                public Class getColumnClass(int column) {
-                    switch (column) {
-                        case 0:
-                            return String.class;
-                        case 1:
-                            return String.class;
-                        default:
-                        case 2:
-                            return String.class;
-
-                    }
-                }
-            };
-
         }
 
-        jTableAlumnos.setBounds(30,40,200,300);
+
+        jTableAlumnos.setBounds(30, 40, 200, 300);
         JScrollPane scrollpane = new JScrollPane(jTableAlumnos);
 
-        general.add(titulo);
-        general.add(scrollpane,BorderLayout.SOUTH);
-       // general.add(combo);
-        add(general,BorderLayout.CENTER);
-
+        general.add(encabezado);
+        general.add(scrollpane, BorderLayout.SOUTH);
+        // general.add(combo);
+        add(general, BorderLayout.CENTER);
 
         setSize(860, 530);
         setVisible(true);
 
-
-
     }
-
-
 
 
     public static void main() {
         Listas listas = new Listas();
     }
+
     private DefaultTableModel generarModeloTablaAlumno(ArrayList<Curso> nombresAlumnos) {
 
-        String[] cols = {"Nombre","Curso", };
+        String[] cols = {"Nombre", "Curso",};
         DefaultTableModel model = new DefaultTableModel(cols, 0);
         for (int i = 0; i < nombresAlumnos.size(); i++) {
             Object[] data = {nombresAlumnos.get(i).getNombre_curso(), nombresAlumnos.get(i).getNombre_alumno()};

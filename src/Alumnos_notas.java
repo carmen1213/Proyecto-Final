@@ -12,16 +12,17 @@ import java.util.ArrayList;
 /**
  * @author Carmen Martí,Salva Blanquer,Lucia Calabrese
  */
+
 public class Alumnos_notas extends JFrame {
 
     //Variable para crear la tabla
-    private JTable jTableAlumnos;
+    private final JTable jTableAlumnos;
     //llama a la clase controlador notas para poder usar a continuacion sus diferentes metodos
-    private ControladorNotasALumnos controladorTablanotasAlumnos = new ControladorNotasALumnos();
+    private final ControladorNotasALumnos controladorTablanotasAlumnos = new ControladorNotasALumnos();
     //llama a la clase controlador notas para poder usar a continuacion sus diferentes metodos
-    private Controlador_login controllogin = new Controlador_login();
+    private final Controlador_login controllogin = new Controlador_login();
     //Crea un Arraylist de ints que obtiene los datos de las notas desde la base de datos y las va guardando en la misma
-    private ArrayList<Integer> notas = controladorTablanotasAlumnos.getNotasalumnos(controllogin.getIdalumno(inicio.usuario.getText(), inicio.contraseña.getText()).getId());
+    private final ArrayList<Integer> notas = controladorTablanotasAlumnos.getNotasalumnos(controllogin.getIdalumno(inicio.usuario.getText(), inicio.contraseña.getText()).getId());
 
 
     public Alumnos_notas() throws SQLException {
@@ -29,12 +30,9 @@ public class Alumnos_notas extends JFrame {
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         this.getContentPane().setBackground(new Color(227, 247, 193));
 
-
         JPanel general = new JPanel();
         general.setLayout(new GridLayout(5, 1));
         general.setBackground(new Color(227, 247, 193));
-
-
 
         JPanel opciones = new JPanel();
         opciones.setBackground(new Color(227, 247, 193));
@@ -142,7 +140,7 @@ public class Alumnos_notas extends JFrame {
      */
     //Metodo que devuelve los datos que iran posteriormente en la tabla, obteniendo los mismos de la base de datos con los metodos que se encuentran en los controladores
     private DefaultTableModel generarModeloTablaNotasProfesor(String alumnosAsignatura, ArrayList<Asignatura> asignaturas, ArrayList<Integer> notas) {
-       //Crea un array de tipo string para darle nombre a las diferentes columnas principales de la tabla
+        //Crea un array de tipo string para darle nombre a las diferentes columnas principales de la tabla
         String[] cols = {"Nombre Alumno", "Nombre Asignatura", "Notas"};
 
         DefaultTableModel model = new DefaultTableModel(cols, 0);
@@ -156,4 +154,3 @@ public class Alumnos_notas extends JFrame {
         return model;
     }
 }
-

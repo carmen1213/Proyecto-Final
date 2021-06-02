@@ -1,8 +1,10 @@
-
 //import necesarios
 
 import Interfaz.Metodos_repetitivos;
 import models.Usuario;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import javax.swing.*;
 import javax.swing.event.MenuEvent;
@@ -22,9 +24,9 @@ import java.sql.SQLException;
 
 public class alumnoGUI {
 
-    public static Font fuenteGeneral=new Font("Rockwell", Font.BOLD, 17);
-    public static Font fuenteTitulo=new Font("Segoe Script",Font.BOLD | Font.ITALIC, 34);
-    public static Font fuenteBotones=new Font("Berlin Sans FB", Font.BOLD | Font.ITALIC, 22);
+    public static Font fuenteGeneral = new Font("Rockwell", Font.BOLD, 17);
+    public static Font fuenteTitulo = new Font("Segoe Script", Font.BOLD | Font.ITALIC, 34);
+    public static Font fuenteBotones = new Font("Berlin Sans FB", Font.BOLD | Font.ITALIC, 22);
     JFrame general;
 
     public alumnoGUI(Usuario user) {
@@ -79,6 +81,7 @@ public class alumnoGUI {
         barraMenu.add(quejasMenu);
 
         JMenu cuestionariosMenu = new JMenu("Cuestionarios");
+        cuestionariosMenu.addActionListener(new verFormularios());
         cuestionariosMenu.setFont(fuenteGeneral);
         barraMenu.add(cuestionariosMenu);
 
@@ -95,7 +98,7 @@ public class alumnoGUI {
 
 
     public static void main(Usuario user) {
-      new alumnoGUI(user);
+        new alumnoGUI(user);
 
     }
 
@@ -162,6 +165,21 @@ public class alumnoGUI {
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
+        }
+    }
+
+    private class verFormularios implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            WebDriver driver;
+
+            String exePath = "..\\Proyecto-Final\\chromedriver.exe";
+            System.setProperty("webdriver.chrome.driver",exePath);
+
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--start-maximized");
+            driver = new ChromeDriver(options);
+            driver.get("https://www.google.es/intl/es/forms/about/");
         }
     }
 }
