@@ -237,6 +237,23 @@ public class inicio {
         }
     }
 
+    KeyListener loginEnter = new KeyListener() {
+        public void keyPressed(KeyEvent keyEvent) {
+            if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER) {
+                validarLogin.autenticarUsuarioBD();
+            }
+        }
+
+
+        public void keyReleased(KeyEvent keyEvent) {
+
+        }
+
+        public void keyTyped(KeyEvent keyEvent) {
+
+        }
+    };
+
 
     private class loginEnter implements KeyListener {
         @Override

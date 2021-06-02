@@ -28,13 +28,13 @@ import java.util.Scanner;
 
 public class profesor {
 
+     JFrame general;
     public static Font fuenteBotones = new Font("Copperplate Gothic Bold", Font.PLAIN, 22);
     public static Font fuenteTitulo = new Font("Mongolian Baiti", Font.BOLD | Font.ITALIC, 51);
     public static Font fuenteMenu = new Font("Rockwell Condensed", Font.BOLD, 18);
     private final Controlador_login control = new Controlador_login();
     private final Controlador_cursos_material_profesores controlador_cursos_material_profesores = new Controlador_cursos_material_profesores();
     private final String cursos = Controlador_cursos_material_profesores.getCursoProfesor(control.getIdProfesor(inicio.usuario.getText(), inicio.contraseña.getText()).getId_profesor());
-    JFrame general;
 
     public profesor(Usuario user) {
 

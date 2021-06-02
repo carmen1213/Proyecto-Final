@@ -29,6 +29,10 @@ public class alumno {
     public static Font fuenteBotones = new Font("Berlin Sans FB", Font.BOLD | Font.ITALIC, 22);
     JFrame general;
 
+    JRadioButtonMenuItem recompensasDAM;
+    JRadioButtonMenuItem recompensasCIN;
+    JRadioButtonMenuItem recompensasMIP;
+
     public alumno(Usuario user) {
 
         //Declaración de JFrame y JLayeredPane
@@ -49,11 +53,16 @@ public class alumno {
 
         //Declaración de JMenu y JMenuBar
 
-        JMenu expedientesMenu = new JMenu("Expedientes");
+        JMenu recompensasMenu = new JMenu("Recompensas");
         JMenu quejasMenu = new JMenu("Quejas");
         JMenu cuestionariosMenu = new JMenu("Cuestionarios");
-        JMenu TareasMenu = new JMenu("Tareas");
         JMenuBar barraMenu = new JMenuBar();
+
+        //Declaración de JRadioButtonMenuItem
+
+        recompensasDAM = new JRadioButtonMenuItem("DAM");
+        recompensasMIP = new JRadioButtonMenuItem("MIP");
+        recompensasCIN = new JRadioButtonMenuItem("CIN");
 
         /* Modificaciones */
 
@@ -91,14 +100,13 @@ public class alumno {
         barraMenu.setBackground(new Color(250, 250, 210));
         barraMenu.setForeground(new Color(255, 255, 255));
 
-        expedientesMenu.setHorizontalAlignment(SwingConstants.CENTER);
-        expedientesMenu.setFont(fuenteGeneral);
+        recompensasMenu.setHorizontalAlignment(SwingConstants.CENTER);
+        recompensasMenu.setFont(fuenteGeneral);
 
         quejasMenu.setFont(fuenteGeneral);
 
         cuestionariosMenu.setFont(fuenteGeneral);
 
-        TareasMenu.setFont(fuenteGeneral);
 
         //Insercciones a la GUI
 
@@ -109,10 +117,13 @@ public class alumno {
         principal.add(notasBtn);
         principal.add(horarioBtn);
 
-        barraMenu.add(expedientesMenu);
+        barraMenu.add(recompensasMenu);
+        recompensasMenu.add(recompensasDAM);
+        recompensasMenu.add(recompensasMIP);
+        recompensasMenu.add(recompensasCIN);
         barraMenu.add(quejasMenu);
         barraMenu.add(cuestionariosMenu);
-        barraMenu.add(TareasMenu);
+
 
         principal.add(Metodos_repetitivos.volverBoton(volverBtn));
 

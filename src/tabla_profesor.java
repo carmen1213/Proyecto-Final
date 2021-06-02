@@ -34,7 +34,7 @@ public class tabla_profesor extends JFrame {
 
     public tabla_profesor() throws SQLException {
         super("Listas");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(HIDE_ON_CLOSE);
         this.getContentPane().setBackground(new Color(227, 247, 193));
 
 
