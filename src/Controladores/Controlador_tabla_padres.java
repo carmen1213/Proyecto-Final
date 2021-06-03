@@ -7,14 +7,29 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+/**
+ * @author Carmen Martí,Salva Blanquer,Lucia Calabrese
+ */
 
 public class Controlador_tabla_padres {
+
     private static Connection conn;
+
+    //Metodo para conectar la clase con la base de datos, accediendo con datos de conexion que se encuentran en la clase conexionbasedatos
+    /**
+     * Metodo para conectarse a la base de datos
+     */
     public Controlador_tabla_padres() {
         conexionbasedatos conexion;
         conexion = new conexionbasedatos();
         conn = conexion.conectarMySQL();
     }
+
+    /**
+     * Pide primero el nombre del alumno para su utilizacion y a continuacion realiza una consulta a la base de datos para obtener los nombres de los alumnos
+     * @param nombre parametro que despues se utiliza para realizar la correcta consulta a la base de datos
+     * @return devuelve los nombres de los alumnos obtenidos
+     */
     public String getalumno(String nombre) {
 
         //Conecta con la base de datos y realiza a la misma la consulta correspondiente
@@ -36,8 +51,14 @@ public class Controlador_tabla_padres {
         }
         return null;
     }
-    public String getpadre(String usuario, String contraseña) {
-        ArrayList<String> nombre_alumno = new ArrayList<String>();
+
+    /**
+     * Pide primero el nombre del usuario y la contraseña que seran las del login y a continuacion realiza una consulta a la base de datos para obtener los nombres de los padres que cumplen esos parametros
+     * @param usuario prametro que despues se utiliza para realizar la consulta a la base de datos
+     * @param contraseña prametro que despues se utiliza para realizar la consulta a la base de datos
+     * @return devuelve un String con los nombres de los padres obtenidos
+     */
+    public String getNombrepadre(String usuario, String contraseña) {
         //Conecta con la base de datos y realiza a la misma la consulta correspondiente
         String SQL = "Select nombre FROM login WHERE nombre_usuario = ? AND  contraseña = ?";
         try {
@@ -58,6 +79,13 @@ public class Controlador_tabla_padres {
         }
         return null;
     }
+
+    /**
+     * Pide primero el nombre del usuario y el nombre del padre y a continuacion realiza una consulta a la base de datos para obtener las notas de los alumnos que cumplen esos parametros
+     * @param nombre prametro que despues se utiliza para realizar la consulta a la base de datos
+     * @param padre prametro que despues se utiliza para realizar la consulta a la base de datos
+     * @return devuelve un int con las notas obtenidas anteriormente
+     */
     public int getnotas(String nombre, String padre) {
 
         //Conecta con la base de datos y realiza a la misma la consulta correspondiente
