@@ -240,7 +240,6 @@ select `p`.`id_profesor` AS `id_profesor`, `educativ`.`curso`.`nombre` AS `curso
 from (((`educativ`.`curso` left join `educativ`.`asignatura` `a` on ((`educativ`.`curso`.`id_curso` = `a`.`id_curso`))) left join `educativ`.`profesor_asignatura` `pa` on ((`a`.`id_asignatura` = `pa`.`id_asignatura`)))
          left join `educativ`.`profesor` `p` on ((`pa`.`id_profesor` = `p`.`id_profesor`)));
 
-
 INSERT INTO educativ.login (id_login, nombre_usuario, contraseña, seguridad, tipo_usuario, id_aj, nombre) VALUES (1, 'Sblanquer', '1234', 8, 'Alumno', null, 'Salvador Blanquer');
 INSERT INTO educativ.login (id_login, nombre_usuario, contraseña, seguridad, tipo_usuario, id_aj, nombre) VALUES (2, 'Iajenjo', '2345', 8, 'Profesor', null, 'Ivan Ajenjo');
 INSERT INTO educativ.login (id_login, nombre_usuario, contraseña, seguridad, tipo_usuario, id_aj, nombre) VALUES (5, 'Fmiralles', '0000', null, 'Profesor', null, 'Fernando Miralles');
