@@ -62,7 +62,7 @@ public class ControladorNotasALumnos {
         return resultado;
     }
 
-    public ArrayList<String> getasignaturas(String nombre) {
+    public ArrayList<String> getasignaturas(String usuarioText, String text, String nombre) {
         ArrayList<String> notas = new ArrayList<String>();
 
         String SQL = "Select nombreAsignatura FROM alumnos_asignatura WHERE nombre = ?";

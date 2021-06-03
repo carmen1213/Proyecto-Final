@@ -1,4 +1,5 @@
 import Controladores.ControladorNotasALumnos;
+import Controladores.ControladorTablaNotas;
 import Controladores.Controlador_login;
 import Interfaz.Metodos_repetitivos;
 import models.Asignatura;
@@ -23,7 +24,7 @@ public class Alumnos_notas extends JFrame {
     private final Controlador_login controllogin = new Controlador_login();
     //Crea un Arraylist de ints que obtiene los datos de las notas desde la base de datos y las va guardando en la misma
     private final ArrayList<Integer> notas = controladorTablanotasAlumnos.getNotasalumnos(controllogin.getIdalumno(inicio.usuario.getText(), inicio.contraseña.getText()).getId());
-
+    private ControladorTablaNotas controladorNotas = new ControladorTablaNotas();
 
     public Alumnos_notas() throws SQLException {
         super("Listas");
@@ -41,7 +42,8 @@ public class Alumnos_notas extends JFrame {
         opciones.add(new JLabel(" "));
 
         //Crea un Arraylist de objetos asignatura que obtiene los datos de las asignaturas desde la base de datos y los va guardando en el mismo
-        ArrayList<Asignatura> asignaturas = controladorTablanotasAlumnos.getasignaturas(inicio.usuario.getText(), inicio.contraseña.getText(), 3);
+        ArrayList<String> asignaturas = controladorTablanotasAlumnos.getasignaturas(inicio.usuario.getText(), inicio.contraseña.getText(), controladorNotas.getidAlumno(controllogin.getIdalumno(inicio.usuario.getText(),inicio.contraseña.getText()).getNombre()).getNombre());
+
         //Guarda en una variable de tipo String los diferentes nombres de los alumnos, consultandoselo a la base de datos
         String alumnosAsignatura = controllogin.getIdalumno(inicio.usuario.getText(), inicio.contraseña.getText()).getNombre();
 
@@ -139,7 +141,7 @@ public class Alumnos_notas extends JFrame {
      * @return devuelve el modelo de la tabla ya con los datos
      */
     //Metodo que devuelve los datos que iran posteriormente en la tabla, obteniendo los mismos de la base de datos con los metodos que se encuentran en los controladores
-    private DefaultTableModel generarModeloTablaNotasProfesor(String alumnosAsignatura, ArrayList<Asignatura> asignaturas, ArrayList<Integer> notas) {
+    private DefaultTableModel generarModeloTablaNotasProfesor(String alumnosAsignatura, ArrayList<String> asignaturas, ArrayList<Integer> notas) {
         //Crea un array de tipo string para darle nombre a las diferentes columnas principales de la tabla
         String[] cols = {"Nombre Alumno", "Nombre Asignatura", "Notas"};
 
@@ -147,7 +149,8 @@ public class Alumnos_notas extends JFrame {
 
         //Ciclo para ingresar los nombres de los alumnos.
         for (int k = 0; k < notas.size(); k++) {
-            Object[] data = {alumnosAsignatura, asignaturas.get(k).getNombre(), notas.get(k)};
+            System.out.println(notas.get(k).intValue());
+            Object[] data = {alumnosAsignatura, asignaturas.get(k), notas.get(k).intValue()};
             model.addRow(data);
         }
 
