@@ -18,6 +18,12 @@ public class ControladorTablaProfesores {
         conexion = new conexionbasedatos();
         conn = conexion.conectarMySQL();
     }
+
+    /**
+     *
+     * @param nombre  parametro que despues se utiliza para realizar la consulta a la base de datos
+     * @return devuelve un int con los identificadores de los profesores
+     */
     public int getidProfesor(String nombre){
         String SQL = "Select id_profesor FROM profesor WHERE nombre = ?";
         try {
@@ -39,6 +45,11 @@ public class ControladorTablaProfesores {
         return -1;
     }
 
+    /**
+     *
+     * @param idAsignatura parametro que despues se utiliza para realizar la consulta a la base de datos
+     * @return devuelve una lista con todos los identificadores de los alumnos obtenidos
+     */
     //Obtiene para el id del alumno para poder obtener las asignaturas que le corresponnda, para la tabla de asistencia de la clase de profesor
     public ArrayList<String> getidAlumno(int idAsignatura) {
         ArrayList<String> resultado = new ArrayList<>();
@@ -59,8 +70,8 @@ public class ControladorTablaProfesores {
 
     /**
      *
-     * @param idProfesor
-     * @return
+     * @param idProfesor parametro que despues se utiliza para realizar la consulta a la base de datos
+     * @return devuelve una lista de tipo asignatura (objeto) con los datos obtenidos
      */
 
     //Obtiene las asignaturas que imparte el profesor, para que aparezcan las mismas en las opciones de la tabla que se encuentra en la misma clase
@@ -85,7 +96,13 @@ public class ControladorTablaProfesores {
 
         return resultado;
     }
-    public ArrayList<Alumno> getAlumnosxAsignaturaA(int idAsignatura){
+
+    /**
+     *
+     * @param idAsignatura parametro que despues se utiliza para realizar la consulta a la base de datos
+     * @return  devuelve una lista de tipo alumno (objeto) con los datos obtenidos
+     */
+    public ArrayList<Alumno> getnombreyidxasignatura(int idAsignatura){
         ArrayList<Alumno> resultado = new ArrayList<Alumno>();
 
         String SQL = "SELECT nombre, id_alumno FROM alumnos_asignatura where id_asignatura = ?;";

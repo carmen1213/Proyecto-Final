@@ -73,7 +73,7 @@ public class tabla_profesor extends JFrame {
         opciones.add(combo);
 
 
-        ArrayList<Alumno> alumnosAsignatura = controladorProfesores.getAlumnosxAsignaturaA(asignaturas.get(asignatura.getSelectedIndex()).getId());
+        ArrayList<Alumno> alumnosAsignatura = controladorProfesores.getnombreyidxasignatura(asignaturas.get(asignatura.getSelectedIndex()).getId());
         DefaultTableModel model = generarModeloTablaAlumno(alumnosAsignatura);
 
         jTableAlumnos = new JTable(model) {
