@@ -14,14 +14,21 @@ public class Controlador_cursos_material_profesores {
 
     private static Connection conn;
 
+    /**
+     * Metodo para conectarse a la base de datos
+     */
     public Controlador_cursos_material_profesores() {
         conexionbasedatos conexion;
         conexion = new conexionbasedatos();
         conn = conexion.conectarMySQL();
     }
 
+    /**
+     * Pide primero el id del profesor como paramentro papra la utilizacion y a continuacion realiza una consulta a la base de datos para obtener el curso que tiene a ese profesor
+     * @param idProfesor parametro que despues se utiliza para realizar la consulta a la base de datos
+     * @return devuelve los nombres de los cursos obtenidos
+     */
     public static String getCursoProfesor(int idProfesor) {
-
 
         String SQL = "SELECT curso FROM profesores_cursos where id_profesor = ?;";
         try {
