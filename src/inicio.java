@@ -117,7 +117,7 @@ public class inicio {
     }
 
     public static class validarLogin implements ActionListener {
-
+        //
         private static void autenticarUsuarioBD() {
             Usuario user = controlLogin.iniciarSesion(usuario.getText(), contraseña.getText());
             if (user != null) {
@@ -236,6 +236,12 @@ public class inicio {
 
         }
     }
+    KeyListener loginEnter = new KeyListener() {
+        public void keyPressed(KeyEvent keyEvent) {
+            if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER) {
+                validarLogin.autenticarUsuarioBD();
+            }
+        }
 
     KeyListener loginEnter = new KeyListener() {
         public void keyPressed(KeyEvent keyEvent) {
@@ -244,6 +250,11 @@ public class inicio {
             }
         }
 
+        public void keyReleased(KeyEvent keyEvent) {
+        }
+        public void keyTyped(KeyEvent keyEvent) {
+        }
+    };
 
         public void keyReleased(KeyEvent keyEvent) {
 

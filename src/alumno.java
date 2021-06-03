@@ -49,6 +49,7 @@ public class alumno {
 
         JButton notasBtn = new JButton("Notas");
         JButton horarioBtn = new JButton("Horario");
+
         JButton volverBtn = new JButton("");
 
         //Declaración de JMenu y JMenuBar
@@ -128,12 +129,13 @@ public class alumno {
         principal.add(Metodos_repetitivos.volverBoton(volverBtn));
 
         //Acciones
-
         quejasMenu.addMenuListener(new abrirQuejas());
         cuestionariosMenu.addActionListener(new verFormularios());
         volverBtn.addMouseListener(new volverInicio());
         notasBtn.addActionListener(new verNotas());
-
+        if (inicio.usuario.getText().equals("Sblanquer")) {
+            horarioBtn.addActionListener(new verhorario());
+        }
     }
 
     public static void main(Usuario user) {
@@ -196,6 +198,7 @@ public class alumno {
         }
     }
 
+
     private class verNotas implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -219,6 +222,13 @@ public class alumno {
             options.addArguments("--start-maximized");
             driver = new ChromeDriver(options);
             driver.get("https://www.google.es/intl/es/forms/about/");
+        }
+    }
+
+    private class verhorario implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            new horario();
         }
     }
 }

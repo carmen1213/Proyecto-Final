@@ -64,7 +64,7 @@ public class tabla_profesor extends JFrame {
         asignatura.setBackground(new Color(227, 247, 193));
 
 
-
+        //
         for (int i = 0; i < asignaturas.size(); i++) {
             asignatura.addItem(asignaturas.get(i).getNombre());
         }
@@ -72,10 +72,11 @@ public class tabla_profesor extends JFrame {
         combo.add(asignatura);
         opciones.add(combo);
 
-
+        //
         ArrayList<Alumno> alumnosAsignatura = controladorProfesores.getnombreyidxasignatura(asignaturas.get(asignatura.getSelectedIndex()).getId());
+        //
         DefaultTableModel model = generarModeloTablaAlumno(alumnosAsignatura);
-
+        //
         jTableAlumnos = new JTable(model) {
             @Override
             public Class getColumnClass(int column) {
@@ -138,12 +139,14 @@ public class tabla_profesor extends JFrame {
 
     }
 
-
+//
     private DefaultTableModel generarModeloTablaAlumno(ArrayList<Alumno> nombresAlumnos) {
-
+        //
         String[] cols = {"Nombre", "Asistencia"};
         DefaultTableModel model = new DefaultTableModel(cols, 0);
+        //
         for (int i = 0; i < nombresAlumnos.size(); i++) {
+            //
             Object[] data = {nombresAlumnos.get(i).getNombre(), false};
             model.addRow(data);
         }

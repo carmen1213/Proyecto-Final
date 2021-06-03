@@ -16,6 +16,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class Boletin_alumnos extends JFrame {
+
     private JTable jTableAlumnos;
     private ControladorTablaNotas controladorNotas = new ControladorTablaNotas();
     private ControladorTablaProfesores controladorProfesores = new ControladorTablaProfesores();
@@ -24,10 +25,7 @@ public class Boletin_alumnos extends JFrame {
     private ArrayList<Asignatura> asignaturas = controladorProfesores.getAsignaturaProfesor(controllogin.getIdProfesor(inicio.usuario.getText(), inicio.contraseña.getText()).getId_profesor());
     private static Connection conn;
 
-    /**
-     *
-     * @throws SQLException
-     */
+
     public Boletin_alumnos() throws SQLException {
         super("Listas");
         setDefaultCloseOperation(HIDE_ON_CLOSE);
@@ -45,11 +43,12 @@ public class Boletin_alumnos extends JFrame {
         opciones.add(new JLabel(" "));
         opciones.add(new JLabel(" "));
 
-
-        ArrayList<Alumno> alumnosAsignatura = controladorProfesores.getAlumnosxAsignaturaA(controladorNotas.getid_asignatura(controllogin.getIdProfesor(inicio.usuario.getText(), inicio.contraseña.getText()).getId_profesor()));
+//
+        ArrayList<Alumno> alumnosAsignatura = controladorProfesores.getnombreyidxasignatura(controladorNotas.getid_asignatura(controllogin.getIdProfesor(inicio.usuario.getText(), inicio.contraseña.getText()).getId_profesor()));
+        //
         DefaultTableModel model = generarModeloTablaAlumno(alumnosAsignatura, asignaturas);
 
-
+//
         jTableAlumnos = new JTable(model) {
             @Override
             public Class getColumnClass(int column) {
@@ -135,10 +134,11 @@ public class Boletin_alumnos extends JFrame {
 
     }
 
-
+   //
     private DefaultTableModel generarModeloTablaAlumno(ArrayList<Alumno> nombresAlumnos, ArrayList<Asignatura> asignaturas) {
-
+//
         String[] cols = {"Nombre Alumno", "Nombre Asignatura", "Notas"};
+        //
         DefaultTableModel model = new DefaultTableModel(cols, 0);
         //Ciclo para ingresar los nombres de los alumnos.
         for (int j = 0; j < nombresAlumnos.size(); j++) {
@@ -170,7 +170,7 @@ public class Boletin_alumnos extends JFrame {
 
         }
     }
-
+//
     private class Guardar implements ActionListener {
         private final Boletin_alumnos notas_alumnos;
 
@@ -182,28 +182,26 @@ public class Boletin_alumnos extends JFrame {
         public void actionPerformed(ActionEvent e) {
 
             {
+                //
                 conexionbasedatos conexion;
                 conexion = new conexionbasedatos();
                 notas_alumnos.conn = conexion.conectarMySQL();
                 Statement stmt = null;
                 try {
+                    //
                     stmt = notas_alumnos.conn.createStatement();
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
-                int ids = 0;
-                ArrayList<Asignatura> asignaturaid;
-                ArrayList<Alumno> nombresAlumnos = new ArrayList<>();
 
-                System.out.println();
-
+                //
                 Object notas = null;
                 for (int i = 0; i < jTableAlumnos.getRowCount(); i++) {
                     notas = jTableAlumnos.getValueAt(i, 2);
                     System.out.println(notas);
 
                     try {
-
+                    //
                         Object resultados = stmt.executeUpdate("INSERT INTO notas (notas,id_asignaturas,id_alumno) " + "VALUES('" + notas + "','" + asignaturas.get(i).getId() + "','" + controladorNotas.getidAlumno((String) jTableAlumnos.getValueAt(i,0)).getId() + "')");
 
                     } catch (SQLException throwables) {

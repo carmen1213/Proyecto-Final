@@ -82,12 +82,15 @@ public class Listas extends JFrame {
     public static void main() {
         Listas listas = new Listas();
     }
-
+    //
     private DefaultTableModel generarModeloTablaAlumno(ArrayList<Curso> nombresAlumnos) {
-
+        //
         String[] cols = {"Nombre", "Curso",};
+        //
         DefaultTableModel model = new DefaultTableModel(cols, 0);
+        //
         for (int i = 0; i < nombresAlumnos.size(); i++) {
+            //
             Object[] data = {nombresAlumnos.get(i).getNombre_curso(), nombresAlumnos.get(i).getNombre_alumno()};
             model.addRow(data);
         }

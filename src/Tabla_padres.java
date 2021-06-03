@@ -2,12 +2,8 @@ import Controladores.ControladorTablaProfesores;
 import Controladores.Controlador_login;
 import Controladores.Controlador_tabla_padres;
 import Interfaz.Metodos_repetitivos;
-import models.Alumno;
-import models.Asignatura;
 import models.Profesor;
 import models.Usuario;
-import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
-import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
 
 import javax.swing.*;
@@ -15,20 +11,11 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class Tabla_padres extends JFrame {
     private JTable jTableAlumnos;
-    private ControladorTablaProfesores controladorProfesores = new ControladorTablaProfesores();
-    private Controlador_login controllogin = new Controlador_login();
-    private JComboBox asignatura;
-    private JLabel titulop;
-    private JButton guardar;
-    private static Connection conn;
     private Controlador_login control = new Controlador_login();
     private Usuario user = control.iniciarSesion(inicio.usuario.getText(), inicio.contraseña.getText());
-    private Profesor id_profesor = control.getIdProfesor(inicio.usuario.getText(), inicio.contraseña.getText());
-    private UtilDateModel date = new UtilDateModel();
     private Controlador_tabla_padres controler = new Controlador_tabla_padres();
 
     public Tabla_padres() throws SQLException {
@@ -48,13 +35,15 @@ public class Tabla_padres extends JFrame {
         opciones.add(new JLabel(" "));
         opciones.add(new JLabel(" "));
 
-
-        String padres = controler.getpadre(inicio.usuario.getText(), inicio.contraseña.getText());
-        String alumnos = String.valueOf(controler.getalumno(controler.getpadre(inicio.usuario.getText(), inicio.contraseña.getText())));
+        //
+        String padres = controler.getNombrepadre(inicio.usuario.getText(), inicio.contraseña.getText());
+        //
+        String alumnos = String.valueOf(controler.getalumno(controler.getNombrepadre(inicio.usuario.getText(), inicio.contraseña.getText())));
+        //
         int notas = controler.getnotas(alumnos, padres);
-
+        //
         DefaultTableModel model = generarModeloTablaAlumno(alumnos, padres, notas);
-
+        //
         jTableAlumnos = new JTable(model) {
             @Override
             public Class getColumnClass(int column) {
@@ -112,11 +101,12 @@ public class Tabla_padres extends JFrame {
         setVisible(true);
 
     }
-
+    //
     private DefaultTableModel generarModeloTablaAlumno(String alumnos, String padres, int notas) {
+            //
         String[] cols = {"Nombre padres", "Nombre alumno", "Notas"};
         DefaultTableModel model = new DefaultTableModel(cols, 0);
-
+            //
             Object[] data = {padres,alumnos,  notas};
             model.addRow(data);
 
