@@ -238,7 +238,7 @@ public class profesor {
             if (cursos.equals("Dam")) {
                 Scanner entrada = null;
                 JFileChooser fileChooser = new JFileChooser();
-                fileChooser.setCurrentDirectory(new File("..\\Proyecto-Final\\MaterialDAM"));
+                fileChooser.setCurrentDirectory(new File("..\\Proyecto-Final\\material\\MaterialDAM"));
                 int valor = fileChooser.showOpenDialog(fileChooser);
                 if (valor == JFileChooser.APPROVE_OPTION) {
                     String ruta = fileChooser.getSelectedFile().getAbsolutePath();
@@ -265,7 +265,7 @@ public class profesor {
             if (cursos.equals("Mip")) {
                 Scanner entrada = null;
                 JFileChooser fileChooser = new JFileChooser();
-                fileChooser.setCurrentDirectory(new File("..\\Proyecto-Final\\MaterialMIP"));
+                fileChooser.setCurrentDirectory(new File("..\\Proyecto-Final\\material\\MaterialMIP"));
                 int valor = fileChooser.showOpenDialog(fileChooser);
                 if (valor == JFileChooser.APPROVE_OPTION) {
                     String ruta = fileChooser.getSelectedFile().getAbsolutePath();
@@ -292,7 +292,7 @@ public class profesor {
             if (cursos.equals("CIN")) {
                 Scanner entrada = null;
                 JFileChooser fileChooser = new JFileChooser();
-                fileChooser.setCurrentDirectory(new File("..\\Proyecto-Final\\MaterialCIN"));
+                fileChooser.setCurrentDirectory(new File("..\\Proyecto-Final\\material\\MaterialCIN"));
                 int valor = fileChooser.showOpenDialog(fileChooser);
                 if (valor == JFileChooser.APPROVE_OPTION) {
                     String ruta = fileChooser.getSelectedFile().getAbsolutePath();
