@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 /**
  * @author Carmen Martí,Salva Blanquer,Lucia Calabrese
  */
@@ -26,9 +27,10 @@ public class Controlador_login {
 
     /**
      * Metodo para la obtencion y almacenamiento de los datos de los usuarios
+     *
      * @return devuelve los datos obtenidos
      */
-    public ArrayList<String> getdatosdellogin(){
+    public ArrayList<String> getdatosdellogin() {
         //Crea un array de tipo String para almacenar los diferentes datos
         ArrayList<String> resultado = new ArrayList<>();
         //Conecta con la base de datos y realiza a la misma la consulta correspondiente
@@ -36,7 +38,7 @@ public class Controlador_login {
         try {
             PreparedStatement pt = conn.prepareStatement(consulta);
             ResultSet login = pt.executeQuery();
-            while (login.next()){
+            while (login.next()) {
                 //Mientras que los resultados tengan datos, guarda los mismos en el array
                 resultado.add(login.getString(1));
                 resultado.add(login.getString(2));
@@ -53,7 +55,8 @@ public class Controlador_login {
 
     /**
      * Metodo que obtiene los datos correspondientes de la base de datos para poder iniciar seccion en la aplicacion
-     * @param usuario Pide a la persona el usuario ingresado en el inicio
+     *
+     * @param usuario    Pide a la persona el usuario ingresado en el inicio
      * @param contraseña Pide a la persona la contraseña ingresado en el inicio
      * @return devuelve nulo si no encuentra resultados en la base de datos
      */
@@ -78,9 +81,11 @@ public class Controlador_login {
     }
 
     //Metodo que obtiene el identificador del profesor de la base de datos mediante una consulta
+
     /**
      * Metodo que obtiene de la tabla de profesor de la base de datos el identificador, comparandolo con las asignaturas que imparte el mismo
-     * @param usuario Pide a la persona el usuario ingresado en el inicio
+     *
+     * @param usuario    Pide a la persona el usuario ingresado en el inicio
      * @param contraseña Pide a la persona la contraseña ingresado en el inicio
      * @return devuelve nulo si no encuentra resultados en la base de datos
      */
@@ -105,6 +110,7 @@ public class Controlador_login {
         }
         return null;
     }
+
     public Alumno getIdalumno(String usuario, String contraseña) {
         //Conecta con la base de datos y realiza a la misma la consulta correspondiente
         String sql = "SELECT nombre, id_alumno FROM alumno WHERE id_login IN(" +
@@ -120,25 +126,26 @@ public class Controlador_login {
             while (login.next()) {
                 String nombre = login.getString(1);
                 int id_alumno = login.getInt(2);
-                return new Alumno(nombre,id_alumno);
+                return new Alumno(nombre, id_alumno);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         return null;
     }
-public String getNombreusuario(String usuario){
+
+    public String nombredelusuario(String usuario) {
         String SQL = "Select nombre FROM login WHERE nombre_usuario = ?";
         try {
             //Conecta con la base de datos y realiza a la misma la consulta correspondiente
             PreparedStatement st = conn.prepareStatement(SQL);
-            //Ingresa el dato faltante en la consulta, reemplazando el signo de pregunta por el dato del id_usuario que le envia la persona
-            st.setString(1,usuario);
+            //Ingresa el dato faltante en la consulta, reemplazando el signo de pregunta por el dato del nombre del usuario que le envia la persona
+            st.setString(1, usuario);
             //Obtiene los resultados
             ResultSet rs = st.executeQuery();
 
-            //Mientras que los resultados tengan datos, guarda los mismos en las diferentes variables y crea un objeto alumno donde almacena esos datos obtenidos
-            while (rs.next()){
+            //Mientras que los resultados tengan datos, guarda los mismos en las diferentes variables
+            while (rs.next()) {
                 String nombre = rs.getString("nombre");
                 return nombre;
             }
@@ -147,5 +154,24 @@ public String getNombreusuario(String usuario){
         }
         return null;
     }
+    public String getContraseña(String usuario) {
+        String SQL = "Select contraseña FROM login WHERE nombre_usuario = ?";
+        try {
+            //Conecta con la base de datos y realiza a la misma la consulta correspondiente
+            PreparedStatement st = conn.prepareStatement(SQL);
+            //Ingresa el dato faltante en la consulta, reemplazando el signo de pregunta por el dato del nombre del usuario que le envia la persona
+            st.setString(1, usuario);
+            //Obtiene los resultados
+            ResultSet rs = st.executeQuery();
 
+            //Mientras que los resultados tengan datos, guarda los mismos en las diferentes variables
+            while (rs.next()) {
+                String nombre = rs.getString("contraseña");
+                return nombre;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
 }
