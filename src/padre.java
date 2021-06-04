@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.SQLException;
 
 /**
  * @author Carmen Martí,Salva Blanquer,Lucia Calabrese
@@ -115,6 +116,8 @@ public class padre {
 
         volverBtn.addMouseListener(new volverInicio());
 
+        notasBtn.addActionListener(new verNotas());
+
     }
 
 
@@ -197,6 +200,17 @@ public class padre {
         @Override
         public void mouseExited(MouseEvent e) {
 
+        }
+    }
+
+    private class verNotas implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                new Tabla_padres();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
         }
     }
 }
