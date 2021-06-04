@@ -29,9 +29,6 @@ public class alumno {
     public static Font fuenteBotones = new Font("Berlin Sans FB", Font.BOLD | Font.ITALIC, 22);
     JFrame general;
 
-    JRadioButtonMenuItem recompensasDAM;
-    JRadioButtonMenuItem recompensasCIN;
-    JRadioButtonMenuItem recompensasMIP;
 
     public alumno(Usuario user) {
 
@@ -58,12 +55,6 @@ public class alumno {
         JMenu quejasMenu = new JMenu("Quejas");
         JMenu cuestionariosMenu = new JMenu("Cuestionarios");
         JMenuBar barraMenu = new JMenuBar();
-
-        //Declaración de JRadioButtonMenuItem
-
-        recompensasDAM = new JRadioButtonMenuItem("DAM");
-        recompensasMIP = new JRadioButtonMenuItem("MIP");
-        recompensasCIN = new JRadioButtonMenuItem("CIN");
 
         /* Modificaciones */
 
@@ -92,6 +83,9 @@ public class alumno {
         //horarioBtn
 
         horarioBtn.setBackground(new Color(255, 222, 173));
+        if (inicio.usuario.getText().equals("Sblanquer")) {
+            horarioBtn.addActionListener(new verhorario());
+        }
         horarioBtn.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenHorario.png"));
         horarioBtn.setFont(fuenteBotones);
         horarioBtn.setBounds(1006, 663, 216, 71);
@@ -119,9 +113,7 @@ public class alumno {
         principal.add(horarioBtn);
 
         barraMenu.add(recompensasMenu);
-        recompensasMenu.add(recompensasDAM);
-        recompensasMenu.add(recompensasMIP);
-        recompensasMenu.add(recompensasCIN);
+
         barraMenu.add(quejasMenu);
         barraMenu.add(cuestionariosMenu);
 
@@ -130,9 +122,13 @@ public class alumno {
 
         //Acciones
         quejasMenu.addMenuListener(new abrirQuejas());
-        cuestionariosMenu.addActionListener(new verFormularios());
+        cuestionariosMenu.addMenuListener(new verFormularios());
         volverBtn.addMouseListener(new volverInicio());
         notasBtn.addActionListener(new verNotas());
+        recompensasMenu.addMenuListener(new escRecompensas());
+
+
+
         if (inicio.usuario.getText().equals("Sblanquer")) {
             horarioBtn.addActionListener(new verhorario());
         }
@@ -148,7 +144,7 @@ public class alumno {
         public void menuSelected(MenuEvent e) {
             try {
 
-                File archivo = new File("..\\Proyecto-Final\\Quejas\\alumnoQueja.docx");
+                File archivo = new File("..\\Proyecto-Final\\plantilla__Quejas\\alumnoQueja.docx");
                 Desktop.getDesktop().open(archivo);
 
             } catch (IOException ex) {
@@ -210,9 +206,10 @@ public class alumno {
         }
     }
 
-    private class verFormularios implements ActionListener {
+    private class verFormularios implements MenuListener {
+
         @Override
-        public void actionPerformed(ActionEvent e) {
+        public void menuSelected(MenuEvent e) {
             WebDriver driver;
 
             String exePath = "..\\Proyecto-Final\\chromedriver.exe";
@@ -223,6 +220,16 @@ public class alumno {
             driver = new ChromeDriver(options);
             driver.get("https://www.google.es/intl/es/forms/about/");
         }
+
+        @Override
+        public void menuDeselected(MenuEvent e) {
+
+        }
+
+        @Override
+        public void menuCanceled(MenuEvent e) {
+
+        }
     }
 
     private class verhorario implements ActionListener {
@@ -231,5 +238,60 @@ public class alumno {
             new horario();
         }
     }
+
+    private class escRecompensas implements MenuListener {
+
+        @Override
+        public void menuSelected(MenuEvent e) {
+            System.out.println("hola");
+            /* if (cursos.equals("DAM"))*/ {
+
+                try {
+
+                    File archivo = new File("..\\Proyecto-Final\\m.deHonor__Rellenas\\MatrículaDeHonorDAM\\matrículaDeHonorDAM_Rellena.pdf");
+                    Desktop.getDesktop().open(archivo);
+
+                } catch (IOException ex) {
+
+                    System.out.println(ex);
+                }
+
+            }
+            /* if (cursos.equals("CIN"))*/  {
+                try {
+
+                    File archivo = new File("..\\Proyecto-Final\\m.deHonor__Rellenas\\MatrículaDeHonorCIN\\matrículaDeHonorCIN_Rellena.pdf");
+                    Desktop.getDesktop().open(archivo);
+
+                } catch (IOException ex) {
+
+                    System.out.println(ex);
+                }
+            }
+            /* if (cursos.equals("MIP"))*/  {
+
+                try {
+
+                    File archivo = new File("..\\Proyecto-Final\\m.deHonor__Rellenas\\MatrículaDeHonorMIP\\matrículaDeHonorMIP_Rellena.pdf");
+                    Desktop.getDesktop().open(archivo);
+
+                } catch (IOException ex) {
+
+                    System.out.println(ex);
+                }
+            }
+        }
+
+        @Override
+        public void menuDeselected(MenuEvent e) {
+
+        }
+
+        @Override
+        public void menuCanceled(MenuEvent e) {
+
+        }
+    }
+
 }
 
