@@ -19,7 +19,7 @@ public class Tabla_padres extends JFrame {
     private Controlador_tabla_padres controler = new Controlador_tabla_padres();
 
     public Tabla_padres() throws SQLException {
-        super("Listas");
+        super("Notas");
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         this.getContentPane().setBackground(new Color(227, 247, 193));
 

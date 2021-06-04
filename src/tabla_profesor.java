@@ -35,7 +35,7 @@ public class tabla_profesor extends JFrame {
     private UtilDateModel date = new UtilDateModel();
 
     public tabla_profesor() throws SQLException {
-        super("Listas");
+        super("Asistencia");
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         this.getContentPane().setBackground(new Color(227, 247, 193));
 
