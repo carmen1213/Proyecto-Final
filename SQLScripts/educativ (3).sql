@@ -334,6 +334,7 @@ INSERT INTO educativ.horario (id_horario, id_asignatura, id_profesor, hora_inici
 
 
 
+
 INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso)
 VALUES ('Programación', 3, 1);
 INSERT INTO educativ.asignatura (nombre, id_asignatura, id_curso)
@@ -393,3 +394,25 @@ INSERT INTO educativ.notas (id_boletin, notas, Observaciones, Documentacion_cent
 INSERT INTO educativ.notas (id_boletin, notas, Observaciones, Documentacion_centro, id_asignaturas, id_alumno) VALUES (33, 10, null, null, 3, 3);
 INSERT INTO educativ.notas (id_boletin, notas, Observaciones, Documentacion_centro, id_asignaturas, id_alumno) VALUES (37, 3, null, null, 13, 15);
 INSERT INTO educativ.notas (id_boletin, notas, Observaciones, Documentacion_centro, id_asignaturas, id_alumno) VALUES (38, 5, null, null, 3, 3);
+
+INSERT INTO educativ.asignatura_profesor (id_asignatura, nombreAsig, id_profesor, nombre) VALUES (3, 'Programación', null, null);
+INSERT INTO educativ.asignatura_profesor (id_asignatura, nombreAsig, id_profesor, nombre) VALUES (4, 'Marketing digital', null, null);
+INSERT INTO educativ.asignatura_profesor (id_asignatura, nombreAsig, id_profesor, nombre) VALUES (5, 'Bases de Datos', null, null);
+INSERT INTO educativ.asignatura_profesor (id_asignatura, nombreAsig, id_profesor, nombre) VALUES (6, 'Entornos de desarrollo', null, null);
+INSERT INTO educativ.asignatura_profesor (id_asignatura, nombreAsig, id_profesor, nombre) VALUES (7, 'Ingles Tecnico', null, null);
+INSERT INTO educativ.asignatura_profesor (id_asignatura, nombreAsig, id_profesor, nombre) VALUES (8, 'Fol', null, null);
+INSERT INTO educativ.asignatura_profesor (id_asignatura, nombreAsig, id_profesor, nombre) VALUES (9, 'Sistemas', null, null);
+INSERT INTO educativ.asignatura_profesor (id_asignatura, nombreAsig, id_profesor, nombre) VALUES (10, 'Lenguaje de marcas', null, null);
+INSERT INTO educativ.asignatura_profesor (id_asignatura, nombreAsig, id_profesor, nombre) VALUES (13, 'Gestion economica y financiera de la empresa', null, null);
+INSERT INTO educativ.asignatura_profesor (id_asignatura, nombreAsig, id_profesor, nombre) VALUES (14, 'Gestion administrativa del comercio internacional', null, null);
+INSERT INTO educativ.asignatura_profesor (id_asignatura, nombreAsig, id_profesor, nombre) VALUES (15, 'Logica del almacenamiento', null, null);
+INSERT INTO educativ.asignatura_profesor (id_asignatura, nombreAsig, id_profesor, nombre) VALUES (16, 'Transporte internacional de mercancias', null, null);
+INSERT INTO educativ.asignatura_profesor (id_asignatura, nombreAsig, id_profesor, nombre) VALUES (17, 'Ingles', null, null);
+INSERT INTO educativ.asignatura_profesor (id_asignatura, nombreAsig, id_profesor, nombre) VALUES (18, 'FOL', null, null);
+INSERT INTO educativ.asignatura_profesor (id_asignatura, nombreAsig, id_profesor, nombre) VALUES (19, 'Ingles tecnico', null, null);
+INSERT INTO educativ.asignatura_profesor (id_asignatura, nombreAsig, id_profesor, nombre) VALUES (20, 'Gestion economica y financiera de la empresa', null, null);
+INSERT INTO educativ.asignatura_profesor (id_asignatura, nombreAsig, id_profesor, nombre) VALUES (21, 'Politicas de marketing', null, null);
+INSERT INTO educativ.asignatura_profesor (id_asignatura, nombreAsig, id_profesor, nombre) VALUES (22, 'Investigacion comercial', null, null);
+INSERT INTO educativ.asignatura_profesor (id_asignatura, nombreAsig, id_profesor, nombre) VALUES (23, 'Ingles', null, null);
+INSERT INTO educativ.asignatura_profesor (id_asignatura, nombreAsig, id_profesor, nombre) VALUES (24, 'Fol', null, null);
+INSERT INTO educativ.asignatura_profesor (id_asignatura, nombreAsig, id_profesor, nombre) VALUES (25, 'Ingles Tecnico', null, null);
