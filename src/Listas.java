@@ -33,7 +33,7 @@ public class Listas extends JFrame {
         asignatura.addItem("DAM");
         asignatura.addItem("MIP");
         asignatura.addItem("CIN");
-        System.out.println(asignatura.getSelectedItem());
+
 
         combo.add(asignatura);
 

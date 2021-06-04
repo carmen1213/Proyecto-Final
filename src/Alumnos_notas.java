@@ -149,7 +149,6 @@ public class Alumnos_notas extends JFrame {
 
         //Ciclo para ingresar los nombres de los alumnos.
         for (int k = 0; k < notas.size(); k++) {
-            System.out.println(notas.get(k).intValue());
             Object[] data = {alumnosAsignatura, asignaturas.get(k), notas.get(k).intValue()};
             model.addRow(data);
         }

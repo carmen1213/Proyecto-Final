@@ -461,7 +461,7 @@ public class jefaEstudios {
                     File f = new File(ruta);
                     entrada = new Scanner(f);
                     while (entrada.hasNext()) {
-                        System.out.println(entrada.nextLine());
+
                     }
                 } catch (FileNotFoundException ee) {
                     System.out.println(ee.getMessage());
@@ -495,7 +495,7 @@ public class jefaEstudios {
                     File f = new File(ruta);
                     entrada = new Scanner(f);
                     while (entrada.hasNext()) {
-                        System.out.println(entrada.nextLine());
+
                     }
                 } catch (FileNotFoundException ee) {
                     System.out.println(ee.getMessage());
@@ -531,7 +531,7 @@ public class jefaEstudios {
                     File f = new File(ruta);
                     entrada = new Scanner(f);
                     while (entrada.hasNext()) {
-                        System.out.println(entrada.nextLine());
+
                     }
                 } catch (FileNotFoundException ee) {
                     System.out.println(ee.getMessage());
