@@ -200,12 +200,14 @@ from ((`educativ`.`asistencia` left join `educativ`.`asignatura` `a` on ((`educa
          left join `educativ`.`alumno` `a2` on ((`a2`.`id_alumno` = `educativ`.`asistencia`.`id_alumno`)));
 
 create definer = root@localhost view asignatura_profesor as
-select `educativ`.`asignatura`.`id_asignatura` AS `id_asignatura`,
-       `educativ`.`asignatura`.`nombre`        AS `nombreAsig`,
-       `c`.`id_profesor`                       AS `id_profesor`,
-       `p`.`nombre`                            AS `nombre`
-from (((`educativ`.`asignatura` left join `educativ`.`clase` `c` on ((`educativ`.`asignatura`.`id_asignatura` = `c`.`id_asignatura`))) left join `educativ`.`profesor_asignatura` `pa` on ((`educativ`.`asignatura`.`id_asignatura` = `pa`.`id_asignatura`)))
-         left join `educativ`.`profesor` `p` on ((`c`.`id_profesor` = `p`.`id_profesor`)));
+select `a`.`id_asignatura` AS `id_asignatura`,
+       `p`.`nombre`        AS `nombre`,
+       `a`.`nombre`        AS `nombreAsig`,
+       `p`.`id_profesor`   AS `id_profesor`
+from ((`educativ`.`profesor_asignatura` left join `educativ`.`asignatura` `a` on ((`a`.`id_asignatura` = `educativ`.`profesor_asignatura`.`id_asignatura`)))
+         left join `educativ`.`profesor` `p` on ((`educativ`.`profesor_asignatura`.`id_profesor` = `p`.`id_profesor`)));
+
+
 
 create definer = root@localhost view asignaturas_cursos as
 select `educativ`.`asignatura`.`id_asignatura` AS `id_asignatura`, `educativ`.`asignatura`.`nombre` AS `nombre`
