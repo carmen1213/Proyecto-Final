@@ -30,13 +30,18 @@ public class inicio {
         general.getContentPane().add(principal, BorderLayout.CENTER);
         general.addWindowListener(new cerrarVentana());
 
-
+        JLabel encabezado = new JLabel("Bienvenid@,");
+        encabezado.setForeground(new Color(204, 0, 102));
+        encabezado.setFont(fuenteTitulo);
+        encabezado.setBounds(654, 10, 349, 109);
+        principal.add(encabezado);
 
         JLabel titulo = new JLabel("Accede a tus datos!");
         titulo.setForeground(new Color(204, 0, 102));
         titulo.setFont(fuenteTitulo);
         titulo.setBounds(569, 37, 562, 163);
         principal.add(titulo);
+
 
         JLabel labelUsuario = new JLabel("Usuario:");
         labelUsuario.setForeground(new Color(0, 51, 255));
@@ -168,9 +173,10 @@ public class inicio {
 
             int codigo = JOptionPane.showConfirmDialog(null, "¿Estas seguro de que quieres cerrar?", "Confirmacion", JOptionPane.YES_NO_OPTION);
             if (codigo == JOptionPane.YES_OPTION) {
-                general.dispose();
+                general.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             } else {
                 general.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
             }
         }
 
@@ -248,7 +254,7 @@ public class inicio {
             }
         }
 
-    KeyListener loginEnter = new KeyListener() {
+    final KeyListener loginEnter = new KeyListener() {
         public void keyPressed(KeyEvent keyEvent) {
             if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER) {
                 validarLogin.autenticarUsuarioBD();
