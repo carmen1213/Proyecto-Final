@@ -73,7 +73,6 @@ public class Controlador_horario {
             //Mientras que los resultados tengan datos, guarda los mismos en las diferentes variables y crea un objeto Asignatura donde almacena esos datos obtenidos
             while (rs.next()) {
                 int id_asignatura = rs.getInt("id_asignatura");
-                System.out.println(id_asignatura);
                 return id_asignatura;
             }
         } catch (SQLException throwables) {
