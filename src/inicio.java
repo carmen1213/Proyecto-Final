@@ -16,10 +16,10 @@ public class inicio {
     public static JLabel contraIncorrecta;
     public static Font fuenteTitulo = new Font("Snap ITC", Font.BOLD | Font.ITALIC, 45);
     private final JFrame general;
-    JLabel labelUsuario;
+    public static JLabel labelUsuario;
     boolean visible = true;
     JButton verContraseñaBtn;
-
+    private static JLabel contraseñaOlvidada;
 
     public inicio() {
 
@@ -30,11 +30,7 @@ public class inicio {
         general.getContentPane().add(principal, BorderLayout.CENTER);
         general.addWindowListener(new cerrarVentana());
 
-        JLabel encabezado = new JLabel("Bienvenid@,");
-        encabezado.setForeground(new Color(204, 0, 102));
-        encabezado.setFont(fuenteTitulo);
-        encabezado.setBounds(654, 10, 349, 109);
-        principal.add(encabezado);
+
 
         JLabel titulo = new JLabel("Accede a tus datos!");
         titulo.setForeground(new Color(204, 0, 102));
@@ -74,19 +70,26 @@ public class inicio {
         contraIncorrecta.setVisible(false);
         principal.add(contraIncorrecta);
 
+
         JButton contraseñaOlvidadaBtn = new JButton("Contraseña Olvidada");
         contraseñaOlvidadaBtn.setFont(fuenteBotones);
         contraseñaOlvidadaBtn.setForeground(new Color(255, 255, 255));
         contraseñaOlvidadaBtn.setBackground(new Color(255, 0, 0));
-        contraseñaOlvidadaBtn.setBounds(336, 661, 308, 63);
+        contraseñaOlvidadaBtn.setBounds(334, 625, 308, 63);
         principal.add(contraseñaOlvidadaBtn);
 
+        contraseñaOlvidada = new JLabel("Contrase\u00F1a olvidada");
+        contraseñaOlvidada.setForeground(new Color(0, 51, 255));
+        contraseñaOlvidada.setFont(new Font("Tahoma", Font.BOLD, 15));
+        contraseñaOlvidada.setBounds(344, 698, 303, 33);
+        contraseñaOlvidada.setVisible(false);
+        principal.add(contraseñaOlvidada);
 
         JButton loginBtn = new JButton("Login");
         loginBtn.setForeground(new Color(255, 255, 255));
         loginBtn.setBackground(new Color(50, 205, 50));
         loginBtn.setFont(fuenteBotones);
-        loginBtn.setBounds(949, 661, 368, 63);
+        loginBtn.setBounds(953, 625, 368, 63);
         loginBtn.addActionListener(new validarLogin());
         principal.add(loginBtn);
 
@@ -95,7 +98,7 @@ public class inicio {
         verContraseñaBtn.setBackground(Color.WHITE);
 
         verContraseñaBtn.setBounds(1136, 444, 41, 56);
-        verContraseñaBtn.addMouseListener(new verContraseña());
+        verContraseñaBtn.addMouseListener(new mostrarContraseña());
         principal.add(verContraseñaBtn);
 
 
@@ -109,6 +112,8 @@ public class inicio {
         general.add(principal);
         general.setVisible(true);
 
+        //acciones
+        contraseñaOlvidadaBtn.addActionListener(new verContraseña());
 
     }
 
@@ -194,7 +199,7 @@ public class inicio {
         }
     }
 
-    private class verContraseña implements MouseListener {
+    private class mostrarContraseña implements MouseListener {
         @Override
         public void mouseClicked(MouseEvent e) {
 
@@ -282,6 +287,14 @@ public class inicio {
         @Override
         public void keyReleased(KeyEvent e) {
 
+        }
+    }
+
+    private class verContraseña implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            contraseñaOlvidada.setVisible(true);
+        contraseñaOlvidada.setText("Tu contraseña es: " + controlLogin.getContraseña(inicio.usuario.getText()));
         }
     }
 }
