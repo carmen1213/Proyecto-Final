@@ -296,6 +296,11 @@ public class inicio {
             //Muestra el label con el texto correspondiente con la informacion obtenida desde la base de datos
             contraseñaOlvidada.setVisible(true);
             contraseñaOlvidada.setText("Tu contraseña es: " + controlLogin.getContraseña(inicio.usuario.getText()));
+
+            //Para que vuelva a estar en blanco
+            if (inicio.usuario.getText().equals("")){
+                contraseñaOlvidada.setVisible(false);
+            }
         }
     }
 }

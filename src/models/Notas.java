@@ -1,8 +1,11 @@
 package models;
+
+import java.util.ArrayList;
+
 /**
  * @author Carmen Martí,Salva Blanquer,Lucia Calabrese
  */
-public class Notas {
+public class Notas extends ArrayList<Notas> {
 
     //Variables para crear el objeto notas, de tipo alumno son los datos que obtiene del objeto ya creado Alumno y de tipo asignatura son los datos que obtiene del objeto ya creado asignatura
     Alumno alumno;
@@ -88,4 +91,6 @@ public class Notas {
                 ", nota=" + nota +
                 '}';
     }
+
+
 }

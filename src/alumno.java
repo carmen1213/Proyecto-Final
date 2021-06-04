@@ -243,7 +243,7 @@ public class alumno {
 
         @Override
         public void menuSelected(MenuEvent e) {
-            System.out.println("hola");
+
             /* if (cursos.equals("DAM"))*/ {
 
                 try {

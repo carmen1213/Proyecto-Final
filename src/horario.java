@@ -5,7 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class horario extends JFrame {
-
+    //Llama al controlador del horario para poder despues hacer las consultas correspondientes a la base de datos
     private Controlador_horario controlhorario = new Controlador_horario();
 
 
@@ -31,13 +31,18 @@ public class horario extends JFrame {
         combo.setLayout(new GridLayout(3, 1));
         combo.setBackground(new Color(227, 247, 193));
 
-        //
+        //Crea un array de tipo Strings con los diferentes horarios de las clases
         String[] horas = {"8:15:00-9:10:00", "9:10:00-10:05:00", "10:05:00-11:00:00", "11:00:00-11:30:00", "11:30:00-12:25:00", "12:25:00-13:20:00", "13:20:00-14:15:00"};
-        //
+        //Crea un array con las diferentes titulos de las columnas que iran en la tabla de la interfaz
         String[] cols = {"Horario", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes"};
-        //
-        String[][] horario_matriz = getDatostabla(horas);
-        //
+        //Crea un array de dos dimenciones para almacenar los datos de las asignaturas con sus respectivos horarios
+        String[][] horario_matriz = new String[7][7];
+
+        //Almacena en el array de dos dimensiones los diferentes datos de las asignaturas que obtiene de la base de datos
+        for (int i = 0; i < 5; i++) {
+            horario_matriz = new String[][]{{horas[0], controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(0).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(3).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(6).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(1).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(5).getNombre()}, {horas[1], controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(0).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(4).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(6).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(1).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(0).getNombre()}, {horas[2], controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(0).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(5).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(6).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(1).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(0).getNombre()}, {horas[3], "DESCANZO", "DESCANZO", "DESCANZO", "DESCANZO", "DESCANZO"}, {horas[4], controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(2).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(5).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(4).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(0).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(1).getNombre()}, {horas[5], controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(2).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(5).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(4).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(0).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(1).getNombre()}, {horas[6], controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(2).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(5).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(3).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(0).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(3).getNombre()}};
+        }
+
         JTable tabla_horario = new JTable(horario_matriz, cols);
         tabla_horario.setBounds(30, 40, 200, 300);
         JScrollPane sp = new JScrollPane(tabla_horario);
@@ -78,18 +83,5 @@ public class horario extends JFrame {
         setSize(900, 530);
         setVisible(true);
     }
-    //
-    private String[][] getDatostabla(String[] horas) {
-        //
-        String[][] horario_matriz = new String[7][7];
-
-        //
-        for (int i = 0; i < 5; i++) {
-            horario_matriz = new String[][]{{horas[0], controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(0).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(3).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(6).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(1).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(5).getNombre()}, {horas[1], controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(0).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(4).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(6).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(1).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(0).getNombre()}, {horas[2], controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(0).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(5).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(6).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(1).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(0).getNombre()}, {horas[3], "DESCANZO", "DESCANZO", "DESCANZO", "DESCANZO", "DESCANZO"}, {horas[4], controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(2).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(5).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(4).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(0).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(1).getNombre()}, {horas[5], controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(2).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(5).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(4).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(0).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(1).getNombre()}, {horas[6], controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(2).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(5).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(3).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(0).getNombre(), controlhorario.getAsignatura(controlhorario.getasignaturas("8:15:00")).get(3).getNombre()}};
-        }
-
-        return horario_matriz;
-    }
-
 }
 
