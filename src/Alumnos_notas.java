@@ -28,7 +28,7 @@ public class Alumnos_notas extends JFrame {
     private ControladorTablaNotas controladorNotas = new ControladorTablaNotas();
 
     public Alumnos_notas() throws SQLException {
-        super("Listas");
+        super("Notas");
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         this.getContentPane().setBackground(new Color(227, 247, 193));
 

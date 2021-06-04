@@ -33,7 +33,7 @@ public class Boletin_alumnos extends JFrame {
 
 
     public Boletin_alumnos() throws SQLException {
-        super("Listas");
+        super("Notas");
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         this.getContentPane().setBackground(new Color(227, 247, 193));
 
