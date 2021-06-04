@@ -293,8 +293,9 @@ public class inicio {
     private class verContraseña implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+            //Muestra el label con el texto correspondiente con la informacion obtenida desde la base de datos
             contraseñaOlvidada.setVisible(true);
-        contraseñaOlvidada.setText("Tu contraseña es: " + controlLogin.getContraseña(inicio.usuario.getText()));
+            contraseñaOlvidada.setText("Tu contraseña es: " + controlLogin.getContraseña(inicio.usuario.getText()));
         }
     }
 }
