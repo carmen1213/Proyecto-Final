@@ -23,17 +23,31 @@ public class Tabla_padres extends JFrame {
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         this.getContentPane().setBackground(new Color(227, 247, 193));
 
-
+        //jpanel
         JPanel general = new JPanel();
+        JPanel opciones = new JPanel();
+        JPanel primer = new JPanel();
+        JPanel referencia = new JPanel();
+        JPanel botones = new JPanel();
+        JPanel guardarm = new JPanel();
+
+        //jlabel
+        botones.add(new JLabel());
+        botones.add(new JLabel());
+        opciones.add(new JLabel(" "));
+        opciones.add(new JLabel(" "));
+
+        /*Modificaciones*/
+
+        //general
         general.setLayout(new GridLayout(4, 1));
         general.setBackground(new Color(227, 247, 193));
 
 
-        JPanel opciones = new JPanel();
+        //opciones
         opciones.setBackground(new Color(227, 247, 193));
         opciones.setLayout(new GridLayout(1, 4, 12, 0));
-        opciones.add(new JLabel(" "));
-        opciones.add(new JLabel(" "));
+
 
         //Obtiene de la base de datos los datos correspondientes a los padres y los guarda en una variable de tipo String
         String padres = controler.getNombrepadre(inicio.usuario.getText(), inicio.contraseña.getText());
@@ -60,30 +74,30 @@ public class Tabla_padres extends JFrame {
             }
         };
 
-
+        //jtable y scrollpane
         jTableAlumnos.setBounds(30, 40, 200, 300);
         JScrollPane scrollpane = new JScrollPane(jTableAlumnos);
 
 
-        JPanel primer = new JPanel();
+       //primer
         primer.setLayout(new GridLayout(2, 1));
         primer.setBackground(new Color(227, 247, 193));
-        JPanel referencia = new JPanel();
+
+        //referencia
         referencia.setBackground(new Color(227, 247, 193));
         referencia.add(new JLabel(" "));
 
 
-        JPanel botones = new JPanel();
+        //botones
         botones.setLayout(new GridLayout(1, 3));
         botones.setBackground(new Color(227, 247, 193));
-        botones.add(new JLabel());
-        botones.add(new JLabel());
-        JPanel guardarm = new JPanel();
+
+        //guardar
         guardarm.setBackground(new Color(227, 247, 193));
 
 
 
-
+        //Añadir al GUI
         botones.add(guardarm);
         primer.add(referencia);
         primer.add(botones);
@@ -96,7 +110,7 @@ public class Tabla_padres extends JFrame {
 
         add(general, BorderLayout.CENTER);
 
-
+        //Hacer visible la interfaz
         setSize(860, 530);
         setVisible(true);
 
