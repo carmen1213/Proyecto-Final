@@ -4,12 +4,7 @@ CREATE
 DATABASE if not exists educativ;
 use
 educativ;
-create table curso
-(
-    id_curso int auto_increment
-        primary key,
-    nombre varchar(45) null
-);
+
 
 create table asignatura
 (
