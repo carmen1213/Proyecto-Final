@@ -85,13 +85,6 @@ public class profesor {
         profesoresImagen.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenProfesores.jpg"));
         profesoresImagen.setBounds(444, 130, 704, 474);
 
-        //horarioBtn
-
-        horarioBtn.setBackground(new Color(204, 255, 255));
-        horarioBtn.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenHorario.png"));
-        horarioBtn.setFont(fuenteBotones);
-        horarioBtn.setBounds(111, 645, 247, 81);
-
         //reunionesBtn
 
         reunionesBtn.setBackground(new Color(204, 255, 255));
@@ -104,7 +97,7 @@ public class profesor {
         notasBtn.setBackground(new Color(204, 255, 255));
         notasBtn.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenNotas.png"));
         notasBtn.setFont(fuenteBotones);
-        notasBtn.setBounds(694, 656, 247, 70);
+        notasBtn.setBounds(111, 645, 247, 81);
 
         //Menus
 
@@ -130,7 +123,6 @@ public class profesor {
         principal.add(Metodos_repetitivos.Titulo());
         principal.add(Metodos_repetitivos.Usuario(user));
         principal.add(profesoresImagen);
-        principal.add(horarioBtn);
         principal.add(reunionesBtn);
 
         //Acciones
