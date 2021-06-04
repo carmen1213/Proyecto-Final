@@ -1,5 +1,8 @@
 //import necesarios
 
+import Controladores.Controlador_cursos_material_profesores;
+import Controladores.Controlador_login;
+import Controladores.Controlador_recompensas_alumno;
 import Interfaz.Metodos_repetitivos;
 import models.Usuario;
 import org.openqa.selenium.WebDriver;
@@ -28,9 +31,13 @@ public class alumno {
     public static Font fuenteTitulo = new Font("Segoe Script", Font.BOLD | Font.ITALIC, 34);
     public static Font fuenteBotones = new Font("Berlin Sans FB", Font.BOLD | Font.ITALIC, 22);
     JFrame general;
-
+    public static Controlador_recompensas_alumno controlRecompensas = new Controlador_recompensas_alumno();
+    //llama a la clase controlador del login para poder usar a continuacion sus diferentes metodos
+    public static Controlador_login controllogin = new Controlador_login();
+    private static String cursos;
 
     public alumno(Usuario user) {
+        cursos = Controlador_recompensas_alumno.getCursoAlumno(controllogin.nombredelusuario(inicio.usuario.getText()));
 
         //Declaración de JFrame y JLayeredPane
 
@@ -59,7 +66,8 @@ public class alumno {
         /* Modificaciones */
 
         //general
-
+        System.out.println(controllogin.nombredelusuario(inicio.usuario.getText()));
+        System.out.println(cursos);
         general.getContentPane().setBackground(new Color(250, 250, 210));
         general.setTitle("Alumnos");
         general.setVisible(true);
@@ -244,8 +252,7 @@ public class alumno {
         @Override
         public void menuSelected(MenuEvent e) {
 
-            /* if (cursos.equals("DAM"))*/ {
-
+            if (cursos.equals("Dam")) {
                 try {
 
                     File archivo = new File("..\\Proyecto-Final\\m.deHonor__Rellenas\\MatrículaDeHonorDAM\\matrículaDeHonorDAM_Rellena.pdf");
@@ -257,7 +264,7 @@ public class alumno {
                 }
 
             }
-            /* if (cursos.equals("CIN"))*/  {
+             if (cursos.equals("CIN"))  {
                 try {
 
                     File archivo = new File("..\\Proyecto-Final\\m.deHonor__Rellenas\\MatrículaDeHonorCIN\\matrículaDeHonorCIN_Rellena.pdf");
@@ -268,7 +275,7 @@ public class alumno {
                     System.out.println(ex);
                 }
             }
-            /* if (cursos.equals("MIP"))*/  {
+             if (cursos.equals("Mip"))  {
 
                 try {
 
