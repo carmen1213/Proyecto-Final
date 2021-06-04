@@ -6,12 +6,12 @@ import java.awt.*;
 
 public class horario extends JFrame {
     //Llama al controlador del horario para poder despues hacer las consultas correspondientes a la base de datos
-    private Controlador_horario controlhorario = new Controlador_horario();
+    private final Controlador_horario controlhorario = new Controlador_horario();
 
 
     horario() {
         super("Horario");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(HIDE_ON_CLOSE);
         this.getContentPane().setBackground(new Color(227, 247, 193));
 
 
