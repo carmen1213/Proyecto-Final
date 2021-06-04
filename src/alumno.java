@@ -66,8 +66,6 @@ public class alumno {
         /* Modificaciones */
 
         //general
-        System.out.println(controllogin.nombredelusuario(inicio.usuario.getText()));
-        System.out.println(cursos);
         general.getContentPane().setBackground(new Color(250, 250, 210));
         general.setTitle("Alumnos");
         general.setVisible(true);
