@@ -13,7 +13,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Scanner;
 
 /**
  * @author Carmen Martí,Salva Blanquer,Lucia Calabrese
@@ -24,6 +26,8 @@ public class jefaEstudios {
     public static Font fuenteGeneral = new Font("Wide Latin", Font.PLAIN, 17);
     public static Font fuenteMenu = new Font("MV Boli", Font.PLAIN, 15);
     public static JMenu listasMenu;
+
+    JComboBox recompensasComboBox;
 
     JFrame general;
 
@@ -56,7 +60,7 @@ public class jefaEstudios {
 
         JLabel jefaEstudiosImagen = new JLabel("");
 
-        JComboBox recompensasComboBox = new JComboBox();
+         recompensasComboBox  = new JComboBox();
 
         //Declaración de JButton
 
@@ -76,7 +80,6 @@ public class jefaEstudios {
 
         amonestacionesMenu = new JMenu("Amonestaciones");
 
-        JMenu horariosMenu = new JMenu("Horarios");
 
         JMenu quejasMenu = new JMenu("Quejas");
 
@@ -134,7 +137,8 @@ public class jefaEstudios {
         //recompensasComboBox
 
         recompensasComboBox.setBackground(new Color(204, 255, 255));
-        recompensasComboBox.setModel(new DefaultComboBoxModel(new String[]{"-Recompensas-", "DAM", "CIN ", "MIP"}));
+        recompensasComboBox.addActionListener(new escRecompensas());
+        recompensasComboBox.setModel(new DefaultComboBoxModel(new String[]{"-Recompensas-", "DAM", "CIN", "MIP"}));
         recompensasComboBox.setFont(fuenteGeneral);
         recompensasComboBox.setBounds(1217, 555, 262, 67);
 
@@ -153,7 +157,6 @@ public class jefaEstudios {
         barraMenu.setBackground(new Color(255, 192, 203));
         listasMenu.setFont(fuenteMenu);
         amonestacionesMenu.setFont(fuenteMenu);
-        horariosMenu.setFont(fuenteMenu);
         quejasMenu.setFont(fuenteMenu);
 
 
@@ -180,7 +183,6 @@ public class jefaEstudios {
         listasMenu.add(listasDAM);
 
         barraMenu.add(amonestacionesMenu);
-        barraMenu.add(horariosMenu);
         barraMenu.add(quejasMenu);
 
         quejasMenu.add(quejasDAM);
@@ -221,6 +223,11 @@ public class jefaEstudios {
         amonestacionesCIN.addActionListener(new verAmonestacionesCIN());
         amonestacionesMIP.addActionListener(new verAmonestacionesMIP());
 
+        quejasDAM.addActionListener(new verQuejasDAM());
+
+        quejasCIN.addActionListener(new verQuejasCIN());
+
+        quejasMIP.addActionListener(new verQuejasMIP());
         volverBtn.addMouseListener(new volverInicio());
     }
 
@@ -265,6 +272,8 @@ public class jefaEstudios {
 
         }
     }
+
+
 
     private class verAmonestacionesDAM implements ActionListener {
         @Override
@@ -387,11 +396,7 @@ public class jefaEstudios {
             } catch (IOException ex) {
 
                 System.out.println(ex);
-
-
             }
-
-
         }
     }
 
@@ -436,5 +441,155 @@ public class jefaEstudios {
             driver.get("https://www.google.es/intl/es/forms/about/");
         }
     }
-}
 
+    private class verQuejasDAM implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            quejasDAM.setSelected(false);
+            Scanner entrada = null;
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setCurrentDirectory(new File("..\\Proyecto-Final\\quejas__Rellenas\\DAM"));
+            int valor = fileChooser.showOpenDialog(fileChooser);
+            if (valor == JFileChooser.APPROVE_OPTION) {
+                String ruta = fileChooser.getSelectedFile().getAbsolutePath();
+                try {
+                    Desktop.getDesktop().open(new File(ruta));
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+                try {
+                    File f = new File(ruta);
+                    entrada = new Scanner(f);
+                    while (entrada.hasNext()) {
+                        System.out.println(entrada.nextLine());
+                    }
+                } catch (FileNotFoundException ee) {
+                    System.out.println(ee.getMessage());
+                } finally {
+                    if (entrada != null) {
+                        entrada.close();
+                    }
+                }
+            }
+
+        }
+    }
+
+
+    private class verQuejasMIP implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            quejasMIP.setSelected(false);
+            Scanner entrada = null;
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setCurrentDirectory(new File("..\\Proyecto-Final\\quejas__Rellenas\\MIP"));
+            int valor = fileChooser.showOpenDialog(fileChooser);
+            if (valor == JFileChooser.APPROVE_OPTION) {
+                String ruta = fileChooser.getSelectedFile().getAbsolutePath();
+                try {
+                    Desktop.getDesktop().open(new File(ruta));
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+                try {
+                    File f = new File(ruta);
+                    entrada = new Scanner(f);
+                    while (entrada.hasNext()) {
+                        System.out.println(entrada.nextLine());
+                    }
+                } catch (FileNotFoundException ee) {
+                    System.out.println(ee.getMessage());
+                } finally {
+                    if (entrada != null) {
+                        entrada.close();
+                    }
+                }
+            }
+
+        }
+
+        }
+
+
+
+    private class verQuejasCIN implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            quejasCIN.setSelected(false);
+            Scanner entrada = null;
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setCurrentDirectory(new File("..\\Proyecto-Final\\quejas__Rellenas\\CIN"));
+            int valor = fileChooser.showOpenDialog(fileChooser);
+            if (valor == JFileChooser.APPROVE_OPTION) {
+                String ruta = fileChooser.getSelectedFile().getAbsolutePath();
+                try {
+                    Desktop.getDesktop().open(new File(ruta));
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+                try {
+                    File f = new File(ruta);
+                    entrada = new Scanner(f);
+                    while (entrada.hasNext()) {
+                        System.out.println(entrada.nextLine());
+                    }
+                } catch (FileNotFoundException ee) {
+                    System.out.println(ee.getMessage());
+                } finally {
+                    if (entrada != null) {
+                        entrada.close();
+                    }
+                }
+            }
+
+        }
+
+        }
+
+
+    private class escRecompensas implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+          if(recompensasComboBox.getSelectedItem().equals("DAM")){
+
+                try {
+
+                    File archivo = new File("..\\Proyecto-Final\\plantilla__M.deHonor\\DAM\\matrículaDeHonorDAM.docx");
+                    Desktop.getDesktop().open(archivo);
+
+                } catch (IOException ex) {
+
+                    System.out.println(ex);
+                }
+
+            }
+            if(recompensasComboBox.getSelectedItem().toString().equals("CIN")) {
+
+                try {
+
+                    File archivo = new File("..\\Proyecto-Final\\plantilla__M.deHonor\\CIN\\matrículaDeHonorCIN.docx");
+                    Desktop.getDesktop().open(archivo);
+
+                } catch (IOException ex) {
+
+                    System.out.println(ex);
+                }
+
+            }
+            if(recompensasComboBox.getSelectedItem().equals("MIP")){
+
+                try {
+
+                    File archivo = new File("..\\Proyecto-Final\\plantilla__M.deHonor\\MIP\\matrículaDeHonorMIP.docx");
+                    Desktop.getDesktop().open(archivo);
+
+                } catch (IOException ex) {
+
+                    System.out.println(ex);
+                }
+
+            }
+
+        }
+    }
+}
