@@ -1,3 +1,6 @@
+
+//imports necesarios
+
 import Controladores.Controlador_login;
 import models.Usuario;
 
@@ -5,6 +8,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+/**
+ * @author Carmen Martí,Salva Blanquer,Lucia Calabrese
+ */
 
 public class inicio {
     public static final Controlador_login controlLogin = new Controlador_login();
@@ -23,103 +29,154 @@ public class inicio {
 
     public inicio() {
 
+        //Declaración de JFrame y JLayeredPane
+
         general = new JFrame();
-        general.getContentPane().setBackground(new Color(204, 255, 255));
 
         JLayeredPane principal = new JLayeredPane();
-        general.getContentPane().add(principal, BorderLayout.CENTER);
-        general.addWindowListener(new cerrarVentana());
+
+        //Declaración de JLabel
 
         JLabel encabezado = new JLabel("Bienvenid@,");
+
+        JLabel titulo = new JLabel("Acceda a tus datos");
+
+        JLabel labelUsuario = new JLabel("Usuario:");
+
+        JLabel labelContraseña = new JLabel("Contraseña:");
+
+        usuarioIncorrecto = new JLabel(" usuario incorrecto");
+
+        contraIncorrecta = new JLabel(" contraseña incorrecta");
+
+        contraseñaOlvidada = new JLabel("Contraseña olvidada");
+
+        //Declaración de JTextField y JPasswordFIeld
+
+        usuario = new JTextField();
+
+        contraseña = new JPasswordField();
+
+        //Declaración de JButton
+
+        JButton contraseñaOlvidadaBtn = new JButton("Contraseña Olvidada");
+
+        JButton loginBtn = new JButton("Login");
+
+        verContraseñaBtn = new JButton("");
+
+        /* Modificaciones */
+
+        //general
+
+        general.getContentPane().setBackground(new Color(204, 255, 255));
+        general.setBackground(new Color(204, 255, 255));
+        general.setBounds(100, 100, 1449, 810);
+        general.setVisible(true);
+
+        //encabezado
+
         encabezado.setForeground(new Color(204, 0, 102));
         encabezado.setFont(fuenteTitulo);
         encabezado.setBounds(654, 10, 349, 109);
-        principal.add(encabezado);
 
-        JLabel titulo = new JLabel("Accede a tus datos!");
+        //titulo
+
         titulo.setForeground(new Color(204, 0, 102));
         titulo.setFont(fuenteTitulo);
         titulo.setBounds(569, 37, 562, 163);
-        principal.add(titulo);
 
+        //labelUsuario
 
-        JLabel labelUsuario = new JLabel("Usuario:");
         labelUsuario.setForeground(new Color(0, 51, 255));
         labelUsuario.setFont(fuenteGeneral);
         labelUsuario.setBounds(510, 250, 127, 97);
-        principal.add(labelUsuario);
 
+        //labelContraseña
 
-        usuario = new JTextField();
-        usuario.setBounds(849, 278, 328, 56);
-        principal.add(usuario);
-        usuario.setColumns(10);
-
-        JLabel labelContraseña = new JLabel("Contraseña:");
         labelContraseña.setForeground(new Color(0, 51, 255));
         labelContraseña.setFont(fuenteGeneral);
         labelContraseña.setBounds(510, 433, 177, 63);
-        principal.add(labelContraseña);
 
-        usuarioIncorrecto = new JLabel(" usuario incorrecto");
+        //usuarioIncorrecto
+
         usuarioIncorrecto.setForeground(Color.red);
         usuarioIncorrecto.setFont(fuenteGeneral);
         usuarioIncorrecto.setBounds(850, 314, 230, 63);
         usuarioIncorrecto.setVisible(false);
-        principal.add(usuarioIncorrecto);
 
-        contraIncorrecta = new JLabel(" contraseña incorrecta");
+        //contraIncorrecta
+
         contraIncorrecta.setForeground(Color.red);
         contraIncorrecta.setFont(fuenteGeneral);
         contraIncorrecta.setBounds(850, 480, 270, 63);
         contraIncorrecta.setVisible(false);
-        principal.add(contraIncorrecta);
 
+        //contraseñaOlvidada
 
-        JButton contraseñaOlvidadaBtn = new JButton("Contraseña Olvidada");
-        contraseñaOlvidadaBtn.setFont(fuenteBotones);
-        contraseñaOlvidadaBtn.setForeground(new Color(255, 255, 255));
-        contraseñaOlvidadaBtn.setBackground(new Color(255, 0, 0));
-        contraseñaOlvidadaBtn.setBounds(334, 625, 308, 63);
-        principal.add(contraseñaOlvidadaBtn);
-
-        contraseñaOlvidada = new JLabel("Contrase\u00F1a olvidada");
         contraseñaOlvidada.setForeground(new Color(0, 51, 255));
         contraseñaOlvidada.setFont(new Font("Tahoma", Font.BOLD, 15));
         contraseñaOlvidada.setBounds(344, 698, 303, 33);
         contraseñaOlvidada.setVisible(false);
-        principal.add(contraseñaOlvidada);
 
-        JButton loginBtn = new JButton("Login");
+        //usuario
+
+        usuario.setBounds(849, 278, 328, 56);
+        usuario.setColumns(10);
+
+        //contraseña
+
+        contraseña.setBounds(849, 444, 289, 56);
+
+        //contraseñaOlvidadaBtn
+
+        contraseñaOlvidadaBtn.setFont(fuenteBotones);
+        contraseñaOlvidadaBtn.setForeground(new Color(255, 255, 255));
+        contraseñaOlvidadaBtn.setBackground(new Color(255, 0, 0));
+        contraseñaOlvidadaBtn.setBounds(334, 625, 308, 63);
+
+        //loginBtn
+
         loginBtn.setForeground(new Color(255, 255, 255));
         loginBtn.setBackground(new Color(50, 205, 50));
         loginBtn.setFont(fuenteBotones);
         loginBtn.setBounds(953, 625, 368, 63);
-        loginBtn.addActionListener(new validarLogin());
-        principal.add(loginBtn);
 
+        //verContraseñaBtn
 
-        verContraseñaBtn = new JButton("");
+        verContraseñaBtn.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenOjo.png"));
         verContraseñaBtn.setBackground(Color.WHITE);
-
         verContraseñaBtn.setBounds(1136, 444, 41, 56);
-        verContraseñaBtn.addMouseListener(new mostrarContraseña());
+
+        //Insercciones a la GUI
+
+        general.add(principal);
+        general.getContentPane().add(principal, BorderLayout.CENTER);
+
+        principal.add(encabezado);
+        principal.add(titulo);
+        principal.add(labelUsuario);
+        principal.add(usuario);
+        principal.add(contraseña);
+        principal.add(labelContraseña);
+        principal.add(usuarioIncorrecto);
+        principal.add(contraIncorrecta);
+        principal.add(contraseñaOlvidadaBtn);
+        principal.add(contraseñaOlvidada);
+        principal.add(loginBtn);
         principal.add(verContraseñaBtn);
 
-
-        contraseña = new JPasswordField();
-        contraseña.setBounds(849, 444, 289, 56);
-        verContraseñaBtn.setIcon(new ImageIcon("..\\Proyecto-Final\\imagenes\\imagenOjo.png"));
-        contraseña.addKeyListener(new loginEnter());
-        principal.add(contraseña);
-        general.setBackground(new Color(204, 255, 255));
-        general.setBounds(100, 100, 1449, 810);
-        general.add(principal);
-        general.setVisible(true);
-
         //acciones
+
         contraseñaOlvidadaBtn.addActionListener(new verContraseña());
 
+        general.addWindowListener(new cerrarVentana());
+
+        contraseña.addKeyListener(new loginEnter());
+
+        loginBtn.addActionListener(new validarLogin());
+
+        verContraseñaBtn.addMouseListener(new mostrarContraseña());
     }
 
     public static void main() {
@@ -127,7 +184,7 @@ public class inicio {
     }
 
     public static class validarLogin implements ActionListener {
-        //
+
         private static void autenticarUsuarioBD() {
             Usuario user = controlLogin.iniciarSesion(usuario.getText(), contraseña.getText());
             if (user != null) {
@@ -247,35 +304,6 @@ public class inicio {
 
         }
     }
-    KeyListener loginEnter = new KeyListener() {
-        public void keyPressed(KeyEvent keyEvent) {
-            if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER) {
-                validarLogin.autenticarUsuarioBD();
-            }
-        }
-
-    final KeyListener loginEnter = new KeyListener() {
-        public void keyPressed(KeyEvent keyEvent) {
-            if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER) {
-                validarLogin.autenticarUsuarioBD();
-            }
-        }
-
-        public void keyReleased(KeyEvent keyEvent) {
-        }
-        public void keyTyped(KeyEvent keyEvent) {
-        }
-    };
-
-        public void keyReleased(KeyEvent keyEvent) {
-
-        }
-
-        public void keyTyped(KeyEvent keyEvent) {
-
-        }
-    };
-
 
     private class loginEnter implements KeyListener {
         @Override
