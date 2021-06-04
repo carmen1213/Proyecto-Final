@@ -2,7 +2,6 @@ import Controladores.ControladorNotasALumnos;
 import Controladores.ControladorTablaNotas;
 import Controladores.Controlador_login;
 import Interfaz.Metodos_repetitivos;
-import models.Asignatura;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -32,15 +31,36 @@ public class Alumnos_notas extends JFrame {
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         this.getContentPane().setBackground(new Color(227, 247, 193));
 
+        //Jpanels
         JPanel general = new JPanel();
+        JPanel opciones = new JPanel();
+        JPanel primer = new JPanel();
+        JPanel boton = new JPanel();
+        JPanel guarda = new JPanel();
+        JPanel botones = new JPanel();
+        JLabel vacioaba = new JLabel(" ");
+        JPanel referencia = new JPanel();
+
+        //Jlabes
+        JLabel vacioar = new JLabel(" ");
+        JLabel vacioab = new JLabel(" ");
+        opciones.add(new JLabel(" "));
+        opciones.add(new JLabel(" "));
+        JLabel vacioarr = new JLabel(" ");
+        JLabel vacioarriba = new JLabel(" ");
+        JLabel vacioabajo = new JLabel(" ");
+
+        /*Modificaciones*/
+
+        //general
+
         general.setLayout(new GridLayout(5, 1));
         general.setBackground(new Color(227, 247, 193));
 
-        JPanel opciones = new JPanel();
+        //opciones
         opciones.setBackground(new Color(227, 247, 193));
         opciones.setLayout(new GridLayout(1, 4, 12, 0));
-        opciones.add(new JLabel(" "));
-        opciones.add(new JLabel(" "));
+
 
         //Crea un Arraylist de objetos asignatura que obtiene los datos de las asignaturas desde la base de datos y los va guardando en el mismo
         ArrayList<String> asignaturas = controladorTablanotasAlumnos.getasignaturas(inicio.usuario.getText(), inicio.contraseña.getText(), controladorNotas.getidAlumno(controllogin.getIdalumno(inicio.usuario.getText(),inicio.contraseña.getText()).getNombre()).getNombre());
@@ -68,41 +88,45 @@ public class Alumnos_notas extends JFrame {
             }
         };
 
-
+        //Jtable y scrollpane
         jTableAlumnos.setBounds(30, 40, 200, 300);
         JScrollPane scrollpane = new JScrollPane(jTableAlumnos);
 
-        JPanel primer = new JPanel();
+        //primer
         primer.setLayout(new GridLayout(2, 1));
         primer.setBackground(new Color(227, 247, 193));
-        JPanel referencia = new JPanel();
+
+        //referencia
         referencia.setBackground(new Color(227, 247, 193));
         referencia.add(new JLabel(" "));
 
-        JPanel boton = new JPanel();
+       //boton
         boton.setBackground(new Color(227, 247, 193));
         boton.setLayout(new GridLayout(1, 3));
-        JLabel vacioar = new JLabel(" ");
-        vacioar.setBackground(new Color(227, 247, 193));
-        JLabel vacioab = new JLabel(" ");
-        vacioab.setBackground(new Color(227, 247, 193));
-
-        JPanel guarda = new JPanel();
-        guarda.setLayout(new GridLayout(3, 1));
-        JLabel vacioarriba = new JLabel(" ");
-        vacioar.setBackground(new Color(227, 247, 193));
-        JLabel vacioabajo = new JLabel(" ");
-        vacioab.setBackground(new Color(227, 247, 193));
-
-        JPanel botones = new JPanel();
         botones.setBackground(new Color(227, 247, 193));
-        JLabel vacioarr = new JLabel(" ");
+
+        //vaciar
         vacioar.setBackground(new Color(227, 247, 193));
+        vacioab.setBackground(new Color(227, 247, 193));
+        vacioar.setBackground(new Color(227, 247, 193));
+        vacioab.setBackground(new Color(227, 247, 193));
+
+        //guardar
+        guarda.setLayout(new GridLayout(3, 1));
         guarda.setBackground(new Color(227, 247, 193));
 
 
-        JLabel vacioaba = new JLabel(" ");
-        vacioab.setBackground(new Color(227, 247, 193));
+
+
+
+
+
+
+
+
+
+
+
 
 
         botones.add(vacioarr);
