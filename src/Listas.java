@@ -7,6 +7,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Listas extends JFrame {
+
     public static Font fuenteGeneral = new Font("fantasy", Font.BOLD, 30);
     private final ControladorTablaJefeEstudios controladorJefeestudios = new ControladorTablaJefeEstudios();
     private final JComboBox asignatura;
@@ -42,12 +43,16 @@ public class Listas extends JFrame {
         titulo.setFont(fuenteGeneral);
         encabezado.add(titulo);
 
-
+        //Crea una tabla cuando el usuario hace click en Dam
         if (asignatura.getSelectedItem().equals("DAM")) {
+            //Guarda en una lista con objetos de tipo curso con los datos de la base de datos correspondiente
             ArrayList<Curso> Curso_Alumnos = controladorJefeestudios.getAlumnosxCurso("DAM");
+            //Crea una variable de tipo Defaulttablemodel llamada model que genera un modelo de tabla pidiendo los datos al usuario
             DefaultTableModel model = generarModeloTablaAlumno(Curso_Alumnos);
+
+            //Asigna el tipo de variables que debe tener la tabla
             jTableAlumnos = new JTable(model) {
-                //private static final long serialVersionUID = 1L;
+
                 @Override
                 public Class getColumnClass(int column) {
                     switch (column) {
@@ -82,15 +87,20 @@ public class Listas extends JFrame {
     public static void main() {
         Listas listas = new Listas();
     }
-    //
+
+    /**
+     * Metodo que genera el diseño de la tabla
+     * @param nombresAlumnos  String para insertar los datos de los alumnos a la tabla
+     * @return devuelve el modelo de la tabla ya con los datos
+     */
+    //Metodo que devuelve los datos que iran posteriormente en la tabla, obteniendo los mismos de la base de datos con los metodos que se encuentran en los controladores
     private DefaultTableModel generarModeloTablaAlumno(ArrayList<Curso> nombresAlumnos) {
-        //
+        //Crea un array de tipo string para darle nombre a las diferentes columnas principales de la tabla
         String[] cols = {"Nombre", "Curso",};
-        //
         DefaultTableModel model = new DefaultTableModel(cols, 0);
-        //
+
+        //Ciclo para ingresar los nombres de los alumnos y el curso
         for (int i = 0; i < nombresAlumnos.size(); i++) {
-            //
             Object[] data = {nombresAlumnos.get(i).getNombre_curso(), nombresAlumnos.get(i).getNombre_alumno()};
             model.addRow(data);
         }
