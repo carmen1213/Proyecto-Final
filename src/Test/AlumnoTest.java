@@ -6,29 +6,28 @@ class AlumnoTest {
 
     @org.junit.jupiter.api.Test
     void getNombre() {
-        Alumno instance = new Alumno("Salva",2);
-        instance.getNombre();
-        System.out.println(instance.getNombre());
+        Alumno instancia = new Alumno("Salva",2);
+        instancia.getNombre();
+        System.out.println(instancia.getNombre());
     }
 
     @org.junit.jupiter.api.Test
     void setNombre() {
-        Alumno instancia2 = new Alumno("pepe",2);
-        instancia2.setNombre("alma");
+        Alumno instancia = new Alumno("pepe",2);
+        instancia.setNombre("alma");
         System.out.println("setnombre()");
     }
 
     @org.junit.jupiter.api.Test
     void getId() {
-        System.out.println("getid");
         Alumno testGetid = new Alumno("pepe",3);
         System.out.println(testGetid.getId());
     }
 
     @org.junit.jupiter.api.Test
     void setId() {
-        Alumno instancia2 = new Alumno("Lucia",5);
-        instancia2.setId(2);
+        Alumno instancia = new Alumno("Lucia",5);
+        instancia.setId(2);
         System.out.println("setnombre()");
     }
 }
