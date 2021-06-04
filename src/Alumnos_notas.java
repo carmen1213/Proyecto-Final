@@ -20,10 +20,11 @@ public class Alumnos_notas extends JFrame {
     private final JTable jTableAlumnos;
     //llama a la clase controlador notas para poder usar a continuacion sus diferentes metodos
     private final ControladorNotasALumnos controladorTablanotasAlumnos = new ControladorNotasALumnos();
-    //llama a la clase controlador notas para poder usar a continuacion sus diferentes metodos
+    //llama a la clase controlador del login para poder usar a continuacion sus diferentes metodos
     private final Controlador_login controllogin = new Controlador_login();
     //Crea un Arraylist de ints que obtiene los datos de las notas desde la base de datos y las va guardando en la misma
     private final ArrayList<Integer> notas = controladorTablanotasAlumnos.getNotasalumnos(controllogin.getIdalumno(inicio.usuario.getText(), inicio.contraseña.getText()).getId());
+    //llama a la clase controlador notas para poder usar a continuacion sus diferentes metodos
     private ControladorTablaNotas controladorNotas = new ControladorTablaNotas();
 
     public Alumnos_notas() throws SQLException {
@@ -52,7 +53,6 @@ public class Alumnos_notas extends JFrame {
 
         //Asigna el tipo de variables que debe tener la tabla
         jTableAlumnos = new JTable(model) {
-            //private static final long serialVersionUID = 1L;
             @Override
             public Class getColumnClass(int column) {
                 switch (column) {

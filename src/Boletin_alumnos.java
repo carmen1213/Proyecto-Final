@@ -16,13 +16,19 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class Boletin_alumnos extends JFrame {
-
+    //Variable para crear la tabla
     private JTable jTableAlumnos;
+    //llama a la clase controlador notas para poder usar a continuacion sus diferentes metodos
     private ControladorTablaNotas controladorNotas = new ControladorTablaNotas();
+    //llama a la clase controlador profesores para poder usar a continuacion sus diferentes metodos
     private ControladorTablaProfesores controladorProfesores = new ControladorTablaProfesores();
+    //Crea el boton para poder guardar a continuacion la informacion en la base de datos
     private JButton guardar;
+    //llama a la clase controlador del login para poder usar a continuacion sus diferentes metodos
     private Controlador_login controllogin = new Controlador_login();
+    //Crea un Arraylist de objetos asignatura que obtiene los datos de las asignaturas desde la base de datos y las va guardando en la misma
     private ArrayList<Asignatura> asignaturas = controladorProfesores.getAsignaturaProfesor(controllogin.getIdProfesor(inicio.usuario.getText(), inicio.contraseña.getText()).getId_profesor());
+    //Variable para realizar la coneccion con la base de datos
     private static Connection conn;
 
 
@@ -43,12 +49,12 @@ public class Boletin_alumnos extends JFrame {
         opciones.add(new JLabel(" "));
         opciones.add(new JLabel(" "));
 
-//
+        //Crea un Arraylist de objetos alumno que obtiene los datos de los alumnos desde la base de datos y los va guardando en el mismo
         ArrayList<Alumno> alumnosAsignatura = controladorProfesores.getnombreyidxasignatura(controladorNotas.getid_asignatura(controllogin.getIdProfesor(inicio.usuario.getText(), inicio.contraseña.getText()).getId_profesor()));
-        //
+        //Crea una variable de tipo Defaulttablemodel llamada model que genera un modelo de tabla pidiendo los datos al usuario
         DefaultTableModel model = generarModeloTablaAlumno(alumnosAsignatura, asignaturas);
 
-//
+        //Asigna el tipo de variables que debe tener la tabla
         jTableAlumnos = new JTable(model) {
             @Override
             public Class getColumnClass(int column) {
@@ -134,11 +140,18 @@ public class Boletin_alumnos extends JFrame {
 
     }
 
-   //
+    /**
+     * Metodo que genera el diseño de la tabla
+     * @param nombresAlumnos String para insertar los datos de los alumnos a la tabla
+     * @param asignaturas Arraylist de tipo asignatura, que obtiene los diferentes nombres de las asignaturas de la base de datos
+     * @return devuelve el modelo de la tabla ya con los datos
+     */
+
+    //Metodo que devuelve los datos que iran posteriormente en la tabla, obteniendo los mismos de la base de datos con los metodos que se encuentran en los controladores
     private DefaultTableModel generarModeloTablaAlumno(ArrayList<Alumno> nombresAlumnos, ArrayList<Asignatura> asignaturas) {
-//
+       //Crea un array de tipo string para darle nombre a las diferentes columnas principales de la tabla
         String[] cols = {"Nombre Alumno", "Nombre Asignatura", "Notas"};
-        //
+
         DefaultTableModel model = new DefaultTableModel(cols, 0);
         //Ciclo para ingresar los nombres de los alumnos.
         for (int j = 0; j < nombresAlumnos.size(); j++) {
@@ -170,7 +183,7 @@ public class Boletin_alumnos extends JFrame {
 
         }
     }
-//
+//Metodo para guardar las notas que ingresa el profesor en la base de datos
     private class Guardar implements ActionListener {
         private final Boletin_alumnos notas_alumnos;
 
@@ -182,26 +195,26 @@ public class Boletin_alumnos extends JFrame {
         public void actionPerformed(ActionEvent e) {
 
             {
-                //
+                //Coneccion con la base de datos
                 conexionbasedatos conexion;
                 conexion = new conexionbasedatos();
                 notas_alumnos.conn = conexion.conectarMySQL();
                 Statement stmt = null;
+
                 try {
-                    //
                     stmt = notas_alumnos.conn.createStatement();
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
 
-                //
+                //Obtiene las notas de la tabla de la interfaa
                 Object notas = null;
                 for (int i = 0; i < jTableAlumnos.getRowCount(); i++) {
                     notas = jTableAlumnos.getValueAt(i, 2);
-                    System.out.println(notas);
+
 
                     try {
-                    //
+                    //Metodo para insertar en la base de datos los datos ya almacenados
                         Object resultados = stmt.executeUpdate("INSERT INTO notas (notas,id_asignaturas,id_alumno) " + "VALUES('" + notas + "','" + asignaturas.get(i).getId() + "','" + controladorNotas.getidAlumno((String) jTableAlumnos.getValueAt(i,0)).getId() + "')");
 
                     } catch (SQLException throwables) {
