@@ -106,11 +106,11 @@ public class ControladorTablaNotas {
     //Selecciona pidiento el id del alumno a la persona y mediante una consulta a la base de datos, obtiene el valor de las notas de ese alumno y el identificador de la asignatua de la base de datos
 
     /**
-     * @param id_alumno
-     * @return
+     * @param id_alumno Pide al usuario el identificador del alumno que quiere saber los datos
+     * @return devuelve un array con sus respectivas notas
      */
     public ArrayList<Notas> getNotas(int id_alumno) {
-        //
+
         Alumno alm = getAlumno(id_alumno);
         ArrayList<Notas> resultado = new ArrayList<Notas>();
         //Conecta con la base de datos y realiza a la misma la consulta correspondiente
@@ -131,8 +131,12 @@ public class ControladorTablaNotas {
         return resultado;
     }
 
+    /**
+     *
+     * @param id_profesor Pide al usuario el identificador del profesor que quiere saber los datos
+     * @return un int con los id de las asignaturas
+     */
     public int getid_asignatura(int id_profesor) {
-        ArrayList<Integer> resultado = new ArrayList<Integer>();
         //Conecta con la base de datos y realiza a la misma la consulta correspondiente
         String SQL = "Select id_asignatura FROM profesor_asignatura WHERE id_profesor = ?";
         try {
@@ -141,7 +145,6 @@ public class ControladorTablaNotas {
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 int id_asignatura = rs.getInt("id_asignatura");
-                resultado.add(id_asignatura);
                 return id_asignatura;
             }
         } catch (SQLException throwables) {
